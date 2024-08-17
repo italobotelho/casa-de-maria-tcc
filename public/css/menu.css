@@ -1,0 +1,65 @@
+        /* Estilo da navbar */
+        nav {
+            background-color: #795127;
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%;
+            display: flex;
+        }
+        /*Botão de configurações*/
+        nav button {
+            background: transparent; 
+            border: none; 
+            display: flex;
+            align-items: center;
+            position: absolute;
+            left:95%;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer; 
+        }
+        .navimg{
+            margin-left: 10px;
+        }
+
+        body {
+            padding-top: 75px; 
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; 
+            overflow: hidden; 
+        }
+
+        /* Espaçamento e centralização dos cards*/
+        .card-group {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            gap:35px;
+            
+        }
+
+        /*estilo dos cards*/
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 35px;
+            width: 12rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            background-color: #795127;
+            color: white;
+            padding: 55px;
+            
+        }
+         .card-text {
+            font-size:30px;
+            color: white;
+            
+        }
+       
+        .card a {
+            text-decoration: none;
+        }
