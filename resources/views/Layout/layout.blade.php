@@ -11,12 +11,12 @@
     <header>
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <div class="container-fluid">
-              <a class="navbar-brand" href="./menu"><img class="navimg" src="/img/logo.png" alt="Logo Casa de Maria" width="35" height="45"><img src="/img/titulo branco.png" alt="Casa de Maria" width="55" height="30"></a>  
+              <a class="navbar-brand" href="./menu"><img class="navimg" src="/img/logo.png" alt="Logo Casa de Maria" width="30" height="45"><img src="/img/titulo branco.png" alt="Casa de Maria" width="40" height="30"></a>  
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
               </button>
-              <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul class="navbar-nav">
+              <div class="collapse navbar-collapse d-flex justify-content-around" id="collapsibleNavbar">
+                <ul class="navbar-nav ">
                   <li class="nav-item">
                     <a class="nav-link" href="#">Agenda</a>
                   </li>
@@ -31,11 +31,12 @@
                   </li>
                 </ul>
               </div>
+              <a class="navbar-brand" href="#"><img class="navimg" src="/img/conf.png" alt=""></a>
             </div> 
           </nav>
     </header>
     <main>
-
+      @yield('carrosel')
     </main>
     <footer>
 
