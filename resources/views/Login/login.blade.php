@@ -6,7 +6,8 @@
     <title>Casa de Maria</title>
 
     <!-- Link para o arquivo CSS de estilos personalizados da página de login -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/login.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css')}}" />
+    
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -15,10 +16,10 @@
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col col-xl-10">
-              <div class="card" style="border-radius: 1rem;">
+              <div class="card shadow-lg border border-0" style="border-radius: 1rem; background-color: #E5D5C0;">
                 <div class="row g-0">
                   <div class="d-flex col-md-6 col-lg-5 d-md-block" >
-                    <img src="" alt="Logo Casa de Maria" class="img-fluid" style="background-color: #C99C65; border-radius: 1rem 0 0 1rem;"/>
+                    <img src="img/logo.png" alt="Logo Casa de Maria" class="img-fluid" style="background-color: rgb(201, 156, 101, 0.5); border-radius: 1rem 0 0 1rem;"/>
                   </div>
                   <div class="col-md-6 col-lg-7 d-flex align-items-center">
                     <div class="card-body p-4 p-lg-5 text-black">
@@ -53,15 +54,15 @@
                         </div>
       
                         <div data-mdb-input-init class="form-outline mb-4 d-grid gap-2 col-10 mx-auto">
-                            <input type="input" name="user" class="form-control form-control-lg rounded-pill" id="inputEmailUser" aria-describedby="userHelp" placeholder="Usuário">
+                            <input type="input" name="user" class="form-control form-control-lg rounded-pill shadow-sm border border-0" style="background-color: rgb(255, 255, 255, 0.5);"  id="inputEmailUser" aria-describedby="userHelp" placeholder="Usuário">
                         </div>
       
                         <div data-mdb-input-init class="form-outline mb-4 d-grid gap-2 col-10 mx-auto">
-                            <input type="password" name="senha" class="form-control form-control-lg rounded-pill" id="inputPassword" placeholder="Senha">
+                            <input type="password" name="senha" class="form-control form-control-lg rounded-pill shadow-sm border border-0" style="background-color: rgb(255, 255, 255, 0.5);" id="inputPassword" placeholder="Senha">
                         </div>
       
                         <div class=" mb-4 d-grid gap-2 col-6 mx-auto">
-                          <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg rounded-pill" type="submit">Entrar</button>
+                          <button data-mdb-button-init data-mdb-ripple-init class="btn btn-lg rounded-pill shadow-sm" style="background-color: #6C3D0E; color: white;" type="submit">Entrar</button>
                         </div>
 
                         <div class="d-grid gap-2 col-6 mx-auto">
