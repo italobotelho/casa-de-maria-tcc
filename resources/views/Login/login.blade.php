@@ -12,7 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body style="background-color: #E5D5C0;">
-    <section class="vh-100">
+    <section class="vh-100">  
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col col-xl-10">
@@ -50,22 +50,22 @@
                         <!-- Campo de entrada para o usuário -->
 
                         <div class="d-flex justify-content-center mb-3 pb-1">
-                          <h1 class="">Seu Login</h1>
+                          <h1 style="color: #795127;">SEU LOGIN</h1>
                         </div>
       
                         <div data-mdb-input-init class="form-outline mb-4 d-grid gap-2 col-10 mx-auto">
-                            <input type="input" name="user" class="form-control form-control-lg rounded-pill shadow-sm border border-0" style="background-color: rgb(255, 255, 255, 0.5);"  id="inputEmailUser" aria-describedby="userHelp" placeholder="Usuário">
+                            <input type="input" name="user" class="form-control form-control-lg rounded-pill shadow-sm border border-0" style="background-color: rgb(255, 255, 255, 0.5);"  id="inputEmailUser" aria-describedby="userHelp" placeholder="USUÁRIO">
                         </div>
       
                         <div data-mdb-input-init class="form-outline mb-4 d-grid gap-2 col-10 mx-auto">
-                            <input type="password" name="senha" class="form-control form-control-lg rounded-pill shadow-sm border border-0" style="background-color: rgb(255, 255, 255, 0.5);" id="inputPassword" placeholder="Senha">
+                            <input type="password" name="senha" class="form-control form-control-lg rounded-pill shadow-sm border border-0" style="background-color: rgb(255, 255, 255, 0.5);" id="inputPassword" placeholder="SENHA">
                         </div>
-      
+                        
                         <div class=" mb-4 d-grid gap-2 col-6 mx-auto">
-                          <button data-mdb-button-init data-mdb-ripple-init class="btn btn-lg rounded-pill shadow-sm" style="background-color: #6C3D0E; color: white;" type="submit">Entrar</button>
+                          <button data-mdb-button-init data-mdb-ripple-init class="btn btn-lg rounded-pill shadow-sm" style="background-color: rgb(138, 99, 58); color: white;" type="submit">ENTRAR</button>
                         </div>
 
-                        <div class="d-grid gap-2 col-6 mx-auto">
+                        
                           
                         </div>
                       </form>
