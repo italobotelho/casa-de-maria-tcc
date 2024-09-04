@@ -10,3 +10,11 @@ Route::get('/', [LoginController::class, 'index'])->name('login.page');
 Route::get('/menu', function () {
     return view('Menu/menu'); // Substitua isso pela lógica correta para a sua página inicial
 })->middleware('auth');
+
+Route::get('/pacientes', function () {
+    return view('Pacientes/pacientes');
+});
+
+Route::get('/layout', function () {
+    return view('Layout/layout');
+});
