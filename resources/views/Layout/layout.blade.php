@@ -9,10 +9,32 @@
 </head>
 <body>
     <header>
-        
+        <nav class="navbar navbar-expand-sm bg-primary justify-content-center">
+            <div class="container-fluid ">
+                <a class="navbar-brand " href="menu"><img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24"></a>
+              <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Painel</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Agenda</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Consultas</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Pacientes</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Procedimentos</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
     </header>
     <main>
-      
+      @yield('main')
     </main>
     <footer>
 

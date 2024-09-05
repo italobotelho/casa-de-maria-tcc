@@ -18,3 +18,7 @@ Route::get('/pacientes', function () {
 Route::get('/layout', function () {
     return view('Layout/layout');
 });
+
+Route::get('/config', function () {
+    return view('Configurações/gerais');
+});
