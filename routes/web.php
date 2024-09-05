@@ -18,3 +18,19 @@ Route::get('/pacientes', function () {
 Route::get('/layout', function () {
     return view('Layout/layout');
 });
+
+Route::get('/agenda', function () {
+    return view('Menu/agenda');
+});
+
+Route::get('/consulta', function () {
+    return view('Menu/consulta');
+});
+
+Route::get('/pacientes', function () {
+    return view('Menu/pacientes');
+});
+
+Route::get('/profissional', function () {
+    return view('Menu/profissional');
+});
