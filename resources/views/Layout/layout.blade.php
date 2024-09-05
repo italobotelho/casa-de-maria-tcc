@@ -13,7 +13,7 @@
             <div class="container-fluid ">
                 <a class="navbar-brand " href="menu"><img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24"></a>
               <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav nav-fill me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Painel</a>
                   </li>
@@ -34,7 +34,7 @@
             </div>
     </header>
     <main>
-      @yield('main')
+        @yield('main')
     </main>
     <footer>
 
