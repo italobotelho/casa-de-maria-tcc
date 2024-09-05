@@ -1,27 +1,23 @@
-@extends('Layout/layout')
+@extends('Layout/configuracoes')
 
-@section('main')
+@section('nav-gerais')
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="config-gerais">Gerais</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" aria-current="page" href="config-procedimentos">Procedimentos</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" aria-current="page" href="config-convenios">Convênios</a>
+  </li>
+@endsection
 
-
-    <h1>Configurações</h1>
-
-
-    <div class="container border">
-        <ul class="nav nav-underline nav-fill justify-content-center">
-            <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="config-gerais">Gerais</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="config-procedimentos">Procedimentos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="config-convenios">Convênios</a>
-            </li>
-        </ul>
+@section('main-configuracoes')
 
         <div>
             <h1>Dados da Clínica</h1>
             <form class="row g-3">
+              @csrf
               <div class="col-md-6">
                 <label for="inputNome" class="form-label">NOME</label>
                 <input type="text" class="form-control" id="inputNome">

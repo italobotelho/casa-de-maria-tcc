@@ -27,14 +27,14 @@
                     <a class="nav-link active" aria-current="page" href="#">Pacientes</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Procedimentos</a>
+                    <a class="nav-link active" aria-current="page" href="#">Profissionais</a>
                   </li>
                 </ul>
               </div>
             </div>
     </header>
     <main>
-        @yield('main')
+        @yield('main-layout')
     </main>
     <footer>
 
