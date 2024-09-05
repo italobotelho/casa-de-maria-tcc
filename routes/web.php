@@ -11,9 +11,6 @@ Route::get('/menu', function () {
     return view('Menu/menu'); // Substitua isso pela lógica correta para a sua página inicial
 })->middleware('auth');
 
-Route::get('/pacientes', function () {
-    return view('Pacientes/pacientes');
-});
 
 Route::get('/layout', function () {
     return view('Layout/layout');
@@ -34,3 +31,11 @@ Route::get('/pacientes', function () {
 Route::get('/profissional', function () {
     return view('Menu/profissional');
 });
+
+Route::get('/form_paciente', function () {
+    return view('Cadastros/form_paciente');
+});
+
+
+
+
