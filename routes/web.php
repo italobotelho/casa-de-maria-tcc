@@ -19,6 +19,14 @@ Route::get('/layout', function () {
     return view('Layout/layout');
 });
 
-Route::get('/config', function () {
+Route::get('/config-gerais', function () {
     return view('Configurações/gerais');
+});
+
+Route::get('/config-procedimentos', function () {
+    return view('Configurações/procedimentos');
+});
+
+Route::get('/config-convenios', function () {
+    return view('Configurações/convenios');
 });
