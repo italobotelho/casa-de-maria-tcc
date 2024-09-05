@@ -9,13 +9,13 @@
     <div class="container border">
         <ul class="nav nav-underline nav-fill justify-content-center">
             <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="gerais">Gerais</a>
+            <a class="nav-link active" aria-current="page" href="config-gerais">Gerais</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="procedimentos">Procedimentos</a>
+                <a class="nav-link" href="config-procedimentos">Procedimentos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="convenios">Convênios</a>
+                <a class="nav-link" href="config-convenios">Convênios</a>
             </li>
         </ul>
 
