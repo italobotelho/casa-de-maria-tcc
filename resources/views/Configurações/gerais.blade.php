@@ -22,77 +22,70 @@
         <div>
             <h1>Dados da Clínica</h1>
             <form class="row g-3">
-                <div class="col-md-6">
-                  <label for="inputNome" class="form-label">NOME</label>
-                  <input type="text" class="form-control" id="inputNome">
+              <div class="col-md-6">
+                <label for="inputNome" class="form-label">NOME</label>
+                <input type="text" class="form-control" id="inputNome">
+              </div>
+              <div class="col-md-6">
+                <label for="inputCNPJ" class="form-label">CNPJ</label>
+                <input type="number" class="form-control" id="inputCNPJ">
+              </div>
+              <div class="mb-3">
+                <label for="FormControlDescricao" class="form-label">DESCRIÇÃO</label>
+                <textarea class="form-control" id="FormControlDescricao" rows="3"></textarea>
+              </div>
+              <div class="col-md-4">
+                <label for="inputTelRecepcao" class="form-label">TELEFONE DA RECEPÇÃO</label>
+                <input type="tel" class="form-control" id="inputTelRecepcao">
+              </div>
+              <div class="col-md-4">
+                <label for="inputEmailAtendimentoClinica" class="form-label">E-MAIL DE ATENDIMENTO DA CLÍNICA</label>
+                <input type="email" class="form-control" id="inputEmailAtendimentoClinica">
+              </div>
+              <div class="col-md-4">
+                <label for="inputEmailResponsavelClinica" class="form-label">E-MAIL RESPONSÁVEL PELA CLÍNICA</label>
+                <input type="email" class="form-control" id="inputEmailResponsavelClinica">
+              </div>
+
+              <h1>Endereço</h1>
+              <div>
+                <div class="col-md-3">
+                  <label for="inputCEP" class="form-label">CEP</label>
+                  <input type="number" class="form-control" id="inputCEP">
                 </div>
-                <div class="col-md-6">
-                  <label for="inputCNPJ" class="form-label">CNPJ</label>
-                  <input type="text" class="form-control" id="inputCNPJ">
-                </div>
-                <div class="col-12">
-                  <label for="inputAddress" class="form-label">Address</label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                </div>
-                <div class="col-12">
-                  <label for="inputAddress2" class="form-label">Address 2</label>
-                  <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                </div>
-                <div class="col-md-6">
-                  <label for="inputCity" class="form-label">City</label>
-                  <input type="text" class="form-control" id="inputCity">
-                </div>
-                <div class="col-md-4">
-                  <label for="inputState" class="form-label">State</label>
-                  <select id="inputState" class="form-select">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                  </select>
-                </div>
-                <div class="col-md-2">
-                  <label for="inputZip" class="form-label">Zip</label>
-                  <input type="text" class="form-control" id="inputZip">
-                </div>
-                <div class="col-12">
-                </div>
-        </div>
-        <div>
-            <h1>Endereço</h1>
-                <div class="col-12">
-                  <label for="inputAddress" class="form-label">Address</label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                </div>
-                <div class="col-12">
-                  <label for="inputAddress2" class="form-label">Address 2</label>
-                  <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                </div>
-                <div class="col-md-6">
-                  <label for="inputCity" class="form-label">City</label>
-                  <input type="text" class="form-control" id="inputCity">
-                </div>
-                <div class="col-md-4">
-                  <label for="inputState" class="form-label">State</label>
-                  <select id="inputState" class="form-select">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                  </select>
-                </div>
-                <div class="col-md-2">
-                  <label for="inputZip" class="form-label">Zip</label>
-                  <input type="text" class="form-control" id="inputZip">
-                </div>
-                <div class="col-12">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                    <label class="form-check-label" for="gridCheck">
-                      Check me out
-                    </label>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <button type="submit" class="btn btn-primary">Sign in</button>
-                </div>
-              </form>
-        </div>
-    </div>
+                <h5>*INFORME O CEP PARA O PREENCHIMENTO AUTOMÁTICO DOS DADOS</h5>
+              </div>
+              <div class="col-md-6">
+                <label for="inputLogradouro" class="form-label">LOGRADOURO</label>
+                <input type="text" class="form-control" id="inputLogradouro">
+              </div>
+              <div class="col-md-2">
+                <label for="inputNumeroEstabelecimento" class="form-label">NÚMERO</label>
+                <input type="number" class="form-control" id="inputNumeroEstabelecimento">
+              </div>
+              <div class="col-md-4">
+                <label for="inputCBairro" class="form-label">BAIRRO</label>
+                <input type="text" class="form-control" id="inputCBairro">
+              </div>
+              <div class="col-md-4">
+                <label for="inputComplemento" class="form-label">COMPLEMENTO</label>
+                <input type="text" class="form-control" id="inputComplemento">
+              </div>
+              <div class="col-md-4">
+                <label for="inputCidade" class="form-label">CIDADE</label>
+                <input type="text" class="form-control" id="inputCidade">
+              </div>
+              <div class="col-md-2">
+                <label for="inputUF" class="form-label">UF (ESTADO)</label>
+                <input type="text" class="form-control" id="inputUF">
+              </div>
+              <div class="col-md-2">
+                <label for="inputCodIBGE" class="form-label">CÓD. IBGE</label>
+                <input type="number" class="form-control" id="inputCodIBGE">
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+              </div>
+            </form>
+    </div> {{-- fim da container --}}
 @endsection
