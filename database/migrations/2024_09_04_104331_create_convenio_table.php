@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('convenio', function (Blueprint $table) {
-            $table->integer('pk_ans_conv')->primary();
+            $table->string('ans_conv');
             $table->dateTime('retorno_conv');
-            $table->string('nome_conv', 55); 
+            $table->integer('pk_nome_conv')->primary();
             $table->timestamps();
         });
     }

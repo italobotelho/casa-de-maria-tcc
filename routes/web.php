@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PersonController;
 use Illuminate\Support\Facades\Route;
 
 // Rota para autenticação do usuário via método POST
@@ -35,6 +36,12 @@ Route::get('/profissional', function () {
 Route::get('/form_paciente', function () {
     return view('Cadastros/form_paciente');
 });
+
+Route::post('/form_paciente', [PersonController::class, 'store'])->name('paciente.store');
+
+
+//[PersonController::class, 'store'])->name('paciente.store');
+
 
 
 
