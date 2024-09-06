@@ -7,22 +7,25 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Execute as migrações.
      */
     public function up(): void
     {
         Schema::create('paciente', function (Blueprint $table) {
-            $table->integer('pk_cod_paci')->primary();
+            $table->increments('pk_cod_paci'); // Chave primária auto-incrementada
 
-            $table->integer('fk_cidade');
+            // Definir fk_cidade como unsignedInteger para corresponder ao tipo de pk_ende_paci
+            $table->unsignedInteger('fk_cidade');
             $table->foreign('fk_cidade')->references('pk_ende_paci')->on('cidade');
 
-            $table->integer('fk_convenio_paci');
+            // Definir fk_convenio_paci como unsignedInteger para garantir compatibilidade
+            $table->unsignedInteger('fk_convenio_paci');
             $table->foreign('fk_convenio_paci')->references('pk_nome_conv')->on('convenio');
 
-            $table->string('email_paci', 255);
+            // Campos adicionais
+            $table->string('email_paci', 255)->nullable();
             $table->dateTime('data_obito_paci')->nullable();
-            $table->string('carteira_convenio_paci', 20);
+            $table->string('carteira_convenio_paci', 20)->nullable();
             $table->string('responsavel_paci', 50)->nullable();
             $table->dateTime('data_nasci_paci')->nullable();
             $table->string('nome_paci', 54)->nullable();
@@ -33,7 +36,7 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Reverta as migrações.
      */
     public function down(): void
     {

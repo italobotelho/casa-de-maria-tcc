@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('clinica', function (Blueprint $table) {
-            $table->integer('pk_cnpj')->primary();
+            $table->unsignedInteger('pk_cnpj')->primary();
             $table->string('nome_clin', 25);
             $table->string('email_aten_clin', 255);
             $table->string('numero_clin', 5);

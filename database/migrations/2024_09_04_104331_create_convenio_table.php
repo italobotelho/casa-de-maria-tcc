@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('convenio', function (Blueprint $table) {
             $table->string('ans_conv');
             $table->dateTime('retorno_conv');
-            $table->integer('pk_nome_conv')->primary();
+            $table->unsignedInteger('pk_nome_conv')->primary();
             $table->timestamps();
         });
     }
