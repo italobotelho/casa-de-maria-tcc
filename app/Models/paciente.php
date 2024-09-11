@@ -35,6 +35,7 @@ class Paciente extends Model
         'responsavel_paci',
         'data_nasci_paci',
         'nome_paci',
+        'nome_cidade',
         'cpf_responsavel_paci',
         'telefone_paci',
     ];
@@ -45,8 +46,15 @@ class Paciente extends Model
         'data_nasci_paci',
     ];
 
-
-
+    public function cidade()
+    {
+        return $this->belongsTo(Cidade::class, 'fk_cidade');
+    }
+    
+    public function getNomeCidadeAttribute()
+    {
+        return $this->cidade->nome_cidade;
+    }
 
 }
 

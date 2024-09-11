@@ -46,7 +46,14 @@
 
 
          <!-- Cidade -->
-            <div class="form-group">
+         <div class="form-group">
+            <label for="nome_cidade">Cidade:</label>
+            <input type="text" class="form-control" id="nome_cidade" name="nome_cidade" value="{{ old('nome_cidade') }}" required>
+        </div>
+
+
+
+          {{-- <div class="form-group">
                 <!-- Rótulo para o campo de seleção de cidade -->
                 <label for="fk_cidade">Cidade</label>
                 <!-- Campo de seleção de cidade -->
@@ -56,11 +63,11 @@
                     <option value="1" {{ old('fk_cidade') == 1 ? 'selected' : '' }}>Jaguariúna</option> <!---old('fk_cidade'): Se o formulário foi submetido e houve um erro de validação, o valor anterior de fk_cidade será reutilizado.-->
                     <option value="2" {{ old('fk_cidade') == 2 ? 'selected' : '' }}>Amparo</option>
                     <option value="3" {{ old('fk_cidade') == 3 ? 'selected' : '' }}>Campinas</option>
-                </select>
-            </div>
+                </sele  ct>
+            </div> --}}
 
-            <!-- Convênio -->
-            <div class="form-group">
+            {{-- <!-- Convênio -->
+             <div class="form-group">
                 <!-- Rótulo para o campo de seleção de convênio -->
                 <label for="fk_convenio_paci">Convênio</label>
 
@@ -68,10 +75,15 @@
                 <select class="form-control" id="fk_convenio_paci" name="fk_convenio_paci" required>
                     <!-- Opção padrão desabilitada, solicitando ao usuário que selecione um convênio -->
                     <option value="" disabled {{ old('fk_convenio_paci') == '' ? 'selected' : '' }}>Selecione o convênio</option>
-
                     <option value="1" {{ old('fk_convenio_paci') == 1 ? 'selected' : '' }}>Convênio 1</option>
                     <option value="2" {{ old('fk_convenio_paci') == 2 ? 'selected' : '' }}>Convênio 2</option>
                 </select>
+            </div>  --}}
+
+
+            <div class="form-group">
+                <label for="pk_nome_conv">Convênio</label>
+                <input type="text" class="form-control" id="pk_nome_conv" name="pk_nome_conv" value="{{ old('pk_nome_conv') }}" required>
             </div>
 
              <!-- Carteira do Convênio -->

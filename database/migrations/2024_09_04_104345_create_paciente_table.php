@@ -6,38 +6,29 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Execute as migrações.
-     */
     public function up(): void
     {
         Schema::create('paciente', function (Blueprint $table) {
-            $table->increments('pk_cod_paci'); // Chave primária auto-incrementada
+            $table->increments('pk_cod_paci'); // Primary key, auto-incrementing
 
-            // Definir fk_cidade como unsignedInteger para corresponder ao tipo de pk_ende_paci
-            $table->unsignedInteger('fk_cidade');
-            $table->foreign('fk_cidade')->references('pk_ende_paci')->on('cidade');
-
-            // Definir fk_convenio_paci como unsignedInteger para garantir compatibilidade
+            // Foreign key reference
             $table->unsignedInteger('fk_convenio_paci');
             $table->foreign('fk_convenio_paci')->references('pk_nome_conv')->on('convenio');
 
-            // Campos adicionais
+            // Additional fields
             $table->string('email_paci', 255)->nullable();
             $table->dateTime('data_obito_paci')->nullable();
             $table->string('carteira_convenio_paci', 20)->nullable();
             $table->string('responsavel_paci', 50)->nullable();
             $table->dateTime('data_nasci_paci')->nullable();
             $table->string('nome_paci', 54)->nullable();
+            $table->string('nome_cidade', 100)->nullable();
             $table->string('cpf_responsavel_paci', 11)->nullable();
             $table->string('telefone_paci', 12)->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverta as migrações.
-     */
     public function down(): void
     {
         Schema::dropIfExists('paciente');

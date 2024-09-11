@@ -6,22 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('convenio', function (Blueprint $table) {
+            $table->unsignedInteger('pk_nome_conv')->primary(); // Changed to unsignedInteger
             $table->string('ans_conv');
             $table->dateTime('retorno_conv');
-            $table->unsignedInteger('pk_nome_conv')->primary();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('convenio');
