@@ -45,3 +45,8 @@ Route::get('/pacientes', function () {
 Route::get('/profissional', function () {
     return view('Menu/profissional');
 });
+
+// routes/web.php
+
+Route::get('/configuracoes', 'ConfiguracoesController@index');
+Route::patch('/configuracoes', 'ConfiguracoesController@update');
