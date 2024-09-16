@@ -9,9 +9,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('convenio', function (Blueprint $table) {
-            $table->unsignedInteger('pk_nome_conv')->primary(); // Changed to unsignedInteger
+            $table->bigIncrements('pk_id_conv'); // Changed to unsignedInteger
             $table->string('ans_conv');
-            $table->dateTime('retorno_conv');
+            $table->string('nome_conv');
             $table->timestamps();
         });
     }

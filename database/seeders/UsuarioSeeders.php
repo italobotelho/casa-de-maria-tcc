@@ -17,5 +17,7 @@ class UsuarioSeeders extends Seeder
             'user' => 'ana provence',
             'senha' => Hash::make('30201702'),
         ]);
+
+       
     }
 }

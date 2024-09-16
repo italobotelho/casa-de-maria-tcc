@@ -11,9 +11,9 @@ return new class extends Migration
         Schema::create('paciente', function (Blueprint $table) {
             $table->increments('pk_cod_paci'); // Primary key, auto-incrementing
 
-            // Foreign key reference
-            $table->unsignedInteger('fk_convenio_paci');
-            $table->foreign('fk_convenio_paci')->references('pk_nome_conv')->on('convenio');
+           // Foreign key reference
+           $table->unsignedBigInteger('fk_convenio_paci'); // Should match 'bigIncrements' type from 'convenio' table
+           $table->foreign('fk_convenio_paci')->references('pk_id_conv')->on('convenio')->onDelete('cascade');
 
             // Additional fields
             $table->string('email_paci', 255)->nullable();

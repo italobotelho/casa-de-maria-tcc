@@ -38,9 +38,7 @@ Route::get('/form_paciente', function () {
 });
 
 Route::post('/form_paciente', [PersonController::class, 'store'])->name('paciente.store');
-
-
-//[PersonController::class, 'store'])->name('paciente.store');
+Route::get('/convenio', [PersonController::class, 'ListarConvenio'])->name('convenio.listar');
 
 
 

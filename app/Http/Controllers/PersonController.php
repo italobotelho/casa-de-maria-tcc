@@ -7,6 +7,11 @@ use App\Models\Convenio;
 
 class PersonController extends Controller
 {
+    public function ListarConvenio() // Nome do método corrigido
+    {
+        $convenios = Convenio::all(); // Recupera todos os convênios
+        return response()->json($convenios); // Retorna os dados como JSON
+    }
 
 
 

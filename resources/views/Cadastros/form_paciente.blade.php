@@ -74,11 +74,30 @@
             </div> --}}
 
 
-           <div class="form-group">
+            <div class="form-group">
                 <label for="fk_convenio_paci">Convênio</label>
-                <input type="text" class="form-control" id="fk_convenio_paci" name="fk_convenio_paci"
-                    value="{{ old('fk_convenio_paci') }}" required>
+                <select name="fk_convenio_paci" id="fk_convenio_paci" required>
+                    <option value="">Selecione um convênio</option>
+                </select>
             </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    fetch('/convenio')
+                        .then(response => response.json())
+                        .then(data => {
+                            let select = document.getElementById('fk_convenio_paci');
+                            data.forEach(convenio => {
+                                let option = document.createElement('option');
+                                option.value = convenio.pk_id_conv; // Ajuste conforme o nome da chave primária
+                                option.text = convenio.nome_conv; // Ajuste conforme o nome do convênio
+                                select.add(option);
+                            });
+                        })
+                        .catch(error => console.error('Erro ao carregar convênios:', error));
+                });
+            </script>
+
 
             <!-- Carteira do Convênio -->
             <div class="form-group">
