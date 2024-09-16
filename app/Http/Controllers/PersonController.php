@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -13,9 +14,6 @@ class PersonController extends Controller
         return response()->json($convenios); // Retorna os dados como JSON
     }
 
-
-
-
     public function store(Request $request)
     {
 
@@ -28,9 +26,13 @@ class PersonController extends Controller
             'carteira_convenio_paci' => 'required|string|max:20',
             'nome_cidade' => 'required|string|max:100',
             'fk_convenio_paci' => 'required|string',
+            'data_obito_paci' => 'date',
+            'responsavel_paci' => 'required|string',
+            'cpf_paci' => 'required|string|max:12'
 
 
         ]);
+
 
 
         $paciente = new Paciente();
@@ -41,11 +43,14 @@ class PersonController extends Controller
         $paciente->email_paci = $request->email_paci;
         $paciente->carteira_convenio_paci = $request->carteira_convenio_paci;
         $paciente->fk_convenio_paci = $request->fk_convenio_paci;
+        $paciente->nome_cidade = $request->nome_cidade;
+        $paciente->data_obito_paci = $request->data_obito_paci;
+        $paciente->responsavel_paci = $request->responsavel_paci;
+        $paciente->cpf_paci = $request->cpf_paci;
 
         $paciente->save();
 
         // Redireciona com uma mensagem de sucesso
         return redirect()->route('paciente.store')->with('success', 'Paciente cadastrado com sucesso!');
-
     }
 }

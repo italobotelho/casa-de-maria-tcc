@@ -10,7 +10,6 @@ return new class extends Migration
     {
         Schema::create('convenio', function (Blueprint $table) {
             $table->bigIncrements('pk_id_conv'); // Changed to unsignedInteger
-            $table->string('ans_conv');
             $table->string('nome_conv');
             $table->timestamps();
         });

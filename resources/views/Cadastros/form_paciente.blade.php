@@ -44,11 +44,28 @@
                     value="{{ old('data_nasci_paci') }}" required>
             </div>
 
-            <!-- CPF do Responsável -->
+            {{-- cpf paciente --}}
+            <!-- CPF Paciente -->
             <div class="form-group">
-                <label for="cpf_responsavel_paci">CPF</label>
-                <input type="text" class="form-control" id="cpf_responsavel_paci" name="cpf_responsavel_paci"
+                <label for="cpf_paci">CPF Paciente</label>
+                <input type="text" class="form-control" id="cpf_paci" name="cpf_paci" value="{{ old('cpf_paci') }}"
+                    required>
+            </div>
+
+
+
+            <!-- CPF do Responsável -->
+            <div>
+                <label for="cpf_responsavel_paci">CPF do Responsável:</label>
+                <input type="text" name="cpf_responsavel_paci" id="cpf_responsavel_paci"
                     value="{{ old('cpf_responsavel_paci') }}" required>
+            </div>
+
+            {{-- nome responsavel --}}
+            <div class="form-group">
+                <label for="responsavel_paci">Nome responsavel</label>
+                <input type="text" class="form-control" id="responsavel_paci" name="responsavel_paci"
+                    value="{{ old('responsavel_paci') }}" required>
             </div>
 
 
@@ -60,7 +77,7 @@
             </div>
 
             <!-- Convênio -->
-             {{-- <div class="form-group">
+            {{-- <div class="form-group">
                 <!-- Rótulo para o campo de seleção de convênio -->
                 <label for="fk_convenio_paci">Convênio</label>
 
@@ -121,7 +138,7 @@
             @if (session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
-                    </div>
+                </div>
             @endif
 
 
