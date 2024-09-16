@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Configuracoes extends Model
+class Clinica extends Model
 {
     protected $fillable = [
         'nome',
         'cnpj',
         'descricao',
-        'telefone_recepcao',
-        'email_atendimento_clinica',
-        'email_responsavel_clinica',
+        'telefone',
+        'email_aten',
+        'email_resp',
         'cep',
-        'logradouro',
-        'numero_estabelecimento',
+        'rua',
+        'numero',
         'bairro',
         'complemento',
         'cidade',
@@ -24,5 +24,6 @@ class Configuracoes extends Model
         'cod_ibge',
     ];
 
-    protected $primaryKey = 'pk_cnpj';
+    protected $primaryKey = 'cnpj';
 }
+

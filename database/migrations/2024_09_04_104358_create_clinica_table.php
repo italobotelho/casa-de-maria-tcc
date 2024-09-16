@@ -11,16 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clinica', function (Blueprint $table) {
-            $table->integer('pk_cnpj')->primary();
-            $table->string('nome_clin', 25);
-            $table->string('email_aten_clin', 255);
-            $table->string('numero_clin', 5);
-            $table->string('rua_clin', 17);
-            $table->string('telefone_clin', 12);
-            $table->string('email_resp_clin', 255);
-            $table->string('cidade_clin', 30);
-            $table->string('descriçõ_clin', 100);
+        Schema::create('clinicas', function (Blueprint $table) {
+            $table->bigInteger('cnpj')->primary();
+            $table->string('nome', 25);
+            $table->string('descricao', 100);
+            $table->string('telefone', 12);
+            $table->string('email_aten', 255);
+            $table->string('email_resp', 255);
+            $table->string('cep', 8);
+            $table->string('rua', 17);
+            $table->string('numero', 5);
+            $table->string('bairro', 50);
+            $table->string('complemento', 100);
+            $table->string('cidade', 30);
+            $table->string('uf', 2);
+            $table->bigInteger('cod_ibge');
+            $table->timestamps();
         });
     }
 
@@ -29,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clinica');
+        Schema::dropIfExists('clinicas');
     }
 };

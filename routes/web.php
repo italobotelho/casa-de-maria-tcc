@@ -46,7 +46,8 @@ Route::get('/profissional', function () {
     return view('Menu/profissional');
 });
 
-// routes/web.php
+// Rotas da Tela Configurações Gerais
 
-Route::get('/configuracoes', 'ConfiguracoesController@index');
-Route::patch('/configuracoes', 'ConfiguracoesController@update');
+Route::get('/config-gerais', 'App\Http\Controllers\ConfiguracoesController@index')->name('config-gerais.store');
+Route::post('/config-gerais', 'App\Http\Controllers\ConfiguracoesController@store')->name('config-gerais.store');
+Route::patch('/config-gerais', 'App\Http\Controllers\ConfiguracoesController@update')->name('config-gerais.store');
