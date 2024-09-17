@@ -15,8 +15,8 @@ return new class extends Migration
             $table->integer('pk_cod_proc')->primary();
             $table->integer('fk_crm_med');
             $table->foreign('fk_crm_med')->references('pk_crm_med')->on('medico');
-            $table->string('descrição_proc', 100);
-            $table->dateTime('tempo_proc');
+            $table->string('descricao_proc', 100);
+            $table->time('tempo_proc');
             $table->string('nome_proc', 50);
         });
     }

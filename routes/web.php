@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ConfiguracoesController;
+use App\Http\Controllers\ProcedimentoController;
 use Illuminate\Support\Facades\Route;
 
 // Rota para autenticação do usuário via método POST
@@ -21,10 +23,6 @@ Route::get('/layout', function () {
 
 Route::get('/config-gerais', function () {
     return view('Configurações/gerais');
-});
-
-Route::get('/config-procedimentos', function () {
-    return view('Configurações/procedimentos');
 });
 
 Route::get('/config-convenios', function () {
@@ -51,3 +49,13 @@ Route::get('/profissional', function () {
 Route::get('/config-gerais', 'App\Http\Controllers\ConfiguracoesController@index')->name('config-gerais.store');
 Route::post('/config-gerais', 'App\Http\Controllers\ConfiguracoesController@store')->name('config-gerais.store');
 Route::patch('/config-gerais', 'App\Http\Controllers\ConfiguracoesController@update')->name('config-gerais.store');
+
+// Rotas da Tela Configurações Procedimentos
+
+
+Route::get('/procedimentos/create', [ProcedimentoController::class, 'create'])->name('procedimentos.create');
+Route::get('/procedimentos/{pk_cod_proc}', 'ProcedimentoController@show');
+Route::post('/procedimentos', [ProcedimentoController::class, 'store'])->name('procedimentos.store');
+Route::get('/procedimentos', [ProcedimentoController::class, 'index'])->name('procedimentos.index');
+
+

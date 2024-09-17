@@ -5,7 +5,7 @@
     <a class="nav-link " aria-current="page" href="config-gerais">Gerais</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" aria-current="page" href="config-procedimentos">Procedimentos</a>
+    <a class="nav-link" aria-current="page" href="procedimentos">Procedimentos</a>
   </li>
   <li class="nav-item">
     <a class="nav-link active" aria-current="page" href="config-convenios">Convênios</a>
