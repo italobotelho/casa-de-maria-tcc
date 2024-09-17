@@ -2,13 +2,13 @@
 
 @section('nav-gerais')
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="config-gerais">Gerais</a>
+    <a class="nav-link active" aria-current="page" href="gerais">Gerais</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" aria-current="page" href="procedimentos">Procedimentos</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" aria-current="page" href="config-convenios">Convênios</a>
+    <a class="nav-link" aria-current="page" href="convenios">Convênios</a>
   </li>
 @endsection
 

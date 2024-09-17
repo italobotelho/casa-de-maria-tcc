@@ -12,7 +12,7 @@
         <div>
             <img class="navimg" src="/img/logo.png" alt="Logo Casa de Maria" width="35" height="45" >
             <img src="/img/titulo branco.png" alt="Casa de Maria" width="55" height="30">
-           <a  href="config-gerais"> <button><img src="/img/conf.png" alt="Configurações"></button> </a>
+           <a  href="gerais"> <button><img src="/img/conf.png" alt="Configurações"></button> </a>
         </div>
     </nav>
      

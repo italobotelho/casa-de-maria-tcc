@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('fk_cidade');
             $table->foreign('fk_cidade')->references('pk_ende_paci')->on('cidade');
             $table->integer('fk_convenio_paci');
-            $table->foreign('fk_convenio_paci')->references('pk_ans_conv')->on('convenio');
+            $table->foreign('fk_convenio_paci')->references('pk_ans_conv')->on('convenios');
             $table->string('convenio_paci', 50);
             $table->string('email_paci', 255);
             $table->dateTime('data_obito_paci')->nullable();

@@ -3,6 +3,7 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ConfiguracoesController;
 use App\Http\Controllers\ProcedimentoController;
+use App\Http\Controllers\ConvenioController;
 use Illuminate\Support\Facades\Route;
 
 // Rota para autenticação do usuário via método POST
@@ -21,13 +22,8 @@ Route::get('/layout', function () {
     return view('Layout/layout');
 });
 
-Route::get('/config-gerais', function () {
-    return view('Configurações/gerais');
-});
+// Rotas da Tela Menu
 
-Route::get('/config-convenios', function () {
-    return view('Configurações/convenios');
-});
 Route::get('/agenda', function () {
     return view('Menu/agenda');
 });
@@ -46,16 +42,21 @@ Route::get('/profissional', function () {
 
 // Rotas da Tela Configurações Gerais
 
-Route::get('/config-gerais', 'App\Http\Controllers\ConfiguracoesController@index')->name('config-gerais.store');
-Route::post('/config-gerais', 'App\Http\Controllers\ConfiguracoesController@store')->name('config-gerais.store');
-Route::patch('/config-gerais', 'App\Http\Controllers\ConfiguracoesController@update')->name('config-gerais.store');
+Route::get('/gerais', 'App\Http\Controllers\ConfiguracoesController@index')->name('config-gerais.store');
+Route::post('/gerais', 'App\Http\Controllers\ConfiguracoesController@store')->name('config-gerais.store');
+Route::patch('/gerais', 'App\Http\Controllers\ConfiguracoesController@update')->name('config-gerais.store');
 
 // Rotas da Tela Configurações Procedimentos
 
 
+Route::get('/procedimentos', [ProcedimentoController::class, 'index'])->name('procedimentos.index');
 Route::get('/procedimentos/create', [ProcedimentoController::class, 'create'])->name('procedimentos.create');
 Route::get('/procedimentos/{pk_cod_proc}', 'ProcedimentoController@show');
 Route::post('/procedimentos', [ProcedimentoController::class, 'store'])->name('procedimentos.store');
-Route::get('/procedimentos', [ProcedimentoController::class, 'index'])->name('procedimentos.index');
 
 
+//Rotas da Tela Configurações Convenios
+
+Route::get('/convenios', [ConvenioController::class, 'index'])->name('convenios.index');
+Route::get('/convenios/create', [ConvenioController::class, 'create'])->name('convenios.create');
+Route::post('/convenios', [ConvenioController::class, 'store'])->name('convenios.store');
