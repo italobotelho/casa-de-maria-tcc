@@ -17,6 +17,7 @@ class PersonController extends Controller
     public function store(Request $request)
     {
 
+
         $request->validate([
             'nome_paci' => 'required|string|max:54',
             'data_nasci_paci' => 'required|date',

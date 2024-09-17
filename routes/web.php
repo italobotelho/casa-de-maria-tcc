@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\PersonController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,13 @@ Route::get('/form_paciente', function () {
 
 Route::post('/form_paciente', [PersonController::class, 'store'])->name('paciente.store');
 Route::get('/convenio', [PersonController::class, 'ListarConvenio'])->name('convenio.listar');
+
+
+
+Route::get('/form_medico', function () {
+    return view('Cadastros/form_medico');
+});
+Route::post('/form_medico', [MedicoController::class, 'store'])->name('medico.store');
 
 
 
