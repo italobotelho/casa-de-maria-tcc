@@ -19,24 +19,31 @@
             <!-- Nome -->
             <div class="form-group">
                 <label for="nome_paci">Nome</label>
-                <input type="text" class="form-control" id="nome_paci" name="nome_paci"
+                <input maxlength="54" type="text" class="form-control" id="nome_paci" name="nome_paci"
                     value="{{ old('nome_paci') }}" required>
             </div>
 
             <!-- Telefone -->
             <div class="form-group">
                 <label for="telefone_paci">Telefone</label>
-                <input type="text" class="form-control" id="telefone_paci" name="telefone_paci"
+                <input maxlength="12" type="text" class="form-control" id="telefone_paci" name="telefone_paci"
                     value="{{ old('telefone_paci') }}" required>
             </div>
 
             <!-- Email -->
             <div class="form-group">
                 <label for="email_paci">Email</label>
-                <input type="email" class="form-control" id="email_paci" name="email_paci"
+                <input maxlength="255" type="email" class="form-control" id="email_paci" name="email_paci"
                     value="{{ old('email_paci') }}" required>
             </div>
 
+
+            <!-- CPF Paciente -->
+            <div class="form-group">
+                <label for="cpf_paci">CPF Paciente</label>
+                <input maxlength="11" type="text" class="form-control" id="cpf_paci" name="cpf_paci"
+                    value="{{ old('cpf_paci') }}" required>
+            </div>
             <!-- Data de Nascimento -->
             <div class="form-group">
                 <label for="data_nasci_paci">Data de Nascimento</label>
@@ -44,51 +51,46 @@
                     value="{{ old('data_nasci_paci') }}" required>
             </div>
 
-            {{-- cpf paciente --}}
-            <!-- CPF Paciente -->
-            <div class="form-group">
-                <label for="cpf_paci">CPF Paciente</label>
-                <input type="text" class="form-control" id="cpf_paci" name="cpf_paci" value="{{ old('cpf_paci') }}"
-                    required>
+            <!-- CPF do Responsável e Nome Responsável -->
+            <div id="responsavel-fields" style="display: none;">
+                <div class="form-group">
+                    <label for="cpf_responsavel_paci">CPF do Responsável:</label>
+                    <input maxlength="11" type="text" name="cpf_responsavel_paci" id="cpf_responsavel_paci"
+                        value="{{ old('cpf_responsavel_paci') }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="responsavel_paci">Nome responsavel</label>
+                    <input maxlength="54" type="text" class="form-control" id="responsavel_paci"
+                        name="responsavel_paci" value="{{ old('responsavel_paci') }}" required>
+                </div>
             </div>
 
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const dataNasciInput = document.getElementById('data_nasci_paci');
+                    const responsavelFields = document.getElementById('responsavel-fields');
 
+                    dataNasciInput.addEventListener('input', function() {
+                        const birthDate = new Date(dataNasciInput.value);
+                        const today = new Date();
+                        const age = today.getFullYear() - birthDate.getFullYear();
+                        const isMinor = age < 18;
 
-            <!-- CPF do Responsável -->
-            <div>
-                <label for="cpf_responsavel_paci">CPF do Responsável:</label>
-                <input type="text" name="cpf_responsavel_paci" id="cpf_responsavel_paci"
-                    value="{{ old('cpf_responsavel_paci') }}" required>
-            </div>
-
-            {{-- nome responsavel --}}
-            <div class="form-group">
-                <label for="responsavel_paci">Nome responsavel</label>
-                <input type="text" class="form-control" id="responsavel_paci" name="responsavel_paci"
-                    value="{{ old('responsavel_paci') }}" required>
-            </div>
-
-
+                        if (isMinor) {
+                            responsavelFields.style.display = 'block';
+                        } else {
+                            responsavelFields.style.display = 'none';
+                        }
+                    });
+                });
+            </script>
             <!-- Cidade -->
             <div class="form-group">
                 <label for="nome_cidade">Cidade:</label>
-                <input type="text" class="form-control" id="nome_cidade" name="nome_cidade"
+                <input maxlength="100" type="text" class="form-control" id="nome_cidade" name="nome_cidade"
                     value="{{ old('nome_cidade') }}" required>
             </div>
 
-            <!-- Convênio -->
-            {{-- <div class="form-group">
-                <!-- Rótulo para o campo de seleção de convênio -->
-                <label for="fk_convenio_paci">Convênio</label>
-
-                <!-- Campo de seleção de convênio -->
-                <select class="form-control" id="fk_convenio_paci" name="fk_convenio_paci" required>
-                    <!-- Opção padrão desabilitada, solicitando ao usuário que selecione um convênio -->
-                    <option value="" disabled {{ old('fk_convenio_paci') == '' ? 'selected' : '' }}>Selecione o convênio</option>
-                    <option value="1" {{ old('fk_convenio_paci') == 1 ? 'selected' : '' }}>Unimed</option>
-                    <option value="2" {{ old('fk_convenio_paci') == 2 ? 'selected' : '' }}>Particular</option>
-                </select>
-            </div> --}}
 
 
             <div class="form-group">
@@ -119,8 +121,8 @@
             <!-- Carteira do Convênio -->
             <div class="form-group">
                 <label for="carteira_convenio_paci">Carteira do Convênio</label>
-                <input type="text" class="form-control" id="carteira_convenio_paci" name="carteira_convenio_paci"
-                    value="{{ old('carteira_convenio_paci') }}" required>
+                <input maxlength="12" type="text" class="form-control" id="carteira_convenio_paci"
+                    name="carteira_convenio_paci" value="{{ old('carteira_convenio_paci') }}" required>
             </div>
 
 

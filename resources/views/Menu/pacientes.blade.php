@@ -4,25 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>PACI</title>
 </head>
 <body>
     <a href="form_paciente">CADASTRAR PACIENTE</a>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Código</th>
-                <th>Nome Completo</th>
-                <th>Data Nasc.</th>
-                <th>Convenio</th>
-                <th>Celular</th>
-                <th>CPF</th>
-                <th>Cidade</th>
-            </tr>
-        </thead>
-
-        </tbody>
-    </table>
+    {{-- @section('content')
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 mt-4">
+            </div>
+            <div class="col-lg-8">
+                <div class="card shadow">
+                    <div class="card-header bg-success text-white d-flex justify-content-between">
+                       <h1 class="fw-bold">Pacientes</h1>
+                    </div>
+                    <div class="card-body p-4">
+                        <table class="table table-striped">
+                        <thead>
+                            <tr>
+                            <th scope="col">codigo</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Data nascimento</th>
+                            <th scope="col">Convenio</th>
+                            <th scope="col">Telefone</th>
+                            <th scope="col">CPF</th>
+                            <th scope="col">Cidade</th>
+                            <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($pacientes as $paciente)
+                                <tr>
+                                <th scope="row">{{$paciente->pk_cod_paci}}</th>
+                                <td>{{$paciente->nome_paci}}</td>
+                                <td>{{$paciente->data_nasci_paci}}</td>
+                                <td>{{$paciente->fk_convenio_paci}}</td>
+                                <td>{{$paciente->telefone_paci}}</td>
+                                <td>{{$paciente->cpf_paci}}</td>
+                                <td>{{$paciente->nome_cidade}}</td>
+                                <td>
+                                    <div class="d-flex gap-1">
+                                    <a href="/pacientes/{{$paciente->id}}" class="btn btn-secondary">Editar</a>
+                                    <form action="/pacientes/{{$paciente->id}}" method="POST">
+                                        @method('delete')
+                                        @csrf
+                                        <button class="btn btn-danger">
+                                            Excluir
+                                        </button>
+                                    </form>
+                                    </div>
+                                </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="8" class="text-center fs-4">
+                                        Nenhum paciente cadastrado
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div><!-- fim da col -->
+        </div><!-- fim da row -->
+    </div> <!-- fim do container -->
+    @endsection --}}
 </body>
 </html>

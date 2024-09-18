@@ -7,6 +7,10 @@
     <title>Document</title>
 </head>
 <body>
+    <a href="form_medico">CADASTRAR MEDICO</a>
     <h1>PROFISSIONAL</h1>
+
+    
+
 </body>
 </html>
