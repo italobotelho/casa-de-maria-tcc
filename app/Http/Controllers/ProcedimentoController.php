@@ -27,17 +27,23 @@ class ProcedimentoController extends Controller
         $validatedData = $request->validate([
             'nome_proc' => 'required|string|max:50',
             'descricao_proc' => 'required|string|max:100',
-            'tempo_proc' => 'required|date_format:H:i:s', // Alterei o formato de tempo
-            'fk_crm_med' => 'required|integer|exists:medico,pk_crm_med',
+            'tempo_proc' => 'required|date_format:H:i',
+            'fk_crm_med' => 'required|array|exists:medico,pk_crm_med',
         ]);
-
+    
         $procedimento = new Procedimento();
         $procedimento->nome_proc = $validatedData['nome_proc'];
         $procedimento->descricao_proc = $validatedData['descricao_proc'];
         $procedimento->tempo_proc = $validatedData['tempo_proc'];
-        $procedimento->fk_crm_med = $validatedData['fk_crm_med'];
         $procedimento->save();
-
+    
+        foreach ($validatedData['fk_crm_med'] as $medicoId) {
+            ProcedimentoMedico::create([
+                'fk_cod_proc' => $procedimento->pk_cod_proc,
+                'fk_crm_med' => $medicoId,
+            ]);
+        }
+    
         return redirect()->route('procedimentos.index');
     }
 
@@ -47,7 +53,8 @@ class ProcedimentoController extends Controller
         if (!$procedimento) {
             abort(404); // or return a custom error message
         }
-        return view('procedimentos.show', compact('procedimento'));
+        $medicos = $procedimento->medicos;
+        return view('procedimentos.show', compact('procedimento', 'medicos'));
     }
 }
     

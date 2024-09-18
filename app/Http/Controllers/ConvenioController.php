@@ -25,11 +25,10 @@ class ConvenioController extends Controller
     public function store(Request $request)
     {
         $convenio = new Convenio();
-        $convenio->pk_ans_conv = $request->input('registro_ans');
-        $convenio->nome_conv = $request->input('nome_convenio');
-        $convenio->retorno_conv = $request->input('retorno_conv');
+        $convenio->ans_conv = $request->input('ans_conv');
+        $convenio->nome_conv = $request->input('nome_conv');
         $convenio->save();
 
-        return redirect()->route('convenios.create')->with('success', 'Convênio cadastrado com sucesso!');
+        return redirect()->route('convenios.index')->with('success', 'Convênio cadastrado com sucesso!');
     }
 }

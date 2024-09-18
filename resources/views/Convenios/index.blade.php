@@ -25,8 +25,7 @@
         <thead>
             <tr>
                 <th>Nome do Convenio</th>
-                <th>PK ANS Convenio</th>
-                <th>Data de Retorno</th>
+                <th>ANS Convenio</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -34,8 +33,7 @@
             @foreach($convenios as $convenio)
                 <tr>
                     <td>{{ $convenio->nome_conv }}</td>
-                    <td>{{ $convenio->pk_ans_conv }}</td>
-                    <td>{{ $convenio->retorno_conv }}</td>
+                    <td>{{ $convenio->ans_conv }}</td>
                     <td>
                         <!-- Adicione links para editar e excluir os convenios -->
                         <a href="#">Editar</a>

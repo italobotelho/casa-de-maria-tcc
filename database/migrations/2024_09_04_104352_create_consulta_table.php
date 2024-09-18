@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('consulta', function (Blueprint $table) {
             $table->integer('pk_id_cons')->primary();
-            $table->integer('fk_cod_paci');
+            $table->unsignedInteger('fk_cod_paci');
             $table->foreign('fk_cod_paci')->references('pk_cod_paci')->on('paciente');
-            $table->integer('fk_crm_med');
+            $table->unsignedInteger('fk_crm_med');
             $table->foreign('fk_crm_med')->references('pk_crm_med')->on('medico');
             $table->dateTime('dia_cons');
             $table->dateTime('mes_cons');

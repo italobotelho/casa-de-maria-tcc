@@ -22,18 +22,13 @@
         @csrf
 
         <div class="form-group">
-            <label for="nome_convenio">Nome do Convênio</label>
-            <input type="text" id="nome_convenio" name="nome_convenio" class="form-control">
+            <label for="nome_conv">Nome do Convênio</label>
+            <input type="text" id="nome_conv" name="nome_conv" class="form-control" required>
         </div>
 
         <div class="form-group">
-            <label for="registro_ans">Registro ANS</label>
-            <input type="text" id="registro_ans" name="registro_ans" class="form-control">
-        </div>
-
-        <div class="form-group">
-            <label for="retorno_conv">Data de Retorno</label>
-            <input type="date" id="retorno_conv" name="retorno_conv" class="form-control">
+            <label for="ans_conv">Registro ANS</label>
+            <input type="text" maxlength="6" id="ans_conv" name="ans_conv" class="form-control" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Cadastrar Convênio</button>

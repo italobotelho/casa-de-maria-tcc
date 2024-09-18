@@ -11,8 +11,8 @@ class Convenio extends Model
     protected $table = 'convenios';
 
     protected $fillable = [
-        'pk_ans_conv',
+        'pk_cod_conv',
+        'ans_conv',
         'nome_conv',
-        'retorno_conv',
     ];
 }

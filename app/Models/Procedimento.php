@@ -10,6 +10,8 @@ class Procedimento extends Model
 {
     protected $primaryKey = 'pk_cod_proc'; // Adicionei a chave primária
 
+    public $incrementing = true;
+
     protected $fillable = [
         'nome_proc',
         'descricao_proc',
@@ -18,16 +20,21 @@ class Procedimento extends Model
     ];
 
     protected $casts = [
-        'tempo_proc' => 'time:H:i:s',
+        'tempo_proc' => 'string',
     ];
 
     public function getTempoProcAttribute($value)
     {
-        return \Carbon\Carbon::createFromFormat('H:i:s', $value)->format('H:i:s');
+        return Carbon::createFromFormat('H:i', $value)->format('i:s');
     }
 
     public function medico()
     {
         return $this->belongsTo(Medico::class, 'fk_crm_med', 'pk_crm_med');
+    }
+
+    public function medicos()
+    {
+        return $this->belongsToMany(Medico::class, 'procedimento_medico', 'fk_cod_proc', 'fk_crm_med');
     }
 }

@@ -42,9 +42,9 @@ Route::get('/profissional', function () {
 
 // Rotas da Tela Configurações Gerais
 
-Route::get('/gerais', 'App\Http\Controllers\ConfiguracoesController@index')->name('config-gerais.store');
-Route::post('/gerais', 'App\Http\Controllers\ConfiguracoesController@store')->name('config-gerais.store');
-Route::patch('/gerais', 'App\Http\Controllers\ConfiguracoesController@update')->name('config-gerais.store');
+Route::get('/gerais', 'App\Http\Controllers\ConfiguracoesController@index')->name('configuracoes.index');
+Route::post('/gerais', 'App\Http\Controllers\ConfiguracoesController@store')->name('configuracoes.store');
+Route::patch('/gerais', 'App\Http\Controllers\ConfiguracoesController@update')->name('configuracoes.update');
 
 // Rotas da Tela Configurações Procedimentos
 

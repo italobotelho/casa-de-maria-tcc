@@ -40,7 +40,7 @@
 
             <div>
                 <label for="fk_crm_med">Médico:</label>
-                <select id="fk_crm_med" name="fk_crm_med">
+                <select id="fk_crm_med" name="fk_crm_med[]" multiple required>
                     @foreach($medicos as $medico)
                         <option value="{{ $medico->pk_crm_med }}">{{ $medico->nome_med }}</option>
                     @endforeach

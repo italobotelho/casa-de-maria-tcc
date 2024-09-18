@@ -8,22 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class Clinica extends Model
 {
     protected $fillable = [
-        'nome',
-        'cnpj',
-        'descricao',
-        'telefone',
-        'email_aten',
-        'email_resp',
-        'cep',
-        'rua',
-        'numero',
-        'bairro',
-        'complemento',
-        'cidade',
-        'uf',
-        'cod_ibge',
+        'nome_clin',
+        'cnpj_clin',
+        'descricao_clin',
+        'telefone_clin',
+        'email_aten_clin',
+        'email_resp_clin',
+        'cep_clin',
+        'rua_clin',
+        'numero_clin',
+        'bairro_clin',
+        'complemento_clin',
+        'cidade_clin',
+        'uf_clin',
+        'cod_ibge_clin',
     ];
 
-    protected $primaryKey = 'cnpj';
+    protected $primaryKey = 'cnpj_clin';
 }
 
