@@ -37,13 +37,13 @@
                     value="{{ old('email_paci') }}" required>
             </div>
 
-
             <!-- CPF Paciente -->
             <div class="form-group">
                 <label for="cpf_paci">CPF Paciente</label>
                 <input maxlength="11" type="text" class="form-control" id="cpf_paci" name="cpf_paci"
                     value="{{ old('cpf_paci') }}" required>
             </div>
+
             <!-- Data de Nascimento -->
             <div class="form-group">
                 <label for="data_nasci_paci">Data de Nascimento</label>
@@ -59,7 +59,7 @@
                         value="{{ old('cpf_responsavel_paci') }}" required>
                 </div>
                 <div class="form-group">
-                    <label for="responsavel_paci">Nome responsavel</label>
+                    <label for="responsavel_paci">Nome responsável</label>
                     <input maxlength="54" type="text" class="form-control" id="responsavel_paci"
                         name="responsavel_paci" value="{{ old('responsavel_paci') }}" required>
                 </div>
@@ -69,8 +69,10 @@
                 document.addEventListener('DOMContentLoaded', function() {
                     const dataNasciInput = document.getElementById('data_nasci_paci');
                     const responsavelFields = document.getElementById('responsavel-fields');
+                    const cpfResponsavel = document.getElementById('cpf_responsavel_paci');
+                    const nomeResponsavel = document.getElementById('responsavel_paci');
 
-                    dataNasciInput.addEventListener('input', function() {
+                    function toggleResponsavelFields() {
                         const birthDate = new Date(dataNasciInput.value);
                         const today = new Date();
                         const age = today.getFullYear() - birthDate.getFullYear();
@@ -78,12 +80,21 @@
 
                         if (isMinor) {
                             responsavelFields.style.display = 'block';
+                            cpfResponsavel.setAttribute('required', true);
+                            nomeResponsavel.setAttribute('required', true);
                         } else {
                             responsavelFields.style.display = 'none';
+                            cpfResponsavel.removeAttribute('required');
+                            nomeResponsavel.removeAttribute('required');
                         }
-                    });
+                    }
+
+                    // Chamar a função ao carregar a página e ao alterar a data
+                    dataNasciInput.addEventListener('input', toggleResponsavelFields);
+                    toggleResponsavelFields(); // Executa ao carregar para garantir que funcione corretamente no primeiro carregamento
                 });
             </script>
+
             <!-- Cidade -->
             <div class="form-group">
                 <label for="nome_cidade">Cidade:</label>
@@ -91,8 +102,7 @@
                     value="{{ old('nome_cidade') }}" required>
             </div>
 
-
-
+            <!-- Convênio -->
             <div class="form-group">
                 <label for="fk_convenio_paci">Convênio</label>
                 <select name="fk_convenio_paci" id="fk_convenio_paci" required>
@@ -100,6 +110,7 @@
                 </select>
             </div>
 
+            <!-- JavaScript para carregar os convênios -->
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
                     fetch('/convenio')
@@ -117,16 +128,48 @@
                 });
             </script>
 
-
             <!-- Carteira do Convênio -->
-            <div class="form-group">
+            <div class="form-group" id="carteira-convenio-field">
                 <label for="carteira_convenio_paci">Carteira do Convênio</label>
                 <input maxlength="12" type="text" class="form-control" id="carteira_convenio_paci"
                     name="carteira_convenio_paci" value="{{ old('carteira_convenio_paci') }}" required>
             </div>
 
+         <!-- ... (rest of the code remains the same) ... -->
 
+<!-- ... (rest of the code remains the same) ... -->
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const convenioSelect = document.getElementById('fk_convenio_paci');
+        const carteiraConvenioInput = document.getElementById('carteira_convenio_paci');
+        const carteiraConvenioField = document.getElementById('carteira-convenio-field');
+
+        function toggleCarteiraConvenio() {
+            console.log('toggleCarteiraConvenio function called');
+            if (convenioSelect) {
+                const selectedOption = convenioSelect.options[convenioSelect.selectedIndex].text;
+                console.log('Selected option:', selectedOption);
+                if (selectedOption === 'Particular') {
+                    carteiraConvenioField.style.display = 'none'; // Hide the field
+                    carteiraConvenioInput.value = ''; // Set the value to null
+                    carteiraConvenioInput.removeAttribute('required'); // Remove the required attribute
+                } else {
+                    carteiraConvenioField.style.display = 'block'; // Show the field
+                    carteiraConvenioInput.setAttribute('required', true); // Set the required attribute
+                }
+            } else {
+                console.error('convenioSelect element not found');
+            }
+        }
+
+        // Execute the function when the page is loaded and when the convenio value is changed
+        convenioSelect.addEventListener('change', toggleCarteiraConvenio);
+        toggleCarteiraConvenio(); // Check on page load
+    });
+</script>
+
+<!-- ... (rest of the code remains the same) ... -->
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -142,7 +185,6 @@
                     {{ session('success') }}
                 </div>
             @endif
-
 
             <br>
 
