@@ -7,20 +7,38 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Cadastrar Paciente</title>
+    <link href="{{ asset('/css/cadastro.css') }}" rel="stylesheet">    
+    
 </head>
 
 <body>
+
+    <nav>
+        <div>
+            <img class="navimg" src="/img/logo.png" alt="Logo Casa de Maria" width="35" height="45" >
+            <img src="/img/titulo branco.png" alt="Casa de Maria" width="55" height="30">
+           <a  href="conf"> <button><img src="/img/conf.png" alt="Configurações"></button> </a>
+        </div>
+    </nav>
+
     <div class="container">
         <h1>CADASTRE UM NOVO PACIENTE</h1>
 
+        <div class="card">
         <form action="{{ route('paciente.store') }}" method="POST">
             @csrf
-
             <!-- Nome -->
             <div class="form-group">
                 <label for="nome_paci">Nome</label>
                 <input type="text" class="form-control" id="nome_paci" name="nome_paci"
                     value="{{ old('nome_paci') }}" required>
+            </div>
+
+            <!-- Data de Nascimento -->
+            <div class="form-group">
+                <label for="data_nasci_paci">Data de Nascimento</label>
+                <input type="date" class="form-control" id="data_nasci_paci" name="data_nasci_paci"
+                    value="{{ old('data_nasci_paci') }}" required>
             </div>
 
             <!-- Telefone -->
@@ -37,13 +55,7 @@
                     value="{{ old('email_paci') }}" required>
             </div>
 
-            <!-- Data de Nascimento -->
-            <div class="form-group">
-                <label for="data_nasci_paci">Data de Nascimento</label>
-                <input type="date" class="form-control" id="data_nasci_paci" name="data_nasci_paci"
-                    value="{{ old('data_nasci_paci') }}" required>
-            </div>
-
+            
             {{-- cpf paciente --}}
             <!-- CPF Paciente -->
             <div class="form-group">
@@ -52,7 +64,14 @@
                     required>
             </div>
 
+            <hr style="color:#C99C65"><!--divisão dados do paciente e dados do responsavel-->
 
+             {{-- nome responsavel --}}
+             <div class="form-group">
+                <label for="responsavel_paci">Nome responsavel</label>
+                <input type="text" class="form-control" id="responsavel_paci" name="responsavel_paci"
+                    value="{{ old('responsavel_paci') }}" required>
+            </div>
 
             <!-- CPF do Responsável -->
             <div>
@@ -61,14 +80,7 @@
                     value="{{ old('cpf_responsavel_paci') }}" required>
             </div>
 
-            {{-- nome responsavel --}}
-            <div class="form-group">
-                <label for="responsavel_paci">Nome responsavel</label>
-                <input type="text" class="form-control" id="responsavel_paci" name="responsavel_paci"
-                    value="{{ old('responsavel_paci') }}" required>
-            </div>
-
-
+           
             <!-- Cidade -->
             <div class="form-group">
                 <label for="nome_cidade">Cidade:</label>
@@ -144,10 +156,13 @@
 
             <br>
 
+            
             <!-- Submit Button -->
             <button type="submit" class="btn btn-primary">Cadastrar Paciente</button>
         </form>
+
     </div>
+</div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
