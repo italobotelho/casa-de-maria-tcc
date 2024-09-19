@@ -5,11 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PACI</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    
 </head>
 <body>
     <a href="form_paciente">CADASTRAR PACIENTE</a>
 
-    {{-- @section('content')
+     
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 mt-4">
@@ -30,7 +35,7 @@
                             <th scope="col">Telefone</th>
                             <th scope="col">CPF</th>
                             <th scope="col">Cidade</th>
-                            <th scope="col">Ações</th>
+                    
                             </tr>
                         </thead>
                         <tbody>
@@ -43,7 +48,7 @@
                                 <td>{{$paciente->telefone_paci}}</td>
                                 <td>{{$paciente->cpf_paci}}</td>
                                 <td>{{$paciente->nome_cidade}}</td>
-                                <td>
+                                {{-- <td>
                                     <div class="d-flex gap-1">
                                     <a href="/pacientes/{{$paciente->id}}" class="btn btn-secondary">Editar</a>
                                     <form action="/pacientes/{{$paciente->id}}" method="POST">
@@ -54,7 +59,7 @@
                                         </button>
                                     </form>
                                     </div>
-                                </td>
+                                </td> --}}
                                 </tr>
                             @empty
                                 <tr>
@@ -70,6 +75,6 @@
             </div><!-- fim da col -->
         </div><!-- fim da row -->
     </div> <!-- fim do container -->
-    @endsection --}}
+    
 </body>
 </html>

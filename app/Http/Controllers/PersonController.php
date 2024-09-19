@@ -13,12 +13,11 @@ class PersonController extends Controller
         $convenios = Convenio::all(); // Recupera todos os convênios
         return response()->json($convenios); // Retorna os dados como JSON
     }
-
     public function index(){
-        //Seleciona todos os "pacientes" e armazena no array
         $pacientes = Paciente::all();
-        return view('pacientes.index',['pacientes' => $pacientes ]);
+        return view('/Menu/pacientes', ['pacientes' => $pacientes]);
     }
+    
 
     public function store(Request $request)
     {

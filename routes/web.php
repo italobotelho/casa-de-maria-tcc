@@ -46,10 +46,10 @@ Route::get('/convenio', [PersonController::class, 'ListarConvenio'])->name('conv
 Route::get('/form_medico', function () {
     return view('Cadastros/form_medico');
 });
-Route::post('/form_medico', [MedicoController::class, 'store'])->name('medico.store');
-// File: routes/web.php
 
+Route::post('/form_medico', [MedicoController::class, 'store'])->name('medico.store');
 Route::get('Menu/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
+Route::get('/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
 
 
 
