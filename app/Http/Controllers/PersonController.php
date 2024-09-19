@@ -8,7 +8,7 @@ use App\Models\Convenio;
 
 class PersonController extends Controller
 {
-    
+
     public function ListarConvenio() // Nome do método corrigido
     {
         $convenios = Convenio::all(); // Recupera todos os convênios
@@ -19,7 +19,7 @@ class PersonController extends Controller
         $pacientes = Paciente::with('convenio')->get();
         return view('/Menu/pacientes', ['pacientes' => $pacientes]);
     }
-    
+
 
     public function store(Request $request)
     {
@@ -27,33 +27,33 @@ class PersonController extends Controller
         $birthDate = new \DateTime($request->input('data_nasci_paci'));
         $today = new \DateTime();
         $age = $today->diff($birthDate)->y;
-    
+
         // Regras de validação básicas
         $rules = [
             'nome_paci' => 'required|string|max:54',
             'data_nasci_paci' => 'required|date',
             'telefone_paci' => 'required|string|max:12',
             'email_paci' => 'required|email',
-            
+
             'nome_cidade' => 'required|string|max:100',
             'fk_convenio_paci' => 'required|string',
             'data_obito_paci' => 'nullable|date', // campo opcional
             'cpf_paci' => 'required|string|max:12'
         ];
-    
+
         if ($request->input('fk_convenio_paci') == 'Particular') {
-            unset($rules['carteira_convenio_paci']); // Remove the required rule for "Particular"
+            unset($rules['carteira_convenio_paci']); // Remove a obrigatorio se for "Particular"
         } else {
             $rules['carteira_convenio_paci'] = 'string|max:20';
         }
-        
-    
+
+
         // Se a idade for menor que 18 anos, adiciona as regras para o responsável
         if ($age < 18) {
             $rules['cpf_responsavel_paci'] = 'required|string|max:11';
             $rules['responsavel_paci'] = 'required|string|max:54';
         }
-    
+
         // Cria um novo paciente e atribui os dados do request
         $paciente = new Paciente();
         $paciente->nome_paci = $request->nome_paci;
@@ -64,26 +64,26 @@ class PersonController extends Controller
         $paciente->nome_cidade = $request->nome_cidade;
         $paciente->data_obito_paci = $request->data_obito_paci; // campo opcional
         $paciente->cpf_paci = $request->cpf_paci;
-    
+
         // Se a idade for menor de 18 anos, salva os dados do responsável
         if ($age < 18) {
             $paciente->cpf_responsavel_paci = $request->cpf_responsavel_paci;
             $paciente->responsavel_paci = $request->responsavel_paci;
         }
-        
+
         // Se o convênio for "Particular", não salva o campo carteira_convenio_paci
         if ($request->input('fk_convenio_paci') == 'Particular') {
             $paciente->carteira_convenio_paci = null;
         } else {
             $paciente->carteira_convenio_paci = $request->carteira_convenio_paci;
         }
-    
+
         // Aplica a validação com as regras definidas
         $request->validate($rules);
-    
+
         // Salva o paciente no banco de dados
         $paciente->save();
-    
+
         // Redireciona com uma mensagem de sucesso
         return redirect()->route('paciente.store')->with('success', 'Paciente cadastrado com sucesso!');
     }
