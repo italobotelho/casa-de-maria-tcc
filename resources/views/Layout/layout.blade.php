@@ -11,7 +11,7 @@
     <header>
         <nav class="navbar navbar-expand-sm bg-primary justify-content-center">
             <div class="container-fluid ">
-                <a class="navbar-brand " href="menu"><img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24"></a>
+                <a class="navbar-brand " href="menu"><img src="#" alt="" width="30" height="24"></a>
               <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                 <ul class="navbar-nav nav-fill me-auto mb-2 mb-lg-0">
                   <li class="nav-item">

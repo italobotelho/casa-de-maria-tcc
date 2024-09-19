@@ -16,7 +16,7 @@
 @endsection
 
 @section('main-configuracoes')
-    <!-- resources/views/convenios/index.blade.php -->
+
     <a href="{{ route('convenios.create') }}">Cadastrar Novo Convenio</a>
     
     <h1>Convenios</h1>
@@ -31,16 +31,19 @@
         </thead>
         <tbody>
             @foreach($convenios as $convenio)
-                <tr>
-                    <td>{{ $convenio->nome_conv }}</td>
-                    <td>{{ $convenio->ans_conv }}</td>
-                    <td>
-                        <!-- Adicione links para editar e excluir os convenios -->
-                        <a href="#">Editar</a>
-                        <a href="#">Excluir</a>
-                    </td>
-                </tr>
-            @endforeach
+            <tr>
+                <td>{{ $convenio->nome_conv }}</td>
+                <td>{{ $convenio->ans_conv }}</td>
+                <td>
+                    <a href="{{ route('convenios.edit', ['pk_id_conv' => $convenio->pk_id_conv]) }}">Editar</a>
+                    <form action="{{ route('convenios.destroy', ['pk_id_conv' => $convenio->pk_id_conv]) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
 @endsection

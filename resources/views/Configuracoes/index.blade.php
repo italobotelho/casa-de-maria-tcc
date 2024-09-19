@@ -77,7 +77,7 @@
                 </div>
                 <div class="col-md-2">
                     <label for="inputCodIBGE" class="form-label">CÓD. IBGE</label>
-                    <input type="text" class="form-control" id="cod_ibge_clin" name="cod_ibge_clin" value="{{ old('cod_ibge_clin', $clinica?->cod_ibge_clin) }}" size="8">
+                    <input type="text" class="form-control" id="cod_ibge_clin" name="cod_ibge_clin" value="{{ old('cod_ibge_clin', $clinica?->cod_ibge_clin) }}" size="7">
                 </div>
               <div class="col-12">
                 <button type="submit" class="btn btn-primary">Salvar</button>

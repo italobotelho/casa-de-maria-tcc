@@ -2,8 +2,6 @@
 
 // app/Http/Controllers/ConvenioController.php
 
-// app/Http/Controllers/ConvenioController.php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -30,5 +28,32 @@ class ConvenioController extends Controller
         $convenio->save();
 
         return redirect()->route('convenios.index')->with('success', 'Convênio cadastrado com sucesso!');
+    }
+
+    public function destroy($pk_id_conv)
+    {
+        $convenio = Convenio::where('pk_id_conv', $pk_id_conv)->first();
+        $convenio->delete();
+        return redirect()->route('convenios.index')->with('success', 'Convênio excluído com sucesso!');
+    }
+
+    public function edit($pk_id_conv)
+    {
+        $convenio = Convenio::where('pk_id_conv', $pk_id_conv)->first();
+        if (!$convenio) {
+            abort(404);
+        }
+        return view('convenios.edit', compact('convenio'));
+    }
+
+    public function update(Request $request, $pk_id_conv)
+    {
+        $convenio = Convenio::where('pk_id_conv', $pk_id_conv)->first();
+        if (!$convenio) {
+            abort(404);
+        }
+        $convenio->fill($request->all());
+        $convenio->save();
+        return redirect()->route('convenios.index')->with('success', 'Convênio atualizado com sucesso!');
     }
 }

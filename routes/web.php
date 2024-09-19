@@ -60,3 +60,7 @@ Route::post('/procedimentos', [ProcedimentoController::class, 'store'])->name('p
 Route::get('/convenios', [ConvenioController::class, 'index'])->name('convenios.index');
 Route::get('/convenios/create', [ConvenioController::class, 'create'])->name('convenios.create');
 Route::post('/convenios', [ConvenioController::class, 'store'])->name('convenios.store');
+
+Route::get('/convenios/{pk_id_conv}/edit', [ConvenioController::class, 'edit'])->name('convenios.edit');
+Route::put('/convenios/{pk_id_conv}', [ConvenioController::class, 'update'])->name('convenios.update');
+Route::delete('/convenios/{pk_id_conv}', [ConvenioController::class, 'destroy'])->name('convenios.destroy');
