@@ -23,11 +23,11 @@
                         value="{{ old('nome_med') }}" required>
                 </div>
 
-                <!-- Telefone -->
+            <!-- Telefone -->
                 <div class="form-group">
                     <label for="telefone_med">Telefone:</label>
                     <input maxlength="12" type="text" class="form-control" id="telefone_med" name="telefone_med"
-                        value="{{ old('telefone_med') }}" required>
+                        value="{{ old('telefone_med') }}" required pattern="\d{12}" title="O telefone deve ter exatamente 12 dígitos">
                 </div>
 
                 <!-- Email -->
@@ -37,27 +37,27 @@
                         value="{{ old('email_med') }}" required>
                 </div>
 
-                <!-- Data de Nascimento -->
+                <!-- UF -->
                 <div class="form-group">
                     <label for="uf_med">UF:</label>
                     <input maxlength="2"  type="text" class="form-control" id="uf_med" name="uf_med"
                         value="{{ old('uf_med') }}" required>
                 </div>
 
-                <!-- CPF -->
+                <!-- ESPECIALIDADE -->
                 <div class="form-group">
                     <label for="especialidade1_med">1° Especialidade:</label>
                     <input maxlength="40"  type="text" class="form-control" id="especialidade1_med" name="especialidade1_med" value="{{ old('especialidade1_med') }}"
                         required>
                 </div>
 
-                <!-- CPF do Responsável -->
+                <!-- ESPECIALIDADE -->
                 <div>
                     <label for="especialidade2_med">2° Especialidade:</label>
                     <input maxlength="40"  type="text" name="especialidade2_med" id="especialidade2_med"
                         value="{{ old('especialidade2_med') }}" required>
                 </div>
-
+                {{-- crm --}}
                 <div>
                     <label for="pk_crm_med">CRM:</label>
                     <input maxlength="6"  type="text" name="pk_crm_med" id="pk_crm_med"

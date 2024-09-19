@@ -26,7 +26,7 @@
             <!-- Telefone -->
             <div class="form-group">
                 <label for="telefone_paci">Telefone</label>
-                <input maxlength="12" type="text" class="form-control" id="telefone_paci" name="telefone_paci"
+                <input maxlength="12"  class="form-control" id="telefone_paci" name="telefone_paci"
                     value="{{ old('telefone_paci') }}" required>
             </div>
 
