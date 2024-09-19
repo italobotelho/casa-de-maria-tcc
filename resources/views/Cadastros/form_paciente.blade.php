@@ -135,9 +135,7 @@
                     name="carteira_convenio_paci" value="{{ old('carteira_convenio_paci') }}" required>
             </div>
 
-         <!-- ... (rest of the code remains the same) ... -->
-
-<!-- ... (rest of the code remains the same) ... -->
+       
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -146,22 +144,24 @@
         const carteiraConvenioField = document.getElementById('carteira-convenio-field');
 
         function toggleCarteiraConvenio() {
-            console.log('toggleCarteiraConvenio function called');
-            if (convenioSelect) {
-                const selectedOption = convenioSelect.options[convenioSelect.selectedIndex].text;
-                console.log('Selected option:', selectedOption);
-                if (selectedOption === 'Particular') {
-                    carteiraConvenioField.style.display = 'none'; // Hide the field
-                    carteiraConvenioInput.value = ''; // Set the value to null
-                    carteiraConvenioInput.removeAttribute('required'); // Remove the required attribute
-                } else {
-                    carteiraConvenioField.style.display = 'block'; // Show the field
-                    carteiraConvenioInput.setAttribute('required', true); // Set the required attribute
-                }
-            } else {
-                console.error('convenioSelect element not found');
-            }
+    console.log('toggleCarteiraConvenio function called');
+    if (convenioSelect) {
+        const selectedOption = convenioSelect.options[convenioSelect.selectedIndex].text;
+        console.log('Selected option:', selectedOption);
+        if (selectedOption === 'Particular') {
+            carteiraConvenioField.style.display = 'none'; // Hide the field
+            carteiraConvenioInput.value = ''; // Set the value to null
+            carteiraConvenioInput.removeAttribute('required'); // Remove the required attribute
+            carteiraConvenioInput.disabled = true; // Disable the field
+        } else {
+            carteiraConvenioField.style.display = 'block'; // Show the field
+            carteiraConvenioInput.setAttribute('required', true); // Set the required attribute
+            carteiraConvenioInput.disabled = false; // Enable the field
         }
+    } else {
+        console.error('convenioSelect element not found');
+    }
+}
 
         // Execute the function when the page is loaded and when the convenio value is changed
         convenioSelect.addEventListener('change', toggleCarteiraConvenio);

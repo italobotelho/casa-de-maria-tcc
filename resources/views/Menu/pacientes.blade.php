@@ -44,7 +44,8 @@
                                 <th scope="row">{{$paciente->pk_cod_paci}}</th>
                                 <td>{{$paciente->nome_paci}}</td>
                                 <td>{{$paciente->data_nasci_paci}}</td>
-                                <td>{{$paciente->fk_convenio_paci}}</td>
+                               <td>{{$paciente->convenio->nome_conv}}</td>
+
                                 <td>{{$paciente->telefone_paci}}</td>
                                 <td>{{$paciente->cpf_paci}}</td>
                                 <td>{{$paciente->nome_cidade}}</td>
