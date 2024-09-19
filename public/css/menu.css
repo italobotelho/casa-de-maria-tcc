@@ -63,3 +63,13 @@
         .card a {
             text-decoration: none;
         }
+
+
+        /*teste*/
+
+        body {
+            background-image: url(../img/fundo-menu.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            
+        }

@@ -1,4 +1,10 @@
 
+body {
+    background-image: url(../img/fundo-cadastro.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
     nav {
         background-color: #795127;
         position: fixed; 
@@ -6,8 +12,10 @@
         left: 0; 
         width: 100%;
         display: flex;
+        text-align: center;
+        padding: 3px;
     }
-    /*Botão de configurações*/
+    
     nav button {
         background: transparent; 
         border: none; 
@@ -58,5 +66,14 @@
         border: 1px solid  #C99C65;
         padding: 5px;
        cursor: pointer;
+       justify-content: flex-end;
     }
-    
+
+    a{
+        margin: 4rem;   
+        text-decoration: none;
+        font-size: 20px ;
+        display: inline;
+        padding: 40px;
+        color: white; 
+    }  
