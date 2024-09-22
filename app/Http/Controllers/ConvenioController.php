@@ -40,18 +40,12 @@ class ConvenioController extends Controller
     public function edit($pk_id_conv)
     {
         $convenio = Convenio::where('pk_id_conv', $pk_id_conv)->first();
-        if (!$convenio) {
-            abort(404);
-        }
         return view('convenios.edit', compact('convenio'));
     }
 
     public function update(Request $request, $pk_id_conv)
     {
         $convenio = Convenio::where('pk_id_conv', $pk_id_conv)->first();
-        if (!$convenio) {
-            abort(404);
-        }
         $convenio->fill($request->all());
         $convenio->save();
         return redirect()->route('convenios.index')->with('success', 'Convênio atualizado com sucesso!');

@@ -42,9 +42,9 @@ Route::get('/profissional', function () {
 
 // Rotas da Tela Configurações Gerais
 
-Route::get('/gerais', 'App\Http\Controllers\ConfiguracoesController@index')->name('configuracoes.index');
-Route::post('/gerais', 'App\Http\Controllers\ConfiguracoesController@store')->name('configuracoes.store');
-Route::patch('/gerais', 'App\Http\Controllers\ConfiguracoesController@update')->name('configuracoes.update');
+Route::get('/gerais', 'App\Http\Controllers\ClinicaController@index')->name('clinica.index');
+Route::post('/gerais', 'App\Http\Controllers\ClinicaController@store')->name('clinica.store');
+Route::patch('/gerais', 'App\Http\Controllers\ClinicaController@update')->name('clinica.update');
 
 // Rotas da Tela Configurações Procedimentos
 

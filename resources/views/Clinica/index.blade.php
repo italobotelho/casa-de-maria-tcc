@@ -16,7 +16,7 @@
 
         <div>
             <h1>Dados da Clínica</h1>
-            <form class="row g-3" method="POST" action="{{ route('configuracoes.store') }}">
+            <form class="row g-3" method="POST" action="{{ route('clinica.store') }}" id="clinica">
               @csrf
               <div class="col-md-6">
                 <label for="inputNome" class="form-label">NOME</label>
@@ -24,22 +24,22 @@
               </div>
               <div class="col-md-6">
                 <label for="inputCNPJ" class="form-label">CNPJ</label>
-                <input type="text" class="form-control" id="cnpj_clin" name="cnpj_clin" value="{{ old('cnpj_clin', $clinica?->cnpj_clin) }}" size="15" maxlength="14" required>
+                <input type="text" class="form-control" id="cnpj_clin" name="cnpj_clin" value="{{ old('cnpj_clin', $clinica?->cnpj_clin) }}" size="21" maxlength="21" required>
               </div>
               <div class="mb-3">
                 <label for="FormControlDescricao" class="form-label">DESCRIÇÃO</label>
-                <textarea class="form-control" id="descricao_clin" name="descricao_clin" rows="3" value="{{ old('descricao_clin', $clinica?->descricao_clin) }}" required></textarea>
+                <textarea class="form-control" id="descricao_clin" name="descricao_clin" rows="3" value="{{ old('descricao_clin', $clinica?->descricao_clin) }}" required>{!! $clinica->descricao_clin !!}</textarea>
               </div>
               <div class="col-md-4">
                 <label for="inputTelRecepcao" class="form-label">TELEFONE DA RECEPÇÃO</label>
-                <input type="tel" class="form-control" id="telefone_clin" name="telefone_clin" value="{{ old('telefone_clin', $clinica?->telefone_clin) }}" maxlength="16" required>
+                <input type="tel" class="form-control" id="telefone_clin" name="telefone_clin" value="{{ old('telefone_clin', $clinica?->telefone_clin) }}" maxlength="15" required>
               </div>
               <div class="col-md-4">
                 <label for="inputEmailAtendimentoClinica" class="form-label">E-MAIL DE ATENDIMENTO DA CLÍNICA</label>
                 <input type="email" class="form-control" id="email_aten_clin" name="email_aten_clin" value="{{ old('email_aten_clin', $clinica?->email_aten_clin) }}" required>
               </div>
               <div class="col-md-4">
-                <label for="inputEmailResponsavelClinica" class="form-label">E-MAIL RESPONSÁVEL P ELA CLÍNICA</label>
+                <label for="inputEmailResponsavelClinica" class="form-label">E-MAIL RESPONSÁVEL PELA CLÍNICA</label>
                 <input type="email" class="form-control" id="email_resp_clin" name="email_resp_clin" value="{{ old('email_resp_clin', $clinica?->email_resp_clin) }}" required>
               </div>
 
@@ -86,6 +86,8 @@
     </div> {{-- fim da container --}}
 @endsection
 @section('scripts')
-    <script src="{{ asset('js/phone-format.js') }}"></script>
-    <script src="{{ asset('js/cep.js') }}"></script>
+<script src="{{ asset('js/validate-cnpj.js') }}"></script>
+<script src="{{ asset('js/phone-format.js') }}"></script>
+<script src="{{ asset('js/validate-email.js') }}"></script>
+<script src="{{ asset('js/cep.js') }}"></script>
 @endsection

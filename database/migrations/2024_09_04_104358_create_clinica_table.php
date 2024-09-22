@@ -13,19 +13,21 @@ return new class extends Migration
     {
         Schema::create('clinicas', function (Blueprint $table) {
             $table->bigInteger('cnpj_clin')->primary();
-            $table->string('nome_clin', 25);
-            $table->string('descricao_clin', 100);
+            $table->string('nome_clin', 50);
+            $table->string('descricao_clin', 150);
             $table->string('telefone_clin', 12);
-            $table->string('email_aten_clin', 255);
-            $table->string('email_resp_clin', 255);
-            $table->string('cep_clin', 8);
-            $table->string('rua_clin', 17);
-            $table->string('numero_clin', 5);
-            $table->string('bairro_clin', 50);
-            $table->string('complemento_clin', 100);
-            $table->string('cidade_clin', 30);
-            $table->string('uf_clin', 2);
-            $table->bigInteger('cod_ibge_clin');
+            $table->string('email_aten_clin', 50);
+            $table->string('email_resp_clin', 50);
+            $table->string('cep_clin', 8)->nullable();
+            $table->string('rua_clin', 17)->nullable();
+            $table->string('numero_clin', 5)->nullable();
+            $table->string('bairro_clin', 50)->nullable();
+            $table->string('complemento_clin', 100)->nullable();
+            $table->string('cidade_clin', 30)->nullable();
+            $table->string('uf_clin', 2)->nullable();
+            $table->bigInteger('cod_ibge_clin')->nullable();
+
+
             $table->timestamps();
         });
     }

@@ -25,5 +25,6 @@ class Clinica extends Model
     ];
 
     protected $primaryKey = 'cnpj_clin';
+    
 }
 
