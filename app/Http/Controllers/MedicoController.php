@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class MedicoController extends Controller
 {
+    public function index()
+    {
+        $medicos = Medico::all();
+        return view('Menu/profissional', ['medicos' => $medicos]);
+    }
+
+
+
     public function store(Request $request)
     {
         $request->validate([

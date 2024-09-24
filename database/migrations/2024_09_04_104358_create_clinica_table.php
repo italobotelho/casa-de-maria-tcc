@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nome_clin', 50);
             $table->string('descricao_clin', 150);
             $table->string('telefone_clin', 12);
+<<<<<<< HEAD
             $table->string('email_aten_clin', 50);
             $table->string('email_resp_clin', 50);
             $table->string('cep_clin', 9)->nullable();
@@ -29,6 +30,17 @@ return new class extends Migration
 
 
             $table->timestamps();
+=======
+            $table->string('email_resp_clin', 255);
+            $table->string('cidade_clin', 30);
+            $table->string('descricao_clin', 100);
+            $table->string('cep_clin', 100);
+            $table->string('bairro_clin', 100);
+            $table->string('complemento_clin', 100);
+            $table->string('uf_clin', 100);
+            $table->string('cod_ibge_clin', 100);
+
+>>>>>>> tela-busca
         });
     }
 

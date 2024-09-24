@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @extends('Layout/layout')
 
 @section('head')
@@ -15,6 +16,36 @@
                         </div>
                     </a>
                 </div>
+=======
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="pt-br">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link href="{{ asset('/css/menu.css') }}" rel="stylesheet">
+</head>
+<body>
+    <!--Navbar-->
+    <nav>
+        <div>
+            <img class="navimg" src="/img/logo.png" alt="Logo Casa de Maria" width="35" height="45" >
+            <img src="/img/titulo branco.png" alt="Casa de Maria" width="55" height="30">
+           <a  href="conf"> <button><img src="/img/conf.png" alt="Configurações"></button> </a>
+        </div>
+    </nav>
+
+
+
+    <!--Cards-->
+   <div class="card-group">
+
+     <div class="card">
+     <a href="agenda">
+            <img src="/img/agenda.png" alt="Ícone de agenda">
+            <div class="card-body">
+                <p class="card-text">AGENDA</p>
+>>>>>>> tela-busca
             </div>
             <div class="col-md-3">
                 <div class="card rounded-4 shadow p-4 mx-auto">
