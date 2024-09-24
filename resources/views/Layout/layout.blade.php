@@ -6,35 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Casa de Maria</title>
+    @yield('head')
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm bg-primary justify-content-center">
-            <div class="container-fluid ">
-                <a class="navbar-brand " href="menu"><img src="#" alt="" width="30" height="24"></a>
-              <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-                <ul class="navbar-nav nav-fill me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Painel</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Agenda</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Consultas</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Pacientes</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Profissionais</a>
-                  </li>
-                </ul>
-              </div>
+        <!--Navbar-->
+        <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #795127;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="img/logo.png" alt="Logo" width="30" height="40" class="d-inline-block align-text-top">
+                </a>
+                <a class="navbar-brand" href="#">
+                    <img src="img/conf.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                </a>
             </div>
+        </nav>
     </header>
     <main>
-        @yield('main-layout')
+        @yield('main')
     </main>
     <footer>
 

@@ -1,62 +1,54 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu</title>
-    <link href="{{ asset('/css/menu.css') }}" rel="stylesheet">    
-</head>
-<body>
-    <!--Navbar-->
-    <nav>
-        <div>
-            <img class="navimg" src="/img/logo.png" alt="Logo Casa de Maria" width="35" height="45" >
-            <img src="/img/titulo branco.png" alt="Casa de Maria" width="55" height="30">
-           <a  href="gerais"> <button><img src="/img/conf.png" alt="Configurações"></button> </a>
-        </div>
-    </nav>
-     
-    
+@extends('Layout/layout')
 
-    <!--Cards-->
-   <div class="card-group"> 
-     
-     <div class="card">
-     <a href="agenda">
-            <img src="/img/agenda.png" alt="Ícone de agenda">
-            <div class="card-body">
-                <p class="card-text">AGENDA</p>
+@section('head')
+    <link rel="stylesheet" href="{{ asset('css/menu.css')}}">
+@endsection
+  
+@section('main')
+<section class="vh-100">  
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-3">
+                <div class="card rounded-4 shadow p-4 mx-auto">
+                    <a href="agenda" class="link-offset-2 link-underline link-underline-opacity-0 mx-auto">
+                        <img src="img/agenda.png" class="img-fluid" alt="Ícone de agenda">
+                        <div class="card-body">
+                            <p class="card-text fs-2">AGENDA</p>
+                        </div>
+                    </a>
+                </div>
             </div>
-     </div>
-     </a>
-
-        <div class="card">
-         <a href="consulta">
-            <img src="/img/consulta.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-text">CONSULTA </p>
+            <div class="col-md-3">
+                <div class="card rounded-4 shadow p-4 mx-auto">
+                    <a href="consulta" class="link-offset-2 link-underline link-underline-opacity-0 mx-auto">
+                        <img src="img/consulta.png" class="img-fluid" alt="...">
+                        <div class="card-body">
+                            <p class="card-text fs-2">CONSULTA</p>
+                        </div>
+                    </a>
+                </div>
             </div>
-        </div>
-        </a>
-
-        <div class="card">
-        <a href="pacientes">
-            <img src="/img/paciente.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-text">PACIENTE</p>
+            <div class="col-md-3">
+                <div class="card rounded-4 shadow p-4 mx-auto">
+                    <a href="pacientes" class="link-offset-2 link-underline link-underline-opacity-0 mx-auto">
+                        <img src="img/paciente.png" class="img-fluid" alt="...">
+                        <div class="card-body">
+                            <p class="card-text fs-2">PACIENTES</p>
+                        </div>
+                    </a>
+                </div>
             </div>
+            <div class="col-md-3">
+                <div class="card rounded-4 shadow p-4 mx-auto">
+                    <a href="profissional" class="link-offset-2 link-underline link-underline-opacity-0 mx-auto">
+                        <img src="img/profissional.png" class="img-fluid" alt="...">
+                        <div class="card-body">
+                            <p class="card-text fs-2">MÉDICOS</p>
+                        </div>
+                    </a>
+                </div>  
+            </div>  
         </div>
-        </a>
-
-        <div class="card">
-        <a href="profissional">
-            <img src="/img/profissional.png" class="card-img-top"  alt="...">
-            <div class="card-body">
-                <p class="card-text">PROFISSIONAL </p>
-            </div>
-        </div>
-        </a>
-
     </div>
-</body>
-</html>
+</section>
+@endsection

@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('consulta', function (Blueprint $table) {
-            $table->integer('pk_id_cons')->primary();
-            $table->unsignedInteger('fk_cod_paci');
+            $table->unsignedInteger('pk_id_cons')->primary(); // Use o tipo adequado para a chave primária
+            $table->unsignedInteger('fk_cod_paci'); // Altere para o mesmo tipo de dado da chave primária na tabela 'paciente'
             $table->foreign('fk_cod_paci')->references('pk_cod_paci')->on('paciente');
-            $table->unsignedInteger('fk_crm_med');
+            $table->unsignedInteger('fk_crm_med'); // Altere para o mesmo tipo de dado da chave primária na tabela 'medico'
             $table->foreign('fk_crm_med')->references('pk_crm_med')->on('medico');
             $table->dateTime('dia_cons');
             $table->dateTime('mes_cons');

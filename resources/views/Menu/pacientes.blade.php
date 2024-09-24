@@ -7,6 +7,36 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>PACIENTES</h1>
+   
+        <div>
+            <img class="navimg" src="/img/logo.png" alt="Logo Casa de Maria" width="35" height="45" >
+            <img src="/img/titulo branco.png" alt="Casa de Maria" width="55" height="30">
+            
+                <a href="menu">Painel</a>
+                <a href="agenda">Agenda</a>
+                <a href="consulta">Consulta</a>
+                <a href="pacientes">Paciente</a>
+                <a href="profissional">Profissional</a>
+        
+           <a  href="conf"> <button><img src="/img/conf.png" alt="Configurações"></button> </a>
+        </div>
+    </nav>
+    <a href="form_paciente">CADASTRAR PACIENTE</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nome Completo</th>
+                <th>Data Nasc.</th>
+                <th>Convenio</th>
+                <th>Celular</th>
+                <th>CPF</th>
+                <th>Cidade</th>
+            </tr>
+        </thead>
+
+        </tbody>
+    </table>
 </body>
 </html>
