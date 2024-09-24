@@ -35,15 +35,16 @@ class ProcedimentoController extends Controller
         $procedimento->nome_proc = $validatedData['nome_proc'];
         $procedimento->descricao_proc = $validatedData['descricao_proc'];
         $procedimento->tempo_proc = $validatedData['tempo_proc'];
-        $procedimento->save();
+        
     
-        foreach ($validatedData['fk_crm_med'] as $medicoId) {
-            ProcedimentoMedico::create([
-                'fk_cod_proc' => $procedimento->pk_cod_proc,
-                'fk_crm_med' => $medicoId,
-            ]);
-        }
+        $procedimento = Procedimento::create([
+            'nome_proc' => $validatedData['nome_proc'],
+            'descricao_proc' => $validatedData['descricao_proc'],
+            'tempo_proc' => $validatedData['tempo_proc'],
+        ]);
     
+        $procedimento->medicos()->attach($validatedData['fk_crm_med']);
+
         return redirect()->route('procedimentos.index');
     }
 

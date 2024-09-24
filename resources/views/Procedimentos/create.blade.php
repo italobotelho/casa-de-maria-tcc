@@ -23,12 +23,12 @@
 
             <div>
                 <label for="nome_proc">Nome do Procedimento:</label>
-                <input type="text" id="nome_proc" name="nome_proc" required maxlength="50">
+                <input type="text" id="nome_proc" name="nome_proc" required maxlength="50" required>
             </div>
             
             <div>
                 <label for="descricao_proc">Descrição do Procedimento:</label>
-                <textarea id="descricao_proc" name="descricao_proc" required maxlength="100"></textarea>
+                <textarea id="descricao_proc" name="descricao_proc" required maxlength="100" required></textarea>
             </div>
             
             <div>

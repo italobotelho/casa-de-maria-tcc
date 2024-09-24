@@ -66,12 +66,6 @@
                 <span id="cpf-error" style="color: red;"></span> <!-- Error message for CPF validation -->
             </div>
 
-            <!-- Data de Nascimento -->
-            <div class="form-group">
-                <label for="data_nasci_paci">Data de Nascimento</label>
-                <input type="date" class="form-control" id="data_nasci_paci" name="data_nasci_paci" value="{{ old('data_nasci_paci') }}" required>
-            </div>
-
             <!-- Campos do Responsável -->
             <div id="responsavel-fields" style="display: none;">
                 <div class="form-group">
