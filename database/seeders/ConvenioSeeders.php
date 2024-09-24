@@ -13,10 +13,6 @@ class UsuarioSeeders extends Seeder
      */
     public function run(): void
     {
-        DB::table('usuario_adm')->insert([
-            'user' => 'ana provence',
-            'senha' => Hash::make('30201702'),
-        ]);
 
         DB::table('convenio')->insert([
             ['nome_conv' => 'Unimed'],
@@ -28,3 +24,4 @@ class UsuarioSeeders extends Seeder
 
     }
 }
+

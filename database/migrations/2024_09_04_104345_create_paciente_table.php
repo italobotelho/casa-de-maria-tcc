@@ -6,33 +6,30 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('paciente', function (Blueprint $table) {
-            $table->integer('pk_cod_paci')->primary();
-            $table->integer('fk_cidade');
-            $table->foreign('fk_cidade')->references('pk_ende_paci')->on('cidade');
-            $table->integer('fk_convenio_paci');
-            $table->foreign('fk_convenio_paci')->references('pk_ans_conv')->on('convenio');
-            $table->string('convenio_paci', 50);
-            $table->string('email_paci', 255);
+            $table->increments('pk_cod_paci'); // Primary key, auto-incrementing
+
+            // Foreign key reference
+            $table->unsignedBigInteger('fk_convenio_paci'); // Should match 'bigIncrements' type from 'convenio' table
+            $table->foreign('fk_convenio_paci')->references('pk_id_conv')->on('convenio')->onDelete('cascade');
+
+
+            $table->string('nome_paci', 54)->nullable();
+            $table->string('telefone_paci', 12)->nullable();
+            $table->string('email_paci', 255)->nullable();
+            $table->dateTime('data_nasci_paci')->nullable();
+            $table->string('cpf_paci', 11)->nullable();
+            $table->string('cpf_responsavel_paci', 11)->nullable();
+            $table->string('responsavel_paci', 50)->nullable();
+            $table->string('nome_cidade', 100)->nullable();
+            $table->string('carteira_convenio_paci', 20)->nullable();
             $table->dateTime('data_obito_paci')->nullable();
-            $table->string('carteira_convenio_paci', 20);
-            $table->string('responsavel_paci', 50);
-            $table->dateTime('data_nasci_paci');
-            $table->string('nome_paci', 54);
-            $table->string('cpf_responsavel_paci', 11);
-            $table->string('telefone_paci', 12);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('paciente');
