@@ -7,26 +7,12 @@ body {
     background-position: center;
 }
 
-.container {
-    height: 100vh; /* Altura total da tela */
-    padding-top: 70px; /* Add some padding to the top of the container */
-}
-
-nav {
-    z-index: 1; /* Add a higher z-index to the navbar */
-}
-
 .card {
     background-color: #795127;
     margin: 5vh; /* Add margin to create spacing between cards */
-    height: 40vh;
-
-    z-index: 0; /* Add a lower z-index to the cards */
 }
 
 .card p {
     color: #fff; /* Muda a cor do texto para branco */
     text-align: center; /* Centraliza o texto */
 }
-
-
