@@ -16,8 +16,9 @@ return new class extends Migration
             $table->unsignedInteger('fk_crm_med'); // Garanta que o tipo de dado corresponde à chave primária na tabela 'medico'
             $table->foreign('fk_crm_med')->references('pk_crm_med')->on('medico');
             $table->string('descricao_proc', 100); // Corrija o nome da coluna se for 'descricao_proc' em vez de 'descrição_proc'
-            $table->dateTime('tempo_proc');
+            $table->time('tempo_proc');
             $table->string('nome_proc', 50);
+            $table->timestamps();
         });
     }
 

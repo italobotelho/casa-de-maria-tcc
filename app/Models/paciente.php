@@ -56,13 +56,9 @@ class Paciente extends Model
 
     public function convenio()
     {
-        return $this->belongsTo(Cidade::class, 'fk_convenio_paci');
+        return $this->belongsTo(Convenio::class, 'fk_convenio_paci','pk_id_conv');
     }
 
-    public function getNomeCidadeAttribute()
-    {
-        return $this->cidade->nome_cidade;
-    }
-
+   
 }
 

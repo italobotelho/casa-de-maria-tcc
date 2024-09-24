@@ -3,9 +3,9 @@
 @section('head')
     <link rel="stylesheet" href="{{ asset('css/menu.css')}}">
 @endsection
-  
+
 @section('main')
-<section class="vh-100">  
+<section class="vh-100">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-md-3">
@@ -46,8 +46,8 @@
                             <p class="card-text fs-2">MÉDICOS</p>
                         </div>
                     </a>
-                </div>  
-            </div>  
+                </div>
+            </div>
         </div>
     </div>
 </section>
