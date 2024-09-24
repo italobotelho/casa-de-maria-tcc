@@ -33,12 +33,7 @@
 
         <div class="card">
         <form action="{{ route('paciente.store') }}" method="POST">
-<<<<<<< HEAD
             @csrf
-=======
-            @csrf <!-- CSRF token for form submission -->
-
->>>>>>> tela-busca
             <!-- Nome -->
             <div class="form-group">
                 <label for="nome_paci">Nome</label>
@@ -71,34 +66,6 @@
                 <span id="cpf-error" style="color: red;"></span> <!-- Error message for CPF validation -->
             </div>
 
-<<<<<<< HEAD
-            
-            {{-- cpf paciente --}}
-            <!-- CPF Paciente -->
-            <div class="form-group">
-                <label for="cpf_paci">CPF Paciente</label>
-                <input type="text" class="form-control" id="cpf_paci" name="cpf_paci" value="{{ old('cpf_paci') }}"
-                    required>
-            </div>
-
-            <hr style="color:#C99C65"><!--divisão dados do paciente e dados do responsavel-->
-
-             {{-- nome responsavel --}}
-             <div class="form-group">
-                <label for="responsavel_paci">Nome responsavel</label>
-                <input type="text" class="form-control" id="responsavel_paci" name="responsavel_paci"
-                    value="{{ old('responsavel_paci') }}" required>
-            </div>
-
-            <!-- CPF do Responsável -->
-            <div>
-                <label for="cpf_responsavel_paci">CPF do Responsável:</label>
-                <input type="text" name="cpf_responsavel_paci" id="cpf_responsavel_paci"
-                    value="{{ old('cpf_responsavel_paci') }}" required>
-            </div>
-
-           
-=======
             <!-- Data de Nascimento -->
             <div class="form-group">
                 <label for="data_nasci_paci">Data de Nascimento</label>
@@ -118,7 +85,6 @@
                 </div>
             </div>
 
->>>>>>> tela-busca
             <!-- Cidade -->
             <div class="form-group">
                 <label for="nome_cidade">Cidade:</label>

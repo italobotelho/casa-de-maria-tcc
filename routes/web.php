@@ -54,7 +54,6 @@ Route::get('/form_medico', function () {
 
 Route::get('profissional', [MedicoController::class, 'index'])->name('medicos.index');
 Route::post('/form_medico', [MedicoController::class, 'store'])->name('medico.store');
-<<<<<<< HEAD
 Route::get('menu/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
 
 // Rotas da Tela Configurações Gerais
@@ -64,10 +63,8 @@ Route::post('/gerais', 'App\Http\Controllers\ClinicaController@store')->name('cl
 Route::patch('/gerais', 'App\Http\Controllers\ClinicaController@update')->name('clinica.update');
 
 // Rotas da Tela Configurações Procedimentos
-=======
 Route::get('Menu/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
 Route::get('/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
->>>>>>> tela-busca
 
 
 Route::get('/procedimentos', [ProcedimentoController::class, 'index'])->name('procedimentos.index');
