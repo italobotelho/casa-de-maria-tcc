@@ -40,11 +40,11 @@
 
             <div>
                 <label for="fk_crm_med">Médico:</label>
-                <select id="fk_crm_med" name="fk_crm_med[]" multiple required>
+                <select multiple id="fk_crm_med" name="fk_crm_med[]" required>
                     @foreach($medicos as $medico)
                         <option value="{{ $medico->pk_crm_med }}">{{ $medico->nome_med }}</option>
                     @endforeach
-                </select>
+                  </select>
             </div>
             
             <button type="submit">Cadastrar</button>
@@ -65,3 +65,13 @@
 
 @endsection
 
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $('#mySelect').multiselect({
+        multiple: true,
+        selectAll: true
+        });
+    });
+</script>
+@endsection
