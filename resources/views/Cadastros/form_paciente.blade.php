@@ -187,19 +187,25 @@
                 .catch(error => console.error('Erro ao carregar convênios:', error));
         });
 
+          // Função para alternar campo da Carteira do Convênio
         // Função para alternar campo da Carteira do Convênio
         document.addEventListener('DOMContentLoaded', function () {
             const convenioSelect = document.getElementById('fk_convenio_paci');
             const carteiraConvenioField = document.getElementById('carteira-convenio-field');
+            const carteiraConvenioInput = document.getElementById('carteira_convenio_paci');
 
             convenioSelect.addEventListener('change', function () {
-                if (this.value === 'Particular') {
+                // Substitua '2' pelo ID correto do convênio "Particular"
+                if (this.value === '4') { 
                     carteiraConvenioField.style.display = 'none';
+                    carteiraConvenioInput.removeAttribute('required');
                 } else {
                     carteiraConvenioField.style.display = 'block';
+                    carteiraConvenioInput.setAttribute('required', true);
                 }
             });
         });
+
 
         // Função para aplicar máscara de telefone
         function aplicarMascaraTelefone(input) {
