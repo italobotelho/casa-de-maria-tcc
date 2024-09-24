@@ -32,13 +32,13 @@ class PersonController extends Controller
         $rules = [
             'nome_paci' => 'required|string|max:54',
             'data_nasci_paci' => 'required|date',
-            'telefone_paci' => 'required|string|max:12',
+            'telefone_paci' => 'required|string|max:15',
             'email_paci' => 'required|email',
 
             'nome_cidade' => 'required|string|max:100',
             'fk_convenio_paci' => 'required|string',
             'data_obito_paci' => 'nullable|date', // campo opcional
-            'cpf_paci' => 'required|string|max:12'
+            'cpf_paci' => 'required|string|max:14'
         ];
 
         if ($request->input('fk_convenio_paci') == 'Particular') {
@@ -50,7 +50,7 @@ class PersonController extends Controller
 
         // Se a idade for menor que 18 anos, adiciona as regras para o responsável
         if ($age < 18) {
-            $rules['cpf_responsavel_paci'] = 'required|string|max:11';
+            $rules['cpf_responsavel_paci'] = 'required|string|max:14';
             $rules['responsavel_paci'] = 'required|string|max:54';
         }
 
