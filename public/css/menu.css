@@ -1,75 +1,32 @@
-        /* Estilo da navbar */
-        nav {
-            background-color: #795127;
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%;
-            display: flex;
-        }
-        /*Botão de configurações*/
-        nav button {
-            background: transparent; 
-            border: none; 
-            display: flex;
-            align-items: center;
-            position: absolute;
-            left:95%;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer; 
-        }
-        .navimg{
-            margin-left: 10px;
-        }
+@charset 'UTF-8';
 
-        body {
-            padding-top: 75px; 
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; 
-            overflow: hidden; 
-        }
+body {
+    background-image: url(../img/fundo-menu.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 
-        /* Espaçamento e centralização dos cards*/
-        .card-group {
-            display: flex;
-            align-items: center;
-            padding: 20px;
-            gap:35px;
-            
-        }
+.container {
+    height: 100vh; /* Altura total da tela */
+    padding-top: 70px; /* Add some padding to the top of the container */
+}
 
-        /*estilo dos cards*/
-        .card {
-            border: 1px solid #ccc;
-            border-radius: 35px;
-            width: 12rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            background-color: #795127;
-            color: white;
-            padding: 55px;
-            
-        }
-         .card-text {
-            font-size:30px;
-            color: white;
-            
-        }
-       
-        .card a {
-            text-decoration: none;
-        }
+nav {
+    z-index: 1; /* Add a higher z-index to the navbar */
+}
+
+.card {
+    background-color: #795127;
+    margin: 5vh; /* Add margin to create spacing between cards */
+    height: 40vh;
+
+    z-index: 0; /* Add a lower z-index to the cards */
+}
+
+.card p {
+    color: #fff; /* Muda a cor do texto para branco */
+    text-align: center; /* Centraliza o texto */
+}
 
 
-        /*teste*/
-
-        body {
-            background-image: url(../img/fundo-menu.png);
-            background-size: cover;
-            background-repeat: no-repeat;
-            
-        }
