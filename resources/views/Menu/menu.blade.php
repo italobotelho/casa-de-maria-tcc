@@ -5,8 +5,6 @@
 @endsection
   
 @section('main')
-<section class="vh-100">  
-    <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-md-3">
                 <div class="card rounded-4 shadow p-4 mx-auto">
@@ -49,6 +47,4 @@
                 </div>  
             </div>  
         </div>
-    </div>
-</section>
 @endsection

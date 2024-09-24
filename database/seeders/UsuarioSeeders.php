@@ -17,14 +17,5 @@ class UsuarioSeeders extends Seeder
             'user' => 'ana provence',
             'senha' => Hash::make('30201702'),
         ]);
-
-        DB::table('convenio')->insert([
-            ['nome_conv' => 'Unimed'],
-            ['nome_conv' => 'Sulamérica'],
-            ['nome_conv' => 'Amil'],
-            ['nome_conv' => 'Particular'],
-            ['nome_conv' => 'Samaritano'],
-        ]);
-
     }
 }

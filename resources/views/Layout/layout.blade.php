@@ -13,17 +13,21 @@
         <!--Navbar-->
         <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #795127;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="menu">
                     <img src="img/logo.png" alt="Logo" width="30" height="40" class="d-inline-block align-text-top">
                 </a>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="gerais">
                     <img src="img/conf.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
                 </a>
             </div>
         </nav>
     </header>
     <main>
-        @yield('main')
+      <section class="vh-100">
+        <div class="container py h-100">
+          @yield('main')
+        </div>
+      </section>
     </main>
     <footer>
 

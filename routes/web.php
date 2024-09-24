@@ -3,7 +3,7 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\PersonController;
-use App\Http\Controllers\ConfiguracoesController;
+use App\Http\Controllers\ClinicaController;
 use App\Http\Controllers\ProcedimentoController;
 use App\Http\Controllers\ConvenioController;
 use Illuminate\Support\Facades\Route;
@@ -53,14 +53,6 @@ Route::get('/form_medico', function () {
 });
 Route::post('/form_medico', [MedicoController::class, 'store'])->name('medico.store');
 Route::get('menu/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
-
-
-
-
-
-
-
-
 
 // Rotas da Tela Configurações Gerais
 

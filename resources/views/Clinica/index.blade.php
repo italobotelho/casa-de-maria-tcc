@@ -13,8 +13,7 @@
 @endsection
 
 @section('main-configuracoes')
-
-        <div>
+        <div class="h-100">
             <h1>Dados da Clínica</h1>
             <form class="row g-3" method="POST" action="{{ route('clinica.store') }}" id="clinica">
               @csrf

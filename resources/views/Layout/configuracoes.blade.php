@@ -1,10 +1,9 @@
 @extends('Layout/layout')
 
-@section('main-layout')
+@section('main')
     <h1>Configurações</h1>
 
-
-    <div class="container border">
+    <div class="container border ">
         <ul class="nav nav-underline nav-fill justify-content-center">
             
                 @yield('nav-gerais')
@@ -16,5 +15,5 @@
         </ul>
 
         @yield('main-configuracoes')
-
+    </div>
 @endsection
