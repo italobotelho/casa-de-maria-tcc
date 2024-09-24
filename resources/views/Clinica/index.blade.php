@@ -28,7 +28,7 @@
               </div>
               <div class="mb-3">
                 <label for="FormControlDescricao" class="form-label">DESCRIÇÃO</label>
-                <textarea class="form-control" id="descricao_clin" name="descricao_clin" rows="3" value="{{ old('descricao_clin', $clinica?->descricao_clin) }}" required>{!! $clinica->descricao_clin !!}</textarea>
+                <textarea class="form-control" id="descricao_clin" name="descricao_clin" rows="3" value="{{ old('descricao_clin', $clinica?->descricao_clin ?? '') }}">{{ $clinica?->descricao_clin ?? '' }}</textarea>
               </div>
               <div class="col-md-4">
                 <label for="inputTelRecepcao" class="form-label">TELEFONE DA RECEPÇÃO</label>
@@ -47,7 +47,7 @@
               <div>
                 <div class="col-md-3">
                   <label for="inputCEP" class="form-label">CEP</label>
-                  <input type="text" class="form-control" id="cep_clin" name="cep_clin" value="{{ old('cep_clin', $clinica?->cep_clin) }}" size="9" maxlength="8" onblur="pesquisacep(this.value);">
+                  <input type="text" class="form-control" id="cep_clin" name="cep_clin" value="{{ old('cep_clin', $clinica?->cep_clin) }}" size="9" maxlength="8" onblur="pesquisacep(this.value);" oninput="this.value = formatCEP(this.value);">
                 </div>
                 <h5>*INFORME O CEP PARA O PREENCHIMENTO AUTOMÁTICO DOS DADOS</h5>
               </div>
@@ -90,4 +90,5 @@
 <script src="{{ asset('js/phone-format.js') }}"></script>
 <script src="{{ asset('js/validate-email.js') }}"></script>
 <script src="{{ asset('js/cep.js') }}"></script>
+<script src="{{ asset('js/validate-cep.js') }}"></script>
 @endsection

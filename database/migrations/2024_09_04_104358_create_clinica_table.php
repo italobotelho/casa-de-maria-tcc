@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('telefone_clin', 12);
             $table->string('email_aten_clin', 50);
             $table->string('email_resp_clin', 50);
-            $table->string('cep_clin', 8)->nullable();
+            $table->string('cep_clin', 9)->nullable();
             $table->string('rua_clin', 17)->nullable();
             $table->string('numero_clin', 5)->nullable();
             $table->string('bairro_clin', 50)->nullable();
