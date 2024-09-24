@@ -32,14 +32,14 @@ class ConvenioController extends Controller
 
     public function destroy($pk_id_conv)
     {
-        $convenio = Convenio::where('pk_id_conv', $pk_id_conv)->first();
+        $convenio = Convenio::find($pk_id_conv);
         $convenio->delete();
         return redirect()->route('convenios.index')->with('success', 'Convênio excluído com sucesso!');
     }
 
     public function edit($pk_id_conv)
     {
-        $convenio = Convenio::where('pk_id_conv', $pk_id_conv)->first();
+        $convenio = Convenio::find($pk_id_conv);
         return view('convenios.edit', compact('convenio'));
     }
 

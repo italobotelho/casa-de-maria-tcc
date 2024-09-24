@@ -80,5 +80,5 @@ Route::get('/convenios/create', [ConvenioController::class, 'create'])->name('co
 Route::post('/convenios', [ConvenioController::class, 'store'])->name('convenios.store');
 
 Route::get('/convenios/{pk_id_conv}/edit', [ConvenioController::class, 'edit'])->name('convenios.edit');
-Route::put('/convenios/{pk_id_conv}', [ConvenioController::class, 'update'])->name('convenios.update');
+Route::patch('/convenios/{pk_id_conv}', [ConvenioController::class, 'update'])->name('convenios.update');
 Route::delete('/convenios/{pk_id_conv}', [ConvenioController::class, 'destroy'])->name('convenios.destroy');

@@ -11,7 +11,11 @@ class Procedimento extends Model
 {
     protected $primaryKey = 'pk_cod_proc'; // Adicionei a chave primária
 
-    public $incrementing = true;
+    protected $keyType = 'string';
+
+    protected $casts = [
+        'tempo_proc' => 'string',
+    ];
 
     protected $fillable = [
         'nome_proc',
@@ -20,9 +24,7 @@ class Procedimento extends Model
         'fk_crm_med',
     ];
 
-    protected $casts = [
-        'tempo_proc' => 'string',
-    ];
+    public $incrementing = true;
 
     public function getTempoProcAttribute($value)
     {

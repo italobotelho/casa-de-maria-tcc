@@ -15,4 +15,8 @@ class Convenio extends Model
         'ans_conv',
         'nome_conv',
     ];
+
+    protected $primaryKey = 'pk_id_conv';
+
+    protected $keyType = 'string';
 }
