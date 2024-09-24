@@ -2,7 +2,7 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="pt-br">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -135,7 +135,7 @@
                     name="carteira_convenio_paci" value="{{ old('carteira_convenio_paci') }}" required>
             </div>
 
-       
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -192,6 +192,15 @@
             <button type="submit" class="btn btn-primary">Cadastrar Paciente</button>
         </form>
     </div>
+    <br>
+
+    <a href="pacientes">VOLTAR</a>
+
+
+
+
+
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>

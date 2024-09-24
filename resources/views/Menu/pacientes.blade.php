@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="pt-br">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PACI</title>
@@ -9,12 +9,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-    
+
 </head>
 <body>
     <a href="form_paciente">CADASTRAR PACIENTE</a>
 
-     
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 mt-4">
@@ -35,7 +35,7 @@
                             <th scope="col">Telefone</th>
                             <th scope="col">CPF</th>
                             <th scope="col">Cidade</th>
-                    
+
                             </tr>
                         </thead>
                         <tbody>
@@ -76,6 +76,8 @@
             </div><!-- fim da col -->
         </div><!-- fim da row -->
     </div> <!-- fim do container -->
-    
+
+    <a href="menu">VOLTAR</a>
+
 </body>
 </html>
