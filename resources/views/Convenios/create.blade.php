@@ -16,7 +16,7 @@
 @endsection
 
 @section('main-configuracoes')
-    <h1>Cadastro de Convênio</h1>
+    <h2>Cadastro de Convênio</h2>
 
     <form method="POST" action="{{ route('convenios.store') }}">
         @csrf

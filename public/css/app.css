@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+/* Fontes */
+
+@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 @font-face {
     font-family: Century Gothic;
     src: url(../../public/fonts/centurygothic.ttf);
@@ -10,49 +16,31 @@
     src: url(../../public/fonts/centurygothic_bold.ttf);
 }
 
+
 * {
-    font-family: 'Century Gothic';
+    font-family: "Abel", sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    font-style: normal;
 }
 
-body {
-    background-image: url(../img/fundo.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    
+h1 {
+    font-weight: bold;    
+    letter-spacing: 0.3em;
 }
 
-/* app.css */
-
-.popup-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none;
+h2 {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: 0.01rem;
 }
 
-.popup-content {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    width: 500px;
-}
-
-.popup-content h1 {
-    text-align: center;
-}
-
-.popup-content form {
-    margin-top: 20px;
-}
-
-.popup-content button[type="submit"] {
-    margin-top: 20px;
+nav li a {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 100;
+    font-style: normal;
+    letter-spacing: 0.2rem;
 }

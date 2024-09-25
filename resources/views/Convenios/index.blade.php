@@ -19,7 +19,7 @@
 
     <a href="{{ route('convenios.create') }}">Cadastrar Novo Convenio</a>
     
-    <h1>Convenios</h1>
+    <h2>CONVÊNIOS</h2>
 
     <table>
         <thead>

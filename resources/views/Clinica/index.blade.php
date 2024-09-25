@@ -14,7 +14,7 @@
 
 @section('main-configuracoes')
         <div class="h-100">
-            <h1>Dados da Clínica</h1>
+            <h2 class="mt-3 fs-4">DADOS DA CLÍNICA</h2>
             <form class="row g-3" method="POST" action="{{ route('clinica.store') }}" id="clinica">
               @csrf
               <div class="col-md-6">
@@ -42,14 +42,12 @@
                 <input type="email" class="form-control" id="email_resp_clin" name="email_resp_clin" value="{{ old('email_resp_clin', $clinica?->email_resp_clin) }}" required>
               </div>
 
-              <h1>Endereço</h1>
-              <div>
+              <h2 class="fs-4">ENDEREÇO</h2>
                 <div class="col-md-3">
                   <label for="inputCEP" class="form-label">CEP</label>
                   <input type="text" class="form-control" id="cep_clin" name="cep_clin" value="{{ old('cep_clin', $clinica?->cep_clin) }}" size="9" maxlength="8" onblur="pesquisacep(this.value);" oninput="this.value = formatCEP(this.value);">
                 </div>
                 <h5>*INFORME O CEP PARA O PREENCHIMENTO AUTOMÁTICO DOS DADOS</h5>
-              </div>
               <div class="col-md-6">
                 <label for="inputLogradouro" class="form-label">LOGRADOURO</label>
                 <input type="text" class="form-control" id="rua_clin" name="rua_clin" value="{{ old('rua_clin', $clinica?->rua_clin) }}" size="60" maxlength="60">

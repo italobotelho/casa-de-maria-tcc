@@ -15,7 +15,7 @@
 @section('main-configuracoes')
     <!-- resources/views/procedimentos/create.blade.php -->
 
-    <div class="popup-container">
+    <div class="">
         <h1>Cadastrar Novo Procedimento</h1>
 
         <form method="POST" action="{{ route('procedimentos.store') }}">

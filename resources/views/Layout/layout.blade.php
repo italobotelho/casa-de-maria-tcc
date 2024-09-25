@@ -11,15 +11,31 @@
 <body>
     <header>
         <!--Navbar-->
-        <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #795127;">
+        <nav class="navbar navbar-expand-lg sticky-top" style="background-color: #795127;">
             <div class="container-fluid">
                 <a class="navbar-brand" href="menu">
                     <img src="img/logo.png" alt="Logo" width="30" height="40" class="d-inline-block align-text-top">
                 </a>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                      <li class="nav-item">
+                        <a class="nav-link text-white" href="agenda">Agenda</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link text-white" href="consulta">Consultas</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link text-white" href="pacientes">Pacientes</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link text-white" href="profissional">Médicos</a>
+                      </li>
+                    </ul>
+                  </div>
                 <a class="navbar-brand" href="gerais">
                     <img src="img/conf.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
                 </a>
-            </div>
+            </div>  
         </nav>
     </header>
     <main>

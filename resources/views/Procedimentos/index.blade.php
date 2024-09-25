@@ -15,7 +15,7 @@
 @section('main-configuracoes')
      <!-- resources/views/procedimentos/index.blade.php -->
 
-    <h1>Procedimentos</h1>
+    <h2>PROCEDIMENTOS</h2>
 
     <a href="{{ route('procedimentos.create') }}">Cadastrar</a>
 
