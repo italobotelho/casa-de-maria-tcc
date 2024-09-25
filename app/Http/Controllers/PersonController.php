@@ -41,14 +41,10 @@ class PersonController extends Controller
             'cpf_paci' => 'required|string|max:14'
         ];
 
-        if ($request->input('fk_convenio_paci') == 'Particular') {
-            unset($rules['carteira_convenio_paci']); // Remove a obrigatorio se for "Particular"
-        } else {
-            $rules['carteira_convenio_paci'] = 'string|max:20';
-        }
+    
 
 
-        // Se a idade for menor que 18 anos, adiciona as regras para o responsável
+        // Se a idade for menor que 18 anos, adi   ciona as regras para o responsável
         if ($age < 18) {
             $rules['cpf_responsavel_paci'] = 'required|string|max:14';
             $rules['responsavel_paci'] = 'required|string|max:54';
@@ -70,14 +66,12 @@ class PersonController extends Controller
             $paciente->cpf_responsavel_paci = $request->cpf_responsavel_paci;
             $paciente->responsavel_paci = $request->responsavel_paci;
         }
-
         // Se o convênio for "Particular", não salva o campo carteira_convenio_paci
-        if ($request->input('fk_convenio_paci') == 'Particular') {
+        if ($request->input('fk_convenio_paci') == 4) {
             $paciente->carteira_convenio_paci = null;
         } else {
             $paciente->carteira_convenio_paci = $request->carteira_convenio_paci;
         }
-
         // Aplica a validação com as regras definidas
         $request->validate($rules);
 
