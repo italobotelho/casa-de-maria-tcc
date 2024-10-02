@@ -1,11 +1,11 @@
 // app.js
+const myModal = document.getElementById('myModal')
+const myInput = document.getElementById('myInput')
 
-$(document).ready(function() {
-    $('.open-popup').on('click', function() {
-        $('.popup-container').fadeIn();
-    });
-
-    $('.close-popup').on('click', function() {
-        $('.popup-container').fadeOut();
-    });
+myModal.addEventListener('shown.bs.modal', () => {
+  myInput.focus()
+})
+//Metódo para abrir modal 
+document.getElementById('open-modal').addEventListener('click', function() {
+    $('#modal').modal('show');
 });

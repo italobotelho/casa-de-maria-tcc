@@ -62,14 +62,14 @@ Route::get('/gerais', 'App\Http\Controllers\ClinicaController@index')->name('cli
 Route::post('/gerais', 'App\Http\Controllers\ClinicaController@store')->name('clinica.store');
 Route::patch('/gerais', 'App\Http\Controllers\ClinicaController@update')->name('clinica.update');
 
-// Rotas da Tela Configurações Procedimentos
+// Rotas da Tela Pacientes
 Route::get('Menu/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
 Route::get('/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
 
-
+// Rotas da Tela Configurações Procedimentos
 Route::get('/procedimentos', [ProcedimentoController::class, 'index'])->name('procedimentos.index');
 Route::get('/procedimentos/create', [ProcedimentoController::class, 'create'])->name('procedimentos.create');
-Route::get('/procedimentos/{pk_cod_proc}', 'ProcedimentoController@show');
+Route::get('/procedimentos/{pk_cod_proc}', [ProcedimentoController::class, 'show'])->name('procedimentos.show');
 Route::post('/procedimentos', [ProcedimentoController::class, 'store'])->name('procedimentos.store');
 
 

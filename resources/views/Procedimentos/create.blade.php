@@ -15,9 +15,14 @@
 @section('main-configuracoes')
     <!-- resources/views/procedimentos/create.blade.php -->
 
-    <div class="">
-        <h1>Cadastrar Novo Procedimento</h1>
-
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Cadastrar Novo Procedimento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
         <form method="POST" action="{{ route('procedimentos.store') }}">
             @csrf
 
@@ -59,10 +64,12 @@
                 </ul>
             </div>
         @endif
-
-        <button type="button" class="close-popup">Fechar</button>
     </div>
-
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary">Salvar</button>
+    </div>
+</div>
 @endsection
 
 @section('scripts')

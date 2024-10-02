@@ -10,16 +10,18 @@ use App\Models\Medico;
 
 class ProcedimentoController extends Controller
 {
-    public function index()
-    {
-        $procedimentos = Procedimento::all(); // Retrieve all Procedimentos from the database
-        return view('procedimentos.index', compact('procedimentos')); // Return the view with the Procedimentos data
-    }
-    
+
+public function index()
+{
+    $procedimentos = Procedimento::all(); // Retrieve all Procedimentos from the database
+    $medicos = Medico::all(); // Busca todos os médicos
+    return view('procedimentos.index', ['procedimentos' => $procedimentos, 'medicos' => $medicos]); // Return the view with the Procedimentos data
+}
+
     public function create()
     {
-        $medicos = Medico::all(); // Retrieve all médicos from the database
-        return view('procedimentos.create', compact('medicos'));
+        $medicos = Medico::all(); // Busca todos os médicos
+        return view('procedimentos.create', ['medicos' => $medicos]);
     }
 
     public function store(Request $request)
@@ -55,7 +57,7 @@ class ProcedimentoController extends Controller
             abort(404); // or return a custom error message
         }
         $medicos = $procedimento->medicos;
-        return view('procedimentos.show', compact('procedimento', 'medicos'));
+        return view('procedimentos.show', ['procedimento' => $procedimento, 'medicos' => $medicos]);
     }
 }
     
