@@ -52,6 +52,9 @@ Route::post('/form_medico', [MedicoController::class, 'store'])->name('medico.st
 Route::get('Menu/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
 Route::get('/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
 
+//MOSTRAR NOME DOS PACIENTE NA HORA DE AGENDAR
+Route::get('/pacientes/search', [PacienteController::class, 'search'])->name('pacientes.search');
+
 
 
 

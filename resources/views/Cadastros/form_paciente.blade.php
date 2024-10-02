@@ -45,7 +45,7 @@
             <!-- Data de Nascimento -->
             <div class="form-group">
                 <label for="data_nasci_paci">Data de Nascimento</label>
-                <input type="date" class="form-control" id="data_nasci_paci" name="data_nasci_paci" value="{{ old('data_nasci_paci') }} " placeholder="dd/mm/aaaa" required pattern="\d{2}/\d{2}/\d{4}" " required>
+                <input type="date" class="form-control" id="data_nasci_paci" name="data_nasci_paci" value="{{ old('data_nasci_paci') }} " placeholder="dd/mm/aaaa" required pattern="\d{2}/\d{2}/\d{4}"  required>
             </div>
 
             <!-- Campos do Responsável -->

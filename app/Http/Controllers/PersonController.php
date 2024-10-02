@@ -8,6 +8,15 @@ use App\Models\Convenio;
 
 class PersonController extends Controller
 {
+    public function search(Request $request)
+    {
+        $search = $request->get('query');
+        $pacientes = Paciente::where('nome_paci', 'LIKE', "%{$search}%")
+                             ->limit(5)
+                             ->get();
+        
+        return response()->json($pacientes);
+    }
 
     public function ListarConvenio() // Nome do método corrigido
     {
