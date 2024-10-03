@@ -1,59 +1,31 @@
 <?php
 
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\MedicoController;
-use App\Http\Controllers\PersonController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-// Rota para autenticação do usuário via método POST
-Route::post('/', [LoginController::class,'auth'])->name('auth.user');
-Route::get('/', [LoginController::class, 'index'])->name('login.page');
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
-Route::get('/menu', function () {
-    return view('Menu/menu'); // Substitua isso pela lógica correta para a sua página inicial
-})->middleware('auth');
-
-
-Route::get('/layout', function () {
-    return view('Layout/layout');
+Route::get('/', function () {
+    return view('welcome');
 });
 
-Route::get('/agenda', function () {
-    return view('Menu/agenda');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/consulta', function () {
-    return view('Menu/consulta');
-});
-
-Route::get('/pacientes', function () {
-    return view('Menu/pacientes');
-});
-
-Route::get('/profissional', function () {
-    return view('Menu/profissional');
-});
-
-Route::get('/form_paciente', function () {
-    return view('Cadastros/form_paciente');
-});
-
-Route::post('/form_paciente', [PersonController::class, 'store'])->name('paciente.store');
-Route::get('/convenio', [PersonController::class, 'ListarConvenio'])->name('convenio.listar');
-
-
-
-Route::get('/form_medico', function () {
-    return view('Cadastros/form_medico');
-});
-
-Route::get('profissional', [MedicoController::class, 'index'])->name('medicos.index');
-Route::post('/form_medico', [MedicoController::class, 'store'])->name('medico.store');
-Route::get('Menu/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
-Route::get('/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
-
-
-
-
-
-
+require __DIR__.'/auth.php';
