@@ -51,9 +51,11 @@ Route::get('profissional', [MedicoController::class, 'index'])->name('medicos.in
 Route::post('/form_medico', [MedicoController::class, 'store'])->name('medico.store');
 Route::get('Menu/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
 Route::get('/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
+Route::get('/pacientes/buscar', [PersonController::class, 'buscar'])->name('pacientes.buscar');
+Route::get('/medicos/buscar', [MedicoController::class, 'buscar'])->name('medicos.buscar');
+Route::get('/especialidades/buscar', [MedicoController::class, 'buscarEspecialidades']);
 
-//MOSTRAR NOME DOS PACIENTE NA HORA DE AGENDAR
-Route::get('/pacientes/search', [PacienteController::class, 'search'])->name('pacientes.search');
+
 
 
 

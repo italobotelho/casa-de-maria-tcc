@@ -13,6 +13,16 @@ class MedicoController extends Controller
         return view('Menu/profissional', ['medicos' => $medicos]);
     }
 
+    public function buscar(Request $request) {
+        $query = $request->input('query');
+        $medicos = Medico::where('nome_med', 'like', "%$query%")->pluck('nome_med'); // Alterar para o campo correto
+        return response()->json($medicos);
+    }
+
+    
+    
+    
+
 
 
     public function store(Request $request)

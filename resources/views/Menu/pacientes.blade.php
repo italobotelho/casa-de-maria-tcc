@@ -12,20 +12,7 @@
 
 </head>
 <body>
-   
-        <div>
-            <img class="navimg" src="/img/logo.png" alt="Logo Casa de Maria" width="35" height="45" >
-            <img src="/img/titulo branco.png" alt="Casa de Maria" width="55" height="30">
-            
-                <a href="menu">Painel</a>
-                <a href="agenda">Agenda</a>
-                <a href="consulta">Consulta</a>
-                <a href="pacientes">Paciente</a>
-                <a href="profissional">Profissional</a>
-        
-           <a  href="conf"> <button><img src="/img/conf.png" alt="Configurações"></button> </a>
-        </div>
-    </nav>
+
     <a href="form_paciente">CADASTRAR PACIENTE</a>
 
 
@@ -62,18 +49,7 @@
                                 <td>{{$paciente->telefone_paci}}</td>
                                 <td>{{$paciente->cpf_paci}}</td>
                                 <td>{{$paciente->nome_cidade}}</td>
-                                {{-- <td>
-                                    <div class="d-flex gap-1">
-                                    <a href="/pacientes/{{$paciente->id}}" class="btn btn-secondary">Editar</a>
-                                    <form action="/pacientes/{{$paciente->id}}" method="POST">
-                                        @method('delete')
-                                        @csrf
-                                        <button class="btn btn-danger">
-                                            Excluir
-                                        </button>
-                                    </form>
-                                    </div>
-                                </td> --}}
+                             
                                 </tr>
                             @empty
                                 <tr>

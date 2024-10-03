@@ -2,10 +2,9 @@
 <html lang='en'>
 
 <head>
-    <meta charset='pt-br' />
+    <meta charset='utf-8' />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
     <title>Agenda</title>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
     <style>
@@ -20,11 +19,15 @@
             max-width: 1100px;
             margin: 0 auto;
         }
+
+        .list-group {
+            position: absolute;
+            z-index: 1000;
+            max-height: 200px;
+            overflow-y: auto;
+        }
     </style>
-
 </head>
-
-
 
 <body>
 
@@ -36,57 +39,52 @@
                     <h1 class="modal-title fs-5" id="cadastrarModalLabel">NOVO AGENDAMENTO:</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form method="POST" id="formCad">
+                <form>
+                    <div class="modal-body">
                         <div class="row mb-3">
-                            <label for="nome_paciente" class="col-sm-2 col-form-label">Nome do paciente:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="nome_paciente">
+                            <label for="nome_paciente" class="col-12 col-form-label">Nome do paciente:</label>
+                            <div class="col-12">
+                                <input type="text" class="form-control" id="nome_paciente" onkeyup="buscarPacientes(this.value)">
+                                <div id="sugestoes" class="list-group" style="display: none;"></div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="profissional" class="col-12 col-form-label">Profissional:</label>
+                            <div class="col-12">
+                                <input type="text" class="form-control" id="profissional" onkeyup="buscarMedicos(this.value)">
+                                <div id="sugestoes_medicos" class="list-group" style="display: none;"></div>
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="profissional" class="col-sm-2 col-form-label">Profissional:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="profissional">
-                            </div>
+
+                       <div class="row mb-3">
+                        <label for="especialidade" class="col-12 col-form-label">Especialidade:</label>
+                        <div class="col-12">
+                            <input type="text" class="form-control" id="especialidade" onkeyup="buscarEspecialidades(this.value)">
+                            <div id="sugestoes_especialidades" class="list-group" style="display: none;"></div>
+
                         </div>
+                    </div>
+
+
 
                         <div class="row mb-3">
-                            <label for="especialidade" class="col-sm-2 col-form-label">Especialidade:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="especialidade">
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="data_cons" class="col-sm-2 col-form-label">Data:</label>
-                            <div class="col-sm-10">
+                            <label for="data_cons" class="col-12 col-form-label">Data:</label>
+                            <div class="col-12">
                                 <input type="datetime-local" class="form-control" id="data_cons">
                             </div>
                         </div>
 
-                        <button type="submit" name="btnCad" id="btnCad" class="btn btn-success">Agendar</button>
-                    </form>
 
-                </div>
+                        <button type="submit" name="btnCad" id="btnCad" class="btn btn-success">Agendar</button>
+
+
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
- 
- 
-
-
-
-
-
-
-
-
-
-
-    {{-- aonnde vai ser redenrisado o calendarario --}}
     <div id='calendar'></div>
     <script src='{{ asset('js/index.global.min.js') }}'></script>
     <script src='{{ asset('Js/core/locales-all.global.min.js') }}'></script>
@@ -96,8 +94,5 @@
     </script>
     <script src='{{ asset('js/bootstrap5/index.global.min.js') }}'></script>
 
-
-
 </body>
-
 </html>

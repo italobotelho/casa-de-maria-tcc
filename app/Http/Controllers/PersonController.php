@@ -8,13 +8,11 @@ use App\Models\Convenio;
 
 class PersonController extends Controller
 {
-    public function search(Request $request)
+    //mostrar pacientes cadastrados no modal
+    public function buscar(Request $request)
     {
-        $search = $request->get('query');
-        $pacientes = Paciente::where('nome_paci', 'LIKE', "%{$search}%")
-                             ->limit(5)
-                             ->get();
-        
+        $query = $request->input('query');
+        $pacientes = Paciente::where('nome_paci', 'LIKE', "%{$query}%")->pluck('nome_paci');
         return response()->json($pacientes);
     }
 

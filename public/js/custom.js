@@ -67,6 +67,133 @@ document.addEventListener("DOMContentLoaded", function () {
       return `${ano}-${mes}-${dia}T${horas}:${minutos}`; // Adiciona o 'T' para o formato datetime-local
   }
 
+  
+
+    // Adicionar um evento ao modal para limpar os campos ao fechar
+    var cadastrarModalElement = document.getElementById("cadastrarModal");
+    cadastrarModalElement.addEventListener('hidden.bs.modal', function () {
+        document.getElementById("nome_paciente").value = ''; // Limpar campo nome do paciente
+        document.getElementById("profissional").value = ''; // Limpar campo profissional
+        document.getElementById("especialidade").value = ''; // Limpar campo especialidade
+        document.getElementById("data_cons").value = ''; // Limpar campo data
+        document.getElementById('sugestoes').style.display = 'none'; // Ocultar sugestões
+    });
   // Renderizar o calendário
   calendar.render();
 });
+
+
+
+
+
+//função para carregar os nomes dos pacientes cadastrado no modal quando for fazer o agendamento
+function buscarPacientes(query) {
+  // Se a consulta estiver vazia, ocultar as sugestões e sair da função
+  if (query.length < 1) {
+      document.getElementById('sugestoes').style.display = 'none';
+      return;
+  }
+
+  // Fazer uma requisição para buscar pacientes que correspondem à consulta
+  fetch(`/pacientes/buscar?query=${query}`)
+
+      .then(response => response.json()) // Converter a resposta em JSON
+      .then(data => {
+          const sugestoesDiv = document.getElementById('sugestoes');
+          sugestoesDiv.innerHTML = ''; // Limpar sugestões anteriores
+
+          // Verificar se há resultados
+          if (data.length > 0) {
+              data.forEach(nome => {
+                  // Criar um elemento <a> para cada nome retornado
+                  const item = document.createElement('a');
+                  item.className = 'list-group-item list-group-item-action'; // Estilização do item
+                  item.href = '#'; // Definir o href como '#', já que é um link fictício
+                  item.textContent = nome; // Definir o texto do link como o nome do paciente
+                  
+                  // Adicionar um evento de clique ao item
+                  item.onclick = function () {
+                      document.getElementById('nome_paciente').value = nome; // Preencher o campo de entrada com o nome selecionado
+                      sugestoesDiv.style.display = 'none'; // Ocultar as sugestões
+                  };
+
+                  // Adicionar o item à lista de sugestões
+                  sugestoesDiv.appendChild(item);
+              });
+              sugestoesDiv.style.display = 'block'; // Mostrar a lista de sugestões
+          } else {
+              // Se não houver resultados, ocultar a lista de sugestões
+              sugestoesDiv.style.display = 'none';
+          }
+      })
+      .catch(error => console.error('Erro:', error)); // Tratar erros da requisição
+}  
+
+
+// Função para carregar os nomes dos médicos cadastrados no modal quando for fazer o agendamento
+function buscarMedicos(query) {
+  // Se a consulta estiver vazia, ocultar as sugestões e sair da função
+  if (query.length < 1) {
+      document.getElementById('sugestoes_medicos').style.display = 'none';
+      return;
+  }
+
+  // Fazer uma requisição para buscar médicos que correspondem à consulta
+  fetch(`/medicos/buscar?query=${query}`)
+      .then(response => response.json()) // Converter a resposta em JSON
+      .then(data => {
+          const sugestoesDiv = document.getElementById('sugestoes_medicos');
+          sugestoesDiv.innerHTML = ''; // Limpar sugestões anteriores
+
+          // Verificar se há resultados
+          if (data.length > 0) {
+              data.forEach(nome => {
+                  // Criar um elemento <a> para cada nome retornado
+                  const item = document.createElement('a');
+                  item.className = 'list-group-item list-group-item-action'; // Estilização do item
+                  item.href = '#'; // Definir o href como '#', já que é um link fictício
+                  item.textContent = nome; // Definir o texto do link como o nome do médico
+
+                  // Adicionar um evento de clique ao item
+                  item.onclick = function () {
+                      document.getElementById('profissional').value = nome; // Preencher o campo de entrada com o nome selecionado
+                      sugestoesDiv.style.display = 'none'; // Ocultar as sugestões
+                  };
+
+                  // Adicionar o item à lista de sugestões
+                  sugestoesDiv.appendChild(item);
+              });
+              sugestoesDiv.style.display = 'block'; // Mostrar a lista de sugestões
+          } else {
+              // Se não houver resultados, ocultar a lista de sugestões
+              sugestoesDiv.style.display = 'none';
+          }
+      })
+      .catch(error => console.error('Erro:', error)); // Tratar erros da requisição
+}
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  document.addEventListener('click', function(event) {
+      const sugestoesDiv = document.getElementById('sugestoes');
+      const sugestoesMedicosDiv = document.getElementById('sugestoes_medicos');
+      const nomePacienteInput = document.getElementById('nome_paciente');
+      const profissionalInput = document.getElementById('profissional');
+
+      // Verifica se o clique foi fora do campo de input ou da lista de sugestões
+      if (!nomePacienteInput.contains(event.target) && !sugestoesDiv.contains(event.target)) {
+          sugestoesDiv.style.display = 'none'; // Oculta sugestões de pacientes
+      }
+      if (!profissionalInput.contains(event.target) && !sugestoesMedicosDiv.contains(event.target)) {
+          sugestoesMedicosDiv.style.display = 'none'; // Oculta sugestões de médicos
+      }
+  });
+
+
+});
+
+
+
+
