@@ -52,6 +52,7 @@ Route::post('/form_medico', [MedicoController::class, 'store'])->name('medico.st
 Route::get('Menu/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
 Route::get('/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
 Route::get('/paciente', [PersonController::class, 'index'])->name('pacientes.show');
+Route::get('/update-paciente', [PersonController::class, 'update'])->name('pacientes.update');;
 
 
 

@@ -267,18 +267,17 @@ function abrirModalPaciente(id, nome, dataNasci, convenio, telefone, cpf, cidade
 
 });
 
-// Enviar o formulário de edição
+    // Enviar o formulário de edição
 $('#formEditarPaciente').submit(function(event) {
     event.preventDefault();
     var formData = $(this).serialize();
     $.ajax({
         type: 'POST',
-        url: '/update-paciente', // Update this URL to your server-side endpoint
+        url: '/update-paciente', // URL to update patient data
         data: formData,
         success: function(data) {
             // Update the table row with the new data
-            var pacienteId = $('#editar-id').val();
-            var pacienteRow = $('tr[data-id="' + pacienteId + '"]');
+            var pacienteRow = $('tr[data-id="' + $('#editar-id').val() + '"]');
             pacienteRow.find('td:eq(1)').text($('#editar-nome').val());
             pacienteRow.find('td:eq(2)').text($('#editar-data-nasci').val());
             pacienteRow.find('td:eq(3)').text($('#editar-convenio').val());
@@ -287,12 +286,11 @@ $('#formEditarPaciente').submit(function(event) {
             pacienteRow.find('td:eq(6)').text($('#editar-cidade').val());
             pacienteRow.find('td:eq(7)').text($('#editar-responsavel').val());
             pacienteRow.find('td:eq(8)').text($('#editar-cpf-responsavel').val());
-            // Close the modal
             $('#editarPacienteModal').modal('hide');
             alert('Dados do paciente atualizados!');
         },
         error: function(xhr, status, error) {
-            console.error(error);
+            console.log(error);
             alert('Erro ao atualizar dados do paciente!');
         }
     });

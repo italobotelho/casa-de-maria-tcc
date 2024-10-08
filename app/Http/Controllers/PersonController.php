@@ -15,6 +15,24 @@ class PersonController extends Controller
     }
 
 
+        public function update(Request $request)
+        {
+            
+                $paciente = Paciente::find($request->input('id'));
+                $paciente->nome_paci = $request->input('nome');
+                $paciente->data_nasci_paci = $request->input('data_nasci');
+                $paciente->convenio->nome_conv = $request->input('convenio');
+                $paciente->telefone_paci = $request->input('telefone');
+                $paciente->cpf_paci = $request->input('cpf');
+                $paciente->nome_cidade = $request->input('cidade');
+                $paciente->responsavel_paci = $request->input('responsavel');
+                $paciente->cpf_responsavel_paci = $request->input('cpf_responsavel');
+                $paciente->save();
+                return response()->json(['success' => true]);
+        
+    
+    }
+
     public function ListarConvenio() // Nome do método corrigido
     {
         $convenios = Convenio::all(); // Recupera todos os convênios
