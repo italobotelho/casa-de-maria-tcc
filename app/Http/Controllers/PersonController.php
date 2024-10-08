@@ -9,6 +9,12 @@ use App\Models\Convenio;
 class PersonController extends Controller
 {
 
+    public function show(Paciente $paciente)
+    {
+        return view('paciente.show', compact('paciente'));
+    }
+
+
     public function ListarConvenio() // Nome do método corrigido
     {
         $convenios = Convenio::all(); // Recupera todos os convênios

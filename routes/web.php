@@ -51,6 +51,8 @@ Route::get('profissional', [MedicoController::class, 'index'])->name('medicos.in
 Route::post('/form_medico', [MedicoController::class, 'store'])->name('medico.store');
 Route::get('Menu/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
 Route::get('/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
+Route::get('/paciente', [PersonController::class, 'index'])->name('pacientes.show');
+
 
 
 
