@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -13,10 +14,6 @@ class UsuarioSeeders extends Seeder
      */
     public function run(): void
     {
-        DB::table('usuario_adm')->insert([
-            'user' => 'ana provence',
-            'senha' => Hash::make('30201702'),
-        ]);
 
         DB::table('convenio')->insert([
             ['nome_conv' => 'Unimed'],
