@@ -159,6 +159,10 @@
                         <input type="text" class="form-control" id="editar-nome" name="nome" required>
                     </div>
                     <div class="form-group">
+                        <label for="editar-email">E-mail</label>
+                        <input type="email" class="form-control" id="editar-email" name="email" required>
+                    </div>
+                    <div class="form-group">
                         <label for="editar-data-nasci">Data de Nascimento</label>
                         <input type="date" class="form-control" id="editar-data-nasci" name="data_nasci" required>
                     </div>
@@ -185,11 +189,11 @@
                     </div>
                     <div class="form-group">
                         <label for="editar-responsavel">Nome do Responsável</label>
-                        <input type="text" class="form-control" id="editar-responsavel" name="responsavel" required>
+                        <input type="text" class="form-control" id="editar-responsavel" name="responsavel">
                     </div>
                     <div class="form-group">
                         <label for="editar-cpf-responsavel">CPF do Responsável</label>
-                        <input type="text" class="form-control" id="editar-cpf-responsavel" name="cpf_responsavel" required>
+                        <input type="text" class="form-control" id="editar-cpf-responsavel" name="cpf_responsavel">
                     </div>
                 </div>
                 <div class="modal-footer">
