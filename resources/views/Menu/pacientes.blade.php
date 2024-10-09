@@ -10,6 +10,26 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
+<style>
+    #convenio-suggestions {
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 200px;
+    z-index: 1000;
+}
+
+#convenio-suggestions li {
+    padding: 5px;
+    cursor: pointer;
+}
+
+#convenio-suggestions li:hover {
+    background-color: #ccc;
+}
+</style>
+
 
 </head>
 <body>
@@ -120,6 +140,7 @@
 
 
   {{-- modal edicao --}}
+
   <div class="modal fade" id="editarPacienteModal" tabindex="-1" role="dialog" aria-labelledby="editarPacienteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -129,7 +150,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('paciente.store') }}" id="formEditarPaciente">
+            <form action="{{ route('paciente.update') }}" id="formEditarPaciente">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="modal-body">
                     <input type="hidden" id="editar-id" name="id">
@@ -142,8 +163,13 @@
                         <input type="date" class="form-control" id="editar-data-nasci" name="data_nasci" required>
                     </div>
                     <div class="form-group">
-                        <label for="editar-convenio">Convênio</label>
-                        <input type="text" class="form-control" id="editar-convenio" name="convenio" required>
+                        <label for="fk_convenio_paci">Convênio</label>
+                        <select name="fk_convenio_paci" id="fk_convenio_paci">
+                         
+                            @foreach($convenios as $convenio)
+                                <option value="{{ $convenio->pk_id_conv }}">{{ $convenio->nome_conv }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="editar-telefone">Telefone</label>
@@ -175,136 +201,9 @@
     </div>
 </div>
 
+            <script src="js/paciente.js"></script>
+
   
 
 </body>
 </html>
-<script>
-// Adiciona um evento de clique nos nomes dos pacientes
-$(document).ready(function() {
-    $('.nome-paciente').click(function() {
-        var id = $(this).data('id');
-        var nome = $(this).data('nome');
-        var dataNasci = $(this).data('data-nasci');
-        var convenio = $(this).data('convenio');
-        var telefone = $(this).data('telefone');
-        var cpf = $(this).data('cpf');
-        var cidade = $(this).data('cidade');
-        var responsavel = $(this).data('responsavel'); // Adicione essa linha
-        var cpfResponsavel = $(this).data('cpf-responsavel'); // Adicione essa linha
-        
-        abrirModalPaciente(id, nome, dataNasci, convenio, telefone, cpf, cidade, responsavel, cpfResponsavel);
-    });
-});
-
-// Função para abrir o modal
-function abrirModalPaciente(id, nome, dataNasci, convenio, telefone, cpf, cidade, responsavel, cpfResponsavel) {
-    // Preenche os campos do modal com as informações do paciente
-    $('#nome-paciente').text(nome);
-    $('#data-nascimento').text(dataNasci);
-    $('#convenio').text(convenio);
-    $('#telefone').text(telefone);
-    $('#cpf').text(cpf);
-    $('#cidade').text(cidade);
-    $('#responsavel').text(responsavel);
-    $('#cpf-responsavel').text(cpfResponsavel);
-    // Abre o modal
-    $('#pacienteModal').modal('show');
-}
-
-
-    // sript para abri o modal e preencher 
-    $(document).ready(function() {
-        $('.editar-paciente').click(function() {
-        var id = $(this).data('id');
-        var nome = $(this).data('nome');
-        var dataNasci = $(this).data('data-nasci');
-        var convenio = $(this).data('convenio');
-        var telefone = $(this).data('telefone');
-        var cpf = $(this).data('cpf');
-        var cidade = $(this).data('cidade');
-        var responsavel = $(this).data('responsavel');
-        var cpfResponsavel = $(this).data('cpf-responsavel');
-
-        // Preenche os campos do formulário
-        $('#editar-id').val(id);
-        $('#editar-nome').val(nome);
-        $('#editar-data-nasci').val(dataNasci);
-        $('#editar-convenio').val(convenio);
-        $('#editar-telefone').val(telefone);
-        $('#editar-cpf').val(cpf);
-        $('#editar-cidade').val(cidade);
-        $('#editar-responsavel').val(responsavel);
-        $('#editar-cpf-responsavel').val(cpfResponsavel);
-
-        // Verifica se a pessoa é maior de idade
-        var birthDate = new Date(dataNasci);
-        var today = new Date();
-        var age = today.getFullYear() - birthDate.getFullYear();
-        var m = today.getMonth() - birthDate.getMonth();
-        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-            age--;
-        }
-
-        // Mostra ou esconde os campos do responsável
-        if (age >= 18) {
-            $('#editar-responsavel').closest('.form-group').hide();
-            $('#editar-cpf-responsavel').closest('.form-group').hide();
-        } else {
-            $('#editar-responsavel').closest('.form-group').show();
-            $('#editar-cpf-responsavel').closest('.form-group').show();
-        }
-
-        $('#editarPacienteModal').modal('show');
-    });
-
-   
-
-
-});
-
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
-
-
-// Enviar o formulário de edição
-$('#formEditarPaciente').submit(function(event) {
-    event.preventDefault();
-   
-    var formData = $(this).serialize();
-    $.ajax({
-        type: 'POST',
-        url: '/update-paciente', // URL to update patient data
-        data: formData,
-        success: function(data) {
-            if (data.success) {
-                // Atualize a tabela aqui
-                var pacienteRow = $('tr[data-id="' + $('#editar-id').val() + '"]');
-                pacienteRow.find('td:eq(1)').text($('#editar-nome').val());
-                pacienteRow.find('td:eq(2)').text($('#editar-data-nasci').val());
-                pacienteRow.find('td:eq(3)').text($('#editar-convenio').val());
-                pacienteRow.find('td:eq(4)').text($('#editar-telefone').val());
-                pacienteRow.find('td:eq(5)').text($('#editar-cpf').val());
-                pacienteRow.find('td:eq(6)').text($('#editar-cidade').val());
-                pacienteRow.find('td:eq(7)').text($('#editar-responsavel').val());
-                pacienteRow.find('td:eq(8)').text($('#editar-cpf-responsavel').val());
-                $('#editarPacienteModal').modal('hide');
-                alert(data.message);
-            } else {
-                alert(data.error);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.log(xhr.responseText);
-            console.log(status);
-            console.log(error);
-            alert('Erro ao atualizar dados do paciente!');
-        }
-    });
-}); 
-
-
-</script>

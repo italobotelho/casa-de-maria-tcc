@@ -8,7 +8,6 @@ use App\Models\Convenio;
 
 class PersonController extends Controller
 {
-
    
 
     public function update(Request $request)
@@ -21,8 +20,10 @@ class PersonController extends Controller
             'telefone' => 'required|string|max:15',
             'cpf' => 'required|string|max:14',
             'cidade' => 'required|string|max:100',
-            'responsavel' => 'nullable|string|max:54',
-            'cpf_responsavel' => 'nullable|string|max:14',
+            'responsavel' => 'string|max:54',
+            'cpf_responsavel' => 'string|max:14',
+            'fk_convenio_paci' => 'nullable|string'
+            
         ]);
     
         $paciente = Paciente::find($request->input('id'));
@@ -35,6 +36,9 @@ class PersonController extends Controller
             $paciente->nome_cidade = $request->input('cidade');
             $paciente->responsavel_paci = $request->input('responsavel');
             $paciente->cpf_responsavel_paci = $request->input('cpf_responsavel');
+            $paciente->fk_convenio_paci = $request->input('fk_convenio_paci');
+
+        
     
             if ($paciente->save()) {
                 return response()->json(['success' => true, 'message' => 'Dados do paciente atualizados com sucesso!']);
@@ -59,9 +63,12 @@ class PersonController extends Controller
 }
     public function index()
     {
+ 
         $pacientes = Paciente::with('convenio')->get();
-        return view('/Menu/pacientes', ['pacientes' => $pacientes]);
-    }
+        $convenios = Convenio::all(); // Recupera todos os convênios
+        return view('/Menu/pacientes', ['pacientes' => $pacientes, 'convenios' => $convenios]);
+
+}
 
 
     public function store(Request $request)

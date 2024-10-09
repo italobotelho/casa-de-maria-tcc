@@ -44,7 +44,7 @@ Route::post('/form_paciente', [PersonController::class, 'store'])->name('pacient
 
 // Rota para listar convênios
 Route::get('/convenio', [PersonController::class, 'ListarConvenio'])->name('convenio.listar');
-Route::get('/convenios', [PersonController::class, 'listarConvenios'])->name('convenios.listar');
+
 
 // Rota para o formulário de cadastro de médico
 Route::get('/form_medico', function () {
@@ -56,4 +56,5 @@ Route::post('/form_medico', [MedicoController::class, 'store'])->name('medico.st
 
 // Rota para atualizar os dados de um paciente
 Route::post('/update-paciente', [PersonController::class, 'update'])->name('paciente.update');
+Route::post('/convenios', 'PersonController@ListarConvenio');
 
