@@ -4,6 +4,7 @@
     <meta charset="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>PACI</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -123,12 +124,13 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editarPacienteModalLabel">Editar Paciente</h5>
+                <h3 class="modal-title" id="editarPacienteModalLabel">Editar Paciente</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="formEditarPaciente">
+            <form action="{{ route('paciente.store') }}" id="formEditarPaciente">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="modal-body">
                     <input type="hidden" id="editar-id" name="id">
                     <div class="form-group">
@@ -256,46 +258,53 @@ function abrirModalPaciente(id, nome, dataNasci, convenio, telefone, cpf, cidade
         $('#editarPacienteModal').modal('show');
     });
 
-    // Enviar o formulário de edição
-    $('#formEditarPaciente').submit(function(event) {
-        event.preventDefault();
-        // Aqui você pode adicionar a lógica para atualizar os dados via AJAX ou outro método
-        alert('Dados do paciente atualizados!');
-        $('#editarPacienteModal').modal('hide');
-    });
+   
 
 
 });
 
-    // Enviar o formulário de edição
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+
+// Enviar o formulário de edição
 $('#formEditarPaciente').submit(function(event) {
     event.preventDefault();
+   
     var formData = $(this).serialize();
     $.ajax({
         type: 'POST',
         url: '/update-paciente', // URL to update patient data
         data: formData,
         success: function(data) {
-            // Update the table row with the new data
-            var pacienteRow = $('tr[data-id="' + $('#editar-id').val() + '"]');
-            pacienteRow.find('td:eq(1)').text($('#editar-nome').val());
-            pacienteRow.find('td:eq(2)').text($('#editar-data-nasci').val());
-            pacienteRow.find('td:eq(3)').text($('#editar-convenio').val());
-            pacienteRow.find('td:eq(4)').text($('#editar-telefone').val());
-            pacienteRow.find('td:eq(5)').text($('#editar-cpf').val());
-            pacienteRow.find('td:eq(6)').text($('#editar-cidade').val());
-            pacienteRow.find('td:eq(7)').text($('#editar-responsavel').val());
-            pacienteRow.find('td:eq(8)').text($('#editar-cpf-responsavel').val());
-            $('#editarPacienteModal').modal('hide');
-            alert('Dados do paciente atualizados!');
+            if (data.success) {
+                // Atualize a tabela aqui
+                var pacienteRow = $('tr[data-id="' + $('#editar-id').val() + '"]');
+                pacienteRow.find('td:eq(1)').text($('#editar-nome').val());
+                pacienteRow.find('td:eq(2)').text($('#editar-data-nasci').val());
+                pacienteRow.find('td:eq(3)').text($('#editar-convenio').val());
+                pacienteRow.find('td:eq(4)').text($('#editar-telefone').val());
+                pacienteRow.find('td:eq(5)').text($('#editar-cpf').val());
+                pacienteRow.find('td:eq(6)').text($('#editar-cidade').val());
+                pacienteRow.find('td:eq(7)').text($('#editar-responsavel').val());
+                pacienteRow.find('td:eq(8)').text($('#editar-cpf-responsavel').val());
+                $('#editarPacienteModal').modal('hide');
+                alert(data.message);
+            } else {
+                alert(data.error);
+            }
         },
         error: function(xhr, status, error) {
+            console.log(xhr.responseText);
+            console.log(status);
             console.log(error);
             alert('Erro ao atualizar dados do paciente!');
         }
     });
-});
-
+}); 
 
 
 </script>

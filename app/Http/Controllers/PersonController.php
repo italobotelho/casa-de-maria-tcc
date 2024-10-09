@@ -9,35 +9,54 @@ use App\Models\Convenio;
 class PersonController extends Controller
 {
 
-    public function show(Paciente $paciente)
+   
+
+    public function update(Request $request)
     {
-        return view('paciente.show', compact('paciente'));
-    }
-
-
-        public function update(Request $request)
-        {
-            
-                $paciente = Paciente::find($request->input('id'));
-                $paciente->nome_paci = $request->input('nome');
-                $paciente->data_nasci_paci = $request->input('data_nasci');
-                $paciente->convenio->nome_conv = $request->input('convenio');
-                $paciente->telefone_paci = $request->input('telefone');
-                $paciente->cpf_paci = $request->input('cpf');
-                $paciente->nome_cidade = $request->input('cidade');
-                $paciente->responsavel_paci = $request->input('responsavel');
-                $paciente->cpf_responsavel_paci = $request->input('cpf_responsavel');
-                $paciente->save();
-                return response()->json(['success' => true]);
-        
+        // Validação
+        $request->validate([
+            'id' => 'required|exists:paciente,pk_cod_paci',
+            'nome' => 'required|string|max:54',
+            'data_nasci' => 'required|date',
+            'telefone' => 'required|string|max:15',
+            'cpf' => 'required|string|max:14',
+            'cidade' => 'required|string|max:100',
+            'responsavel' => 'nullable|string|max:54',
+            'cpf_responsavel' => 'nullable|string|max:14',
+        ]);
     
+        $paciente = Paciente::find($request->input('id'));
+    
+        if ($paciente) {
+            $paciente->nome_paci = $request->input('nome');
+            $paciente->data_nasci_paci = $request->input('data_nasci');
+            $paciente->telefone_paci = $request->input('telefone');
+            $paciente->cpf_paci = $request->input('cpf');
+            $paciente->nome_cidade = $request->input('cidade');
+            $paciente->responsavel_paci = $request->input('responsavel');
+            $paciente->cpf_responsavel_paci = $request->input('cpf_responsavel');
+    
+            if ($paciente->save()) {
+                return response()->json(['success' => true, 'message' => 'Dados do paciente atualizados com sucesso!']);
+            } else {
+                return response()->json(['error' => 'Erro ao atualizar paciente'], 422);
+            }
+        } else {
+            return response()->json(['error' => 'Paciente não encontrado'], 404);
+        }
     }
 
+    
     public function ListarConvenio() // Nome do método corrigido
     {
         $convenios = Convenio::all(); // Recupera todos os convênios
         return response()->json($convenios); // Retorna os dados como JSON
     }
+    public function listarConvenios()
+{
+    $convenios = Convenio::all();
+    return response()->json($convenios);
+}
     public function index()
     {
         $pacientes = Paciente::with('convenio')->get();
