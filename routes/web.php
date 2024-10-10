@@ -4,6 +4,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\PersonController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/', function () {
@@ -47,12 +48,6 @@ Route::get('profissional', [MedicoController::class, 'index'])->name('medicos.in
 Route::post('/form_medico', [MedicoController::class, 'store'])->name('medico.store');
 Route::get('Menu/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
 Route::get('/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
-
-
-
-
-
-
 
 Auth::routes();
 
