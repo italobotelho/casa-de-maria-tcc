@@ -187,7 +187,6 @@
                 .catch(error => console.error('Erro ao carregar convênios:', error));
         });
 
-          // Função para alternar campo da Carteira do Convênio
         // Função para alternar campo da Carteira do Convênio
         document.addEventListener('DOMContentLoaded', function () {
             const convenioSelect = document.getElementById('fk_convenio_paci');
