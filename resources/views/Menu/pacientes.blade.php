@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>PACI</title>
+    <title>Seus Pacientes</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -74,9 +74,19 @@
                                     <a href="#" class="nome-paciente" data-id="{{ $paciente->pk_cod_paci }}" data-nome="{{ $paciente->nome_paci }}" data-data-nasci="{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('d/m/Y') }}" data-convenio="{{ $paciente->convenio->nome_conv }}" data-telefone="{{ $paciente->telefone_paci }}" data-cpf="{{ $paciente->cpf_paci }}" data-cidade="{{ $paciente->nome_cidade }}" data-responsavel="{{ $paciente->responsavel_paci }}" data-cpf-responsavel="{{ $paciente->cpf_responsavel_paci }}">
                                         {{ $paciente->nome_paci }}
                                     </a>
-                                    <button class="btn btn-warning btn-sm editar-paciente" data-id="{{ $paciente->pk_cod_paci }}" data-nome="{{ $paciente->nome_paci }}" data-data-nasci="{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('Y-m-d') }}" data-convenio="{{ $paciente->convenio->nome_conv }}" data-telefone="{{ $paciente->telefone_paci }}" data-cpf="{{ $paciente->cpf_paci }}" data-cidade="{{ $paciente->nome_cidade }}" data-responsavel="{{ $paciente->responsavel_paci }}" data-cpf-responsavel="{{ $paciente->cpf_responsavel_paci }}">
-                                        Editar
-                                    </button>
+                                    <button class="btn btn-warning btn-sm editar-paciente" 
+                                    data-id="{{ $paciente->pk_cod_paci }}" 
+                                    data-nome="{{ $paciente->nome_paci }}" 
+                                    data-email="{{ $paciente->email_paci }}" 
+                                    data-data-nasci="{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('Y-m-d') }}" 
+                                    data-convenio="{{ $paciente->convenio->nome_conv }}" 
+                                    data-telefone="{{ $paciente->telefone_paci }}" 
+                                    data-cpf="{{ $paciente->cpf_paci }}" 
+                                    data-cidade="{{ $paciente->nome_cidade }}" 
+                                    data-responsavel="{{ $paciente->responsavel_paci }}" 
+                                    data-cpf-responsavel="{{ $paciente->cpf_responsavel_paci }}">
+                                Editar
+                            </button>
                                
                                 </td>
                                 
@@ -153,14 +163,14 @@
             <form action="{{ route('paciente.update') }}" id="formEditarPaciente">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="modal-body">
-                    <input type="hidden" id="editar-id" name="id">
+                    <input maxlength="54" type="text"  id="editar-id" name="id">
                     <div class="form-group">
                         <label for="editar-nome">Nome</label>
                         <input type="text" class="form-control" id="editar-nome" name="nome" required>
                     </div>
                     <div class="form-group">
                         <label for="editar-email">E-mail</label>
-                        <input type="email" class="form-control" id="editar-email" name="email" required>
+                        <input type="email" maxlength="255" class="form-control" id="editar-email" name="email" required>
                     </div>
                     <div class="form-group">
                         <label for="editar-data-nasci">Data de Nascimento</label>
@@ -169,7 +179,7 @@
                     <div class="form-group">
                         <label for="fk_convenio_paci">Convênio</label>
                         <select name="fk_convenio_paci" id="fk_convenio_paci">
-                         
+                            <option value="" disabled selected>Clique para alterar o convênio</option>
                             @foreach($convenios as $convenio)
                                 <option value="{{ $convenio->pk_id_conv }}">{{ $convenio->nome_conv }}</option>
                             @endforeach
@@ -177,15 +187,20 @@
                     </div>
                     <div class="form-group">
                         <label for="editar-telefone">Telefone</label>
-                        <input type="text" class="form-control" id="editar-telefone" name="telefone" required>
+                        <input type="text" 
+                        maxlength="15"
+                        class="form-control" id="editar-telefone" name="telefone" required>
                     </div>
                     <div class="form-group">
                         <label for="editar-cpf">CPF</label>
-                        <input type="text" class="form-control" id="editar-cpf" name="cpf" required>
+                        <input type="text" 
+                        maxlength="14"
+                        class="form-control" id="editar-cpf" name="cpf" required>
                     </div>
                     <div class="form-group">
                         <label for="editar-cidade">Cidade</label>
-                        <input type="text" class="form-control" id="editar-cidade" name="cidade" required>
+                        <input type="text" 
+                        maxlength="100" class="form-control" id="editar-cidade" name="cidade" required>
                     </div>
                     <div class="form-group">
                         <label for="editar-responsavel">Nome do Responsável</label>

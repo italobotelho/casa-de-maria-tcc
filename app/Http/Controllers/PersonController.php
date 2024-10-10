@@ -16,6 +16,7 @@ class PersonController extends Controller
         $request->validate([
             'id' => 'required|exists:paciente,pk_cod_paci',
             'nome' => 'required|string|max:54',
+             'email' => 'required|email', 
             'data_nasci' => 'required|date',
             'telefone' => 'required|string|max:15',
             'cpf' => 'required|string|max:14',
@@ -56,11 +57,17 @@ class PersonController extends Controller
         $convenios = Convenio::all(); // Recupera todos os convênios
         return response()->json($convenios); // Retorna os dados como JSON
     }
-    public function listarConvenios()
-{
-    $convenios = Convenio::all();
-    return response()->json($convenios);
-}
+
+    public function convenios($id)
+    {
+        $convenio = Convenio::find($id);
+        if (!$convenio) {
+            return response()->json(['message' => 'Convenio não encontrado'], 404);
+        }
+        return response()->json($convenio);
+    }
+
+    
     public function index()
     {
  

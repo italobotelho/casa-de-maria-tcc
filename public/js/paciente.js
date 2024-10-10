@@ -28,6 +28,7 @@ function abrirModalPaciente(id, nome, dataNasci, convenio, telefone, cpf, cidade
     $('#cidade').text(cidade);
     $('#responsavel').text(responsavel);
     $('#cpf-responsavel').text(cpfResponsavel);
+    
     // Abre o modal
     $('#pacienteModal').modal('show');
 }
@@ -39,7 +40,6 @@ $(document).ready(function () {
         var nome = $(this).data('nome');
         var email = $(this).data('email');
         var dataNasci = $(this).data('data-nasci');
-        var convenio = $(this).data('convenio');
         var telefone = $(this).data('telefone');
         var cpf = $(this).data('cpf');
         var cidade = $(this).data('cidade');
@@ -51,19 +51,13 @@ $(document).ready(function () {
         $('#editar-nome').val(nome);
         $('#editar-email').val(email);
         $('#editar-data-nasci').val(dataNasci);
-        $('#fk_convenio_paci').val(convenio); // Preenche o campo de seleção de convênio com o valor do convênio do paciente
         $('#editar-telefone').val(telefone);
         $('#editar-cpf').val(cpf);
         $('#editar-cidade').val(cidade);
         $('#editar-responsavel').val(responsavel);
         $('#editar-cpf-responsavel').val(cpfResponsavel);
 
-        // Selecione o convênio correto no campo de seleção
-        $('#fk_convenio_paci').find('option').each(function () {
-            if ($(this).text() == convenio) {
-                $(this).prop('selected', true);
-            }
-        });
+
 
         // Verifica se a pessoa é maior de idade
         var birthDate = new Date(dataNasci);
@@ -91,10 +85,6 @@ $(document).ready(function () {
 
         $('#editarPacienteModal').modal('show');
     });
-
-
-
-
 });
 
 $.ajaxSetup({
@@ -112,27 +102,30 @@ $('#formEditarPaciente').submit(function (event) {
     var data = {};
     $.each(formData, function (index, field) {
         if (field.name !== 'responsavel' && field.name !== 'cpf_responsavel' || $('#editar-responsavel').closest('.form-group').is(':visible')) {
-            data[field.name] = field.value ;
+            data[field.name] = field.value;
         }
     });
+    data['email'] = $('#editar-email').val();
+    data['fk_convenio_paci'] = $('#fk_convenio_paci').val();
 
     $.ajax({
         type: 'POST',
-        url: '/update-paciente', // URL to update patient data
+        url: '/update-paciente', 
         data: JSON.stringify(data), // Envia os dados como JSON
-        contentType: 'application/json', // Define o tipo de conteúdo como JSON
+        contentType: 'application/json',
         success: function (data) {
             if (data.success) {
                 // Atualize a tabela aqui
                 var pacienteRow = $('tr[data-id="' + $('#editar-id').val() + '"]');
                 pacienteRow.find('td:eq(1)').text($('#editar-nome').val());
                 pacienteRow.find('td:eq(2)').text($('#editar-data-nasci').val());
-                pacienteRow.find('td:eq(3)').text($('#fk_convenio_paci').val()); // Corrigido aqui
+                pacienteRow.find('td:eq(3)').text($('#fk_convenio_paci').val()); 
                 pacienteRow.find('td:eq(4)').text($('#editar-telefone').val());
                 pacienteRow.find('td:eq(5)').text($('#editar-cpf').val());
                 pacienteRow.find('td:eq(6)').text($('#editar-cidade').val());
                 pacienteRow.find('td:eq(7)').text($('#editar-responsavel').val());
                 pacienteRow.find('td:eq(8)').text($('#editar-cpf-responsavel').val());
+                pacienteRow.find('td:eq(9)').text($('#editar-email').val());
                 $('#editarPacienteModal').modal('hide');
                 alert(data.message);
             } else {
@@ -151,9 +144,41 @@ $('#formEditarPaciente').submit(function (event) {
 function buscarConvenios() {
     return $.ajax({
         type: 'GET',
-        url: '/covenios', // URL para buscar convênios
+        url: '/covenios', 
         success: function (data) {
             console.log(data);
         }
     });
 }
+
+// Função para aplicar a máscara de CPF
+function aplicarMascaraCPF(input) {
+    let cpf = input.value.replace(/\D/g, ''); // Remove tudo que não for dígito
+    if (cpf.length <= 11) {
+        cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+        cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+        cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    }
+    input.value = cpf;
+}
+
+// Função para aplicar máscara de telefone
+function aplicarMascaraTelefone(input) {
+    let telefone = input.value.replace(/\D/g, '');
+    telefone = telefone.replace(/(\d{2})(\d)/, '($1) $2');
+    telefone = telefone.replace(/(\d{4})(\d)/, '$1-$2');
+    input.value = telefone;
+}
+
+// Add event listeners to the input fields
+document.addEventListener('DOMContentLoaded', function () {
+    const cpfInput = document.getElementById('editar-cpf');
+    cpfInput.addEventListener('input', function () {
+        aplicarMascaraCPF(cpfInput);
+    });
+
+    const telefoneInput = document.getElementById('editar-telefone');
+    telefoneInput.addEventListener('input', function () {
+        aplicarMascaraTelefone(telefoneInput);
+    });
+});

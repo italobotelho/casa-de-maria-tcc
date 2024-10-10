@@ -58,3 +58,4 @@ Route::post('/form_medico', [MedicoController::class, 'store'])->name('medico.st
 Route::post('/update-paciente', [PersonController::class, 'update'])->name('paciente.update');
 Route::post('/convenios', 'PersonController@ListarConvenio');
 
+
