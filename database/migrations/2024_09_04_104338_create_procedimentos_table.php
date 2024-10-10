@@ -12,13 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('procedimentos', function (Blueprint $table) {
-            $table->integer('pk_cod_proc')->primary();
-            $table->unsignedInteger('fk_crm_med'); // Garanta que o tipo de dado corresponde à chave primária na tabela 'medico'
+            $table->increments('pk_cod_proc');
+            $table->unsignedInteger('fk_crm_med');
             $table->foreign('fk_crm_med')->references('pk_crm_med')->on('medico');
-            $table->string('descricao_proc', 100); // Corrija o nome da coluna se for 'descricao_proc' em vez de 'descrição_proc'
+            $table->string('descricao_proc', 100);
             $table->time('tempo_proc');
             $table->string('nome_proc', 50);
             $table->timestamps();
+
+            Schema::dropIfExists('procedimentos');
         });
     }
 

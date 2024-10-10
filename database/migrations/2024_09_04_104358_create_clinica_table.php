@@ -11,22 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clinica', function (Blueprint $table) {
-            $table->unsignedInteger('pk_cnpj')->primary();
-            $table->string('nome_clin', 25);
-            $table->string('email_aten_clin', 255);
-            $table->string('numero_clin', 5);
-            $table->string('rua_clin', 17);
+        Schema::create('clinicas', function (Blueprint $table) {
+            $table->bigInteger('cnpj_clin')->primary();
+            $table->string('nome_clin', 50);
+            $table->string('descricao_clin', 150);
             $table->string('telefone_clin', 12);
-            $table->string('email_resp_clin', 255);
-            $table->string('cidade_clin', 30);
-            $table->string('descricao_clin', 100);
-            $table->string('cep_clin', 100);
-            $table->string('bairro_clin', 100);
-            $table->string('complemento_clin', 100);
-            $table->string('uf_clin', 100);
-            $table->string('cod_ibge_clin', 100);
+            $table->string('email_aten_clin', 50);
+            $table->string('email_resp_clin', 50);
+            $table->string('cep_clin', 9)->nullable();
+            $table->string('rua_clin', 17)->nullable();
+            $table->string('numero_clin', 5)->nullable();
+            $table->string('bairro_clin', 50)->nullable();
+            $table->string('complemento_clin', 100)->nullable();
+            $table->string('cidade_clin', 30)->nullable();
+            $table->string('uf_clin', 2)->nullable();
+            $table->bigInteger('cod_ibge_clin')->nullable();
 
+
+            $table->timestamps();
         });
     }
 
@@ -35,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clinica');
+        Schema::dropIfExists('clinicas');
     }
 };

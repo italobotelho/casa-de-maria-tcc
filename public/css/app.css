@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+/* Fontes */
+
+@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 @font-face {
     font-family: Century Gothic;
     src: url(../../public/fonts/centurygothic.ttf);
@@ -10,13 +16,31 @@
     src: url(../../public/fonts/centurygothic_bold.ttf);
 }
 
+
 * {
-    font-family: 'Century Gothic';
+    font-family: "Abel", sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    font-style: normal;
 }
 
-body {
-    background-image: url(../img/fundo.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    
+h1 {
+    font-weight: bold;    
+    letter-spacing: 0.3em;
+}
+
+h2 {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: 0.01rem;
+}
+
+nav li a {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 100;
+    font-style: normal;
+    letter-spacing: 0.2rem;
 }
