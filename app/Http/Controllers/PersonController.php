@@ -12,8 +12,11 @@ class PersonController extends Controller
 
     public function update(Request $request)
     {
+        
+        $data = $request->all();
         // Validação
         $request->validate([
+     
             'id' => 'required|exists:paciente,pk_cod_paci',
             'nome' => 'required|string|max:54',
             'email' => 'required|email',
@@ -39,7 +42,8 @@ class PersonController extends Controller
             $paciente->responsavel_paci = $request->input('responsavel');
             $paciente->cpf_responsavel_paci = $request->input('cpf_responsavel');
             $paciente->fk_convenio_paci = $request->input('fk_convenio_paci');
-            $paciente->carteira_convenio_paci = $request->carteira_convenio_paci->input('carteira_convenio_paci');
+            $paciente->carteira_convenio_paci = $request->input('carteira_convenio_paci');
+            
 
 
 
