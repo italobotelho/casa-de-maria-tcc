@@ -20,6 +20,8 @@ Route::get('/layout', function () {
 
 // Rotas da Tela Menu
 
+// Rotas da Tela Menu
+
 Route::get('/agenda', function () {
     return view('Menu/agenda');
 });
@@ -28,28 +30,30 @@ Route::get('/consulta', function () {
     return view('Menu/consulta');
 });
 
-Route::get('/pacientes', function () {
-    return view('Menu/pacientes');
-});
+// Rota para a lista de pacientes
+Route::get('/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
 
-Route::get('/profissional', function () {
-    return view('Menu/profissional');
-});
+// Rota para o profissional (medico)
+Route::get('/profissional', [MedicoController::class, 'index'])->name('medicos.index');
 
+// Rota para o formulário de cadastro de paciente
 Route::get('/form_paciente', function () {
     return view('Cadastros/form_paciente');
 });
 
+// Rota para armazenar um novo paciente
 Route::post('/form_paciente', [PersonController::class, 'store'])->name('paciente.store');
+
+// Rota para listar convênios
 Route::get('/convenio', [PersonController::class, 'ListarConvenio'])->name('convenio.listar');
 
 
-
+// Rota para o formulário de cadastro de médico
 Route::get('/form_medico', function () {
     return view('Cadastros/form_medico');
 });
 
-Route::get('profissional', [MedicoController::class, 'index'])->name('medicos.index');
+// Rota para armazenar um novo médico
 Route::post('/form_medico', [MedicoController::class, 'store'])->name('medico.store');
 Route::get('menu/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
 
@@ -60,6 +64,12 @@ Route::post('/gerais', 'App\Http\Controllers\ClinicaController@store')->name('cl
 Route::patch('/gerais', 'App\Http\Controllers\ClinicaController@update')->name('clinica.update');
 
 // Rotas da Tela Pacientes
+
+// Rota para atualizar os dados de um paciente
+Route::post('/update-paciente', [PersonController::class, 'update'])->name('paciente.update');
+Route::post('/convenios', 'PersonController@ListarConvenio');
+
+
 Route::get('Menu/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
 Route::get('/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
 
