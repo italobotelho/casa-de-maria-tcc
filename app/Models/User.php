@@ -2,42 +2,42 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable; //necessário para que o Laravel reconheça este modelo como um modelo de usuário autenticável.
+    use HasFactory, Notifiable;
 
-    protected $table = 'usuario_adm'; // Nome da tabela no banco de dados
-
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
-        'user', 'senha',
+        'name',
+        'email',
+        'password',
     ];
 
-    // Método para definir a senha criptografada
-    public function setSenhaAttribute($value)
-    {
-        $this->attributes['senha'] = Hash::make($value);
-    }
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
-    // Métodos necessários para a interface Authenticatable
-    public function getAuthIdentifierName()
-    {
-        return 'id';
-    }
-
-    public function getAuthIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    public function getAuthPassword()
-    {
-        return $this->senha;
-    }
-
-
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 }
