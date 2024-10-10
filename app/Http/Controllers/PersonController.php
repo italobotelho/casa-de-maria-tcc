@@ -8,7 +8,7 @@ use App\Models\Convenio;
 
 class PersonController extends Controller
 {
-   
+
 
     public function update(Request $request)
     {
@@ -16,7 +16,7 @@ class PersonController extends Controller
         $request->validate([
             'id' => 'required|exists:paciente,pk_cod_paci',
             'nome' => 'required|string|max:54',
-             'email' => 'required|email', 
+            'email' => 'required|email',
             'data_nasci' => 'required|date',
             'telefone' => 'required|string|max:15',
             'cpf' => 'required|string|max:14',
@@ -24,11 +24,11 @@ class PersonController extends Controller
             'responsavel' => 'string|max:54',
             'cpf_responsavel' => 'string|max:14',
             'fk_convenio_paci' => 'nullable|string'
-            
+
         ]);
-    
+
         $paciente = Paciente::find($request->input('id'));
-    
+
         if ($paciente) {
             $paciente->nome_paci = $request->input('nome');
             $paciente->data_nasci_paci = $request->input('data_nasci');
@@ -39,8 +39,8 @@ class PersonController extends Controller
             $paciente->cpf_responsavel_paci = $request->input('cpf_responsavel');
             $paciente->fk_convenio_paci = $request->input('fk_convenio_paci');
 
-        
-    
+
+
             if ($paciente->save()) {
                 return response()->json(['success' => true, 'message' => 'Dados do paciente atualizados com sucesso!']);
             } else {
@@ -51,7 +51,7 @@ class PersonController extends Controller
         }
     }
 
-    
+
     public function ListarConvenio() // Nome do método corrigido
     {
         $convenios = Convenio::all(); // Recupera todos os convênios
@@ -67,15 +67,14 @@ class PersonController extends Controller
         return response()->json($convenio);
     }
 
-    
+
     public function index()
     {
- 
+
         $pacientes = Paciente::with('convenio')->get();
         $convenios = Convenio::all(); // Recupera todos os convênios
         return view('/Menu/pacientes', ['pacientes' => $pacientes, 'convenios' => $convenios]);
-
-}
+    }
 
 
     public function store(Request $request)
@@ -98,7 +97,7 @@ class PersonController extends Controller
             'cpf_paci' => 'required|string|max:14'
         ];
 
-    
+
 
 
         // Se a idade for menor que 18 anos, adi   ciona as regras para o responsável

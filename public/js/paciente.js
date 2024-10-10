@@ -29,6 +29,7 @@ function abrirModalPaciente(id, nome, dataNasci, convenio, telefone, cpf, cidade
     $('#responsavel').text(responsavel);
     $('#cpf-responsavel').text(cpfResponsavel);
     
+    
     // Abre o modal
     $('#pacienteModal').modal('show');
 }
@@ -45,6 +46,8 @@ $(document).ready(function () {
         var cidade = $(this).data('cidade');
         var responsavel = $(this).data('responsavel');
         var cpfResponsavel = $(this).data('cpf-responsavel');
+        var convenio = $(this).data('convenio'); 
+        console.log(convenio);
 
         // Preenche os campos do formulário
         $('#editar-id').val(id);
@@ -56,6 +59,12 @@ $(document).ready(function () {
         $('#editar-cidade').val(cidade);
         $('#editar-responsavel').val(responsavel);
         $('#editar-cpf-responsavel').val(cpfResponsavel);
+        
+       
+        console.log($('#fk_convenio_paci'));
+        
+
+
 
 
 
@@ -93,7 +102,6 @@ $.ajaxSetup({
     }
 });
 
-
 // Enviar o formulário de edição
 $('#formEditarPaciente').submit(function (event) {
     event.preventDefault();
@@ -106,7 +114,7 @@ $('#formEditarPaciente').submit(function (event) {
         }
     });
     data['email'] = $('#editar-email').val();
-    data['fk_convenio_paci'] = $('#fk_convenio_paci').val();
+    data['fk_convenio_paci'] = $('#fk_convenio_paci').val(); // Atualiza o valor do campo fk_convenio_paci
 
     $.ajax({
         type: 'POST',

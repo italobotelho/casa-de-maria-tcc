@@ -85,8 +85,8 @@
                                     data-cidade="{{ $paciente->nome_cidade }}" 
                                     data-responsavel="{{ $paciente->responsavel_paci }}" 
                                     data-cpf-responsavel="{{ $paciente->cpf_responsavel_paci }}">
-                                Editar
-                            </button>
+                                    Editar
+                                </button>
                                
                                 </td>
                                 
@@ -179,11 +179,14 @@
                     <div class="form-group">
                         <label for="fk_convenio_paci">Convênio</label>
                         <select name="fk_convenio_paci" id="fk_convenio_paci">
-                            <option value="" disabled selected>Clique para alterar o convênio</option>
                             @foreach($convenios as $convenio)
-                                <option value="{{ $convenio->pk_id_conv }}">{{ $convenio->nome_conv }}</option>
+                                <option value="{{ $convenio->pk_id_conv }}" 
+                                    @if($convenio->pk_id_conv === $paciente->fk_convenio_paci) selected @endif>
+                                    {{ $convenio->nome_conv }}
+                                </option>
                             @endforeach
                         </select>
+                        
                     </div>
                     <div class="form-group">
                         <label for="editar-telefone">Telefone</label>
