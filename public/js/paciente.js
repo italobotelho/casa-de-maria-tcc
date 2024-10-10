@@ -46,8 +46,12 @@ $(document).ready(function () {
         var cidade = $(this).data('cidade');
         var responsavel = $(this).data('responsavel');
         var cpfResponsavel = $(this).data('cpf-responsavel');
-        var convenioId = $(this).data('convenio-id'); // Adicione esta linha
-
+        var convenioId = $(this).data('convenio-id'); 
+        var carteiraConvenio = $(this).data('carteira-convenio');
+    
+        // Adicionando log para depuração
+        console.log('Carteira do convênio:', carteiraConvenio);
+    
         // Preenche os campos do formulário
         $('#editar-id').val(id);
         $('#editar-nome').val(nome);
@@ -58,6 +62,12 @@ $(document).ready(function () {
         $('#editar-cidade').val(cidade);
         $('#editar-responsavel').val(responsavel);
         $('#editar-cpf-responsavel').val(cpfResponsavel);
+        $('#fk_convenio_paci').val(convenioId);
+        $('#editar-carteira-convenio').val(carteiraConvenio); // Atualizando o valor
+      
+
+
+
         
         // Selecione o convênio correto
         $('#fk_convenio_paci').val(convenioId); // Adicione esta linha

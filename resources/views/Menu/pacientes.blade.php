@@ -55,11 +55,13 @@
                             <th scope="col">Nome</th>
                             <th scope="col">Data nascimento</th>
                             <th scope="col">Convenio</th>
+                            <th scope="col">Carteira    </th>
                             <th scope="col">Telefone</th>
                             <th scope="col">CPF</th>
                             <th scope="col">Cidade</th>
                             <th scope="col">Nome Responsavel</th>
                             <th scope="col">CPf Responsavel</th>
+                            
 
                             </tr>
                         </thead>
@@ -84,20 +86,23 @@
                                     data-cpf="{{ $paciente->cpf_paci }}" 
                                     data-cidade="{{ $paciente->nome_cidade }}" 
                                     data-responsavel="{{ $paciente->responsavel_paci }}"        
-                                    data-cpf-responsavel="{{ $paciente->cpf_responsavel_paci }}">
+                                    data-cpf-responsavel="{{ $paciente->cpf_responsavel_paci }}"
+                                    data-carteira-convenio="{{ $paciente->carteira_convenio_paci }}">
                                     Editar
-                                </button>
+                                     </button>
                                
                                 </td>
                                 
 
                                 <td>{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('d/m/Y') }}</td>
                                 <td>{{$paciente->convenio->nome_conv}}</td>
+                                <td>{{$paciente->carteira_convenio_paci}}</td>
                                 <td>{{$paciente->telefone_paci}}</td>
                                 <td>{{$paciente->cpf_paci}}</td>
                                 <td>{{$paciente->nome_cidade}}</td>
                                 <td>{{$paciente->responsavel_paci}}</td>
                                 <td>{{$paciente->cpf_responsavel_paci}}</td>
+                                
                                 
                                
                             
@@ -176,18 +181,24 @@
                         <label for="editar-data-nasci">Data de Nascimento</label>
                         <input type="date" class="form-control" id="editar-data-nasci" name="data_nasci" required>
                     </div>
-                    <div class="form-group">
-                        <label for="fk_convenio_paci">Convênio</label>
-                        <select name="fk_convenio_paci" id="fk_convenio_paci">
-                            @foreach($convenios as $convenio)
-                                <option value="{{ $convenio->pk_id_conv }}" 
-                                    @if($convenio->pk_id_conv === $paciente->fk_convenio_paci) selected @endif>
-                                    {{ $convenio->nome_conv }}
-                                </option>
-                            @endforeach
-                        </select>
-                        
-                    </div>
+
+                        <div class="form-group">
+                            <label for="fk_convenio_paci">Convênio</label>
+                            <select name="fk_convenio_paci" id="fk_convenio_paci">
+                                @foreach($convenios as $convenio)
+                                    <option value="{{ $convenio->pk_id_conv }}" 
+                                        @if(isset($paciente) && $convenio->pk_id_conv === $paciente->fk_convenio_paci) selected @endif>
+                                        {{ $convenio->nome_conv }}
+                                    </option>
+                                @endforeach
+                            </select>
+                           </div>
+
+                           <div class="form-group">
+                            <label for="editar-carteira-convenio">Carteira Convênio</label>
+                            <input maxlength="12" type="text" class="form-control" id="editar-carteira-convenio" name="carteira_convenio_paci">
+                        </div>
+
                     <div class="form-group">
                         <label for="editar-telefone">Telefone</label>
                         <input type="text" 

@@ -23,7 +23,8 @@ class PersonController extends Controller
             'cidade' => 'required|string|max:100',
             'responsavel' => 'string|max:54',
             'cpf_responsavel' => 'string|max:14',
-            'fk_convenio_paci' => 'nullable|string'
+            'fk_convenio_paci' => 'nullable|string',
+            'carteira_convenio_paci' => 'nullable|string'
 
         ]);
 
@@ -38,6 +39,7 @@ class PersonController extends Controller
             $paciente->responsavel_paci = $request->input('responsavel');
             $paciente->cpf_responsavel_paci = $request->input('cpf_responsavel');
             $paciente->fk_convenio_paci = $request->input('fk_convenio_paci');
+            $paciente->carteira_convenio_paci = $request->carteira_convenio_paci->input('carteira_convenio_paci');
 
 
 
