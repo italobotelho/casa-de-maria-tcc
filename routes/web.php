@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
+Route::get('/agenda', function () {
+    return view('Agenda/agenda');
+});
+
 // Rota para o profissional (medico)
 Route::get('/profissional', [MedicoController::class, 'index'])->name('medicos.index');
 
