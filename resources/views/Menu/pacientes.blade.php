@@ -79,11 +79,11 @@
                                     data-nome="{{ $paciente->nome_paci }}" 
                                     data-email="{{ $paciente->email_paci }}" 
                                     data-data-nasci="{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('Y-m-d') }}" 
-                                    data-convenio="{{ $paciente->convenio->nome_conv }}" 
+                                    data-convenio-id="{{ $paciente->fk_convenio_paci }}"
                                     data-telefone="{{ $paciente->telefone_paci }}" 
                                     data-cpf="{{ $paciente->cpf_paci }}" 
                                     data-cidade="{{ $paciente->nome_cidade }}" 
-                                    data-responsavel="{{ $paciente->responsavel_paci }}" 
+                                    data-responsavel="{{ $paciente->responsavel_paci }}"        
                                     data-cpf-responsavel="{{ $paciente->cpf_responsavel_paci }}">
                                     Editar
                                 </button>

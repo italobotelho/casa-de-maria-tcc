@@ -46,8 +46,7 @@ $(document).ready(function () {
         var cidade = $(this).data('cidade');
         var responsavel = $(this).data('responsavel');
         var cpfResponsavel = $(this).data('cpf-responsavel');
-        var convenio = $(this).data('convenio'); 
-        console.log(convenio);
+        var convenioId = $(this).data('convenio-id'); // Adicione esta linha
 
         // Preenche os campos do formulário
         $('#editar-id').val(id);
@@ -60,13 +59,8 @@ $(document).ready(function () {
         $('#editar-responsavel').val(responsavel);
         $('#editar-cpf-responsavel').val(cpfResponsavel);
         
-       
-        console.log($('#fk_convenio_paci'));
-        
-
-
-
-
+        // Selecione o convênio correto
+        $('#fk_convenio_paci').val(convenioId); // Adicione esta linha
 
         // Verifica se a pessoa é maior de idade
         var birthDate = new Date(dataNasci);
@@ -83,8 +77,6 @@ $(document).ready(function () {
             $('#editar-cpf-responsavel').closest('.form-group').hide();
             $('#editar-responsavel').prop('required', false);
             $('#editar-cpf-responsavel').prop('required', false);
-            $('#editar-responsavel').remove(); // Remove o campo do formulário
-            $('#editar-cpf-responsavel').remove(); // Remove o campo do formulário
         } else {
             $('#editar-responsavel').closest('.form-group').show();
             $('#editar-cpf-responsavel').closest('.form-group').show();
@@ -95,6 +87,7 @@ $(document).ready(function () {
         $('#editarPacienteModal').modal('show');
     });
 });
+
 
 $.ajaxSetup({
     headers: {

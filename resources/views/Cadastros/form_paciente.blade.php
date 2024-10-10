@@ -78,7 +78,7 @@
             <!-- Carteira do Convênio -->
             <div class="form-group" id="carteira-convenio-field">
                 <label for="carteira_convenio_paci">Carteira do Convênio</label>
-                <input maxlength="12" type="number" class="form-control" id="carteira_convenio_paci" name="carteira_convenio_paci" value="{{ old('carteira_convenio_paci') }}" required>
+                <input maxlength="12" type="text    " class="form-control" id="carteira_convenio_paci" name="carteira_convenio_paci" value="{{ old('carteira_convenio_paci') }}" required>
             </div>
 
             <!-- Error and Success Messages -->
