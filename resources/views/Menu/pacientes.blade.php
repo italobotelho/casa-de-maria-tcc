@@ -179,12 +179,12 @@
                     <div class="form-group">
                         <label for="fk_convenio_paci">Convênio</label>
                         <select name="fk_convenio_paci" id="fk_convenio_paci">
-                            @foreach($convenios as $convenio)
+                            {{-- @foreach($convenios as $convenio)
                                 <option value="{{ $convenio->pk_id_conv }}" 
                                     @if($convenio->pk_id_conv === $paciente->fk_convenio_paci) selected @endif>
                                     {{ $convenio->nome_conv }}
                                 </option>
-                            @endforeach
+                            @endforeach --}}
                         </select>
                         
                     </div>

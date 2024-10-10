@@ -9,7 +9,11 @@ use App\Models\Convenio;
 class PersonController extends Controller
 {
 
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function update(Request $request)
     {
         // Validação
@@ -52,10 +56,7 @@ class PersonController extends Controller
     }
 
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    
 
     public function ListarConvenio() // Nome do método corrigido
     {
@@ -75,7 +76,6 @@ class PersonController extends Controller
 
     public function index()
     {
-
         $pacientes = Paciente::with('convenio')->get();
         $convenios = Convenio::all(); // Recupera todos os convênios
         return view('/Menu/pacientes', ['pacientes' => $pacientes, 'convenios' => $convenios]);
