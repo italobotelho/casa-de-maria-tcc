@@ -5,14 +5,10 @@ use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\PersonController;
 use Illuminate\Support\Facades\Route;
 
-// Rota para autenticação do usuário via método POST
-Route::post('/', [LoginController::class,'auth'])->name('auth.user');
-Route::get('/', [LoginController::class, 'index'])->name('login.page');
 
-Route::get('/menu', function () {
-    return view('Menu/menu'); // Substitua isso pela lógica correta para a sua página inicial
-})->middleware('auth');
-
+Route::get('/', function () {
+    return view('auth/login');
+});
 
 Route::get('/layout', function () {
     return view('Layout/layout');
@@ -57,3 +53,7 @@ Route::get('/pacientes', [PersonController::class, 'index'])->name('pacientes.in
 
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
