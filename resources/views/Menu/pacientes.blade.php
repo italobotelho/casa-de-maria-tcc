@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Seus Pacientes</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 
 <style>
     #convenio-suggestions {
@@ -33,11 +34,7 @@
 
 </head>
 <body>
-<<<<<<< HEAD
    {{-- testanddoo --}}
-=======
-   {{-- 12234 --}}
->>>>>>> botao-editar
  
    <a href="form_paciente">CADASTRAR PACIENTE</a>
 
@@ -177,18 +174,7 @@
                         <label for="editar-data-nasci">Data de Nascimento</label>
                         <input type="date" class="form-control" id="editar-data-nasci" name="data_nasci" required>
                     </div>
-<<<<<<< HEAD
-                    <div class="form-group">
-                        <label for="fk_convenio_paci">Convênio</label>
-                        <select name="fk_convenio_paci" id="fk_convenio_paci">
-                            {{-- @foreach($convenios as $convenio)
-                                <option value="{{ $convenio->pk_id_conv }}" 
-                                    @if($convenio->pk_id_conv === $paciente->fk_convenio_paci) selected @endif>
-                                    {{ $convenio->nome_conv }}
-                                </option>
-                            @endforeach --}}
-                        </select>
-=======
+
 
                         <div class="form-group">
                             <label for="fk_convenio_paci">Convênio</label>
@@ -206,7 +192,7 @@
                             <label for="editar-carteira-convenio">Carteira do Convênio:</label>
                             <input type="text" maxlength="255" id="editar-carteira-convenio" name="carteira_convenio">
                           </div>
->>>>>>> botao-editar
+
                         
 
                     <div class="form-group">

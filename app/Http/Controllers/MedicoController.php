@@ -12,12 +12,40 @@ class MedicoController extends Controller
         $this->middleware('auth');
     }
 
+    public function update(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:medicos,pk_crm_med',
+            'nome' => 'required|string|max:255',
+            'especialidade' => 'required|string|max:255',
+            'telefone' => 'required|string|max:15',
+            'email' => 'required|email|max:255',
+        ]);
+    
+        // Atualize o médico
+        $medico = Medico::find($request->id);
+        $medico->nome_med = $request->nome;
+        $medico->especialidade1_med = $request->especialidade;
+        $medico->telefone_med = $request->telefone;
+        $medico->email_med = $request->email;
+        $medico->save();
+    
+        return response()->json(['success' => true, 'message' => 'Médico atualizado com sucesso!']);
+    }
+
+
+
     public function index()
     {
         $medicos = Medico::all();
         return view('Menu/profissional', ['medicos' => $medicos]);
     }
 
+    public function edit($pk_crm_med)
+{
+    $medico = Medico::find($pk_crm_med);
+    return view('Cadastros.form_medico_edit', compact('medico'));
+}
 
 
     public function store(Request $request)

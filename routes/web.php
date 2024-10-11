@@ -72,3 +72,11 @@ Route::post('/convenios', [ConvenioController::class, 'store'])->name('convenios
 Route::get('/convenios/{pk_id_conv}/edit', [ConvenioController::class, 'edit'])->name('convenios.edit');
 Route::patch('/convenios/{pk_id_conv}', [ConvenioController::class, 'update'])->name('convenios.update');
 Route::delete('/convenios/{pk_id_conv}', [ConvenioController::class, 'destroy'])->name('convenios.destroy');
+
+
+
+// Rota para o formulário de edição de médico
+Route::get('/medicos', [MedicoController::class, 'edit'])->name('medico.edit');
+
+// Rota para atualizar os dados de um médico
+Route::post('/update-medico', [MedicoController::class, 'update'])->name('medico.update');
