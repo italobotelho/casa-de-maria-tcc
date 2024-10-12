@@ -1,20 +1,8 @@
-@extends('Layout/configuracoes')
+<!-- resources/views/procedimentos/create.blade.php -->
+@extends('layouts.app')
 
-@section('nav-procedimentos')
-<li class="nav-item">
-    <a class="nav-link" aria-current="page" href="gerais">Gerais</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="procedimentos">Procedimentos</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" aria-current="page" href="convenios">Convênios</a>
-  </li>
-@endsection
-
-@section('main-configuracoes')
-    <!-- resources/views/procedimentos/create.blade.php -->
-
+@section('content')
+@include('navbar-config')
 <div class="modal-content">
     <div class="modal-header">
         <h5 class="modal-title">Cadastrar Novo Procedimento</h5>

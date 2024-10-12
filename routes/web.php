@@ -17,10 +17,6 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
-Route::get('/agenda', function () {
-    return view('Agenda/agenda');
-});
-
 // Rota para o profissional (medico)
 Route::get('/profissional', [MedicoController::class, 'index'])->name('medicos.index');
 
@@ -78,3 +74,5 @@ Route::post('/convenios', [ConvenioController::class, 'store'])->name('convenios
 Route::get('/convenios/{pk_id_conv}/edit', [ConvenioController::class, 'edit'])->name('convenios.edit');
 Route::patch('/convenios/{pk_id_conv}', [ConvenioController::class, 'update'])->name('convenios.update');
 Route::delete('/convenios/{pk_id_conv}', [ConvenioController::class, 'destroy'])->name('convenios.destroy');
+
+

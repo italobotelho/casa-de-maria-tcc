@@ -1,18 +1,8 @@
-@extends('Layout/configuracoes')
+@extends('layouts.app')
 
-@section('nav-gerais')
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="gerais">Gerais</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" aria-current="page" href="procedimentos">Procedimentos</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" aria-current="page" href="convenios">Convênios</a>
-  </li>
-@endsection
+@section('content')
+@include('navbar-config')
 
-@section('main-configuracoes')
         <div class="h-100">
             <h2 class="mt-3 fs-4">DADOS DA CLÍNICA</h2>
             <form class="row g-3" method="POST" action="{{ route('clinica.store') }}" id="clinica">
@@ -82,10 +72,11 @@
             </form>
     </div> {{-- fim da container --}}
 @endsection
-@section('scripts')
+
+{{-- @section('scripts')
 <script src="{{ asset('js/validate-cnpj.js') }}"></script>
 <script src="{{ asset('js/phone-format.js') }}"></script>
 <script src="{{ asset('js/validate-email.js') }}"></script>
 <script src="{{ asset('js/cep.js') }}"></script>
 <script src="{{ asset('js/validate-cep.js') }}"></script>
-@endsection
+@endsection --}}

@@ -1,22 +1,9 @@
 {{-- resources/views/convenios/edit.blade.php --}}
 
-@extends('Layout/configuracoes')
+@extends('layouts.app')
 
-@section('nav-convenios')
-<li class="nav-item">
-    <a class="nav-link " aria-current="page" href="gerais">Gerais</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" aria-current="page" href="procedimentos">Procedimentos</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="convenios">Convênios</a>
-  </li>
-    
-@endsection
-
-@section('main-configuracoes')
-
+@section('content')
+@include('navbar-config')
 <h2>Editar Convênio</h2>
 
 <form action="{{ route('convenios.update', ['pk_id_conv' => $convenio->pk_id_conv]) }}" method="post">

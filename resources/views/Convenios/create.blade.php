@@ -1,21 +1,9 @@
 {{-- resources/views/convenios/create.blade.php --}}
 
-@extends('Layout/configuracoes')
+@extends('layouts.app')
 
-@section('nav-convenios')
-<li class="nav-item">
-    <a class="nav-link " aria-current="page" href="gerais">Gerais</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" aria-current="page" href="procedimentos">Procedimentos</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="convenios">Convênios</a>
-  </li>
-    
-@endsection
-
-@section('main-configuracoes')
+@section('content')
+@include('navbar-config')
     <h2>Cadastro de Convênio</h2>
 
     <form method="POST" action="{{ route('convenios.store') }}">
