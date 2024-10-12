@@ -1,9 +1,8 @@
 {{-- resources/views/convenios/edit.blade.php --}}
 
-@extends('layouts.app')
+@extends('layouts.app-navbar-configuracoes')
 
 @section('content')
-@include('navbar-config')
 <h2>Editar Convênio</h2>
 
 <form action="{{ route('convenios.update', ['pk_id_conv' => $convenio->pk_id_conv]) }}" method="post">

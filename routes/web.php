@@ -54,9 +54,9 @@ Route::post('/form_paciente', [PersonController::class, 'store'])->name('pacient
 
 // Rotas da Tela Configurações Gerais
 
-Route::get('/gerais', 'App\Http\Controllers\ClinicaController@index')->name('clinica.index');
-Route::post('/gerais', 'App\Http\Controllers\ClinicaController@store')->name('clinica.store');
-Route::patch('/gerais', 'App\Http\Controllers\ClinicaController@update')->name('clinica.update');
+Route::get('/clinica', 'App\Http\Controllers\ClinicaController@index')->name('clinica.index');
+Route::post('/clinica', 'App\Http\Controllers\ClinicaController@store')->name('clinica.store');
+Route::patch('/clinica', 'App\Http\Controllers\ClinicaController@update')->name('clinica.update');
 
 // Rotas da Tela Configurações Procedimentos
 Route::get('/procedimentos', [ProcedimentoController::class, 'index'])->name('procedimentos.index');

@@ -1,5 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-navbar-configuracoes')
 
 @section('content')
-@include('navbar-config')
 @endsection

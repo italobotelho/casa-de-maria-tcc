@@ -1,9 +1,8 @@
 {{-- resources/views/convenios/create.blade.php --}}
 
-@extends('layouts.app')
+@extends('layouts.app-navbar-configuracoes')
 
 @section('content')
-@include('navbar-config')
     <h2>Cadastro de Convênio</h2>
 
     <form method="POST" action="{{ route('convenios.store') }}">

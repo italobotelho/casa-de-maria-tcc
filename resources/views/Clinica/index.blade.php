@@ -1,7 +1,7 @@
-@extends('layouts.app')
+{{-- resources/views/clinica/index.blade.php --}}
+@extends('layouts.app-navbar-configuracoes')
 
 @section('content')
-@include('navbar-config')
 
         <div class="h-100">
             <h2 class="mt-3 fs-4">DADOS DA CLÍNICA</h2>

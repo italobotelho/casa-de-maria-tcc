@@ -1,22 +1,8 @@
 {{-- resources/views/convenios/index.blade.php --}}
 
-@extends('layouts.app')
-
-{{-- @section('nav-convenios')
-<li class="nav-item">
-    <a class="nav-link " aria-current="page" href="gerais">Gerais</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" aria-current="page" href="procedimentos">Procedimentos</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="convenios">Convênios</a>
-  </li>
-    
-@endsection --}}
+@extends('layouts.app-navbar-configuracoes')
 
 @section('content')
-@include('navbar-config')
     <a href="{{ route('convenios.create') }}">Cadastrar Novo Convenio</a>
     
     <h2>CONVÊNIOS</h2>

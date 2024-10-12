@@ -1,8 +1,7 @@
 <!-- resources/views/procedimentos/index.blade.php -->
-@extends('layouts.app')
+@extends('layouts.app-navbar-configuracoes')
 
 @section('content')
-@include('navbar-config')
 <h2>PROCEDIMENTOS</h2>
 
 <!-- Button trigger modal -->
