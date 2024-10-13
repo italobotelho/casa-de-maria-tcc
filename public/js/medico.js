@@ -97,3 +97,26 @@ $('#editarMedicoModal').on('hidden.bs.modal', function () {
     $(this).removeData('bs.modal');
     $('#formEditarMedico')[0].reset();
 });
+
+
+    
+// Função para aplicar máscara de telefone
+function aplicarMascaraTelefone(input) {
+    let telefone = input.value.replace(/\D/g, ''); // Remove tudo o que não é dígito
+    if (telefone.length <= 10) {
+    
+    } else {
+        telefone = telefone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3'); // Para números de 11 dígitos (móvel)
+    }
+    input.value = telefone;
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Aplica a máscara no campo de telefone
+    const telefoneInput = document.getElementById('telefone_med');
+    if (telefoneInput) {
+        telefoneInput.addEventListener('input', function () {
+            aplicarMascaraTelefone(telefoneInput);
+        });
+    }
+});
