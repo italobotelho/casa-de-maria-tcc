@@ -26,8 +26,8 @@
             <!-- Telefone -->
                 <div class="form-group">
                     <label for="telefone_med">Telefone:</label>
-                    <input maxlength="13" type="text" class="form-control" id="telefone_med" name="telefone_med" value="{{ old('telefone_med') }}" required>
-
+                    <input maxlength="15" type="text" class="form-control" id="telefone_med" name="telefone_med"
+                        value="{{ old('telefone_med') }}" required>
                 </div>
 
                 <!-- Email -->
@@ -90,11 +90,9 @@
             </form>
         </div>
 
-
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
         <script src="js/medico.js"></script>
-
 
 
 

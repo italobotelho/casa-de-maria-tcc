@@ -52,7 +52,7 @@ class MedicoController extends Controller
     {
         $request->validate([
             'nome_med' => 'required|string|max:54',
-            'telefone_med' => 'required|string|max:12',
+            'telefone_med' => 'required|string|max:15',
             'uf_med' => 'required|string|max:18',
             'email_med' => 'required|email',
             'especialidade1_med' => 'required|string|max:40',

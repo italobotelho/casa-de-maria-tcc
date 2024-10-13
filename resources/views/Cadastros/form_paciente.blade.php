@@ -206,35 +206,26 @@
         });
 
 
-// Função para aplicar a máscara de telefone
-function aplicarMascaraTelefone(input) {
-    let telefone = input.value.replace(/\D/g, ''); // Remove tudo que não for dígito
+        // Função para aplicar máscara de telefone
+        function aplicarMascaraTelefone(input) {
+            let telefone = input.value.replace(/\D/g, '');
+            telefone = telefone.replace(/(\d{2})(\d)/, '($1) $2');
+            telefone = telefone.replace(/(\d{4})(\d)/, '$1-$2');
+            input.value = telefone;
+        }
 
-    // Máscara para números com 10 dígitos
-    if (telefone.length <= 10) {
-        telefone = telefone.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
-    } 
-    // Máscara para números com 11 dígitos (celular)
-    else {
-        telefone = telefone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-    }
-    input.value = telefone;
-}
+        document.addEventListener('DOMContentLoaded', function () {
+            const cpfInput = document.getElementById('cpf_paci');
+            cpfInput.addEventListener('input', function () {
+                aplicarMascaraCPF(cpfInput);
+            });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const telefoneInput = document.getElementById('telefone_med');
-    
-    if (telefoneInput) {
-        telefoneInput.addEventListener('input', function () {
-            aplicarMascaraTelefone(telefoneInput);  // Aplica máscara enquanto digita
+            // Aplica a máscara no campo de telefone
+            const telefoneInput = document.getElementById('telefone_paci');
+            telefoneInput.addEventListener('input', function () {
+                aplicarMascaraTelefone(telefoneInput);
+            });
         });
-
-        telefoneInput.addEventListener('blur', function () {
-            aplicarMascaraTelefone(telefoneInput);  // Aplica a máscara ao sair do campo
-        });
-    }
-});
-
 
 
        
