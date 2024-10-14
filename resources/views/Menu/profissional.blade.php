@@ -29,45 +29,48 @@
                                 <tr>
                                     <th scope="col">CRM</th>
                                     <th scope="col">Nome</th>
-                                    <th scope="col">Especialidade</th>
+                                    <th scope="col">1 Especialidade</th>
+                                    <th scope="col">2 Especialidade</th>
                                     <th scope="col">Telefone</th>
                                     <th scope="col">Email</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse($medicos as $medico)
-                                    <tr>
-                                        <th scope="row">{{ $medico->pk_crm_med }}</th>
-                                      
-                                            <td>
-                                                <a href="#" class="nome-medico" 
+                                <tr>
+                                    <th scope="row">{{ $medico->pk_crm_med }}</th>
+                                    <td>
+                                        <a href="#" class="nome-medico" 
+                                           data-id="{{ $medico->pk_crm_med }}" 
+                                           data-nome="{{ $medico->nome_med }}" 
+                                           data-especialidade="{{ $medico->especialidade1_med }}" 
+                                           data-especialidade2="{{ $medico->especialidade2_med }}" 
+                                           data-telefone="{{ $medico->telefone_med }}" 
+                                           data-email="{{ $medico->email_med }}">
+                                            {{ $medico->nome_med }}
+                                        </a>
+                                        <button class="btn btn-warning btn-sm editar-medico" 
                                                 data-id="{{ $medico->pk_crm_med }}" 
                                                 data-nome="{{ $medico->nome_med }}" 
                                                 data-especialidade="{{ $medico->especialidade1_med }}" 
+                                                data-especialidade2="{{ $medico->especialidade2_med }}" 
                                                 data-telefone="{{ $medico->telefone_med }}" 
                                                 data-email="{{ $medico->email_med }}">
-                                                {{ $medico->nome_med }}
-                                            </a>
-                                            <button class="btn btn-warning btn-sm editar-medico" 
-                                                    data-id="{{ $medico->pk_crm_med }}" 
-                                                    data-nome="{{ $medico->nome_med }}" 
-                                                    data-especialidade="{{ $medico->especialidade1_med }}" 
-                                                    data-telefone="{{ $medico->telefone_med }}" 
-                                                    data-email="{{ $medico->email_med }}">
-                                                Editar
-                                            </button>
-                                            </td>
-                                                                                <td>{{ $medico->especialidade1_med }}</td>
-                                        <td>{{ $medico->telefone_med }}</td>
-                                        <td>{{ $medico->email_med }}</td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="5" class="text-center fs-4">
-                                            Nenhum médico cadastrado
-                                        </td>
-                                    </tr>
-                                @endforelse
+                                            Editar
+                                        </button>
+                                    </td>
+                                    <td>{{ $medico->especialidade1_med }}</td>
+                                    <td>{{ $medico->especialidade2_med }}</td>
+                                    <td>{{ $medico->telefone_med }}</td>
+                                    <td>{{ $medico->email_med }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="text-center fs-4">
+                                        Nenhum médico cadastrado
+                                    </td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -92,7 +95,8 @@
             </div>
             <div class="modal-body">
                 <p><strong>Nome:</strong> <span id="nome-medico"></span></p>
-                <p><strong>Especialidade:</strong> <span id="especialidade"></span></p>
+                <p><strong> 1 Especialidade:</strong> <span id="especialidade"></span></p>
+                <p><strong> 2 Especialidade:</strong> <span id="especialidade2"></span></p>
                 <p><strong>Telefone:</strong> <span id="telefone"></span></p>
                 <p><strong>Email:</strong> <span id="email"></span></p>
             </div>
@@ -106,9 +110,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title" id="editarMedicoModalLabel">Editar Médico</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+
             </div>
             <form action="{{ route('medico.update') }}" id="formEditarMedico">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -123,8 +125,12 @@
                         <input type="text" class="form-control" id="editar-especialidade" name="especialidade" required>
                     </div>
                     <div class="form-group">
+                        <label for="editar-especialidade2">2ª Especialidade</label>
+                        <input type="text" class="form-control" id="editar-especialidade2" name="especialidade2">
+                    </div>
+                    <div class="form-group">
                         <label for="editar-telefone">Telefone</label>
-                        <input type="text" class="form-control" id="editar-telefone" name="telefone" required>
+                        <input type="text" maxlength="15" class="form-control" id="editar-telefone" name="telefone" required>
                     </div>
                     <div class="form-group">
                         <label for="editar-email">Email</label>

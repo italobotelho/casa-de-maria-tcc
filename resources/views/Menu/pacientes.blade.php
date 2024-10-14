@@ -134,7 +134,7 @@
                 <p><strong>Nome:</strong> <span id="nome-paciente"></span></p>
                 <p><strong>Data de Nascimento:</strong> <span id="data-nascimento"></span></p>
                 <p><strong>Convênio:</strong><span id="convenio"></span></p>
-                <p><strong>Carteira do Convênio:</strong><span id="carteira_convenio"></span></p> <!-- Verifique se este ID está correto -->
+                <p><strong>Carteira do Convênio:</strong><span id="carteira_convenio"></span></p>
                 <p><strong>Telefone:</strong> <span id="telefone"></span></p>
                 <p><strong>CPF:</strong><span id="cpf"></span></p>
                 <p><strong>Cidade:</strong><span id="cidade"></span></p>

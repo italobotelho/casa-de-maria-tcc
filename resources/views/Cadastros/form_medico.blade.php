@@ -51,11 +51,12 @@
                         required>
                 </div>
 
+               
                 <!-- ESPECIALIDADE -->
                 <div>
                     <label for="especialidade2_med">2° Especialidade:</label>
                     <input maxlength="40"  type="text" name="especialidade2_med" id="especialidade2_med"
-                        value="{{ old('especialidade2_med') }}" required>
+                        value="{{ old('especialidade2_med') }}">
                 </div>
                 {{-- crm --}}
                 <div>
