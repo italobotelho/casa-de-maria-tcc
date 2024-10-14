@@ -2,6 +2,8 @@
 
 @extends('layouts.app-navbar-configuracoes')
 
+@section('title', 'CONFIGURAÇÕES') <!-- Define o título específico -->
+
 @section('content')
     <a href="{{ route('convenios.create') }}">Cadastrar Novo Convenio</a>
     

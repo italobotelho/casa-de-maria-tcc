@@ -23,39 +23,33 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light navbar-personalizada shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/home') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <img src="{{ asset('img/logo.png') }}" alt="{{ config('app.name', 'Laravel') }}" width="15" height="">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>   
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+                    <ul class="navbar-nav w-100 d-flex justify-content-between">
                         <li class="nav-item"><a class="nav-link" href="#">Agenda</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Paciente</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Profissional</a></li>
                         <!-- Add more links here -->
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
                         @guest
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
-
+                
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="#">{{ __('Perfil') }}</a>
                                     <a class="dropdown-item" href="clinica">{{ __('Configurações') }}</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
-
+                
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
@@ -68,6 +62,7 @@
         </nav>
         <main class="vh-100">
             <section class="container h-100 py-4">
+                <h1 class="display-4">@yield('title', 'Título Padrão')</h1> <!-- Título padrão se não definido -->
                 @yield('content')
             </section>
         </main>

@@ -1,6 +1,8 @@
 {{-- resources/views/clinica/index.blade.php --}}
 @extends('layouts.app-navbar-configuracoes')
 
+@section('title', 'CONFIGURAÇÕES') <!-- Define o título específico -->
+
 @section('content')
 
         <div class="h-100">

@@ -1,4 +1,7 @@
+{{-- resources/views/agenda/home.blade.php --}}
 @extends('layouts.app')
+
+@section('title', 'AGENDA') <!-- Define o título específico -->
 
 @section('content')
 <div class="container">
