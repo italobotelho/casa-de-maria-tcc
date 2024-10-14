@@ -4,5 +4,5 @@
 
 @section('content')
     @include('partials.navbar-configuracoes')
-    @yield('content')
+    @yield('sub-content')
 @endsection

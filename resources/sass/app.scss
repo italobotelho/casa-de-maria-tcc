@@ -7,10 +7,19 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
-// Custom CSS
+// Customs CSS
 .navbar-personalizada {
     background-color: $primary;
     .navbar-brand, .nav-link {
       color: #fff;
     }
+}
+.nav-link-config {
+  position: relative; /* Posição relativa para que a linha fique acima da borda */
+  bottom: -10px; /* Deslocamento para baixo para que a linha fique acima da borda */
+  z-index: 1; /* Z-index para que a linha fique acima da borda */  
+}
+
+.nav-link.active-line {
+  border-bottom: 2px solid #000; /* Cor da linha */
 }

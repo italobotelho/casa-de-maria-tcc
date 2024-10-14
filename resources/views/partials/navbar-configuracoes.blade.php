@@ -1,16 +1,16 @@
-<!-- resources/views/partials/navbar.blade.php -->
+<!-- resources/views/partials/navbar-configuracoes.blade.php -->
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light border rounded-top ">
     <div class="container">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav d-flex justify-content-around w-100">
             <li class="nav-item {{ Request::is('clinica*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('clinica.index') }}">Clinica <span class="sr-only">(current)</span></a>
-            </li>
+                <a class="nav-link nav-link-config {{ Request::is('clinica*') ? 'active-line' : '' }}" href="{{ route('clinica.index') }}">Clinica</a>
+            </li> 
             <li class="nav-item {{ Request::is('convenios*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('convenios.index') }}">Convenios</a>
+                <a class="nav-link nav-link-config {{ Request::is('convenios*') ? 'active-line' : '' }}" href="{{ route('convenios.index') }}">Convenios</a>
             </li>
             <li class="nav-item {{ Request::is('procedimentos*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('procedimentos.index') }}">Procedimentos</a>
+                <a class="nav-link nav-link-config {{ Request::is('procedimentos*') ? 'active-line' : '' }}" href="{{ route('procedimentos.index') }}">Procedimentos</a>
             </li>
         </ul>
     </div>

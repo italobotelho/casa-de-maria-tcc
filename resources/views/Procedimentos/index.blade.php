@@ -1,7 +1,9 @@
 <!-- resources/views/procedimentos/index.blade.php -->
 @extends('layouts.app-navbar-configuracoes')
 
-@section('content')
+@section('title', 'CONFIGURAÇÕES') <!-- Define o título específico -->
+
+@section('sub-content')
 <h2>PROCEDIMENTOS</h2>
 
 <!-- Button trigger modal -->

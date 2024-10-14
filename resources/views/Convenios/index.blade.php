@@ -4,7 +4,7 @@
 
 @section('title', 'CONFIGURAÇÕES') <!-- Define o título específico -->
 
-@section('content')
+@section('sub-content')
     <a href="{{ route('convenios.create') }}">Cadastrar Novo Convenio</a>
     
     <h2>CONVÊNIOS</h2>

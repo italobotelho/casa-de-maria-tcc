@@ -1,7 +1,9 @@
 <!-- resources/views/procedimentos/create.blade.php -->
 @extends('layouts.app-navbar-configuracoes')
 
-@section('content')
+@section('title', 'CONFIGURAÇÕES') <!-- Define o título específico -->
+
+@section('sub-content')
 <div class="modal-content">
     <div class="modal-header">
         <h5 class="modal-title">Cadastrar Novo Procedimento</h5>

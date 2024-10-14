@@ -2,7 +2,9 @@
 
 @extends('layouts.app-navbar-configuracoes')
 
-@section('content')
+@section('title', 'CONFIGURAÇÕES') <!-- Define o título específico -->
+
+@section('sub-content')
     <h2>Cadastro de Convênio</h2>
 
     <form method="POST" action="{{ route('convenios.store') }}">

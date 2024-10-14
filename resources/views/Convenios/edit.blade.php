@@ -2,7 +2,9 @@
 
 @extends('layouts.app-navbar-configuracoes')
 
-@section('content')
+@section('title', 'CONFIGURAÇÕES') <!-- Define o título específico -->
+
+@section('sub-content')
 <h2>Editar Convênio</h2>
 
 <form action="{{ route('convenios.update', ['pk_id_conv' => $convenio->pk_id_conv]) }}" method="post">
