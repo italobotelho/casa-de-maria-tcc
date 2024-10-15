@@ -9,15 +9,20 @@ use App\Models\Convenio;
 
 class ConvenioController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $convenios = Convenio::all();
         return view('convenios.index', compact('convenios'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        return view('convenios.create');
+        return view('convenios.create'); // Create a new view for the modal form
     }
 
     public function store(Request $request)
@@ -40,14 +45,15 @@ class ConvenioController extends Controller
     public function edit($pk_id_conv)
     {
         $convenio = Convenio::find($pk_id_conv);
-        return view('convenios.edit', compact('convenio'));
+        return view('convenios.edit', compact('convenios'));
     }
-
+    
     public function update(Request $request, $pk_id_conv)
     {
-        $convenio = Convenio::where('pk_id_conv', $pk_id_conv)->first();
-        $convenio->fill($request->all());
+        $convenio = Convenio::find($pk_id_conv);
+        $convenio->nome_conv = $request->input('nome_conv');
+        $convenio->ans_conv = $request->input('ans_conv');
         $convenio->save();
-        return redirect()->route('convenios.index')->with('success', 'Convênio atualizado com sucesso!');
+        return redirect()->route('convenios.index');
     }
 }

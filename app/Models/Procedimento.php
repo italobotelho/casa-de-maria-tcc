@@ -9,13 +9,7 @@ use Carbon\Carbon;
 
 class Procedimento extends Model
 {
-    protected $primaryKey = 'pk_cod_proc'; // Adicionei a chave primária
-
-    protected $keyType = 'string';
-
-    protected $casts = [
-        'tempo_proc' => 'string',
-    ];
+    protected $table = 'procedimentos';
 
     protected $fillable = [
         'nome_proc',
@@ -24,20 +18,12 @@ class Procedimento extends Model
         'fk_crm_med',
     ];
 
-    public $incrementing = true;
+    protected $primaryKey = 'pk_cod_proc'; // Adicionei a chave primária
 
-    public function getTempoProcAttribute($value)
-    {
-        return Carbon::createFromFormat('H:i', $value)->format('i:s');
-    }
+    protected $keyType = 'string';
 
-    public function medico()
-    {
-        return $this->belongsTo(Medico::class, 'fk_crm_med', 'pk_crm_med');
-    }
+    protected $casts = [
+        'tempo_proc' => 'string',
+    ];
 
-    public function medicos()
-    {
-        return $this->belongsToMany(Medico::class, 'procedimento_medico', 'fk_cod_proc', 'fk_crm_med');
-    }
 }

@@ -12,15 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('procedimentos', function (Blueprint $table) {
-            $table->increments('pk_cod_proc');
+            $table->id('pk_cod_proc');
             $table->unsignedInteger('fk_crm_med');
-            $table->foreign('fk_crm_med')->references('pk_crm_med')->on('medico');
+            $table->foreign('fk_crm_med')->references('pk_crm_med')->on('medicos');
             $table->string('descricao_proc', 100);
             $table->time('tempo_proc');
             $table->string('nome_proc', 50);
             $table->timestamps();
-
-            Schema::dropIfExists('procedimentos');
         });
     }
 

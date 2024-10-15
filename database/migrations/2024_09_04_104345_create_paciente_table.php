@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('paciente', function (Blueprint $table) {
+        Schema::create('pacientes', function (Blueprint $table) {
             $table->increments('pk_cod_paci'); // Primary key, auto-incrementing
 
             // Foreign key reference

@@ -1,6 +1,8 @@
-@extends('Layout/layout')
+@extends('layouts.app')
 
-@section('main')
+@section('title', 'PROFISSIONAL')
+
+@section('content')
 
 <h1>PROFISSIONAL</h1>
 

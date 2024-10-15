@@ -10,7 +10,7 @@ class Medico extends Model
     use HasFactory;
 
     // Define a tabela associada a esta model
-    protected $table = 'medico';
+    protected $table = 'medicos';
 
     // Define a chave primária da tabela
     protected $primaryKey = 'pk_crm_med';

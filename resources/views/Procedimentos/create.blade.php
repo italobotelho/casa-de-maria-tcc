@@ -1,73 +1,37 @@
-<!-- resources/views/procedimentos/create.blade.php -->
-@extends('layouts.app-navbar-configuracoes')
-
-@section('title', 'CONFIGURAÇÕES') <!-- Define o título específico -->
-
-@section('sub-content')
-<div class="modal-content">
-    <div class="modal-header">
-        <h5 class="modal-title">Cadastrar Novo Procedimento</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <form method="POST" action="{{ route('procedimentos.store') }}">
+<!-- Modal -->
+<div class="modal fade" id="ProcedimentoModal" tabindex="-1" aria-labelledby="procedimentoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="procedimentoModalLabel">Cadastro de Procedimento</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="{{route('procedimentos.store')}}" method="post">
             @csrf
+            <label for="inputNomeProcedimento" class="form-label">Procedimento</label>
+            <input type="text" class="form-control" id="nome_proc" name="nome_proc" required>
 
-            <div>
-                <label for="nome_proc">Nome do Procedimento:</label>
-                <input type="text" id="nome_proc" name="nome_proc" required maxlength="50" required>
-            </div>
-            
-            <div>
-                <label for="descricao_proc">Descrição do Procedimento:</label>
-                <textarea id="descricao_proc" name="descricao_proc" required maxlength="100" required></textarea>
-            </div>
-            
-            <div>
-                <label for="tempo_proc">Tempo do Procedimento:</label>
-                <input type="time" id="tempo_proc" name="tempo_proc" required>
-            </div>
-            
-            <!-- resources/views/procedimentos/create.blade.php -->
+            <label for="inputDescricaoProcedimento" class="form-label">Descrição</label>
+            <input type="text" class="form-control" id="descricao_proc" name="descricao_proc" required>
 
-            <div>
-                <label for="fk_crm_med">Médico:</label>
-                <select multiple id="fk_crm_med" name="fk_crm_med[]" required>
-                    @foreach($medicos as $medico)
-                        <option value="{{ $medico->pk_crm_med }}">{{ $medico->nome_med }}</option>
-                    @endforeach
-                  </select>
+            <label for="inputDuracaoProcedimento" class="form-label">Duração Média</label>
+            <input type="time" class="form-control" id="tempo_proc" name="tempo_proc" step="60" required>
+
+            <label for="inputProfissionaisProcedimento" class="form-label">Profissionais que atendem</label>
+            <select class="form-control" id="fk_crm_med" name="fk_crm_med" required>
+              <option value="">Selecione um médico</option>
+              @foreach($medicos as $medico)
+                  <option value="{{ $medico->pk_id_med }}">{{ $medico->nome_med }}</option>
+              @endforeach
+          </select>
+
             </div>
-            
-            <button type="submit">Cadastrar</button>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          <button type="submit" class="btn btn-primary">Salvar</button>
         </form>
-
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        </div>
+      </div>
     </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-primary">Salvar</button>
-    </div>
-</div>
-@endsection
-
-@section('scripts')
-<script>
-    $(document).ready(function() {
-        $('#mySelect').multiselect({
-        multiple: true,
-        selectAll: true
-        });
-    });
-</script>
-@endsection
+  </div>

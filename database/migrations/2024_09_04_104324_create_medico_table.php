@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('medico', function (Blueprint $table) {
+        Schema::create('medicos', function (Blueprint $table) {
             $table->unsignedInteger('pk_crm_med')->primary();
             $table->string('especialidade1_med', 40);
             $table->string('especialidade2_med', 40)->nullable();

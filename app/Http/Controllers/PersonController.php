@@ -14,6 +14,13 @@ class PersonController extends Controller
         $this->middleware('auth');
     }
     
+    public function index()
+    {
+        $pacientes = Paciente::with('convenio')->get();
+        $convenios = Convenio::all(); // Recupera todos os convênios
+        return view('pacientes.pacientes', ['pacientes' => $pacientes, 'convenios' => $convenios]);
+    }
+
     public function update(Request $request)
     {
         // Validação
@@ -72,15 +79,6 @@ class PersonController extends Controller
         }
         return response()->json($convenio);
     }
-
-
-    public function index()
-    {
-        $pacientes = Paciente::with('convenio')->get();
-        $convenios = Convenio::all(); // Recupera todos os convênios
-        return view('/Menu/pacientes', ['pacientes' => $pacientes, 'convenios' => $convenios]);
-    }
-
 
     public function store(Request $request)
     {

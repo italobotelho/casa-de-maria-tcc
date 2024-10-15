@@ -15,10 +15,8 @@ class MedicoController extends Controller
     public function index()
     {
         $medicos = Medico::all();
-        return view('Menu/profissional', ['medicos' => $medicos]);
+        return view('medicos.index', compact('medicos'));
     }
-
-
 
     public function store(Request $request)
     {
@@ -51,6 +49,6 @@ class MedicoController extends Controller
 
         $medico->save();
 
-        return redirect()->route('medico.store')->with('success', 'Medico cadastrado com sucesso!');
+        return redirect()->route('medicos.store')->with('success', 'Medico cadastrado com sucesso!');
     }
 }

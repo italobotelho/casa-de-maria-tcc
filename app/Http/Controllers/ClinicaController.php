@@ -7,6 +7,11 @@ use App\Models\Clinica;
 
 class ClinicaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $clinica = Clinica::first(); // retrieve the first clinica record

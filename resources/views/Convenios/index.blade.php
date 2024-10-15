@@ -5,16 +5,23 @@
 @section('title', 'CONFIGURAÇÕES') <!-- Define o título específico -->
 
 @section('sub-content')
-    <a href="{{ route('convenios.create') }}">Cadastrar Novo Convenio</a>
-    
+
     <h2>CONVÊNIOS</h2>
 
-    <table>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ConvenioModal">
+    Cadastrar Novo Convênio
+    </button>
+
+    @include('convenios.create')
+
+    <table class="table table-bordered table-responsive">
         <thead>
             <tr>
-                <th>Nome do Convenio</th>
-                <th>ANS Convenio</th>
-                <th>Ações</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Registro ANS</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Status</th>
             </tr>
         </thead>
         <tbody>
@@ -23,13 +30,16 @@
                 <td>{{ $convenio->nome_conv }}</td>
                 <td>{{ $convenio->ans_conv }}</td>
                 <td>
-                    <a href="{{ route('convenios.edit', ['pk_id_conv' => $convenio->pk_id_conv]) }}">Editar</a>
+                    <a href="#edit{{$convenio->pk_id_conv}}" data-bs-toggle="modal" class="btn btn-success">Editar</a>
+                </td>
+                <td>
                     <form action="{{ route('convenios.destroy', ['pk_id_conv' => $convenio->pk_id_conv]) }}" method="post">
                         @csrf
                         @method('DELETE')
                         <button type="submit">Excluir</button>
                     </form>
                 </td>
+                @include('convenios.edit')
             </tr>
         @endforeach
         </tbody>

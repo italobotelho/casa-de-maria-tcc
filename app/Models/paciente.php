@@ -10,7 +10,7 @@ class Paciente extends Model
     use HasFactory;
 
     // Define a tabela associada a esta model
-    protected $table = 'paciente';
+    protected $table = 'pacientes';
 
     // Define a chave primária da tabela
     protected $primaryKey = 'pk_cod_paci';

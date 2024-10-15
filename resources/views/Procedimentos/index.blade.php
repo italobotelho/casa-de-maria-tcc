@@ -4,26 +4,44 @@
 @section('title', 'CONFIGURAÇÕES') <!-- Define o título específico -->
 
 @section('sub-content')
-<h2>PROCEDIMENTOS</h2>
+    <h2>PROCEDIMENTOS</h2>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ProcedimentoModal">
+        Cadastrar Novo Convênio
+        </button>
 
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            @include('procedimentos.create', ['medicos' => $medicos])
-        </div>
-    </div>
-</div>
+    @include('procedimentos.create')
 
-<ul>
-    @foreach($procedimentos as $procedimento)
-        <li>{{ $procedimento->nome_proc }} ({{ $procedimento->descricao_proc }})
-          <a href="{{ route('procedimentos.show', $procedimento->pk_cod_proc) }}">Ver detalhes</a>
-        </li>
-    @endforeach
-</ul>
+    <table class="table table-bordered table-responsive">
+        <thead>
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Duração Média</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($procedimentos as $procedimento)
+            <tr>
+                <td>{{ $procedimento->nome_proc }}</td>
+                <td>{{ $procedimento->descricao_proc }}</td>
+                <td>...</td>
+                <td>
+                    <a href="#edit{{$procedimento->pk_cod_proc}}" data-bs-toggle="modal" class="btn btn-success">Editar</a>
+                </td>
+                <td>
+                    <form action="{{ route('procedimentos.destroy', ['pk_cod_proc' => $convenio->pk_cod_proc]) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Excluir</button>
+                    </form>
+                </td>
+                @include('procedimentos.edit')
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
 @endsection

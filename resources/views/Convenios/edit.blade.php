@@ -1,27 +1,32 @@
-{{-- resources/views/convenios/edit.blade.php --}}
+<!-- Edit Modal -->
+<div class="modal fade" id="edit{{$convenio->pk_id_conv}}" tabindex="-1" aria-labelledby="convenioModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="convenioModalLabel">Edição de Convênio</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="{{ route('convenios.update', ['pk_id_conv' => $convenio->pk_id_conv]) }}" method="post">
+            @csrf
+            @method('PUT')
 
-@extends('layouts.app-navbar-configuracoes')
+            
 
-@section('title', 'CONFIGURAÇÕES') <!-- Define o título específico -->
+            <label for="inputNomeConvenio" class="form-label">Convênio</label>
+            <input type="text" class="form-control" id="nome_conv" name="nome_conv" value="{{ $convenio->nome_conv }}" required>
 
-@section('sub-content')
-<h2>Editar Convênio</h2>
+            <label for="inputANSConvenio" class="form-label">Registro ANS</label>
+            <input type="text" class="form-control" id="ans_conv" name="ans_conv" value="{{ $convenio->ans_conv }}" required>
 
-<form action="{{ route('convenios.update', ['pk_id_conv' => $convenio->pk_id_conv]) }}" method="post">
-    @csrf
-    @method('PATCH')
+            <input type="hidden" name="pk_id_conv" value="{{ $convenio->pk_id_conv }}">
 
-    <div class="form-group">
-        <label for="nome_conv">Nome do Convênio</label>
-        <input type="text" id="nome_conv" name="nome_conv" class="form-control" value="{{ $convenio->nome_conv }}" required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+        </div>
+      </div>
     </div>
-
-    <div class="form-group">
-        <label for="ans_conv">Registro ANS</label>
-        <input type="text" id="ans_conv" name="ans_conv" class="form-control" value="{{ $convenio->ans_conv }}" required>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Atualizar Convênio</button>
-</form>
-
-@endsection
+  </div>

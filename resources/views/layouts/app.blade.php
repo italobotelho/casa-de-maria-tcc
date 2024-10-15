@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Casa de Maria') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -34,9 +34,9 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav w-100 d-flex justify-content-between">
-                        <li class="nav-item"><a class="nav-link" href="#">Agenda</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Paciente</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Profissional</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/home') }}">Agenda</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/pacientes') }}">Pacientes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/profissional') }}">Profissionais</a></li>
                         <!-- Add more links here -->
                         @guest
                         @else
@@ -47,7 +47,7 @@
                 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="#">{{ __('Perfil') }}</a>
-                                    <a class="dropdown-item" href="clinica">{{ __('Configurações') }}</a>
+                                    <a class="dropdown-item" href="{{ url('/clinica') }}">{{ __('Configurações') }}</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -67,5 +67,6 @@
             </section>
         </main>
     </div>
+    @yield('scripts')
 </body>
 </html>

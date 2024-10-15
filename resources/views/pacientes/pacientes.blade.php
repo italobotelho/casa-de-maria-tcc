@@ -1,42 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Seus Pacientes</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+@extends('layouts.app')
 
-<style>
-    #convenio-suggestions {
-    position: absolute;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    padding: 10px;
-    width: 200px;
-    z-index: 1000;
-}
+@section('title', 'PACIENTES')
 
-#convenio-suggestions li {
-    padding: 5px;
-    cursor: pointer;
-}
-
-#convenio-suggestions li:hover {
-    background-color: #ccc;
-}
-</style>
-
-
-</head>
-<body>
-   {{-- testanddoo --}}
- 
+@section('content')
+    {{-- testanddoo --}}
     <a href="form_paciente">CADASTRAR PACIENTE</a>
-
 
     <div class="container">
         <div class="row justify-content-center">
@@ -119,7 +87,7 @@
     </div> <!-- fim do container -->
 
  
-    <a href="menu">VOLTAR</a>
+    <a href="{{ url('/home') }}">VOLTAR</a>
   <!-- Remove the duplicate modal -->
 <div class="modal fade" id="pacienteModal" tabindex="-1" role="dialog" aria-labelledby="pacienteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -222,10 +190,28 @@
         </div>
     </div>
 </div>
+@endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-            <script src="js/paciente.js"></script>
+<style>
+    #convenio-suggestions {
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 200px;
+    z-index: 1000;
+}
 
-  
+#convenio-suggestions li {
+    padding: 5px;
+    cursor: pointer;
+}
 
-</body>
-</html>
+#convenio-suggestions li:hover {
+    background-color: #ccc;
+}
+</style>
+
+<script src="js/paciente.js"></script>
