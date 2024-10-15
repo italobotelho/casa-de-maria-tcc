@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+//Rotas Agenda
+Route::get('/load-events', [EventController::class, 'loadEvents'])->name('routeLoadEvents');
+
 // Rotas Login
 Route::get('/', [LoginController::class, 'index'])->name('auth.login');
 
