@@ -5,6 +5,7 @@ use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ClinicaController;
 use App\Http\Controllers\ProcedimentoController;
 use App\Http\Controllers\ConvenioController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
