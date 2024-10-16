@@ -17,7 +17,7 @@ class EventController extends Controller
     public function update(Request $request){
         $event = Event::where('id', $request->id)->first();
 
-        $event->fill($request->all);
+        $event->fill($request->all());
 
         $event->save();
         

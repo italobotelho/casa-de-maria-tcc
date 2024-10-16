@@ -47,8 +47,18 @@ document.addEventListener('DOMContentLoaded', function() {
     eventClick: function(event){
       alert('event Click')
     },
-    eventResize: function(event){
-      alert('event Resize')
+    eventResize: function(element){
+      let start= moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
+      let end= moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
+
+      let newEvent={
+        _method: 'PUT',
+        id: element.event.id,
+        start: start,
+        end: end
+      };
+
+      sendEvent(routeEvents('routeEventUpdate'), newEvent);
     },
     eventSelect: function(event){
       alert('event Select')
