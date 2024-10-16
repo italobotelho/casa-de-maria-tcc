@@ -44,7 +44,8 @@
         <div id='calendar-wrap'>
           <div id='calendar' 
           data-route-load-events="{{ route('routeLoadEvents') }}"
-          data-route-event-update="{{ route('routeEventUpdate') }}">
+          data-route-event-update="{{ route('routeEventUpdate') }}"
+          data-route-event-store="{{ route('routeEventStore') }}">
         </div>
 
       </div>
