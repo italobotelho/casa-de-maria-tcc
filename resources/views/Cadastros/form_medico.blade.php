@@ -6,13 +6,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/cadastro.css')}}">
         <title>Cadastrar Medico</title>
     </head>
 
     <body>
         <div class="container">
             <h1>CADASTRE UM NOVO MEDICO</h1>
-
+<div class="card">
             <form action="{{ route('medico.store') }}" method="POST">
                 @csrf
 
@@ -87,8 +88,9 @@
                 <br>
 
                 <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary">Cadastrar Medico</button>
+                <button type="submit" class="btn ">Cadastrar Medico</button>
             </form>
+            </div>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

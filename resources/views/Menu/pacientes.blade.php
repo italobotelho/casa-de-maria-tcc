@@ -29,6 +29,35 @@
 #convenio-suggestions li:hover {
     background-color: #ccc;
 }
+table {
+       
+       width: 100%;
+       border-collapse: collapse; /* Remove espaços entre células */
+       margin-top: 20px;
+       
+   }
+
+   th, td {
+       font-size:20px;
+       padding: 12px;
+       text-align: left;
+       
+       
+   }
+
+   th {
+       background-color: #795127; /* Cor do cabeçalho */
+       color: white; /* Texto do cabeçalho em branco */
+   }
+
+   /* Linhas alternadas da tabela */
+   tbody tr:nth-child(odd) {
+       background-color: #f9f9f9; /* Cor para linhas ímpares */
+   }
+
+   tbody tr:nth-child(even) {
+       background-color: #ffffff; /* Cor para linhas pares */
+   }
 </style>
 
 
@@ -43,7 +72,7 @@
            <div class="col-lg-8 mt-4"></div>
            <div class="col-lg-8">
                <div class="card shadow">
-                   <div class="card-header bg-success text-white d-flex justify-content-between">
+                   <div class="card-header text-white d-flex justify-content-between">
                        <h1 class="fw-bold">Pacientes</h1>
                    </div>
                    <div class="card-body p-4">

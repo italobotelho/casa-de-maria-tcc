@@ -13,6 +13,47 @@
 @endsection
 
 @section('main-configuracoes')
+
+  <style>
+    /* Ajuste da barra de navegação */
+  .nav-item a {
+      color: #333;
+      text-decoration: none;
+      padding: 10px 15px;
+      display: block;
+      text-transform: uppercase;
+  }
+
+  .nav-item a.active {
+      border-bottom: 2px solid #f0ad4e;
+      color: #f0ad4e;
+  }
+
+  .nav-item a:hover {
+      color: #ec971f;
+  }
+
+    button{
+      background-color:#EABF8A;
+      border-radius: 13px;
+      font-size:20px;
+      font-weight: 200;
+      border:2px;
+      border-color:#653C11;
+      width: 100px;
+      height: 50px;
+      margin:10px;
+    }
+
+    .modal-content {
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+
+}
+  </style>
+  <div class="modal-content">
         <div class="h-100">
             <h2 class="mt-3 fs-4">DADOS DA CLÍNICA</h2>
             <form class="row g-3" method="POST" action="{{ route('clinica.store') }}" id="clinica">
@@ -43,11 +84,13 @@
               </div>
 
               <h2 class="fs-4">ENDEREÇO</h2>
+              <div>
                 <div class="col-md-3">
                   <label for="inputCEP" class="form-label">CEP</label>
                   <input type="text" class="form-control" id="cep_clin" name="cep_clin" value="{{ old('cep_clin', $clinica?->cep_clin) }}" size="9" maxlength="8" onblur="pesquisacep(this.value);" oninput="this.value = formatCEP(this.value);">
-                </div>
+                </div class="form-group">
                 <h5>*INFORME O CEP PARA O PREENCHIMENTO AUTOMÁTICO DOS DADOS</h5>
+                </div>
               <div class="col-md-6">
                 <label for="inputLogradouro" class="form-label">LOGRADOURO</label>
                 <input type="text" class="form-control" id="rua_clin" name="rua_clin" value="{{ old('rua_clin', $clinica?->rua_clin) }}" size="60" maxlength="60">
@@ -77,9 +120,10 @@
                     <input type="text" class="form-control" id="cod_ibge_clin" name="cod_ibge_clin" value="{{ old('cod_ibge_clin', $clinica?->cod_ibge_clin) }}" size="7" maxlength="7">
                 </div>
               <div class="col-12">
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="submit">Salvar</button>
               </div>
             </form>
+            </div>
     </div> {{-- fim da container --}}
 @endsection
 @section('scripts')

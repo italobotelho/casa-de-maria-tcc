@@ -16,9 +16,18 @@
 @endsection
 
 @section('main-configuracoes')
+<style>
+    .modal-content {
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+
+}
+</style>
 
 <h2>Editar Convênio</h2>
-
+<div class="modal-content">
 <form action="{{ route('convenios.update', ['pk_id_conv' => $convenio->pk_id_conv]) }}" method="post">
     @csrf
     @method('PATCH')
@@ -35,5 +44,6 @@
 
     <button type="submit" class="btn btn-primary">Atualizar Convênio</button>
 </form>
+</div>
 
 @endsection

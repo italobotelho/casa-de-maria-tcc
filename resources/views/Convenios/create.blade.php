@@ -16,8 +16,17 @@
 @endsection
 
 @section('main-configuracoes')
-    <h2>Cadastro de Convênio</h2>
+<style>
+    .modal-content {
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #ddd;
 
+}
+</style>
+    <h2>Cadastro de Convênio</h2>
+<div class="modal-content">
     <form method="POST" action="{{ route('convenios.store') }}">
         @csrf
 
@@ -33,4 +42,5 @@
 
         <button type="submit" class="btn btn-primary">Cadastrar Convênio</button>
     </form>
+    </div>
 @endsection

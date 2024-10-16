@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Cadastrar Paciente</title>
+    <link rel="stylesheet" href="{{ asset('css/cadastro.css')}}">
 </head>
 
 <body>
@@ -103,6 +104,7 @@
             <!-- Submit Button -->
             <button type="submit" class="btn btn-primary">Cadastrar Paciente</button>
         </form>
+        
     </div>
 
     <br>
