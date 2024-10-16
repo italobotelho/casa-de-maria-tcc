@@ -17,6 +17,9 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 //Rotas Agenda
 Route::get('/load-events', [EventController::class, 'loadEvents'])->name('routeLoadEvents');
+Route::put('/event-update', [EventController::class, 'update'])->name('event.update');
+
+
 
 // Rotas Login
 Route::get('/', [LoginController::class, 'index'])->name('auth.login');
@@ -69,3 +72,13 @@ Route::post('/convenios', [ConvenioController::class, 'store'])->name('convenios
 Route::get('/convenios/edit', [ConvenioController::class, 'edit'])->name('convenios.edit');
 Route::put('/convenios/{pk_id_conv}', [ConvenioController::class, 'update'])->name('convenios.update');
 Route::delete('/convenios/{pk_id_conv}', [ConvenioController::class, 'destroy'])->name('convenios.destroy');
+
+
+
+// Rota para o formulário de cadastro de paciente
+Route::get('/form_paciente', function () {
+    return view('pacientes/form_paciente');
+});
+Route::get('/form_medico', function () {
+    return view('medicos/form_medico');
+});

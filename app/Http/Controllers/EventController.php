@@ -13,4 +13,8 @@ class EventController extends Controller
 
         return response()->json($events);
     }
+
+    public function update(Request $request){
+        var_dump($request->all());
+    }
 }
