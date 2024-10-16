@@ -17,7 +17,8 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 //Rotas Agenda
 Route::get('/load-events', [EventController::class, 'loadEvents'])->name('routeLoadEvents');
-Route::put('/event-update', [EventController::class, 'update'])->name('event.update');
+Route::put('/event-update', [EventController::class, 'update'])->name('routeEventUpdate');
+
 
 
 

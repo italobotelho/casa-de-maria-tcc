@@ -15,6 +15,12 @@ class EventController extends Controller
     }
 
     public function update(Request $request){
-        var_dump($request->all());
+        $event = Event::where('id', $request->id)->first();
+
+        $event->fill($request->all);
+
+        $event->save();
+        
+        return response()->json(true);
     }
 }

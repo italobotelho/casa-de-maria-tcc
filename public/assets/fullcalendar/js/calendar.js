@@ -36,15 +36,14 @@ document.addEventListener('DOMContentLoaded', function() {
       let end= moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
 
       let newEvent={
-        method: 'PUT',
-        id:element.event.id,
-        start:start,
+        _method: 'PUT',
+        id: element.event.id,
+        start: start,
         end: end
+      };
 
-      }
+      sendEvent(routeEvents('routeEventUpdate'), newEvent);
     },
-
-
     eventClick: function(event){
       alert('event Click')
     },
