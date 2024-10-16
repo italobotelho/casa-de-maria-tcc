@@ -7,11 +7,14 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+
+          <div id="menssage"></div>
+          
             <form id="formEvent">
                 <div class="mb-3">
                     <label for="title" class="form-label">Título</label>
-                    <input type="text" class="form-control" name="title" id="title">
-                    <input type="text" name="id">
+                      <input type="text" class="form-control" name="title" id="title">
+                      <input type="hidden" name="id">
                 </div>
                 <div class="mb-3">
                     <label for="start" class="form-label">Data/hora Inicial</label>

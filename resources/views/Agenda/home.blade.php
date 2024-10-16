@@ -1,4 +1,5 @@
 {{-- resources/views/agenda/home.blade.php --}}
+<title>agendamento</title>
 
 @extends('layouts.app')
 

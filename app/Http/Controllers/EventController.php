@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Http\Request\EventRequest;
 
 class EventController extends Controller
 {
@@ -14,13 +15,13 @@ class EventController extends Controller
         return response()->json($events);
     }
 
-    public function store(Request $request){
+    public function store(EventRequest $request){
         Event::create($request->all());
 
         return response()->json(true);
     }
 
-    public function update(Request $request){
+    public function update(EventRequest $request){
         $event = Event::where('id', $request->id)->first();
 
         $event->fill($request->all());
