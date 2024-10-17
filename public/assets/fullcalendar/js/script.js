@@ -7,6 +7,19 @@ $(function () {
         },
     });
 
+    $(".deleteEvent").click(function() {
+        let id = $("#modalCalendar input[name='id']").val();
+
+        let Event = {
+            id: id,
+            _method: 'DELETE',
+        }
+
+        let route = routeEvents('routeEventDelete');
+
+        sendEvent(route, Event);
+    })
+
     $(".saveEvent").click(function () {
         let id = $("#modalCalendar input[name='id']").val();
 
@@ -37,10 +50,10 @@ $(function () {
         };
 
         let route;
-        if (id == "") {
-            route = routeEvents("routeEventStore");
+        if (id == '') {
+            route = routeEvents('routeEventStore');
         } else {
-            route = routeEvents("routeEventUpdate");
+            route = routeEvents('outeEventUpdate');
             Event.id = id;
             Event._method = "PUT";
         }

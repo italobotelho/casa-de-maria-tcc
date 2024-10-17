@@ -30,4 +30,10 @@ class EventController extends Controller
         
         return response()->json(true);
     }
+
+    public function destroy(Request $request){
+        Event::where('id', $request->id)->delete();
+
+        return response()->json(true);
+    }
 }

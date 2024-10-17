@@ -19,6 +19,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/load-events', [EventController::class, 'loadEvents'])->name('routeLoadEvents');
 Route::put('/event-update', [EventController::class, 'update'])->name('routeEventUpdate');
 Route::post('/event-store', [EventController::class, 'store'])->name('routeEventStore');
+Route::delete('/event-destroy', [EventController::class, 'destroy'])->name('routeEventDelete');
 
 
 // Rotas Login
