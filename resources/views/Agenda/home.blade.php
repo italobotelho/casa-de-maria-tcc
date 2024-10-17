@@ -1,6 +1,4 @@
 {{-- resources/views/agenda/home.blade.php --}}
-<title>agendamento</title>
-
 @extends('layouts.app')
 
 @section('css')
@@ -15,34 +13,7 @@
   @include('agenda.modal-calendar')
     <div id='wrap'>
 
-        <div id='external-events'>
-          <h4>Draggable Events</h4>
-    
-          <div id='external-events-list'>
-            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-              <div class='fc-event-main'>Meu evento 1</div>
-            </div>
-            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-              <div class='fc-event-main'>Meu evento 2</div>
-            </div>
-            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-              <div class='fc-event-main'>Meu evento 3</div>
-            </div>
-            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-              <div class='fc-event-main'>Meu evento 4</div>
-            </div>
-            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-              <div class='fc-event-main'>Meu evento 5</div>
-            </div>
-          </div>
-    
-          <p>
-            <input type='checkbox' id='drop-remove' />
-            <label for='drop-remove'>remove after drop</label>
-          </p>
-        </div>
-
-        <div id='calendar-wrap'>
+        <div>
           <div id='calendar' 
           data-route-load-events="{{ route('routeLoadEvents') }}"
           data-route-event-update="{{ route('routeEventUpdate') }}"

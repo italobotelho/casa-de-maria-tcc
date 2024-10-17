@@ -1,16 +1,6 @@
 // calendar.js
 document.addEventListener('DOMContentLoaded', function() {
 
-  var containerEl = document.getElementById('external-events-list');
-  new FullCalendar.Draggable(containerEl, {
-    itemSelector: '.fc-event',
-    eventData: function(eventEl) {
-      return {
-        title: eventEl.innerText.trim()
-      }
-    }
-  });
-
   var calendarEl = document.getElementById('calendar');
   var calendar = new FullCalendar.Calendar(calendarEl, {
     headerToolbar: {
@@ -25,15 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
     editable: true,
     droppable: true,
     
-     // this allows things to be dropped onto the calendar
-    drop: function(arg) {
-      // is the "remove after drop" checkbox checked?
-      if (document.getElementById('drop-remove').checked) {
-        // if so, remove the element from the "Draggable Events" list
-        arg.draggedEl.parentNode.removeChild(arg.draggedEl);
-      }
-    },
-
     eventDrop: function(element){
 
       let start= moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
@@ -41,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       let newEvent={
         _method: 'PUT',
+        title: element.event.title,
         id: element.event.id,
         start: start,
         end: end
@@ -83,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       let newEvent={
         _method: 'PUT',
+        title: element.event.title,
         id: element.event.id,
         start: start,
         end: end
