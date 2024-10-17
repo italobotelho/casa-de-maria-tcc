@@ -19,21 +19,19 @@ class EventRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
-    {
-        return [
-            'title'=> 'required|min:3'
+    // public function rules(): array
+    // {
+    //     return [
+    //         'title'=> 'required|min:3'
             
-        ];
-    }
+    //     ];
+    // }
 
-    public function message(){
-        return[
-            'title.required' => 'Prencha o campo Titulo',
-            'title.min' => 'Titulo necessita de pelo menos 03 caracteres',
-            
-
-
-        ];
-    }
+    // public function message(): array    
+    // {
+    //     return[
+    //         'title.required' => 'Prencha o campo Titulo',
+    //         'title.min' => 'Titulo necessita de pelo menos 03 caracteres',       
+    //     ];
+    // }
 }
