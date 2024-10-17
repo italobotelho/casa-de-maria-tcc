@@ -8,7 +8,7 @@
         </div>
         <div class="modal-body">
 
-          <div id="menssage"></div>
+          <div id="message"></div>
           
             <form id="formEvent">
                 <div class="mb-3">

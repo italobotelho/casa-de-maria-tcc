@@ -11,27 +11,33 @@ class EventRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     *  @return array
      */
-    // public function rules(): array
-    // {
-    //     return [
-    //         'title'=> 'required|min:3'
-            
-    //     ];
-    // }
 
-    // public function message(): array    
-    // {
-    //     return[
-    //         'title.required' => 'Prencha o campo Titulo',
-    //         'title.min' => 'Titulo necessita de pelo menos 03 caracteres',       
-    //     ];
-    // }
+    public function rules(): array
+    {
+        return [
+            'title' => 'required|min:3',
+            'start' => 'date_format:Y-m-d H:i:s|before:end',
+            'end' => 'date_format:Y-m-d H:i:s|after:start',
+        ];
+    }
+
+    public function messages(): array    
+    {
+        return[
+            'title.required' => 'Prencha o campo Titulo',
+            'title.min' => 'Titulo necessita de pelo menos 03 caracteres',
+            'start.date_format' => 'Preencha uma data inicial com valor válido!',
+            'start.before' => 'A data/hora inicial deve ser menor que a data final',
+            'end.date_format' => 'Preencha uma data final com valor válido!',
+            'end.after' => 'A data/hora final deve ser maior que a data inicial',
+        ];
+    }
 }

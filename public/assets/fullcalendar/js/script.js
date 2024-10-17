@@ -42,7 +42,7 @@ $(function () {
         } else {
             route = routeEvents("routeEventUpdate");
             Event.id = id;
-            Event.method = "PUT";
+            Event._method = "PUT";
         }
 
         sendEvent(route, Event);
@@ -61,26 +61,32 @@ function sendEvent(route, data_) {
             }
         },
 
-        // error: function (json) {         
-        //     let responseJSON = json.responseJSON.errors;
-        //     $("#message").html(loadErrors(responseJSON));
+        error: function (json) {         
+            let responseJSON = json.responseJSON.errors;
+            $("#message").html(loadErrors(responseJSON));
 
-        // },
+        },
     });
 }
 
-// function loadErrors(response) {
-//     let boxAlert = '<div class="alert alert-danger">';
+function loadErrors(response) {
+    let boxAlert = `<div class="alert alert-danger">`;
 
-//     for (let fields in response) {
-//         boxAlert += "<span>${response[fields]}</span><br>";
-//     }
-//     boxAlert += "</div>";
-//     return boxAlert.replace("<br>");
-// }
+    for (let fields in response) {
+        boxAlert += `<span>${response[fields]}</span><br>`;
+    }
+
+    boxAlert += `</div>`;
+
+    return boxAlert.replace(/\,/g, "<br>");
+}
 
 function routeEvents(route) {
     return document.getElementById("calendar").dataset[route];
+}
+
+function clearMessages(element){
+    $(element).text('');
 }
 
 function resetForm(form) {
