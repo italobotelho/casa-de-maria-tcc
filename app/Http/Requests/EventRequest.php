@@ -20,14 +20,14 @@ class EventRequest extends FormRequest
      *  @return array
      */
 
-    public function rules(): array
-    {
-        return [
-            'title' => 'required|min:3',
-            'start' => 'date_format:Y-m-d H:i:s|before:end',
-            'end' => 'date_format:Y-m-d H:i:s|after:start',
-        ];
-    }
+     public function rules(): array
+     {
+         return [
+             'title' => 'required|min:3',
+             'start' => 'required|date_format:H:i', // Validar apenas a hora
+             'end' => 'required|date_format:H:i|after:start', // Validar apenas a hora
+         ];
+     }
 
     public function messages(): array    
     {

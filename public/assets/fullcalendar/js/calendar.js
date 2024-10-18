@@ -31,32 +31,35 @@ document.addEventListener('DOMContentLoaded', function() {
       sendEvent(routeEvents('routeEventUpdate'), newEvent);
     },
 
-    eventClick: function(element){
+    eventClick: function(element) {
+    clearMessages('#message');
+    resetForm("#formEvent");
 
-      clearMessages('#message');
-      resetForm("#formEvent");
+    // Atualiza o título do modal com a data do evento
+    let startDate = moment(element.event.start).format("DD/MM/YYYY"); // Formato da data
+    $("#modalCalendar #titleModal").text('Alteração de agendamento para ' + startDate);
 
-      $("#modalCalendar").modal('show');
-      $("#modalCalendar #titleModal").text('Alterar Evento');
-      $("#modalCalendar button.deleteEvent").css("display","flex");
+    $("#modalCalendar").modal('show');
+    $("#modalCalendar button.deleteEvent").css("display", "flex");
 
-      let id = element.event.id;
-      $("#modalCalendar input[name='id']").val(id);
+    let id = element.event.id;
+    $("#modalCalendar input[name='id']").val(id);
 
-      let title = element.event.title;
-      $("#modalCalendar input[name='title']").val(title);
+    let title = element.event.title;
+    $("#modalCalendar input[name='title']").val(title);
 
-      let start = moment(element.event.start).format("DD/MM/YYYY HH:mm:ss");
-      $("#modalCalendar input[name='start']").val(start);
+    // Preencher os inputs com a hora do evento
+    let startTime = moment(element.event.start).format("HH:mm"); // Apenas a hora
+    $("#modalCalendar input[name='start']").val(startTime);
 
-      let end = moment(element.event.end).format("DD/MM/YYYY HH:mm:ss");
-      $("#modalCalendar input[name='end']").val(end);
+    let endTime = moment(element.event.end).format("HH:mm"); // Apenas a hora
+    $("#modalCalendar input[name='end']").val(endTime);
 
-      let color = element.event.backgroundColor;
-      $("#modalCalendar input[name='color']").val(color);
+    let color = element.event.backgroundColor;
+    $("#modalCalendar input[name='color']").val(color);
 
-      let description = element.event.extendedProps.description;
-      $("#modalCalendar textarea[name='description']").val(description);
+    let description = element.event.extendedProps.description;
+    $("#modalCalendar textarea[name='description']").val(description);
     },
 
     eventResize: function(element){
@@ -74,28 +77,32 @@ document.addEventListener('DOMContentLoaded', function() {
       sendEvent(routeEvents('routeEventUpdate'), newEvent);
     },
 
-    select: function(element){
+    select: function(element) {
+    clearMessages('#message');
+    resetForm("#formEvent");
 
-      clearMessages('#message');
-      resetForm("#formEvent");
+    // Atualiza o título do modal com a data selecionada
+    let startDate = moment(element.start).format("DD/MM/YYYY"); // Formato da data
+    $("#modalCalendar #titleModal").text('Novo agendamento para ' + startDate);
 
-      $("#modalCalendar").modal('show');
-      $("#modalCalendar #titleModal").text('Adicionar Evento');
-      $("#modalCalendar button.deleteEvent").css("display","none");
+    $("#modalCalendar").modal('show');
+    $("#modalCalendar button.deleteEvent").css("display", "none");
 
-      let start = moment(element.start).format("DD/MM/YYYY HH:mm:ss");
-      $("#modalCalendar input[name='start']").val(start);
+    // Preencher os inputs com a hora selecionada
+    let startTime = moment(element.start).format("HH:mm"); // Apenas a hora
+    $("#modalCalendar input[name='start']").val(startTime);
 
-      let end = moment(element.end).format("DD/MM/YYYY HH:mm:ss");
-      $("#modalCalendar input[name='end']").val(end);
+    let endTime = moment(element.end).format("HH:mm"); // Apenas a hora
+    $("#modalCalendar input[name='end']").val(endTime);
 
-      $("#modalCalendar input[name='color']").val("#6C3D0E");
+    $("#modalCalendar input[name='color']").val("#9D9D9B");
 
-      calendar.unselect();
+    calendar.unselect(); // Desmarcar a seleção
     },
 
     events: routeEvents('routeLoadEvents'),
-});
-calendar.render();
 
+});
+
+calendar.render();
 });
