@@ -21,26 +21,25 @@
                   <input type="hidden" name="id">
                 </div>
 
-                <div class="col-md-4">
-                  <label for="" class="form-label">Local</label>
+                <div class="col-md-6">
+                  <label for="" class="form-label">Profissional</label>
                   <select class="form-select" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
+                    <option selected>Selecione o Profissional</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                   </select>
                 </div>
 
-                <div class="form-check form-switch col col-ms-auto text-center">
+                {{-- <div class="form-check form-switch col col-ms-auto text-center">
                   <label class="form-check-label d-block" for="flexSwitchCheckDefault">Bloqueado</label>
                   <div class="d-flex justify-content-center">
                     <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBlock" data-bs-target="#exampleModalToggle" data-bs-toggle="modalBlock">
                   </div>
-                </div>
+                </div> --}}
                 
-
                 <div class="col-md-6">
-                  <label for="" class="form-label">Profissional</label>
+                  <label for="" class="form-label">Procedimento</label>
                   <select class="form-select" aria-label="Default select example">
                     <option selected>Open this select menu</option>
                     <option value="1">One</option>
@@ -73,27 +72,6 @@
                     <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckRepeate" data-bs-target="#exampleModalToggle" data-bs-toggle="modalRepeate">
                   </div>
                 </div>
-                
-
-                <div class="col-md-6">
-                  <label for="" class="form-label">Procedimento</label>
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                </div>
-
-                <div class="col-md-6">
-                  <label for="" class="form-label">Status</label>
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                </div>
 
                 <div class="col-md-6">
                   <label for="" class="form-label">Convênio do Paciente</label>
@@ -104,11 +82,21 @@
                     <option value="3">Three</option>
                   </select>
                 </div>
+                
+                <div class="col-md-6">
+                  <label for="" class="form-label">Status</label>
+                  <select class="form-select" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
 
-                <div class="col-md-auto">
+                {{-- <div class="col-md-auto">
                     <label for="color" class="form-label">Cor do Evento</label>
                     <input type="color" class="form-control" name="color" id="color">
-                </div>
+                </div> --}}
 
             </form>
           </div>

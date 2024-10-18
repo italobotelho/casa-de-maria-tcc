@@ -11,6 +11,8 @@
 <div class="container">
 
   @include('agenda.modal-calendar')
+  @include('agenda.modal-view-calendar')
+  
     <div id='wrap'>
 
         <div>
@@ -46,7 +48,4 @@
 <script src="{{ asset('assets/fullcalendar/js/script.js') }}"></script>
 <script src="{{ asset('assets/fullcalendar/js/calendar.js') }}"></script>
 
-
 @endsection
-</body>
-</html>
