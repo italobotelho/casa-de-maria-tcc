@@ -13,7 +13,13 @@ class PersonController extends Controller
     {
         $this->middleware('auth');
     }
-    
+    public function buscar(Request $request)
+    {
+        $query = $request->input('query');
+        $pacientes = Paciente::where('nome_paci', 'LIKE', "%{$query}%")->pluck('nome_paci');
+        return response()->json($pacientes);
+    }
+        
     public function index()
     {
         $pacientes = Paciente::with('convenio')->get();

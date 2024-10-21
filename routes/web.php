@@ -42,6 +42,9 @@ Route::post('/form_medico', [MedicoController::class, 'store'])->name('medico.st
 // Rota para listar convênios
 Route::get('/convenio', [PersonController::class, 'ListarConvenio'])->name('convenio.listar');
 // Rota para atualizar os dados de um paciente
+
+
+//PACIENTES
 Route::post('/update-paciente', [PersonController::class, 'update'])->name('paciente.update');
 Route::post('/convenios', 'PersonController@ListarConvenio');
 Route::get('/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
@@ -49,6 +52,8 @@ Route::get('/pacientes', [PersonController::class, 'index'])->name('pacientes.in
 Route::get('/form_paciente', [PersonController::class, 'index'])->name('paciente.index');
 // Rota para armazenar um novo paciente
 Route::post('/form_paciente', [PersonController::class, 'store'])->name('paciente.store');
+Route::get('/pacientes/buscar', [PersonController::class, 'buscar'])->name('pacientes.buscar');
+
 
 // Rotas da Tela Configurações Clinica
 Route::get('/clinica', [ClinicaController::class, 'index'])->name('clinica.index');
