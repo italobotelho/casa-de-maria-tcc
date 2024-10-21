@@ -15,18 +15,16 @@ class EventTableSeeder extends Seeder
     {
         DB::table('events')->insert([
             [
-                'title' => 'Reunião',
+                'title' => 'Maria Cristina da Rocha',
                 'start' => '2024-10-11 13:30:00',
                 'end' => '2024-10-12 14:00:00',
-                'color' => '#c40233',
-                'description' => 'Reunião com cliente'
+                'color' => '#c40233'
             ],
             [
-                'title' => 'Ligar p/ cliente',
+                'title' => 'João Pedro de Sousa',
                 'start' => '2024-10-02',
                 'end' => '2024-10-03',
-                'color' => '#29fdf2',
-                'description' => 'Falar com cliente'
+                'color' => '#29fdf2'
             ]
         ]);
     }

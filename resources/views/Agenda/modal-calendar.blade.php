@@ -15,9 +15,15 @@
 
               <form id="formEvent" class="row g-3">
 
+                <input type="hidden" name="id" id="id">
+
+                <input type="hidden" name="color" id="color" value="#9D9D9B">
+                
+            
+
                 <div class="col-md-6">
-                  <label for="title" class="form-label">Paciente</label>
-                  <input type="text" class="form-control" name="title" id="title" placeholder="Informe o nome, código ou data de nascimento...">
+                  <label for="paciente" class="form-label">Paciente</label>
+                  <input type="text" class="form-control" name="paciente" id="paciente" placeholder="Informe o nome, código ou data de nascimento...">
                   <input type="hidden" name="id">
               </div>
 
@@ -25,9 +31,9 @@
                   <label for="professional" class="form-label">Profissional</label>
                   <select class="form-select" id="professional" aria-label="Default select example">
                       <option selected>Selecione o Profissional</option>
-                      <option value="1">One</option>
+                      {{-- <option value="1">One</option>
                       <option value="2">Two</option>
-                      <option value="3">Three</option>
+                      <option value="3">Three</option> --}}
                   </select>
               </div>
 
@@ -35,11 +41,13 @@
                   <label for="procedure" class="form-label">Procedimento</label>
                   <select class="form-select" id="procedure" aria-label="Default select example">
                       <option selected>Open this select menu</option>
-                      <option value="1">One</option>
+                      {{-- <option value="1">One</option>
                       <option value="2">Two</option>
-                      <option value="3">Three</option>
+                      <option value="3">Three</option> --}}
                   </select>
               </div>
+
+              <input type="hidden" name="eventDate" id="eventDate" value="">
 
               <div class="col-md-2">
                   <label for="start" class="form-label">Hora Inicial</label>
@@ -70,9 +78,9 @@
                   <label for="convenio" class="form-label">Convênio do Paciente</label>
                   <select class="form-select" id="convenio" aria-label="Default select example">
                       <option selected>Open this select menu</option>
-                    <option value="1">One</option>
+                    {{-- <option value="1">One</option>
                     <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="3">Three</option> --}}
                   </select>
                 </div>
 
@@ -80,17 +88,11 @@
                   <label for="status" class="form-label">Status</label>
                   <select class="form-select" id="status" aria-label="Default select example">
                     <option selected>Open this select menu</option>
-                    <option value="1">One</option>
+                    {{-- <option value="1">One</option>
                     <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="3">Three</option> --}}
                   </select>
                 </div>
-
-                {{-- <div class="col-md-auto">
-                    <label for="color" class="form-label">Cor do Evento</label>
-                    <input type="color" class="form-control" name="color" id="color">
-                </div> --}}
-
             </form>
           </div>
         </div>

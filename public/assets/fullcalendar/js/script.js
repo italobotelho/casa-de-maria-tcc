@@ -65,8 +65,6 @@ $(document).ready(function() {
 });
 
 $(function () {
-    // Remover a máscara, pois não será mais necessária
-    // $(".date-time").mask("00/00/0000 00:00:00");
 
     $.ajaxSetup({
         headers: {
@@ -89,27 +87,40 @@ $(function () {
 
     $(".saveEvent").click(function () {
         let id = $("#modalCalendar input[name='id']").val();
-
-        let title = $("#modalCalendar input[name='title']").val();
-
-        // Apenas obter a hora, sem a data
-        let start = $("#modalCalendar input[name='start']").val(); // Aqui não precisamos de formatação
-        let end = $("#modalCalendar input[name='end']").val(); // Aqui também
-
-        let color = $("#modalCalendar input[name='color']").val();
-
-        let description = $(
-            "#modalCalendar textarea[name='description']"
-        ).val();
-
+        let title = $("#modalCalendar input[name='paciente']").val();
+    
+        // Obter a data armazenada no campo oculto
+        let selectedDate = $("#modalCalendar input[name='eventDate']").val();
+        let startTime = $("#modalCalendar input[name='start']").val();
+        let endTime = $("#modalCalendar input[name='end']").val();
+    
+        // Verificar se todos os campos estão preenchidos
+        if (!selectedDate || !startTime || !endTime) {
+            console.error("Data ou horário não definidos.");
+            return; // Interrompe a execução se algum valor estiver ausente
+        }
+    
+        let color = $("#modalCalendar input[name='color']").val() || "#9D9D9B"; // Default color
+    
+        // Combinar a data com as horas, especificando o formato
+        let start = moment(`${selectedDate}T${startTime}`, "YYYY-MM-DDTHH:mm").format("YYYY-MM-DD HH:mm:ss");
+        let end = moment(`${selectedDate}T${endTime}`, "YYYY-MM-DDTHH:mm").format("YYYY-MM-DD HH:mm:ss");
+    
+        // Verifique se a data e a hora foram criadas corretamente
+        if (!moment(start, "YYYY-MM-DD HH:mm:ss", true).isValid()) {
+            console.error("Data/hora de início inválida:", start);
+        }
+        if (!moment(end, "YYYY-MM-DD HH:mm:ss", true).isValid()) {
+            console.error("Data/hora de término inválida:", end);
+        }
+    
         let Event = {
             title: title,
             start: start,
             end: end,
-            color: color,
-            description: description,
+            color: color
         };
-
+    
         let route;
         if (id == '') {
             route = routeEvents('routeEventStore');
@@ -118,7 +129,7 @@ $(function () {
             Event.id = id;
             Event._method = "PUT";
         }
-
+    
         sendEvent(route, Event);
     });
 });
@@ -165,6 +176,4 @@ function clearMessages(element){
 
 function resetForm(form) {
     $(form)[0].reset();
-}
-
-
+}   

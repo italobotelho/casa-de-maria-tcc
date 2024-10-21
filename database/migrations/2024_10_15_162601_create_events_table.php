@@ -17,7 +17,6 @@ return new class extends Migration
             $table->dateTime('start');
             $table->dateTime('end');
             $table->string('color', 7);
-            $table->longText('description')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

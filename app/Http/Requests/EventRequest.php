@@ -21,19 +21,18 @@ class EventRequest extends FormRequest
      */
 
      public function rules(): array
-     {
-         return [
-             'title' => 'required|min:3',
-             'start' => 'required|date_format:H:i', // Validar apenas a hora
-             'end' => 'required|date_format:H:i|after:start', // Validar apenas a hora
-         ];
-     }
+    {
+        return [
+            'title' => 'required',
+            'start' => 'required|date_format:Y-m-d H:i:s|before:end',
+            'end' => 'required|date_format:Y-m-d H:i:s|after:start',
+            'color' => 'required',
+        ];
+    }
 
     public function messages(): array    
     {
         return[
-            'title.required' => 'Prencha o campo Titulo',
-            'title.min' => 'Titulo necessita de pelo menos 03 caracteres',
             'start.date_format' => 'Preencha uma data inicial com valor válido!',
             'start.before' => 'A data/hora inicial deve ser menor que a data final',
             'end.date_format' => 'Preencha uma data final com valor válido!',

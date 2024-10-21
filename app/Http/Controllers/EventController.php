@@ -15,20 +15,35 @@ class EventController extends Controller
         return response()->json($events);
     }
 
-    public function store(EventRequest $request){
-        Event::create($request->all());
-
+    public function store(EventRequest $request)
+    {
+        $event = new Event();
+        $event->title = $request->input('title');
+        $event->start = $request->input('start');
+        $event->end = $request->input('end');
+        $event->color = $request->input('color');
+        
+        $event->save();
+    
         return response()->json(true);
     }
-
-    public function update(EventRequest $request){
-        $event = Event::where('id', $request->id)->first();
-
-        $event->fill($request->all());
-
-        $event->save();
-        
-        return response()->json(true);
+    
+    public function update(EventRequest $request)
+    {
+        $event = Event::find($request->id);
+    
+        if ($event) {
+            $event->title = $request->input('title');
+            $event->start = $request->input('start');
+            $event->end = $request->input('end');
+            $event->color = $request->input('color');
+            
+            $event->save();
+    
+            return response()->json(true);
+        }
+    
+        return response()->json(['error' => 'Evento não encontrado'], 404);
     }
 
     public function destroy(Request $request){
