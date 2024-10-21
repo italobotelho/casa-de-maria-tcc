@@ -20,24 +20,45 @@ document.addEventListener('DOMContentLoaded', function() {
       let end = moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
       let color = element.event.backgroundColor; // Get the color
   
+      // Acesse o procedimento_id corretamente
+      let procedimentoId = element.event.procedimento_id || element.event.extendedProps.procedimento_id;
+  
       let newEvent = {
           _method: 'PUT',
           title: element.event.title,
           id: element.event.id,
           start: start,
           end: end,
-          color: color // Include color in the update
+          color: color, // Include color in the update
+          procedimento_id: procedimentoId // Inclua o procedimento_id na atualização
       };
   
+      // Verifique se o procedimento_id está definido antes de enviar
+      if (!procedimentoId) {
+          console.error('Procedimento ID não está disponível na atualização do evento.');
+          return; // Interrompe a execução se o procedimento_id não estiver disponível
+      }
+  
       sendEvent(routeEvents('routeEventUpdate'), newEvent);
-      },
+    },
 
       eventClick: function(element) {
+        console.log('Evento clicado:', element); // Verifique a estrutura do elemento
+    
+        // Acesse o procedimento_id corretamente
+        let procedimentoId = element.event.procedimento_id || element.event.extendedProps.procedimento_id;
+    
+        if (procedimentoId) {
+            console.log('ID do procedimento:', procedimentoId); // Acesse o procedimento_id
+        } else {
+            console.error('Procedimento ID não está disponível no evento.');
+        }
+    
         clearMessages('#message');
         resetForm("#formEvent");
     
         // Atualiza o título do modal com a data do evento
-        let startDate = moment(element.event.start).format("DD/MM/YYYY"); // Formato da data
+        let startDate = moment(element.event.start).format("DD/MM/YYYY");
         $("#modalCalendar #titleModal").text('Alteração de agendamento para ' + startDate);
     
         $("#modalCalendar").modal('show');
@@ -49,26 +70,28 @@ document.addEventListener('DOMContentLoaded', function() {
         let title = element.event.title;
         $("#modalCalendar input[name='paciente']").val(title);
     
-        // Atualize o campo select com o procedimento associado ao evento
-        $('#procedimento_id').val(element.procedimento_id);
-        
-        // Atualize o formulário com os dados do evento
-        $('#formEvent').find('input[name="procedimento_id"]').val(element.procedimento_id);
-
+        // Verifique aqui se o procedimento_id está definido
+        if (procedimentoId) {
+            $('#procedimento_id').val(procedimentoId);
+            console.log('Procedimento ID selecionado:', procedimentoId);
+        } else {
+            console.error('Procedimento ID não está disponível no evento.');
+        }
+    
         // Preencher os inputs com a hora do evento
-        let startTime = moment(element.event.start).format("HH:mm"); // Apenas a hora
+        let startTime = moment(element.event.start).format("HH:mm");
         $("#modalCalendar input[name='start']").val(startTime);
     
-        let endTime = moment(element.event.end).format("HH:mm"); // Apenas a hora
+        let endTime = moment(element.event.end).format("HH:mm");
         $("#modalCalendar input[name='end']").val(endTime);
     
         // Armazena a data do evento em um campo oculto
         let eventDate = moment(element.event.start).format("YYYY-MM-DD");
         $("#modalCalendar input[name='eventDate']").val(eventDate);
-        
-        let color = element.event.backgroundColor || "#9D9D9B"; // Fallback to default if undefined
+    
+        let color = element.event.backgroundColor || "#9D9D9B";
         $("#modalCalendar input[name='color']").val(color);
-      },
+     },
 
       eventResize: function(element){
         let start= moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");

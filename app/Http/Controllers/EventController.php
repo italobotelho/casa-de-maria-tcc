@@ -10,12 +10,14 @@ use App\Models\Paciente;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
+use Illuminate\Support\Facades\Log;
 
 class EventController extends Controller
 {
     public function loadEvents()
     {
-        $events = Event::with('procedimento')->get(); // Puxa os eventos com os procedimentos relacionados
+        $events = Event::with('procedimento')->get();
+        Log::info('Eventos carregados:', $events->toArray()); // Log para verificar a estrutura dos eventos
         return response()->json($events);
     }
 
@@ -27,16 +29,13 @@ class EventController extends Controller
 
     public function store(EventRequest $request)
     {
+        
         $event = new Event();
         $event->title = $request->input('title');
         $event->start = $request->input('start');
         $event->end = $request->input('end');
         $event->color = $request->input('color');
         $event->procedimento_id = $request->input('procedimento_id');
-    
-        // Puxar o nome do procedimento da tabela procedimentos
-        $procedimento = Procedimento::find($event->procedimento_id);
-        $event->nome_proc = $procedimento ? $procedimento->nome_proc : null; // Adiciona o nome_proc
     
         $event->save();
         return response()->json(true);
@@ -52,10 +51,6 @@ class EventController extends Controller
             $event->end = $request->input('end');
             $event->color = $request->input('color');
             $event->procedimento_id = $request->input('procedimento_id');
-    
-            // Atualiza o nome_proc
-            $procedimento = Procedimento::find($event->procedimento_id);
-            $event->nome_proc = $procedimento ? $procedimento->nome_proc : null;
     
             $event->save();
             return response()->json(true);

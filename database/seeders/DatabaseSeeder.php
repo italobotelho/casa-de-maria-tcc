@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Procedimento;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UsuarioSeeders::class,
+            ProcedimentoSeeder::class,
         ]);
     }
 }

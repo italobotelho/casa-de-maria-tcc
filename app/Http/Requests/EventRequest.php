@@ -34,6 +34,7 @@ class EventRequest extends FormRequest
     public function messages(): array    
     {
         return[
+            'procedimento_id.required' => 'Selecione um procedimento',
             'start.date_format' => 'Preencha uma data inicial com valor válido!',
             'start.before' => 'A data/hora inicial deve ser menor que a data final',
             'end.date_format' => 'Preencha uma data final com valor válido!',

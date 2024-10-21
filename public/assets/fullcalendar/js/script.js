@@ -14,15 +14,17 @@ $(document).ready(function() {
             url: '/get-procedimentos', // URL para o método que retorna os procedimentos
             method: 'GET',
             success: function(data) {
-                let select = $('#procedimento');
+                console.log('Dados retornados da API de procedimentos:', data); // Log para verificar a estrutura dos dados
+                let select = $('#procedimento_id'); // Certifique-se de que o ID está correto
                 select.empty(); // Limpa as opções existentes
                 select.append('<option selected>Selecione um Procedimento</option>'); // Adiciona a opção padrão
                 $.each(data, function(index, procedimento) {
                     select.append('<option value="' + procedimento.pk_cod_proc + '">' + procedimento.nome_proc + '</option>');
                 });
+                console.log('Procedimentos carregados no select:', select.html()); // Log para verificar as opções carregadas
             },
-            error: function() {
-                console.error('Erro ao carregar procedimentos.');
+            error: function(xhr, status, error) {
+                console.error('Erro ao carregar procedimentos:', error); // Log de erro
             }
         });
     });

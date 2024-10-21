@@ -18,8 +18,6 @@
                 <input type="hidden" name="id" id="id">
 
                 <input type="hidden" name="color" id="color" value="#9D9D9B">
-                
-            
 
                 <div class="col-md-6">
                   <label for="paciente" class="form-label">Paciente</label>
