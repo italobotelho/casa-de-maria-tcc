@@ -84,10 +84,10 @@
 </div> {{-- fim da container --}}
 @endsection
 
-{{-- @section('scripts')
+@section('scripts')
 <script src="{{ asset('js/validate-cnpj.js') }}"></script>
 <script src="{{ asset('js/phone-format.js') }}"></script>
 <script src="{{ asset('js/validate-email.js') }}"></script>
 <script src="{{ asset('js/cep.js') }}"></script>
 <script src="{{ asset('js/validate-cep.js') }}"></script>
-@endsection --}}
+@endsection
