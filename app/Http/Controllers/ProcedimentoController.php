@@ -31,18 +31,9 @@ class ProcedimentoController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nome_proc' => 'required',
-            'descricao_proc' => 'required',
-            'tempo_proc' => 'required',
-            'fk_crm_med' => 'required|exists:medicos,pk_crm_med',
-        ]);
-    
         $procedimento = new Procedimento();
         $procedimento->nome_proc = $request->input('nome_proc');
         $procedimento->descricao_proc = $request->input('descricao_proc');
-        $procedimento->tempo_proc = $request->input('tempo_proc');
-        $procedimento->fk_crm_med = $request->input('fk_crm_med');
         $procedimento->save();
     
         return redirect()->route('procedimentos.index')->with('success', 'Procedimento cadastrado com sucesso!');
@@ -51,24 +42,14 @@ class ProcedimentoController extends Controller
     public function edit($pk_cod_proc)
     {
         $procedimento = Procedimento::find($pk_cod_proc);
-        $medicos = Medico::all(); // Busca todos os médicos
         return view('procedimentos.edit', compact('procedimento', 'medicos'));
     }
     
     public function update(Request $request, $pk_cod_proc)
     {
-        $request->validate([
-            'nome_proc' => 'required',
-            'descricao_proc' => 'required',
-            'tempo_proc' => 'required',
-            'fk_crm_med' => 'required|exists:medicos,pk_crm_med',
-        ]);
-    
         $procedimento = Procedimento::find($pk_cod_proc);
         $procedimento->nome_proc = $request->input('nome_proc');
         $procedimento->descricao_proc = $request->input('descricao_proc');
-        $procedimento->tempo_proc = $request->input('tempo_proc');
-        $procedimento->fk_crm_med = $request->input('fk_crm_med');
         $procedimento->save();
     
         return redirect()->route('procedimentos.index');

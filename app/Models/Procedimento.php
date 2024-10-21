@@ -14,16 +14,9 @@ class Procedimento extends Model
     protected $fillable = [
         'nome_proc',
         'descricao_proc',
-        'tempo_proc',
-        'fk_crm_med',
     ];
 
     protected $primaryKey = 'pk_cod_proc'; // Adicionei a chave primária
 
     protected $keyType = 'string';
-
-    protected $casts = [
-        'tempo_proc' => 'string',
-    ];
-
 }

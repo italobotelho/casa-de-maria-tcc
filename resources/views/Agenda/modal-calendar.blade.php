@@ -39,11 +39,11 @@
 
               <div class="col-md-6">
                   <label for="procedure" class="form-label">Procedimento</label>
-                  <select class="form-select" id="procedure" aria-label="Default select example">
-                      <option selected>Open this select menu</option>
-                      {{-- <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option> --}}
+                  <select class="form-select" id="procedimento" name="procedimento_id" aria-label="Default select example">
+                    <option selected>Selecione um Procedimento</option>
+                    @foreach($procedimentos as $procedimento)
+                        <option value="{{ $procedimento->pk_cod_proc }}">{{ $procedimento->nome_proc }}</option>
+                    @endforeach
                   </select>
               </div>
 

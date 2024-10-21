@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\Procedimento;
+
+use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
 
 class EventController extends Controller
@@ -13,6 +15,12 @@ class EventController extends Controller
         $events = Event::all();
 
         return response()->json($events);
+    }
+
+    public function index()
+    {
+        $procedimentos = Procedimento::all(); // Busca todos os procedimentos
+        return view('agenda.home', compact('procedimentos')); // Passa para a view
     }
 
     public function store(EventRequest $request)
@@ -51,4 +59,10 @@ class EventController extends Controller
 
         return response()->json(true);
     }
+
+    public function getProcedimentos()
+{
+    $procedimentos = Procedimento::all();
+    return response()->json($procedimentos);
+}
 }

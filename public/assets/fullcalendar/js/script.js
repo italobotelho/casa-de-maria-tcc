@@ -8,6 +8,25 @@ $(document).ready(function() {
         }
     }
 
+    // Quando o modal for aberto
+    $('#modalCalendar').on('show.bs.modal', function() {
+        $.ajax({
+            url: '/get-procedimentos', // URL para o método que retorna os procedimentos
+            method: 'GET',
+            success: function(data) {
+                let select = $('#procedimento');
+                select.empty(); // Limpa as opções existentes
+                select.append('<option selected>Selecione um Procedimento</option>'); // Adiciona a opção padrão
+                $.each(data, function(index, procedimento) {
+                    select.append('<option value="' + procedimento.pk_cod_proc + '">' + procedimento.nome_proc + '</option>');
+                });
+            },
+            error: function() {
+                console.error('Erro ao carregar procedimentos.');
+            }
+        });
+    });
+
     // Mostrar botões ao clicar no input
     $("#start").focus(function() {
         $("#startButtons").show();
@@ -88,6 +107,8 @@ $(function () {
     $(".saveEvent").click(function () {
         let id = $("#modalCalendar input[name='id']").val();
         let title = $("#modalCalendar input[name='paciente']").val();
+
+        let procedimentoId = $("#modalCalendar select[name='procedimento_id']").val();
     
         // Obter a data armazenada no campo oculto
         let selectedDate = $("#modalCalendar input[name='eventDate']").val();
@@ -118,7 +139,8 @@ $(function () {
             title: title,
             start: start,
             end: end,
-            color: color
+            color: color,
+            procedimento_id: procedimentoId
         };
     
         let route;

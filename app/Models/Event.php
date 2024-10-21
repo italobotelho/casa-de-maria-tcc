@@ -10,7 +10,12 @@ class Event extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['title', 'start', 'end', 'color'];
+    protected $fillable = ['title', 'start', 'end', 'color', 'procedimento_id'];
+
+    public function procedimento()
+    {
+        return $this->belongsTo(Procedimento::class, 'procedimento_id', 'pk_cod_proc');
+    }
 
     public function getStartAttribute($value)
     {

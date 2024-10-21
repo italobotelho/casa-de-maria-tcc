@@ -13,17 +13,20 @@ use Illuminate\Support\Facades\Auth;
 
 // Rotas auth
 Auth::routes();
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+// Rotas Login
+Route::get('/', [LoginController::class, 'index'])->name('auth.login');
 
 //Rotas Agenda
+Route::get('/home', [HomeController::class, 'index'])->name('agenda.home');
+
+// Rotas Eventos Agenda
 Route::get('/load-events', [EventController::class, 'loadEvents'])->name('routeLoadEvents');
 Route::put('/event-update', [EventController::class, 'update'])->name('routeEventUpdate');
 Route::post('/event-store', [EventController::class, 'store'])->name('routeEventStore');
 Route::delete('/event-destroy', [EventController::class, 'destroy'])->name('routeEventDelete');
-
-
-// Rotas Login
-Route::get('/', [LoginController::class, 'index'])->name('auth.login');
+Route::get('/get-procedimentos', [EventController::class, 'getProcedimentos'])->name('getProcedimentos');
+Route::get('/home', [EventController::class, 'index'])->name('agenda.home');
 
 // Rota para o profissional (medico)
 Route::get('/profissional', [MedicoController::class, 'index'])->name('medicos.index');
@@ -59,9 +62,9 @@ Route::get('/procedimentos', [ProcedimentoController::class, 'index'])->name('pr
 Route::get('/procedimentos/create', [ProcedimentoController::class, 'create'])->name('procedimentos.create');
 Route::post('/procedimentos', [ProcedimentoController::class, 'store'])->name('procedimentos.store');
 
-Route::get('/procedimentos/edit', [ConvenioController::class, 'edit'])->name('convenios.edit');
-Route::put('/procedimentos/{pk_cod_proc}', [ConvenioController::class, 'update'])->name('convenios.update');
-Route::delete('/procedimentos', [ConvenioController::class, 'destroy'])->name('convenios.destroy');
+Route::get('/procedimentos/edit', [ConvenioController::class, 'edit'])->name('procedimentos.edit');
+Route::put('/procedimentos/{pk_cod_proc}', [ConvenioController::class, 'update'])->name('procedimentos.update');
+Route::delete('/procedimentos/{pk_cod_proc}', [ProcedimentoController::class, 'destroy'])->name('procedimentos.destroy');
 
 //Rotas da Tela Configurações Convênios
 Route::resource('convenios', ConvenioController::class);

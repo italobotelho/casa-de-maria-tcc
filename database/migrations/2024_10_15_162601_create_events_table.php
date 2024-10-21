@@ -17,6 +17,9 @@ return new class extends Migration
             $table->dateTime('start');
             $table->dateTime('end');
             $table->string('color', 7);
+            $table->unsignedBigInteger('procedimento_id'); // Adiciona a chave estrangeira
+
+            $table->foreign('procedimento_id')->references('pk_cod_proc')->on('procedimentos'); // Define a relação
 
             $table->timestamps();
             $table->softDeletes();
@@ -28,6 +31,9 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('events', function (Blueprint $table) {
+            $table->dropForeign(['procedimento_id']); // Remove a chave estrangeira
+        });
         Schema::dropIfExists('events');
     }
 };
