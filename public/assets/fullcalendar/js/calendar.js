@@ -49,6 +49,12 @@ document.addEventListener('DOMContentLoaded', function() {
         let title = element.event.title;
         $("#modalCalendar input[name='paciente']").val(title);
     
+        // Atualize o campo select com o procedimento associado ao evento
+        $('#procedimento_id').val(element.procedimento_id);
+        
+        // Atualize o formulário com os dados do evento
+        $('#formEvent').find('input[name="procedimento_id"]').val(element.procedimento_id);
+
         // Preencher os inputs com a hora do evento
         let startTime = moment(element.event.start).format("HH:mm"); // Apenas a hora
         $("#modalCalendar input[name='start']").val(startTime);

@@ -27,6 +27,7 @@ class EventRequest extends FormRequest
             'start' => 'required|date_format:Y-m-d H:i:s|before:end',
             'end' => 'required|date_format:Y-m-d H:i:s|after:start',
             'color' => 'required',
+            'procedimento_id' => 'required',
         ];
     }
 

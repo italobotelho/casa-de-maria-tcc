@@ -18,6 +18,7 @@ return new class extends Migration
             $table->dateTime('end');
             $table->string('color', 7);
             $table->unsignedBigInteger('procedimento_id'); // Adiciona a chave estrangeira
+            
 
             $table->foreign('procedimento_id')->references('pk_cod_proc')->on('procedimentos'); // Define a relação
 
