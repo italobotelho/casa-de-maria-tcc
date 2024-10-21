@@ -93,48 +93,59 @@ document.addEventListener('DOMContentLoaded', function() {
         $("#modalCalendar input[name='color']").val(color);
      },
 
-      eventResize: function(element){
-        let start= moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
-        let end= moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
-
-        let newEvent = {
+     eventResize: function(element) {
+      let start = moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
+      let end = moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
+      let color = element.event.backgroundColor; // Obter a cor
+      let procedimentoId = element.event.procedimento_id || element.event.extendedProps.procedimento_id;
+  
+      // Crie o novo evento com todos os campos necessários
+      let newEvent = {
           _method: 'PUT',
           title: element.event.title,
           id: element.event.id,
           start: start,
-          end: end
+          end: end,
+          color: color, // Inclua a cor
+          procedimento_id: procedimentoId // Inclua o procedimento_id
       };
+  
+      // Verifique se o procedimento_id está definido antes de enviar
+      if (!procedimentoId) {
+          console.error('Procedimento ID não está disponível na atualização do evento.');
+          return; // Interrompe a execução se o procedimento_id não estiver disponível
+      }
+  
+      sendEvent(routeEvents('routeEventUpdate'), newEvent);
+    },
 
-        sendEvent(routeEvents('routeEventUpdate'), newEvent);
-      },
+    select: function(element) {
+      clearMessages('#message');
+      resetForm("#formEvent");
+  
+      // Atualiza o título do modal com a data selecionada
+      let startDate = moment(element.start).format("DD/MM/YYYY"); // Formato da data
+      $("#modalCalendar #titleModal").text('Novo agendamento para ' + startDate);
+  
+      $("#modalCalendar").modal('show');
+      $("#modalCalendar button.deleteEvent").css("display", "none");
+  
+      // Preencher os inputs com a hora selecionada
+      let startTime = moment(element.start).format("HH:mm"); // Apenas a hora
+      $("#modalCalendar input[name='start']").val(startTime);
+  
+      let endTime = moment(element.end).format("HH:mm"); // Apenas a hora
+      $("#modalCalendar input[name='end']").val(endTime);
+  
+      // Armazena a data selecionada em um campo oculto
+      $("#modalCalendar input[name='eventDate']").val(moment(element.start).format("YYYY-MM-DD"));
+  
+      $("#modalCalendar input[name='color']").val("#9D9D9B");
+  
+      calendar.unselect(); // Desmarcar a seleção
+    },
 
-      select: function(element) {
-        clearMessages('#message');
-        resetForm("#formEvent");
-    
-        // Atualiza o título do modal com a data selecionada
-        let startDate = moment(element.start).format("DD/MM/YYYY"); // Formato da data
-        $("#modalCalendar #titleModal").text('Novo agendamento para ' + startDate);
-    
-        $("#modalCalendar").modal('show');
-        $("#modalCalendar button.deleteEvent").css("display", "none");
-    
-        // Preencher os inputs com a hora selecionada
-        let startTime = moment(element.start).format("HH:mm"); // Apenas a hora
-        $("#modalCalendar input[name='start']").val(startTime);
-    
-        let endTime = moment(element.end).format("HH:mm"); // Apenas a hora
-        $("#modalCalendar input[name='end']").val(endTime);
-    
-        // Armazena a data selecionada em um campo oculto
-        $("#modalCalendar input[name='eventDate']").val(moment(element.start).format("YYYY-MM-DD"));
-    
-        $("#modalCalendar input[name='color']").val("#9D9D9B");
-    
-        calendar.unselect(); // Desmarcar a seleção
-      },
-
-      events: routeEvents('routeLoadEvents'),
+    events: routeEvents('routeLoadEvents'),
 });
 
 calendar.render();
