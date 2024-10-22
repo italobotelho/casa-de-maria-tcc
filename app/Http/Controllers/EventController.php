@@ -14,10 +14,14 @@ use Illuminate\Support\Facades\Log;
 
 class EventController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function loadEvents()
     {
         $events = Event::with('procedimento')->get();
-        Log::info('Eventos carregados:', $events->toArray()); // Log para verificar a estrutura dos eventos
         return response()->json($events);
     }
 
