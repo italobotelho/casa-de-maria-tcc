@@ -9,11 +9,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-
+    <style>
+      .cad{
+        margin:15px;
+        color:white;
+        background-color:#EABF8A;
+        border-radius:5px;
+        border:none;
+        padding:15px;
+        }
+    </style>
 </head>
 <body>
-    <a href="form_paciente">CADASTRAR PACIENTE</a>
-
+    <br><br>
+    <a class="cad" href="form_paciente">CADASTRAR PACIENTE</a>
+    
 
     <div class="container">
         <div class="row justify-content-center">
@@ -21,8 +31,8 @@
             </div>
             <div class="col-lg-8">
                 <div class="card shadow">
-                    <div class="card-header bg-success text-white d-flex justify-content-between">
-                       <h1 class="fw-bold">Pacientes</h1>
+                    <div class="card-header text-white d-flex justify-content-between">
+                       <h1 class="">Pacientes</h1>
                     </div>
                     <div class="card-body p-4">
                         <table class="table table-striped">
@@ -76,7 +86,7 @@
         </div><!-- fim da row -->
     </div> <!-- fim do container -->
 
-    <a href="menu">VOLTAR</a>
+    <a class="cad" href="menu">VOLTAR</a>
 
 </body>
 </html>
