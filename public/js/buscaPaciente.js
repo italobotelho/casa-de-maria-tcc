@@ -35,11 +35,14 @@ function buscarPacientes(query) {
                 });
                 sugestoesDiv.style.display = 'block'; // Exibe a div de sugestões
             } else {
-                sugestoesDiv.style.display = 'none'; // Esconde a div se não houver sugestões
+                // Se não houver pacientes, exibe a mensagem de "Paciente não cadastrado"
+                sugestoesDiv.innerHTML = '<div class="list-group-item">Paciente não cadastrado</div>';
+                sugestoesDiv.style.display = 'block'; // Exibe a div de sugestões
             }
         })
         .catch(error => console.error('Erro:', error)); // Tratamento de erro na requisição
 }
+
 
 // Função para buscar médicos no modal de agendamento
 function buscarMedico(query) {
@@ -101,7 +104,7 @@ function preencherConvenio(pacienteId) {
 // Função para ocultar sugestões ao clicar fora
 document.addEventListener('click', function(event) {
     const sugestoesDivPaciente = document.getElementById('pacienteSuggestions');
-    const sugestoesDivMedico = document.getElementById('medicoSuggestions');
+    const sugestoesDivMedico = document.getElementById('me  dicoSuggestions');
 
     // Verifica se o clique foi fora das sugestões de pacientes
     if (sugestoesDivPaciente && !sugestoesDivPaciente.contains(event.target) && event.target.id !== 'paciente') {
