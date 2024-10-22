@@ -42,7 +42,9 @@ Route::post('/form_medico', [MedicoController::class, 'store'])->name('medico.st
 
 // Rota para listar convênios
 Route::get('/convenio', [PersonController::class, 'ListarConvenio'])->name('convenio.listar');
-// Rota para atualizar os dados de um paciente
+
+
+
 
 
 //PACIENTES

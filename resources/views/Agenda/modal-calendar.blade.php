@@ -1,95 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    #pacienteSuggestions {
-      max-height: 200px;
-      overflow-y: auto;
-      background-color: white; 
-      border: 1px solid #ddd; 
-      border-radius: 0.25rem; 
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
-    }
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura a viewport para dispositivos móveis -->
+    <title>Document</title> <!-- Título da página -->
+    <style>
+        /* Estilo para a lista de sugestões de pacientes */
+        #pacienteSuggestions {
+            max-height: 200px; /* Limita a altura máxima da lista */
+            overflow-y: auto; /* Adiciona rolagem vertical se necessário */
+            background-color: white; 
+            border: 1px solid #ddd; 
+            border-radius: 0.25rem; 
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
+        }
 
-    #pacienteSuggestions .list-group-item {
-      cursor: pointer; 
-    }
-  </style>
+        /* Estilo para cada item da lista de sugestões */
+        #pacienteSuggestions .list-group-item {
+            cursor: pointer; /* Indica que o item é clicável */
+        }
+    </style>
 </head>
 <body>
-  
-<!-- Modal -->
+    
+<!-- Modal para agendamento de eventos -->
 <div class="modal fade" id="modalCalendar" tabindex="-1" aria-labelledby="titleModal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg"> <!-- Diálogo do modal configurado para scroll e tamanho grande -->
         <div class="modal-content">
             <div class="modal-header">
-                <div class="w-100 d-flex justify-content-center">
+                <div class="w-100 d-flex justify-content-center"> <!-- Centraliza o título -->
                     <h1 class="modal-title fs-5" id="titleModal"></h1>
                 </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> <!-- Botão para fechar o modal -->
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <div id="message"></div>
-                    <form id="formEvent" class="row g-3">
-                        <input type="hidden" name="id" id="id">
-                        <input type="hidden" name="color" id="color" value="#9D9D9B">
+                    <div id="message"></div> <!-- Área para exibir mensagens (ex: erros ou confirmações) -->
+                    <form id="formEvent" class="row g-3"> <!-- Formulário com classe para estilo de grade -->
+                        <input type="hidden" name="id" id="id"> <!-- Campo oculto para ID -->
+                        <input type="hidden" name="color" id="color" value="#9D9D9B"> <!-- Campo oculto para cor -->
 
+                        <!-- Campo para paciente -->
                         <div class="col-12">
-                           <label for="paciente" class="form-label">Paciente</label>
-                              <input type="text" class="form-control" name="paciente" id="paciente" placeholder="Informe o nome" oninput="buscarPacientes(this.value)">
-                              <div id="pacienteSuggestions" class="list-group" style="display: none; position: absolute; z-index: 1000;"></div>
+                            <label for="paciente" class="form-label">Paciente</label>
+                            <input type="text" class="form-control" name="paciente" id="paciente" placeholder="Informe o nome" oninput="buscarPacientes(this.value)">
+                            <div id="pacienteSuggestions" class="list-group" style="display: none; position: absolute; z-index: 1000;"></div> <!-- Sugestões para pacientes -->
                         </div>
 
+                        <!-- Campo para médico -->
                         <div class="col-12">
                             <label for="medico" class="form-label">Médico</label>
-                               <input type="text" class="form-control" name="medico" id="medico" placeholder="Informe o nome" oninput="buscarMedico(this.value)">
-                               <div id="medicoSuggestions" class="list-group" style="display: none; position: absolute; z-index: 1000;"></div>
-                         </div>
+                            <input type="text" class="form-control" name="medico" id="medico" placeholder="Informe o nome" oninput="buscarMedico(this.value)">
+                            <div id="medicoSuggestions" class="list-group" style="display: none; position: absolute; z-index: 1000;"></div> <!-- Sugestões para médicos -->
+                        </div>
 
+                        <!-- Campo para procedimento -->
                         <div class="col-12">
                             <label for="procedimento_id" class="form-label">Procedimento</label>
                             <select class="form-select" id="procedimento_id" name="procedimento_id" aria-label="Default select example">
                                 <option selected>Selecione um Procedimento</option>
-                                @foreach($procedimentos as $procedimento)
+                                @foreach($procedimentos as $procedimento) <!-- Loop para adicionar opções de procedimentos -->
                                     <option value="{{ $procedimento->pk_cod_proc }}">{{ $procedimento->nome_proc }}</option>
                                 @endforeach
                             </select>
                         </div>
 
+                        <!-- Campo para data do evento -->
                         <div class="col-12">
                             <label for="eventDate" class="form-label">Data do Evento</label>
                             <input type="date" class="form-control" name="eventDate" id="eventDate">
                         </div>
 
+                        <!-- Campo para hora inicial -->
                         <div class="col-12">
                             <label for="start" class="form-label">Hora Inicial</label>
                             <input type="time" class="form-control" name="start" id="start">
                         </div>
 
+                        <!-- Campo para hora final -->
                         <div class="col-12">
                             <label for="end" class="form-label">Hora Final</label>
                             <input type="time" class="form-control" name="end" id="end">
                         </div>
 
+                        <!-- Campo para repetição -->
                         <div class="col-12">
                             <label class="form-check-label d-block" for="flexSwitchCheckRepeate">Repetição</label>
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckRepeate">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckRepeate"> <!-- Switch para repetição -->
                             </div>
                         </div>
 
+                        <!-- Campo para convênio do paciente -->
                         <div class="col-12">
                             <label for="convenio" class="form-label">Convênio do Paciente</label>
                             <select class="form-select" id="convenio" aria-label="Default select example">
-                                <option selected>Open this select menu</option>
-                                {{-- Adicione as opções de convênios aqui --}}
+                                <!-- As opções de convênios devem ser adicionadas aqui -->
                             </select>
                         </div>
 
+                        <!-- Campo para status -->
                         <div class="col-12">
                             <label for="status" class="form-label">Status</label>
                             <select class="form-select" id="status" aria-label="Default select example">
@@ -101,99 +111,14 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger deleteEvent">Excluir</button>
-                <button type="button" class="btn btn-primary saveEvent">Cadastrar Horário</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> <!-- Botão para fechar o modal -->
+                <button type="button" class="btn btn-danger deleteEvent">Excluir</button> <!-- Botão para excluir o evento -->
+                <button type="button" class="btn btn-primary saveEvent">Cadastrar Horário</button> <!-- Botão para salvar o evento -->
             </div>
         </div>
     </div>
 </div>
 
-<script>
-
-// Função para buscar pacientes no modal de agendamento
-function buscarPacientes(query) {
-    console.log("Buscando pacientes com a consulta:", query);
-    const sugestoesDiv = document.getElementById('pacienteSuggestions');
-
-    // Se a consulta for vazia, esconder as sugestões
-    if (query.length < 1) {
-        sugestoesDiv.style.display = 'none';
-        sugestoesDiv.innerHTML = '';
-        return;
-    }
-
-    // Fazer a requisição para buscar pacientes
-    fetch(`/pacientes/buscar?query=${query}`)
-        .then(response => response.json())
-        .then(data => {
-            sugestoesDiv.innerHTML = ''; // Limpar sugestões anteriores
-            if (data.length > 0) {
-                data.forEach(paciente => {
-                    // Formatar a data de nascimento
-                    const dataNascimento = new Date(paciente.data_nasci_paci);
-                    const dataFormatada = dataNascimento.toLocaleDateString('pt-BR'); // Formato dd/mm/yyyy
-
-                    const item = document.createElement('a');
-                    item.className = 'list-group-item list-group-item-action';
-                    item.href = '#';
-                    item.textContent = `${paciente.nome_paci} - ${dataFormatada}`; // Usar a data formatada
-
-                    // Definir ação ao clicar em uma sugestão
-                    item.onclick = function () {
-                        document.getElementById('paciente').value = paciente.nome_paci; // Preencher o campo de paciente
-                        sugestoesDiv.style.display = 'none'; // Esconder sugestões
-                    };
-                    sugestoesDiv.appendChild(item); // Adicionar sugestão à lista
-                });
-                sugestoesDiv.style.display = 'block'; // Mostrar a lista de sugestões
-            } else {
-                sugestoesDiv.style.display = 'none'; // Esconder se não houver resultados
-            }
-        })
-        .catch(error => console.error('Erro:', error)); // Tratar erros na requisição
-}
-
-// Função para buscar médicos no modal de agendamento
-function buscarMedico(query) {
-    console.log("Buscando medico com a consulta:", query);
-    const sugestoesDiv = document.getElementById('medicoSuggestions');
-
-    // Se a consulta for vazia, esconder as sugestões
-    if (query.length < 1) {
-        sugestoesDiv.style.display = 'none';
-        sugestoesDiv.innerHTML = '';
-        return;
-    }
-
-    // Fazer a requisição para buscar médicos
-    fetch(`/medico/buscar?query=${query}`)
-        .then(response => response.json())
-        .then(data => {
-            sugestoesDiv.innerHTML = ''; // Limpar sugestões anteriores
-            if (data.length > 0) {
-                data.forEach(nome => {
-                    const item = document.createElement('a');
-                    item.className = 'list-group-item list-group-item-action';
-                    item.href = '#';
-                    item.textContent = nome;
-
-                    // Definir ação ao clicar em uma sugestão
-                    item.onclick = function () {
-                        document.getElementById('medico').value = nome; // Preencher o campo de médico
-                        sugestoesDiv.style.display = 'none'; // Esconder sugestões
-                    };
-                    sugestoesDiv.appendChild(item); // Adicionar sugestão à lista
-                });
-                sugestoesDiv.style.display = 'block'; // Mostrar a lista de sugestões
-            } else {
-                sugestoesDiv.style.display = 'none'; // Esconder se não houver resultados
-            }
-        })
-        .catch(error => console.error('Erro:', error)); // Tratar erros na requisição
-}
-
-</script>
-
+<script src="js/buscaPaciente.js"></script> <!-- Script para manipulação das buscas de pacientes -->
 </body>
 </html>
