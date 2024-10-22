@@ -49,10 +49,7 @@ class Paciente extends Model
         'data_nasci_paci',
     ];
 
-    public function cidade()
-    {
-        return $this->belongsTo(Cidade::class, 'fk_cidade');
-    }
+
 
     public function convenio()
     {

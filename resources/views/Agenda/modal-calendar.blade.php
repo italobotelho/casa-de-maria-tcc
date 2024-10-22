@@ -6,18 +6,17 @@
   <title>Document</title>
   <style>
     #pacienteSuggestions {
-    max-height: 200px;
-    overflow-y: auto;
-    background-color: white; 
-    border: 1px solid #ddd; 
-    border-radius: 0.25rem; 
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
-}
+      max-height: 200px;
+      overflow-y: auto;
+      background-color: white; 
+      border: 1px solid #ddd; 
+      border-radius: 0.25rem; 
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
+    }
 
-#pacienteSuggestions .list-group-item {
-    cursor: pointer; 
-}
-
+    #pacienteSuggestions .list-group-item {
+      cursor: pointer; 
+    }
   </style>
 </head>
 <body>
@@ -40,20 +39,16 @@
                         <input type="hidden" name="color" id="color" value="#9D9D9B">
 
                         <div class="col-12">
-    <label for="paciente" class="form-label">Paciente</label>
-    <input type="text" class="form-control" name="paciente" id="paciente" placeholder="Informe o nome" oninput="buscarPacientes(this.value)">
-    <div id="pacienteSuggestions" class="list-group" style="display: none; position: absolute; z-index: 1000;"></div>
-</div>
-
-
+                           <label for="paciente" class="form-label">Paciente</label>
+                              <input type="text" class="form-control" name="paciente" id="paciente" placeholder="Informe o nome" oninput="buscarPacientes(this.value)">
+                              <div id="pacienteSuggestions" class="list-group" style="display: none; position: absolute; z-index: 1000;"></div>
+                        </div>
 
                         <div class="col-12">
-                            <label for="professional" class="form-label">Profissional</label>
-                            <select class="form-select" id="professional" aria-label="Default select example">
-                                <option selected>Selecione o Profissional</option>
-                                {{-- Adicione as opções de profissionais aqui --}}
-                            </select>
-                        </div>
+                            <label for="medico" class="form-label">Médico</label>
+                               <input type="text" class="form-control" name="medico" id="medico" placeholder="Informe o nome" oninput="buscarMedico(this.value)">
+                               <div id="medicoSuggestions" class="list-group" style="display: none; position: absolute; z-index: 1000;"></div>
+                         </div>
 
                         <div class="col-12">
                             <label for="procedimento_id" class="form-label">Procedimento</label>
@@ -115,38 +110,87 @@
 </div>
 
 <script>
+
+// Função para buscar pacientes no modal de agendamento
 function buscarPacientes(query) {
     console.log("Buscando pacientes com a consulta:", query);
     const sugestoesDiv = document.getElementById('pacienteSuggestions');
 
+    // Se a consulta for vazia, esconder as sugestões
     if (query.length < 1) {
         sugestoesDiv.style.display = 'none';
         sugestoesDiv.innerHTML = '';
         return;
     }
 
+    // Fazer a requisição para buscar pacientes
     fetch(`/pacientes/buscar?query=${query}`)
         .then(response => response.json())
         .then(data => {
-            sugestoesDiv.innerHTML = '';
+            sugestoesDiv.innerHTML = ''; // Limpar sugestões anteriores
+            if (data.length > 0) {
+                data.forEach(paciente => {
+                    // Formatar a data de nascimento
+                    const dataNascimento = new Date(paciente.data_nasci_paci);
+                    const dataFormatada = dataNascimento.toLocaleDateString('pt-BR'); // Formato dd/mm/yyyy
+
+                    const item = document.createElement('a');
+                    item.className = 'list-group-item list-group-item-action';
+                    item.href = '#';
+                    item.textContent = `${paciente.nome_paci} - ${dataFormatada}`; // Usar a data formatada
+
+                    // Definir ação ao clicar em uma sugestão
+                    item.onclick = function () {
+                        document.getElementById('paciente').value = paciente.nome_paci; // Preencher o campo de paciente
+                        sugestoesDiv.style.display = 'none'; // Esconder sugestões
+                    };
+                    sugestoesDiv.appendChild(item); // Adicionar sugestão à lista
+                });
+                sugestoesDiv.style.display = 'block'; // Mostrar a lista de sugestões
+            } else {
+                sugestoesDiv.style.display = 'none'; // Esconder se não houver resultados
+            }
+        })
+        .catch(error => console.error('Erro:', error)); // Tratar erros na requisição
+}
+
+// Função para buscar médicos no modal de agendamento
+function buscarMedico(query) {
+    console.log("Buscando medico com a consulta:", query);
+    const sugestoesDiv = document.getElementById('medicoSuggestions');
+
+    // Se a consulta for vazia, esconder as sugestões
+    if (query.length < 1) {
+        sugestoesDiv.style.display = 'none';
+        sugestoesDiv.innerHTML = '';
+        return;
+    }
+
+    // Fazer a requisição para buscar médicos
+    fetch(`/medico/buscar?query=${query}`)
+        .then(response => response.json())
+        .then(data => {
+            sugestoesDiv.innerHTML = ''; // Limpar sugestões anteriores
             if (data.length > 0) {
                 data.forEach(nome => {
                     const item = document.createElement('a');
                     item.className = 'list-group-item list-group-item-action';
                     item.href = '#';
                     item.textContent = nome;
+
+                    // Definir ação ao clicar em uma sugestão
                     item.onclick = function () {
-                        document.getElementById('paciente').value = nome;
-                        sugestoesDiv.style.display = 'none';
+                        document.getElementById('medico').value = nome; // Preencher o campo de médico
+                        sugestoesDiv.style.display = 'none'; // Esconder sugestões
                     };
-                    sugestoesDiv.appendChild(item);
+                    sugestoesDiv.appendChild(item); // Adicionar sugestão à lista
                 });
-                sugestoesDiv.style.display = 'block';
+                sugestoesDiv.style.display = 'block'; // Mostrar a lista de sugestões
             } else {
-                sugestoesDiv.style.display = 'none';
+                sugestoesDiv.style.display = 'none'; // Esconder se não houver resultados
             }
         })
-        .catch(error => console.error('Erro:', error));
+        .catch(error => console.error('Erro:', error)); // Tratar erros na requisição
 }
 
 </script>

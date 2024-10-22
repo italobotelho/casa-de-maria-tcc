@@ -11,6 +11,12 @@ class MedicoController extends Controller
     {
         $this->middleware('auth');
     }
+    public function buscarMedico(Request $request)
+    {
+        $query = $request->input('query');
+        $pacientes = Medico::where('nome_med', 'LIKE', "%{$query}%")->pluck('nome_med');
+        return response()->json($pacientes);
+    }
 
     public function index()
     {

@@ -8,6 +8,7 @@ use App\Http\Controllers\ConvenioController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Models\Medico;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,6 +31,7 @@ Route::get('/home', [EventController::class, 'index'])->name('agenda.home');
 
 // Rota para o profissional (medico)
 Route::get('/profissional', [MedicoController::class, 'index'])->name('medicos.index');
+Route::get('/medico/buscar', [MedicoController::class, 'buscarMedico'])->name('medico.buscar');
 
 // Rota para o formulário de cadastro de médico
 Route::get('/form_medico', [MedicoController::class, 'index'])->name('medico.index');
@@ -37,7 +39,6 @@ Route::get('/form_medico', [MedicoController::class, 'index'])->name('medico.ind
 // Rota para armazenar um novo médico
 Route::post('/form_medico', [MedicoController::class, 'store'])->name('medico.store');
 
-// Rotas da Tela Pacientes
 
 // Rota para listar convênios
 Route::get('/convenio', [PersonController::class, 'ListarConvenio'])->name('convenio.listar');

@@ -16,7 +16,9 @@ class PersonController extends Controller
     public function buscar(Request $request)
     {
         $query = $request->input('query');
-        $pacientes = Paciente::where('nome_paci', 'LIKE', "%{$query}%")->pluck('nome_paci');
+        $pacientes = Paciente::where('nome_paci', 'like', '%' . $query . '%')
+            ->select('nome_paci', 'data_nasci_paci')
+            ->get();
         return response()->json($pacientes);
     }
         
