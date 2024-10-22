@@ -93,10 +93,8 @@
 
                         <!-- Campo para convênio do paciente -->
                         <div class="col-12">
-                            <label for="convenio" class="form-label">Convênio do Paciente</label>
-                            <select class="form-select" id="convenio" aria-label="Default select example">
-                                <!-- As opções de convênios devem ser adicionadas aqui -->
-                            </select>
+                            <label for="convenio" class="form-label">Convênio</label>
+                            <input type="text" class="form-control" name="convenio" id="convenio" readonly>
                         </div>
 
                         <!-- Campo para status -->

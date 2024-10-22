@@ -12,8 +12,15 @@ class PersonController extends Controller
     {
         $this->middleware('auth'); // Aplica middleware de autenticação para proteger as rotas
     }
-
-    // Método para buscar pacientes com base em uma consulta
+    public function getPaciente($id)
+    {
+        $paciente = Paciente::with('convenio')->find($id); // Busca o paciente com o convênio associado
+        if (!$paciente) {
+            return response()->json(['message' => 'Paciente não encontrado'], 404);
+        }
+        return response()->json($paciente); // Retorna o paciente em formato JSON
+    }
+// Método para buscar pacientes com base em uma consulta
     public function buscar(Request $request)
     {
         $query = $request->input('query'); // Obtém a consulta do request

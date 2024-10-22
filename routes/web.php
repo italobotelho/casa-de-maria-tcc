@@ -58,6 +58,13 @@ Route::post('/form_paciente', [PersonController::class, 'store'])->name('pacient
 Route::get('/pacientes/buscar', [PersonController::class, 'buscar'])->name('pacientes.buscar');
 
 
+// Rota para buscar convênio por paciente
+Route::prefix('api')->group(function () {
+    Route::get('/pacientes/{id}', [PersonController::class, 'getPaciente']);
+});
+
+
+
 // Rotas da Tela Configurações Clinica
 Route::get('/clinica', [ClinicaController::class, 'index'])->name('clinica.index');
 Route::post('/clinica', [ClinicaController::class, 'store'])->name('clinica.store');

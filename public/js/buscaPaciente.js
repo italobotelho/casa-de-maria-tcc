@@ -28,18 +28,8 @@ function buscarPacientes(query) {
                     // Adiciona um evento de clique para o item de sugestão
                     item.onclick = function () {
                         document.getElementById('paciente').value = paciente.nome_paci; // Preenche o campo com o nome do paciente
-
-                        // Busca o convênio do paciente selecionado
-                        fetch(`/convenio/buscar-por-paciente?pacienteId=${paciente.pk_cod_paci}`) // Faz uma requisição para buscar o convênio
-                            .then(response => response.json()) // Converte a resposta em JSON
-                            .then(convenioData => {
-                                const convenioSelect = document.getElementById('convenio'); // Obtém o campo de convênio
-                                convenioSelect.value = convenioData.convenio_id; // Atualiza o campo de convênio com o ID retornado
-                                convenioSelect.dispatchEvent(new Event('change')); // Dispara um evento de mudança para atualizar o estado do select
-                            })
-                            .catch(error => console.error('Erro ao buscar convênio:', error)); // Tratamento de erro na busca do convênio
-
-                        sugestoesDiv.style.display = 'none'; // Esconde a div de sugestões após a seleção
+                        preencherConvenio(paciente.pk_cod_paci); // Chama a função para preencher o convênio
+                        sugestoesDiv.style.display = 'none'; // Esconde as sugestões após a seleção
                     };
                     sugestoesDiv.appendChild(item); // Adiciona o item de sugestão à div
                 });
@@ -90,3 +80,36 @@ function buscarMedico(query) {
         })
         .catch(error => console.error('Erro:', error)); // Tratamento de erro na requisição
 }
+
+function preencherConvenio(pacienteId) {
+    fetch(`/api/pacientes/${pacienteId}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log('Dados recebidos:', data); // Verifique a estrutura exata dos dados
+
+        // Verifique se o campo 'convenio' e 'nome_conv' existem
+        if (data && data.convenio && data.convenio.nome_conv) {
+            document.getElementById('convenio').value = data.convenio.nome_conv; // Preencha com 'nome_conv'
+        } else {
+            console.error('A estrutura dos dados não contém o nome do convênio');
+        }
+    })
+    .catch(error => console.error('Erro ao buscar os dados do paciente:', error));
+
+}
+
+// Função para ocultar sugestões ao clicar fora
+document.addEventListener('click', function(event) {
+    const sugestoesDivPaciente = document.getElementById('pacienteSuggestions');
+    const sugestoesDivMedico = document.getElementById('medicoSuggestions');
+
+    // Verifica se o clique foi fora das sugestões de pacientes
+    if (sugestoesDivPaciente && !sugestoesDivPaciente.contains(event.target) && event.target.id !== 'paciente') {
+        sugestoesDivPaciente.style.display = 'none'; // Esconde as sugestões de pacientes
+    }
+
+    // Verifica se o clique foi fora das sugestões de médicos
+    if (sugestoesDivMedico && !sugestoesDivMedico.contains(event.target) && event.target.id !== 'medico') {
+        sugestoesDivMedico.style.display = 'none'; // Esconde as sugestões de médicos
+    }
+});
