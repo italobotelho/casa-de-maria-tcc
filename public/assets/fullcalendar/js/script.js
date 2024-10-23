@@ -95,6 +95,12 @@ $(document).ready(function() {
         let startTime = $("#modalCalendar input[name='start']").val();
         let endTime = $("#modalCalendar input[name='end']").val();
 
+        // Verifique se o procedimento foi selecionado
+        if (!procedimentoId || procedimentoId === 'Selecione um Procedimento') {
+            alert('Procedimento não selecionado. Por favor, escolha um procedimento antes de continuar.');
+            return; // Impede o agendamento
+        }
+
         if (!selectedDate || !startTime || !endTime) {
             console.error("Data ou horário não definidos.");
             return;
@@ -113,7 +119,7 @@ $(document).ready(function() {
         };
 
         let route;
-        if (id == '') {
+        if (id === '') {
             route = routeEvents('routeEventStore');
         } else {
             route = routeEvents('routeEventUpdate');
