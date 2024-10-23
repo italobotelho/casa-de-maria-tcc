@@ -8,6 +8,7 @@ use App\Http\Controllers\ConvenioController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\UserController;
 use App\Models\Medico;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,12 @@ Route::post('/event-store', [EventController::class, 'store'])->name('routeEvent
 Route::delete('/event-destroy', [EventController::class, 'destroy'])->name('routeEventDelete');
 Route::get('/get-procedimentos', [EventController::class, 'getProcedimentos'])->name('getProcedimentos');
 Route::get('/home', [EventController::class, 'index'])->name('agenda.home');
+
+//Rota Perfil
+// Rota Perfil
+Route::get('/perfil', [UserController::class, 'index'])->name('perfil.index');
+Route::post('/perfil/update-profile', [UserController::class, 'updateProfile'])->name('perfil.updateProfile');
+Route::post('/perfil/update-password', [UserController::class, 'updatePassword'])->name('perfil.updatePassword');
 
 // Rota para o profissional (medico)
 Route::get('/profissional', [MedicoController::class, 'index'])->name('medicos.index');
