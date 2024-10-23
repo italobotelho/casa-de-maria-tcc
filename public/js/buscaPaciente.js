@@ -116,3 +116,6 @@ document.addEventListener('click', function(event) {
         sugestoesDivMedico.style.display = 'none'; // Esconde as sugestões de médicos
     }
 });
+
+
+
