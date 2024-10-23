@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     // Função para aumentar ou diminuir o horário
     function adjustTime(selector, adjustment) {
         let currentTime = $(selector).val();
@@ -8,61 +8,66 @@ $(document).ready(function() {
         }
     }
 
+
+
+
+
     // Quando o modal for aberto
-    $('#modalCalendar').on('show.bs.modal', function() {
+    $('#modalCalendar').on('show.bs.modal', function () {
         $.ajax({
             url: '/get-procedimentos',
             method: 'GET',
-            success: function(data) {
+            success: function (data) {
                 let select = $('#procedimento_id');
                 select.empty();
                 select.append('<option selected>Selecione um Procedimento</option>');
-                $.each(data, function(index, procedimento) {
+                $.each(data, function (index, procedimento) {
                     select.append('<option value="' + procedimento.pk_cod_proc + '">' + procedimento.nome_proc + '</option>');
                 });
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error('Erro ao carregar procedimentos:', error);
             }
         });
     });
 
+
     // Mostrar botões ao clicar no input
-    $("#start").focus(function() {
+    $("#start").focus(function () {
         $("#startButtons").show();
     });
 
-    $("#end").focus(function() {
+    $("#end").focus(function () {
         $("#endButtons").show();
     });
 
     // Manter os botões visíveis quando o mouse estiver sobre eles
-    $("#startButtons").mouseenter(function() {
+    $("#startButtons").mouseenter(function () {
         $(this).show();
-    }).mouseleave(function() {
+    }).mouseleave(function () {
         $(this).hide();
     });
 
-    $("#endButtons").mouseenter(function() {
+    $("#endButtons").mouseenter(function () {
         $(this).show();
-    }).mouseleave(function() {
+    }).mouseleave(function () {
         $(this).hide();
     });
 
     // Aumentar e diminuir horários
-    $("#increaseStartTime").click(function() {
+    $("#increaseStartTime").click(function () {
         adjustTime("#start", 30);
     });
 
-    $("#decreaseStartTime").click(function() {
+    $("#decreaseStartTime").click(function () {
         adjustTime("#start", -30);
     });
 
-    $("#increaseEndTime").click(function() {
+    $("#increaseEndTime").click(function () {
         adjustTime("#end", 30);
     });
 
-    $("#decreaseEndTime").click(function() {
+    $("#decreaseEndTime").click(function () {
         adjustTime("#end", -30);
     });
 
@@ -73,7 +78,7 @@ $(document).ready(function() {
         },
     });
 
-    $(".deleteEvent").click(function() {
+    $(".deleteEvent").click(function () {
         let id = $("#modalCalendar input[name='id']").val();
         let Event = { id: id, _method: 'DELETE' };
         let route = routeEvents('routeEventDelete');
@@ -97,7 +102,7 @@ $(document).ready(function() {
 
         // Verifique se o procedimento foi selecionado
         if (!procedimentoId || procedimentoId === 'Selecione um Procedimento') {
-            alert('Procedimento não selecionado. Por favor, escolha um procedimento antes de continuar.');
+            alert('Procedimento não selecionado. Por favor, escolha um procedimento para de continuar.');
             return; // Impede o agendamento
         }
 
@@ -165,10 +170,74 @@ function routeEvents(route) {
     return document.getElementById("calendar").dataset[route];
 }
 
-function clearMessages(element){
+function clearMessages(element) {
     $(element).text('');
 }
 
 function resetForm(form) {
     $(form)[0].reset();
 }
+
+
+
+
+// Receber o seletor do campo listar os usuários
+const user = document.getElementById("user_id");
+
+// Verificar se existe o seletor user_id no HTML
+if (user) {
+
+    // Chamar a função
+    listarUsuarios();
+}
+
+// Função para recuperar os usuários
+async function listarUsuarios() {
+
+    // Chamar o arquivo PHP para recuperar os usuários
+    const dados = await fetch('listar_usuarios.php');
+
+    // Ler os dados retornado do PHP
+    const resposta = await dados.json();
+    //console.log(resposta);
+
+    // Verificar se status é TRUE e acessa o IF, senão acessa o ELSE e retorna a mensagem de erro 
+    if (resposta['status']) {
+
+        // Criar a variável com as opções para o campo SELECT
+        var opcoes = `<option value="">Selecionar ou limpar</option>`;
+
+        // Percorrer o array de usuários
+        for (var i = 0; i < resposta.dados.length; i++) {
+
+            // Atribuir o usuário como opção para o campo SELECT
+            opcoes += `<option value="${resposta.dados[i]['id']}">${resposta.dados[i]['name']}</option>`;
+        }
+
+        // Enviar para o HTML as opções para o campo SELECT
+        user.innerHTML = opcoes;
+    } else {
+
+        // Enviar para o HTML as opções para o campo SELECT
+        user.innerHTML = `<option value="">${resposta['msg']}</option>`;
+    }
+}
+// Receber o seletor user_id do campo select
+var userId = document.getElementById('user_id');
+
+// Aguardar o usuário selecionar valor no campo selecionar usuário
+userId.addEventListener('change', function () {
+    //console.log("Recuperar os eventos do usuário: " + userId.value);
+
+    // Chamar a função carregar eventos
+    calendar = carregarEventos();
+
+    // Renderizar o calendário
+    calendar.render();
+
+});
+// Receber o id do usuário do campo Select
+var user_id = document.getElementById('user_id').value;
+
+// Chamar o arquivo PHP para recuperar os eventos
+events: 'listar_evento.php?user_id=' + user_id
