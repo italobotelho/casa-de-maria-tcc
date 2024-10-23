@@ -1,80 +1,132 @@
 @charset "UTF-8";
-
 body {
     background-image: url(../img/fundo-cadastro.png);
     background-size: cover;
     background-repeat: no-repeat;
-    
+    font-family: 'Inter', sans-serif; /* Adiciona a fonte Inter ao body */
 }
-    nav {
-        background-color: #795127;
-        position: fixed; 
-        top: 0; 
-        left: 0; 
-        width: 100%;
-        display: flex;
-        text-align: center;
-        padding: 3px;
-    }
-    
-    nav button {
-        background: transparent; 
-        border: none; 
-        display: flex;
-        align-items: center;
-        position: absolute;
-        left:95%;
-        top: 50%;
-        transform: translateY(-50%);
-        cursor: pointer; 
-    }
-    .navimg{
-        margin-left: 10px;
-    }
-    h1{
-        margin-top: 5rem;
-        margin-left: 3rem;
-    }
 
-    .card {
-        margin: auto;
-        border: 3px solid #C99C65;
-        border-radius: 35px;
-        width: 50rem;
-        box-shadow: 0 16px 26px rgba(0, 0, 0, 0.1); 
-        color: black;
-        padding: 50px;
-    }
+.container {
+    text-align: center;
+}
 
-    .form-group{
-        padding: 8px;
-    }
+.card {
+    margin: auto;
+    border: 3px solid #C99C65;
+    border-radius: 15px;
+    width: 70rem; /* Card retangular */
+    box-shadow: 0 16px 26px rgba(0, 0, 0, 0.1);
+    color: black;
+    padding: 70px; /* Padding do card */
+    position: relative;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2px; /* Menor espaço entre as linhas */
+    margin-top: 20px; /* Adiciona espaço acima da linha */
+}
+
+.form-column-left,
+.form-column-right {
+    width: 48%;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Mantém os inputs e labels alinhados à esquerda */
+    margin-bottom: 10px; /* Diminui o espaço entre os campos */
+}
+
+label {
+    display: inline-block;
+    text-align: left;
+    margin-right: 10px; /* Mantém um pequeno espaço entre label e input */
+    font-size: 0.9rem;
+    width: auto; /* Remove a largura fixa */
+}
+
+input {
+    display: inline-block;
+    border-radius: 10px;
+    border: 1px solid #C99C65; /* Borda no tom bege claro */
+    padding: 5px;
+    width: 55%; /* Inputs menores */
+}
+
+button {
+    display: inline-block;
+    background: transparent;
+    border-radius: 10px;
+    border: none;
+    background-color: #C99C65;
+    padding: 8px 15px;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    position: absolute; /* Adicionando position absolute para o posicionamento */
+    right: 40px; /* Mantém o botão 30px a partir do lado direito */
+    bottom: 12px; /* Usando a variável para o deslocamento do fundo */
+}
+
+h1 {
+    margin: 35px;
+    text-align: left;
+}
+
+.custom-select-wrapper {
+    position: relative;
+    width: 50%; /* Largura do select igual às inputs */
+}
+
+.custom-select {
+    display: block;
+    height: 35px;
+    padding: 5px 10px;
+    border: 1px solid #C99C65;
+    border-radius: 10px;
+    appearance: none;
+    background: white;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="%23C99C65" d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 14px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.custom-select:focus {
+    border-color: #C99C65;
+    outline: none;
+}
+
+/* Linha horizontal única separando as seções */
+.section-divider {
+    border: none;
+    height: 1px;
+    background: #C99C65; /* Sombra leve */
+    box-shadow: 0 1px 3px #C99C65; /* Sombra leve */
+    margin: 20px 0; /* Espaçamento */
+}
+
+.section-title {
+    font-size: 1.5rem; /* Tamanho da fonte alterado */
+    font-weight: normal; /* Altera para sem negrito */
+    text-align: left;
+    margin-bottom: 5px;
+    color: black;
+    border-bottom: 1px solid #C99C65; /* Linha abaixo do título */
+    padding-bottom: 3px; /* Espaço entre o texto e a linha */
+    width: 25%; /* Ajusta o comprimento da linha abaixo do título */
+}
 
 
-    input{
-        display: inline-block;
-        border-radius: 10px;
-        border: 1px solid #C99C65;
-        padding: 3px;
-        width:25%;
+/*Icones*/
 
-    }
-
-    button{
-        display: flex;
-        background: transparent; 
-        border-radius: 10px;
-        border: 1px solid  #C99C65;
-        padding: 5px;
-       cursor: pointer;
-       justify-content: flex-end;
-    }
-
-    a{
-        margin: 4rem;   
-        text-decoration: none;
-        font-size: 20px ;
-        display: inline;
-        padding: 40px;
-        color: white; 
-    }  
+.section-title .icon {
+    width: 35px; /* Largura do ícone */
+    height: 35px; /* Altura do ícone */
+    margin-right: 10px; /* Espaço entre o ícone e o texto */
+    fill: #C99C65; /* Cor do ícone */
+}
