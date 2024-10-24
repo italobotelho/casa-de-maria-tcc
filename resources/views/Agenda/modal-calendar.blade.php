@@ -50,10 +50,10 @@
                         <!-- Campo para médico -->
                         <div class="col-12">
                             <label for="medico" class="form-label">Médico</label>
-                            <input type="text" class="form-control" name="medico" id="medico" placeholder="Informe o nome" oninput="buscarMedico(this.value)">
+                            <input type="text" class="form-control" name="medico" id="medico" placeholder="Informe o medico" oninput="buscarMedico(this.value)">
                             <div id="medicoSuggestions" class="list-group" style="display: none; position: absolute; z-index: 1000;"></div> <!-- Sugestões para médicos -->
                         </div>
-
+                        
                         <!-- Campo para procedimento -->
                         <div class="col-12">
                             <label for="procedimento_id" class="form-label">Procedimento</label>
