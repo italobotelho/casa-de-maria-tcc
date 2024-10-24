@@ -30,9 +30,9 @@ h1 {
 .section-title {
     font-size: 22px; /* Aumentado o tamanho da fonte do título da seção */
     font-weight: bold;
-    color: #6F4E37; /* Cor do título da seção */
+    color: #000000; /* Cor do título da seção */
     margin-top: 20px;
-    margin-bottom: 20px; /* Aumentado o espaço abaixo do título da seção */
+    margin-bottom: 30px; /* Aumentado o espaço abaixo do título da seção */
     position: relative;
 }
 
@@ -60,34 +60,55 @@ h1 {
     border-bottom: none;
 }
 
-/* Formulário em duas colunas */
+/* Formulário com inputs e labels à direita */
 .form-group {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    flex-wrap: wrap;
+    display: flex; 
+    flex-direction: row; /* Alinha label e input lado a lado */
+    align-items: center; /* Alinha verticalmente */
+    margin-bottom: 25px; /* Aumenta a distância entre as linhas do formulário */
 }
 
+/* Para colunas à esquerda */
+.dados-pessoais-left, .dados-pessoais-right {
+    flex: 1; /* Permite que ambas as colunas ocupem espaço igual */
+}
+
+.dados-pessoais-right {
+    margin-left: 30px; /* Distância entre as colunas esquerda e direita */
+}
+
+/* Ajustar a largura das labels */
+.form-group label {
+    width: 30%; /* Largura da label (ajuste conforme necessário) */
+    text-align: left; /* Alinhamento do texto à esquerda */
+}
+
+/* Garantir que todos os inputs ocupem a mesma largura */
 .form-group input,
 .form-group select {
-    width: 48%;
+    width: 70%; /* Ajuste a largura dos inputs para ocupar 70% */
     padding: 10px;
     border: 1px solid #D3B69A;
     border-radius: 13px; /* Bordas mais arredondadas */
     font-size: 14px;
 }
 
-.form-group select {
-    width: 100%;
-}
-
-.form-group.full-width {
-    width: 100%;
-}
-
 /* Ajuste específico para campos menores */
 .form-group .small-input {
-    width: 30%;
+    width: 100%; /* Largura total para campos pequenos */
+}
+
+/* Ajuste de margem para o input de cidade */
+.form-group.cidade {
+    flex-direction: column; /* Alinha label e input verticalmente */
+}
+
+.form-group.cidade label {
+    margin-bottom: 10px; /* Aumenta a distância entre a label e o input */
+}
+
+.form-group.cidade input {
+    margin-top: 0; /* Remove qualquer margem superior do input de cidade */
 }
 
 /* Estilo do botão */
