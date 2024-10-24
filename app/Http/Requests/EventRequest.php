@@ -21,24 +21,26 @@ class EventRequest extends FormRequest
      */
 
      public function rules(): array
-    {
-        return [
-            'title' => 'required',
-            'start' => 'required|date_format:Y-m-d H:i:s|before:end',
-            'end' => 'required|date_format:Y-m-d H:i:s|after:start',
-            'color' => 'required',
-            'procedimento_id' => 'required',
-        ];
-    }
-
-    public function messages(): array    
-    {
-        return[
-            'procedimento_id.required' => 'Selecione um procedimento',
-            'start.date_format' => 'Preencha uma data inicial com valor válido!',
-            'start.before' => 'A data/hora inicial deve ser menor que a data final',
-            'end.date_format' => 'Preencha uma data final com valor válido!',
-            'end.after' => 'A data/hora final deve ser maior que a data inicial',
-        ];
-    }
+     {
+         return [
+             'title' => 'required',
+             'start' => 'required|date_format:Y-m-d H:i:s|before:end',
+             'end' => 'required|date_format:Y-m-d H:i:s|after:start',
+             'color' => 'required',
+             'procedimento_id' => 'required',
+            //  'medico' => 'required|integer', // Adicione esta linha para validar o médico
+         ];
+     }
+     
+     public function messages(): array    
+     {
+         return [
+             'procedimento_id.required' => 'Selecione um procedimento',
+            //  'medico.required' => 'O campo médico é obrigatório.', // Mensagem para o médico
+             'start.date_format' => 'Preencha uma data inicial com valor válido!',
+             'start.before' => 'A data/hora inicial deve ser menor que a data final',
+             'end.date_format' => 'Preencha uma data final com valor válido!',
+             'end.after' => 'A data/hora final deve ser maior que a data inicial',
+         ];
+     }
 }

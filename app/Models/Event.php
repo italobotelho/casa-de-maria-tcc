@@ -10,7 +10,7 @@ class Event extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['title', 'start', 'end', 'color', 'procedimento_id','medico', 'convenio'];
+    protected $fillable = ['title', 'start', 'end', 'color', 'procedimento_id', 'medico', 'convenio'];
 
     public function procedimento()
     {

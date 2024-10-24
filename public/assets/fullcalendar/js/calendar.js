@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right: 'timeGridDay,timeGridWeek,dayGridMonth,listWeek'
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
 
     locale: 'pt-br',
@@ -128,6 +128,9 @@ document.addEventListener('DOMContentLoaded', function() {
       $("#modalCalendar input[name='eventDate']").val(moment(element.start).format("YYYY-MM-DD"));
   
       $("#modalCalendar input[name='color']").val("#9D9D9B");
+  
+      // Limpa o campo do médico
+      $("#modalCalendar input[name='medico']").val(''); // Adicione esta linha para limpar o campo médico
   
       calendar.unselect(); // Desmarcar a seleção
     },

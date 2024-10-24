@@ -93,8 +93,8 @@
 
                         <!-- Campo para convênio do paciente -->
                         <div class="col-12">
-                            <label for="convenio" class="form-label">Convênio</label>
-                            <input type="text" class="form-control" name="convenio" id="convenio" readonly>
+                            <label for="convenio_id" class="form-label">Convênio</label>
+                            <input type="text" class="form-control" name="convenio_id" id="convenio_id" readonly>
                         </div>
 
                         <!-- Campo para status -->

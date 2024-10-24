@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers; // Define o namespace do controlador
+
 use Illuminate\Http\Request; 
 use App\Models\Paciente; 
 use App\Models\Convenio; 

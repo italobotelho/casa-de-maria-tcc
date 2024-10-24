@@ -8,10 +8,6 @@ $(document).ready(function () {
         }
     }
 
-
-
-
-
     // Quando o modal for aberto
     $('#modalCalendar').on('show.bs.modal', function () {
         $.ajax({
@@ -29,8 +25,24 @@ $(document).ready(function () {
                 console.error('Erro ao carregar procedimentos:', error);
             }
         });
-    });
 
+        // Carregar convênios
+        $.ajax({
+            url: '/get-convenios', // URL para buscar convênios
+            method: 'GET',
+            success: function (data) {
+                let select = $('#convenio_id'); // Certifique-se de que o ID do select é correto
+                select.empty();
+                select.append('<option selected>Selecione um Convênio</option>');
+                $.each(data, function (index, convenio) {
+                    select.append('<option value="' + convenio.id + '">' + convenio.nome + '</option>');
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error('Erro ao carregar convênios:', error);
+            }
+        });
+    });
 
     // Mostrar botões ao clicar no input
     $("#start").focus(function () {
@@ -96,13 +108,20 @@ $(document).ready(function () {
         let id = $("#modalCalendar input[name='id']").val();
         let title = $("#modalCalendar input[name='paciente']").val();
         let procedimentoId = $("#modalCalendar select[name='procedimento_id']").val();
+        let convenioId = $("#modalCalendar select[name='convenio_id']").val(); // Adicione esta linha para obter o convênio
         let selectedDate = $("#modalCalendar input[name='eventDate']").val();
         let startTime = $("#modalCalendar input[name='start']").val();
         let endTime = $("#modalCalendar input[name='end']").val();
+        let medico = $("#modalCalendar input[name='medico']").val(); // Adicione esta linha para obter o médico
 
         // Verifique se o procedimento foi selecionado
         if (!procedimentoId || procedimentoId === 'Selecione um Procedimento') {
-            alert('Procedimento não selecionado. Por favor, escolha um procedimento para de continuar.');
+            alert('Procedimento não selecionado. Por favor, escolha um procedimento para continuar.');
+            return; // Impede o agendamento
+        }
+        console.log("Valor do convênio:", convenioId); // Debug
+        if (!convenioId || convenioId === 'Selecione um Convênio') {
+            alert('Convênio não selecionado. Por favor, escolha um convênio para continuar.');
             return; // Impede o agendamento
         }
 
@@ -120,7 +139,9 @@ $(document).ready(function () {
             start: start,
             end: end,
             color: color,
-            procedimento_id: procedimentoId
+            procedimento_id: procedimentoId,
+            convenio_id: convenioId, // Adicione esta linha para incluir o convênio no objeto Event
+            medico: medico // Adicione esta linha para incluir o médico no objeto Event
         };
 
         let route;
@@ -177,8 +198,3 @@ function clearMessages(element) {
 function resetForm(form) {
     $(form)[0].reset();
 }
-
-
-
-
-

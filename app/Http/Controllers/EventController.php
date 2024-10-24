@@ -33,13 +33,13 @@ class EventController extends Controller
 
     public function store(EventRequest $request)
     {
-        
         $event = new Event();
         $event->title = $request->input('title');
         $event->start = $request->input('start');
         $event->end = $request->input('end');
         $event->color = $request->input('color');
         $event->procedimento_id = $request->input('procedimento_id');
+        $event->medico = $request->input('medico'); // Adicione esta linha para salvar o médico
     
         $event->save();
         return response()->json(true);
@@ -55,6 +55,7 @@ class EventController extends Controller
             $event->end = $request->input('end');
             $event->color = $request->input('color');
             $event->procedimento_id = $request->input('procedimento_id');
+            $event->medico = $request->input('medico'); // Adicione esta linha para atualizar o médico
     
             $event->save();
             return response()->json(true);
@@ -70,8 +71,17 @@ class EventController extends Controller
     }
 
     public function getProcedimentos()
-{
-    $procedimentos = Procedimento::all();
-    return response()->json($procedimentos);
-}
+    {
+        $procedimentos = Procedimento::all();
+        return response()->json($procedimentos);
+    }
+
+    public function getConvenios()
+    {
+        // Busca todos os convênios no banco de dados
+        $convenios = Convenio::all();
+
+        // Retorna os convênios como JSON
+        return response()->json($convenios);
+    }
 }
