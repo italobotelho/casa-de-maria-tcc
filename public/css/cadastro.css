@@ -1,132 +1,123 @@
-@charset "UTF-8";
-body {
-    background-image: url(../img/fundo-cadastro.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    font-family: 'Inter', sans-serif; /* Adiciona a fonte Inter ao body */
-}
-
+/* Estilo para o container principal */
 .container {
-    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
+/* Estilo do card */
 .card {
-    margin: auto;
-    border: 3px solid #C99C65;
-    border-radius: 15px;
-    width: 70rem; /* Card retangular */
-    box-shadow: 0 16px 26px rgba(0, 0, 0, 0.1);
-    color: black;
-    padding: 70px; /* Padding do card */
+    padding: 20px;
+    border: 1px solid #C99C65;
+    border-radius: 15px; /* Bordas mais retangulares */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    margin: 20px auto; /* Centraliza o card horizontalmente */
+    width: 100%; /* Deixe ele ocupar toda a largura do container */
+    max-width: 900px; /* Define o máximo de largura */
+    height: auto; /* Deixa o card crescer com o conteúdo */
+}
+
+/* Título principal */
+h1 {
+    font-size: 28px;
+    text-align: left; /* Alinhamento à esquerda em relação ao card */
+    margin-bottom: 20px;
+    color: #6F4E37; /* Cor do título */
+}
+
+/* Estilo das seções */
+.section-title {
+    font-size: 22px; /* Aumentado o tamanho da fonte do título da seção */
+    font-weight: bold;
+    color: #6F4E37; /* Cor do título da seção */
+    margin-top: 20px;
+    margin-bottom: 20px; /* Aumentado o espaço abaixo do título da seção */
     position: relative;
 }
 
-.form-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2px; /* Menor espaço entre as linhas */
-    margin-top: 20px; /* Adiciona espaço acima da linha */
+/* Linha curta abaixo do título da seção */
+.section-title::after {
+    content: '';
+    display: block;
+    width: 200px; /* Largura da linha curta */
+    height: 2px;
+    background-color: #D3B69A;
+    position: absolute;
+    bottom: -5px; /* Ajuste de posicionamento abaixo do título */
+    left: 0;
 }
 
-.form-column-left,
-.form-column-right {
-    width: 48%;
+/* Linha de divisão entre seções */
+.section {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(211, 182, 154, 0.5); /* Linha que divide as seções com sombreado */
 }
 
+/* Remover borda inferior da última seção */
+.section:last-of-type {
+    border-bottom: none;
+}
+
+/* Formulário em duas colunas */
 .form-group {
     display: flex;
-    align-items: center;
-    justify-content: flex-start; /* Mantém os inputs e labels alinhados à esquerda */
-    margin-bottom: 10px; /* Diminui o espaço entre os campos */
+    justify-content: space-between;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
 }
 
-label {
-    display: inline-block;
-    text-align: left;
-    margin-right: 10px; /* Mantém um pequeno espaço entre label e input */
-    font-size: 0.9rem;
-    width: auto; /* Remove a largura fixa */
+.form-group input,
+.form-group select {
+    width: 48%;
+    padding: 10px;
+    border: 1px solid #D3B69A;
+    border-radius: 13px; /* Bordas mais arredondadas */
+    font-size: 14px;
 }
 
-input {
-    display: inline-block;
-    border-radius: 10px;
-    border: 1px solid #C99C65; /* Borda no tom bege claro */
-    padding: 5px;
-    width: 55%; /* Inputs menores */
-}
-
-button {
-    display: inline-block;
-    background: transparent;
-    border-radius: 10px;
-    border: none;
-    background-color: #C99C65;
-    padding: 8px 15px;
-    cursor: pointer;
-    color: rgb(0, 0, 0);
-    position: absolute; /* Adicionando position absolute para o posicionamento */
-    right: 40px; /* Mantém o botão 30px a partir do lado direito */
-    bottom: 12px; /* Usando a variável para o deslocamento do fundo */
-}
-
-h1 {
-    margin: 35px;
-    text-align: left;
-}
-
-.custom-select-wrapper {
-    position: relative;
-    width: 50%; /* Largura do select igual às inputs */
-}
-
-.custom-select {
-    display: block;
-    height: 35px;
-    padding: 5px 10px;
-    border: 1px solid #C99C65;
-    border-radius: 10px;
-    appearance: none;
-    background: white;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="%23C99C65" d="M7 10l5 5 5-5z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 14px;
-    cursor: pointer;
+.form-group select {
     width: 100%;
 }
 
-.custom-select:focus {
-    border-color: #C99C65;
-    outline: none;
+.form-group.full-width {
+    width: 100%;
 }
 
-/* Linha horizontal única separando as seções */
-.section-divider {
+/* Ajuste específico para campos menores */
+.form-group .small-input {
+    width: 30%;
+}
+
+/* Estilo do botão */
+button {
+    background-color: #D3B69A;
+    color: white;
+    padding: 10px 20px;
     border: none;
-    height: 1px;
-    background: #C99C65; /* Sombra leve */
-    box-shadow: 0 1px 3px #C99C65; /* Sombra leve */
-    margin: 20px 0; /* Espaçamento */
+    border-radius: 10px;
+    cursor: pointer;
+    float: right; /* Mantém o botão à direita */
 }
 
-.section-title {
-    font-size: 1.5rem; /* Tamanho da fonte alterado */
-    font-weight: normal; /* Altera para sem negrito */
-    text-align: left;
-    margin-bottom: 5px;
-    color: black;
-    border-bottom: 1px solid #C99C65; /* Linha abaixo do título */
-    padding-bottom: 3px; /* Espaço entre o texto e a linha */
-    width: 25%; /* Ajusta o comprimento da linha abaixo do título */
+button:hover {
+    background-color: #BA8C6A;
 }
 
+/* Links e botões de ação */
+a {
+    color: #6F4E37;
+    text-decoration: none;
+    font-weight: bold;
+}
 
-/*Icones*/
+a:hover {
+    text-decoration: underline;
+}
 
-.section-title .icon {
-    width: 35px; /* Largura do ícone */
-    height: 35px; /* Altura do ícone */
-    margin-right: 10px; /* Espaço entre o ícone e o texto */
-    fill: #C99C65; /* Cor do ícone */
+/* Ícones */
+.icon {
+    width: 24px;
+    height: 24px;
 }
