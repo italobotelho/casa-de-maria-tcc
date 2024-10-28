@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('convenios', function (Blueprint $table) {
             $table->BigIncrements('pk_id_conv');
             $table->string('ans_conv', 6)->nullable();
-            $table->string('nome_conv', 55);
+            $table->string('nome_conv', 55)->unique();
 
             $table->timestamps();
         });

@@ -39,6 +39,7 @@ class EventController extends Controller
         $event->end = $request->input('end');
         $event->color = $request->input('color');
         $event->procedimento_id = $request->input('procedimento_id');
+        $event->convenio = $request->input('convenio');
         $event->medico = $request->input('medico'); // Adicione esta linha para salvar o médico
     
         $event->save();

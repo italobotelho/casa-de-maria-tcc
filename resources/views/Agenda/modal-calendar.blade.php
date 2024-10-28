@@ -1,28 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura a viewport para dispositivos móveis -->
-    <title>Document</title> <!-- Título da página -->
-    <style>
-        /* Estilo para a lista de sugestões de pacientes */
-        #pacienteSuggestions {
-            max-height: 200px; /* Limita a altura máxima da lista */
-            overflow-y: auto; /* Adiciona rolagem vertical se necessário */
-            background-color: white; 
-            border: 1px solid #ddd; 
-            border-radius: 0.25rem; 
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
-        }
+<style>
+    /* Estilo para a lista de sugestões de pacientes */
+    #pacienteSuggestions {
+        max-height: 200px; /* Limita a altura máxima da lista */
+        overflow-y: auto; /* Adiciona rolagem vertical se necessário */
+        background-color: white; 
+        border: 1px solid #ddd; 
+        border-radius: 0.25rem; 
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
+    }
 
-        /* Estilo para cada item da lista de sugestões */
-        #pacienteSuggestions .list-group-item {
-            cursor: pointer; /* Indica que o item é clicável */
-        }
-    </style>
-</head>
-<body>
-    
+    /* Estilo para cada item da lista de sugestões */
+    #pacienteSuggestions .list-group-item {
+        cursor: pointer; /* Indica que o item é clicável */
+    }
+</style>
+
 <!-- Modal para agendamento de eventos -->
 <div class="modal fade" id="modalCalendar" tabindex="-1" aria-labelledby="titleModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg"> <!-- Diálogo do modal configurado para scroll e tamanho grande -->

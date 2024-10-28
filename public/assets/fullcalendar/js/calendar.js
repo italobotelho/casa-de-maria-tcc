@@ -22,16 +22,26 @@ document.addEventListener('DOMContentLoaded', function() {
   
       // Acesse o procedimento_id corretamente
       let procedimentoId = element.event.procedimento_id || element.event.extendedProps.procedimento_id;
-  
+
+      let medico = $("#modalCalendar input[name='medico']").val(); // Obtenha o valor do campo médico
+      console.log('Valor do médico:', medico); // Verifique o valor do médico
+
       let newEvent = {
           _method: 'PUT',
           title: element.event.title,
           id: element.event.id,
           start: start,
           end: end,
-          color: color, // Include color in the update
-          procedimento_id: procedimentoId // Inclua o procedimento_id na atualização
+          color: color,
+          procedimento_id: procedimentoId,
+          medico: medico // Inclua o valor do médico aqui
       };
+      
+      // Verifique se o campo médico não está vazio
+      if (!medico) {
+          console.error('O campo médico não pode ser nulo.');
+          return; // Interrompe a execução se o campo médico estiver vazio
+      }
   
       // Verifique se o procedimento_id está definido antes de enviar
       if (!procedimentoId) {
@@ -63,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Preenchendo os campos do modal
       $("#modalCalendar input[name='id']").val(element.event.id);
       $("#modalCalendar input[name='paciente']").val(element.event.title);
-      $("#modalCalendar input[name='medico']").val(element.event.medico); 
+      $("#modalCalendar input[name='medico']").val(element.event.medico || ''); // Adiciona um valor padrão
       $("#modalCalendar select[name='procedimento_id']").val(procedimentoId);
       $("#modalCalendar input[name='convenio']").val(element.event.convenio); 
   
@@ -76,10 +86,9 @@ document.addEventListener('DOMContentLoaded', function() {
       $("#modalCalendar input[name='eventDate']").val(eventDate);
       
       let color = element.event.backgroundColor || "#9D9D9B";
-      $("#modalCalendar input[name='color']").val(color);
-  },
+      $("# modalCalendar input[name='color']").val(color);
+    },
   
-
      eventResize: function(element) {
       let start = moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
       let end = moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");

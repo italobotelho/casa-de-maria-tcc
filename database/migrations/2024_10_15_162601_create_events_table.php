@@ -14,12 +14,10 @@ return new class extends Migration
             $table->dateTime('end');
             $table->string('color', 7);
             $table->unsignedBigInteger('procedimento_id'); // Foreign key
-            $table->unsignedInteger('medico'); // Changed to unsignedInteger
-            $table->unsignedBigInteger('convenio');
+            $table->string('medico'); // Changed to unsignedInteger
+            $table->string('convenio'); // Alterado para armazenar o nome do convênio
             
             $table->foreign('procedimento_id')->references('pk_cod_proc')->on('procedimentos');
-            $table->foreign('medico')->references('pk_crm_med')->on('medicos');
-            $table->foreign('convenio')->references('pk_id_conv')->on('convenios');
 
             $table->timestamps();
             $table->softDeletes();

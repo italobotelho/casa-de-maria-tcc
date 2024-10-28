@@ -26,18 +26,18 @@ function buscarPacientes(query) {
                     item.onclick = function () {
                         document.getElementById('paciente').value = paciente.nome_paci;
                         preencherConvenio(paciente.pk_cod_paci);
-
-                        // Aumentando o delay para garantir que o valor foi preenchido
-                        setTimeout(() => {
+                    
+                        // Remova o setTimeout e verifique o valor do convênio diretamente após o preenchimento
+                        preencherConvenio(paciente.pk_cod_paci).then(() => {
                             let convenioId = document.getElementById('convenio_id').value;
                             console.log("Valor do convênio:", convenioId); // Exibe o valor no console
-
+                    
                             // Verifique se o valor ainda é undefined
                             if (convenioId === undefined || convenioId === '') {
                                 console.error("O valor do convênio é undefined ou vazio.");
                             }
-                        }, 300); // Ajuste o tempo conforme necessário
-
+                        });
+                    
                         sugestoesDiv.style.display = 'none';
                     };
                     sugestoesDiv.appendChild(item);
@@ -93,18 +93,21 @@ function buscarMedico(query) {
 }
 
 function preencherConvenio(pacienteId) {
-    fetch(`/api/pacientes/${pacienteId}`)
-    .then(response => response.json())
-    .then(data => {
-        console.log('Dados recebidos:', data); // Verifique a estrutura exata dos dados
+    return fetch(`/api/pacientes/${pacienteId}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log('Dados recebidos:', data); // Verifique a estrutura exata dos dados
 
-        if (data && data.convenio && data.convenio.nome_conv) {
-            document.getElementById('convenio_id').value = data.convenio.nome_conv; // Preencha com 'nome_conv'
-        } else {
-            console.error('A estrutura dos dados não contém o nome do convênio');
-        }
-    })
-    .catch(error => console.error('Erro ao buscar os dados do paciente:', error));
+            if (data && data.convenio && data.convenio.nome_conv) {
+                document.getElementById('convenio_id').value = data.convenio.nome_conv; // Preencha com 'nome_conv'
+                console.log("Convênio preenchido:", data.convenio.nome_conv); // Verifique se o valor está correto
+            } else {
+                console.error('A estrutura dos dados não contém o nome do convênio');
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao buscar os dados do paciente:', error);
+        });
 }
 
 // Função para ocultar sugestões ao clicar fora

@@ -104,46 +104,47 @@ $(document).ready(function () {
             alert('Não é possível agendar. Paciente não cadastrado.'); // Alerta ao usuário
             return; // Impede o agendamento
         }
-
+    
         let id = $("#modalCalendar input[name='id']").val();
         let title = $("#modalCalendar input[name='paciente']").val();
         let procedimentoId = $("#modalCalendar select[name='procedimento_id']").val();
-        let convenioId = $("#modalCalendar select[name='convenio_id']").val(); // Adicione esta linha para obter o convênio
+        let convenioId = $("#modalCalendar input[name='convenio_id']").val(); // Acesse o valor do convênio aqui
         let selectedDate = $("#modalCalendar input[name='eventDate']").val();
         let startTime = $("#modalCalendar input[name='start']").val();
         let endTime = $("#modalCalendar input[name='end']").val();
         let medico = $("#modalCalendar input[name='medico']").val(); // Adicione esta linha para obter o médico
-
+    
         // Verifique se o procedimento foi selecionado
         if (!procedimentoId || procedimentoId === 'Selecione um Procedimento') {
             alert('Procedimento não selecionado. Por favor, escolha um procedimento para continuar.');
             return; // Impede o agendamento
         }
+        
         console.log("Valor do convênio:", convenioId); // Debug
-        if (!convenioId || convenioId === 'Selecione um Convênio') {
+        if (!convenioId || convenioId.trim() === '') {
             alert('Convênio não selecionado. Por favor, escolha um convênio para continuar.');
             return; // Impede o agendamento
         }
-
+    
         if (!selectedDate || !startTime || !endTime) {
             console.error("Data ou horário não definidos.");
             return;
         }
-
+    
         let color = $("#modalCalendar input[name='color']").val() || "#9D9D9B";
         let start = moment(`${selectedDate}T${startTime}`, "YYYY-MM-DDTHH:mm").format("YYYY-MM-DD HH:mm:ss");
         let end = moment(`${selectedDate}T${endTime}`, "YYYY-MM-DDTHH:mm").format("YYYY-MM-DD HH:mm:ss");
-
+    
         let Event = {
             title: title,
             start: start,
             end: end,
             color: color,
             procedimento_id: procedimentoId,
-            convenio_id: convenioId, // Adicione esta linha para incluir o convênio no objeto Event
-            medico: medico // Adicione esta linha para incluir o médico no objeto Event
+            convenio: convenioId, // Inclua o convênio no objeto Event
+            medico: medico // Inclua o médico no objeto Event
         };
-
+    
         let route;
         if (id === '') {
             route = routeEvents('routeEventStore');
