@@ -38,7 +38,7 @@ class EventRequest extends FormRequest
          return [
             'procedimento_id.required' => 'Selecione um procedimento',
             'medico.required' => 'O campo médico é obrigatório.',
-            'convenio.required' => 'O campo médico é obrigatório.',
+            'convenio.required' => 'O campo convenio é obrigatório.',
             'start.date_format' => 'Preencha uma data inicial com valor válido!',
             'start.before' => 'A data/hora inicial deve ser menor que a data final',
             'end.date_format' => 'Preencha uma data final com valor válido!',

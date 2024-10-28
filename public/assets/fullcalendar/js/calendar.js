@@ -23,8 +23,9 @@ document.addEventListener('DOMContentLoaded', function() {
       // Acesse o procedimento_id corretamente
       let procedimentoId = element.event.procedimento_id || element.event.extendedProps.procedimento_id;
 
-      let medico = $("#modalCalendar input[name='medico']").val(); // Obtenha o valor do campo médico
-      console.log('Valor do médico:', medico); // Verifique o valor do médico
+      let medico = element.event.medico || element.event.extendedProps.medico; // Obtenha o valor do campo médico
+
+      let convenio = element.event.convenio || element.event.extendedProps.convenio;
 
       let newEvent = {
           _method: 'PUT',
@@ -34,12 +35,13 @@ document.addEventListener('DOMContentLoaded', function() {
           end: end,
           color: color,
           procedimento_id: procedimentoId,
-          medico: medico // Inclua o valor do médico aqui
+          medico: medico,
+          convenio: convenio
       };
       
       // Verifique se o campo médico não está vazio
       if (!medico) {
-          console.error('O campo médico não pode ser nulo.');
+          console.error('Médico ão está disponível na atualização do evento.');
           return; // Interrompe a execução se o campo médico estiver vazio
       }
   
@@ -48,6 +50,11 @@ document.addEventListener('DOMContentLoaded', function() {
           console.error('Procedimento ID não está disponível na atualização do evento.');
           return; // Interrompe a execução se o procedimento_id não estiver disponível
       }
+
+      if (!convenio) {
+        console.error('Convenio não está disponível na atualização do evento.');
+        return; // Interrompe a execução se o campo médico estiver vazio
+    }
   
       sendEvent(routeEvents('routeEventUpdate'), newEvent);
     },
@@ -94,23 +101,38 @@ document.addEventListener('DOMContentLoaded', function() {
       let end = moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
       let color = element.event.backgroundColor; // Obter a cor
       let procedimentoId = element.event.procedimento_id || element.event.extendedProps.procedimento_id;
-  
-      // Crie o novo evento com todos os campos necessários
+      let medico = element.event.medico || element.event.extendedProps.medico; // Obtenha o valor do campo médico
+
+      let convenio = element.event.convenio || element.event.extendedProps.convenio;
+
       let newEvent = {
           _method: 'PUT',
           title: element.event.title,
           id: element.event.id,
           start: start,
           end: end,
-          color: color, // Inclua a cor
-          procedimento_id: procedimentoId // Inclua o procedimento_id
+          color: color,
+          procedimento_id: procedimentoId,
+          medico: medico,
+          convenio: convenio
       };
+      
+      // Verifique se o campo médico não está vazio
+      if (!medico) {
+          console.error('Médico ão está disponível na atualização do evento.');
+          return; // Interrompe a execução se o campo médico estiver vazio
+      }
   
       // Verifique se o procedimento_id está definido antes de enviar
       if (!procedimentoId) {
           console.error('Procedimento ID não está disponível na atualização do evento.');
           return; // Interrompe a execução se o procedimento_id não estiver disponível
       }
+
+      if (!convenio) {
+        console.error('Convenio não está disponível na atualização do evento.');
+        return; // Interrompe a execução se o campo médico estiver vazio
+    }
   
       sendEvent(routeEvents('routeEventUpdate'), newEvent);
     },
