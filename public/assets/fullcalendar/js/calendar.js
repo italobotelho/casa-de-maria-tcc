@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     editable: true,
     droppable: true,
     
+    
     eventDrop: function(element) {
       let start = moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
       let end = moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
