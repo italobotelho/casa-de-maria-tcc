@@ -9,7 +9,7 @@
           Show a second modal and hide this one with the button below.
         </div>
         <div class="modal-footer">
-          {{-- <button class="btn btn-primary" data-bs-target="#modalCalendar" data-bs-toggle="modal">Open second modal</button> --}}
+          <button class="btn btn-primary" data-bs-target="#modalCalendar" data-bs-toggle="modal">Alterar Agendamento</button>
         </div>
       </div>
     </div>

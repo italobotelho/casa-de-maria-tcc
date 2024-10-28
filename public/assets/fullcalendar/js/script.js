@@ -10,6 +10,9 @@ $(document).ready(function () {
 
     // Quando o modal for aberto
     $('#modalCalendar').on('show.bs.modal', function () {
+        // Suponha que você tenha uma variável `procedimentoSelecionado` que armazena o ID do procedimento
+        let procedimentoSelecionado = $("#modalCalendar input[name='procedimento_id']").val(); // Obtenha o valor selecionado
+    
         $.ajax({
             url: '/get-procedimentos',
             method: 'GET',
@@ -20,18 +23,23 @@ $(document).ready(function () {
                 $.each(data, function (index, procedimento) {
                     select.append('<option value="' + procedimento.pk_cod_proc + '">' + procedimento.nome_proc + '</option>');
                 });
+    
+                // Agora, defina o valor selecionado, se houver
+                if (procedimentoSelecionado) {
+                    select.val(procedimentoSelecionado); // Defina o valor do procedimento
+                }
             },
             error: function (xhr, status, error) {
                 console.error('Erro ao carregar procedimentos:', error);
             }
         });
-
+    
         // Carregar convênios
         $.ajax({
-            url: '/get-convenios', // URL para buscar convênios
+            url: '/get-convenios',
             method: 'GET',
             success: function (data) {
-                let select = $('#convenio_id'); // Certifique-se de que o ID do select é correto
+                let select = $('#convenio_id');
                 select.empty();
                 select.append('<option selected>Selecione um Convênio</option>');
                 $.each(data, function (index, convenio) {
@@ -132,6 +140,7 @@ $(document).ready(function () {
         }
     
         let color = $("#modalCalendar input[name='color']").val() || "#9D9D9B";
+
         let start = moment(`${selectedDate}T${startTime}`, "YYYY-MM-DDTHH:mm").format("YYYY-MM-DD HH:mm:ss");
         let end = moment(`${selectedDate}T${endTime}`, "YYYY-MM-DDTHH:mm").format("YYYY-MM-DD HH:mm:ss");
     

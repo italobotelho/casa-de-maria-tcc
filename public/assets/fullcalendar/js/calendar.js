@@ -69,13 +69,10 @@ document.addEventListener('DOMContentLoaded', function() {
           console.error('Procedimento ID não está disponível no evento.');
       }
   
-      clearMessages('#message');
-      resetForm("#formEvent");
-  
       let startDate = moment(element.event.start).format("DD/MM/YYYY");
-      $("#modalCalendar #titleModal").text('Alteração de agendamento para ' + startDate);
-      $("#modalCalendar").modal('show');
-      $("#modalCalendar button.deleteEvent").css("display", "flex");
+      $("#modalCalendar #titleModal").text('Edição de agendamento');
+      $("#modalViewCalendar #modalViewCalendarLabel").text('Visualização de agendamento ' + startDate);
+      $("#modalViewCalendar").modal('show');
   
       // Preenchendo os campos do modal
       $("#modalCalendar input[name='id']").val(element.event.id);
@@ -93,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
       $("#modalCalendar input[name='eventDate']").val(eventDate);
       
       let color = element.event.backgroundColor || "#9D9D9B";
-      $("# modalCalendar input[name='color']").val(color);
+      $("#modalCalendar input[name='color']").val(color);
     },
   
      eventResize: function(element) {

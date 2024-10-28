@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             UsuarioSeeders::class,
             ProcedimentoSeeder::class,
             ConvenioSeeder::class,
+            PacienteSeeder::class,
         ]);
     }
 }
