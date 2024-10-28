@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     eventDrop: function(element) {
       let start = moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
       let end = moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
-      let color = element.event.backgroundColor;
+      let color = 'brown'; // Usar a nova cor
       let procedimentoId = element.event.procedimento_id || element.event.extendedProps.procedimento_id;
       let medico = element.event.medico || element.event.extendedProps.medico;
       let convenio = element.event.convenio || element.event.extendedProps.convenio;
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
     eventResize: function(element) {
       let start = moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
       let end = moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
-      let color = element.event.backgroundColor;
+      let color = 'brown'; // Usar a nova cor 
       let procedimentoId = element.event.procedimento_id || element.event.extendedProps.procedimento_id;
       let medico = element.event.medico || element.event.extendedProps.medico;
       let convenio = element.event.convenio || element.event.extendedProps.convenio;
