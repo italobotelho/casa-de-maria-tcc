@@ -1,3 +1,5 @@
+let currentEvent = null; // Variável global para armazenar o evento atual
+
 document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
   var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -42,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
     },
 
     eventClick: function(element) {
+      currentEvent = element.event; // Armazena o evento clicado
       console.log('Evento clicado:', element);
 
       let procedimentoId = element.event.procedimento_id || element.event.extendedProps.procedimento_id;
@@ -57,8 +60,11 @@ document.addEventListener('DOMContentLoaded', function() {
       resetForm("#formEvent");
 
       let startDate = moment(element.event.start).format("DD/MM/YYYY");
+
+      $("#modalViewCalendar #modalViewCalendarLabel").text('Visualização de agendamento para ' + startDate);
+      $("#modalViewCalendar").modal('show');
+
       $("#modalCalendar #titleModal").text('Alteração de agendamento para ' + startDate);
-      $("#modalCalendar").modal('show');
       $("#modalCalendar button.deleteEvent").css("display", "flex");
 
       $("#modalCalendar input[name='id']").val(element.event.id);
@@ -157,3 +163,5 @@ document.addEventListener('DOMContentLoaded', function() {
     calendar.refetchEvents(); // Recarrega os eventos quando um médico é selecionado
   });
 });
+
+

@@ -153,6 +153,73 @@ $(document).ready(function () {
     });
 });
 
+// Adiciona o evento de clique nos itens do dropdown
+$(document).on('click', '.dropdown-item', function (e) {
+    e.preventDefault(); // Impede o comportamento padrão do link
+    const selectedColor = $(this).data('color'); // Obtém a cor do atributo data-color
+  
+    if (currentEvent) {
+        // Altera a cor de fundo do evento
+        currentEvent.setProp('backgroundColor', selectedColor);
+        currentEvent.setProp('borderColor', selectedColor); // Altera a cor da borda do evento, se necessário
+  
+        // Captura outros dados necessários
+        const title = currentEvent.title; // Supondo que o título esteja armazenado no evento
+        const start = currentEvent.start; // Data e hora de início
+        const end = currentEvent.end; // Data e hora de fim
+        const convenio = currentEvent.convenio; // Verifique se este valor é capturado corretamente
+        const medico = currentEvent.medico; // Verifique se este valor é capturado corretamente
+        const procedimento_id = currentEvent.procedimento_id; // Verifique se este valor é capturado corretamente
+
+        // Validações
+        if (!title) {
+            alert('O campo título é obrigatório.');
+            return;
+        }
+        if (!procedimento_id) {
+            alert('Selecione um procedimento.');
+            return;
+        }
+        if (!convenio) {
+            alert('O campo convênio é obrigatório.');
+            return;
+        }
+        if (!medico) {
+            alert('O campo médico é obrigatório.');
+            return;
+        }
+        if (!moment(start).isValid()) {
+            alert('Preencha uma data inicial com valor válido!');
+            return;
+        }
+        if (!moment(end).isValid()) {
+            alert('Preencha uma data final com valor válido!');
+            return;
+        }
+        if (moment(start).isSameOrAfter(end)) {
+            alert('A data/hora inicial deve ser menor que a data final');
+            return;
+        }
+
+        // Envia a nova cor e outros dados para o servidor
+        let newEventData = {
+            id: currentEvent.id, // ID do evento
+            color: selectedColor, // Nova cor
+            title: title, // Adicione o título
+            start: moment(start).format("YYYY-MM-DD HH:mm:ss"), // Formate a data de início
+            end: moment(end).format("YYYY-MM-DD HH:mm:ss"), // Formate a data de fim
+            convenio: convenio, // Adicione o convênio
+            medico: medico, // Adicione o médico
+            procedimento_id: procedimento_id, // Adicione o procedimento
+            _method: 'PUT' // Método para atualização
+        };
+  
+        // Chama a função para enviar a atualização
+        let route = routeEvents('routeEventUpdate'); // Obtém a rota para atualização
+        sendEvent(route, newEventData); // Envia a requisição para o servidor
+    }
+});
+  
 function sendEvent(route, data_) {
     $.ajax({
         url: route,
@@ -161,7 +228,7 @@ function sendEvent(route, data_) {
         dataType: "json",
         success: function (json) {
             if (json) {
-                location.reload();
+                location.reload(); // Recarrega a página após a atualização
             }
         },
         error: function (json) {
