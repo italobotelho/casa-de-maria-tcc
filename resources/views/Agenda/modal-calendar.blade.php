@@ -90,13 +90,13 @@
                         </div>
 
                         <!-- - Campo para status -->
-                        <div class="col-12">
+                        <!-- <div class="col-12">
                             <label for="status" class="form-label">Status</label>
                             <select class="form-select" id="status" aria-label="Default select example">
                                 <option selected>Open this select menu</option>
                                 {{-- Adicione as opções de status aqui  
                             </select>
-                        </div> --}}
+                        </div> --}} -->
                     </form>
                 </div>
             </div>

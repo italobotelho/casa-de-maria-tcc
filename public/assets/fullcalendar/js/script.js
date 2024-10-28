@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     // Função para aumentar ou diminuir o horário
     function adjustTime(selector, adjustment) {
         let currentTime = $(selector).val();
@@ -119,13 +120,7 @@ $(document).ready(function () {
             alert('Procedimento não selecionado. Por favor, escolha um procedimento para continuar.');
             return; // Impede o agendamento
         }
-        
-        console.log("Valor do convênio:", convenioId); // Debug
-        if (!convenioId || convenioId.trim() === '') {
-            alert('Convênio não selecionado. Por favor, escolha um convênio para continuar.');
-            return; // Impede o agendamento
-        }
-    
+
         if (!selectedDate || !startTime || !endTime) {
             console.error("Data ou horário não definidos.");
             return;

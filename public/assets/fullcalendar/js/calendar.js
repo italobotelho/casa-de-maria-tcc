@@ -1,6 +1,4 @@
-// calendar.js
 document.addEventListener('DOMContentLoaded', function() {
-
   var calendarEl = document.getElementById('calendar');
   var calendar = new FullCalendar.Calendar(calendarEl, {
     headerToolbar: {
@@ -14,18 +12,13 @@ document.addEventListener('DOMContentLoaded', function() {
     selectable: true,
     editable: true,
     droppable: true,
-    
-    
+
     eventDrop: function(element) {
       let start = moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
       let end = moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
-      let color = element.event.backgroundColor; // Get the color
-  
-      // Acesse o procedimento_id corretamente
+      let color = element.event.backgroundColor;
       let procedimentoId = element.event.procedimento_id || element.event.extendedProps.procedimento_id;
-
-      let medico = element.event.medico || element.event.extendedProps.medico; // Obtenha o valor do campo médico
-
+      let medico = element.event.medico || element.event.extendedProps.medico;
       let convenio = element.event.convenio || element.event.extendedProps.convenio;
 
       let newEvent = {
@@ -39,71 +32,55 @@ document.addEventListener('DOMContentLoaded', function() {
           medico: medico,
           convenio: convenio
       };
-      
-      // Verifique se o campo médico não está vazio
-      if (!medico) {
-          console.error('Médico ão está disponível na atualização do evento.');
-          return; // Interrompe a execução se o campo médico estiver vazio
-      }
-  
-      // Verifique se o procedimento_id está definido antes de enviar
-      if (!procedimentoId) {
-          console.error('Procedimento ID não está disponível na atualização do evento.');
-          return; // Interrompe a execução se o procedimento_id não estiver disponível
+
+      if (!medico || !procedimentoId || !convenio) {
+          console.error('Um ou mais campos obrigatórios estão vazios.');
+          return; 
       }
 
-      if (!convenio) {
-        console.error('Convenio não está disponível na atualização do evento.');
-        return; // Interrompe a execução se o campo médico estiver vazio
-    }
-  
       sendEvent(routeEvents('routeEventUpdate'), newEvent);
     },
 
     eventClick: function(element) {
-      console.log('Evento clicado:', element); // Verifique a estrutura do elemento
-  
+      console.log('Evento clicado:', element);
+
       let procedimentoId = element.event.procedimento_id || element.event.extendedProps.procedimento_id;
-      if (procedimentoId) {
-          console.log('ID do procedimento:', procedimentoId);
-      } else {
-          console.error('Procedimento ID não está disponível no evento.');
-      }
-  
+      let medico = element.event.medico || element.event.extendedProps.medico;
+      let convenio = element.event.convenio || element.event.extendedProps.convenio;
+
       clearMessages('#message');
       resetForm("#formEvent");
-  
+
       let startDate = moment(element.event.start).format("DD/MM/YYYY");
       $("#modalCalendar #titleModal").text('Alteração de agendamento para ' + startDate);
       $("#modalCalendar").modal('show');
       $("#modalCalendar button.deleteEvent").css("display", "flex");
-  
-      // Preenchendo os campos do modal
+
       $("#modalCalendar input[name='id']").val(element.event.id);
       $("#modalCalendar input[name='paciente']").val(element.event.title);
-      $("#modalCalendar input[name='medico']").val(element.event.medico || ''); // Adiciona um valor padrão
-      $("#modalCalendar select[name='procedimento_id']").val(procedimentoId);
-      $("#modalCalendar input[name='convenio']").val(element.event.convenio); 
-  
+      $("#modalCalendar input[name='medico']").val(medico || '');
+      $("#modalCalendar input[name='convenio']").val(convenio || '');
+      $("#modalCalendar select[name='procedimento_id']").val(procedimentoId || '');
+
       let startTime = moment(element.event.start).format("HH:mm");
       $("#modalCalendar input[name='start']").val(startTime);
+
       let endTime = moment(element.event.end).format("HH:mm");
       $("#modalCalendar input[name='end']").val(endTime);
-  
+
       let eventDate = moment(element.event.start).format("YYYY-MM-DD");
       $("#modalCalendar input[name='eventDate']").val(eventDate);
-      
+
       let color = element.event.backgroundColor || "#9D9D9B";
-      $("# modalCalendar input[name='color']").val(color);
+      $("#modalCalendar input[name='color']").val(color);
     },
-  
-     eventResize: function(element) {
+
+    eventResize: function(element) {
       let start = moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
       let end = moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
-      let color = element.event.backgroundColor; // Obter a cor
+      let color = element.event.backgroundColor;
       let procedimentoId = element.event.procedimento_id || element.event.extendedProps.procedimento_id;
-      let medico = element.event.medico || element.event.extendedProps.medico; // Obtenha o valor do campo médico
-
+      let medico = element.event.medico || element.event.extendedProps.medico;
       let convenio = element.event.convenio || element.event.extendedProps.convenio;
 
       let newEvent = {
@@ -117,58 +94,61 @@ document.addEventListener('DOMContentLoaded', function() {
           medico: medico,
           convenio: convenio
       };
-      
-      // Verifique se o campo médico não está vazio
-      if (!medico) {
-          console.error('Médico ão está disponível na atualização do evento.');
-          return; // Interrompe a execução se o campo médico estiver vazio
-      }
-  
-      // Verifique se o procedimento_id está definido antes de enviar
-      if (!procedimentoId) {
-          console.error('Procedimento ID não está disponível na atualização do evento.');
-          return; // Interrompe a execução se o procedimento_id não estiver disponível
+
+      if (!medico || !procedimentoId || !convenio) {
+          console.error('Um ou mais campos obrigatórios estão vazios.');
+          return; 
       }
 
-      if (!convenio) {
-        console.error('Convenio não está disponível na atualização do evento.');
-        return; // Interrompe a execução se o campo médico estiver vazio
-    }
-  
       sendEvent(routeEvents('routeEventUpdate'), newEvent);
     },
 
     select: function(element) {
       clearMessages('#message');
       resetForm("#formEvent");
-  
-      // Atualiza o título do modal com a data selecionada
-      let startDate = moment(element.start).format("DD/MM/YYYY"); // Formato da data
+
+      let startDate = moment(element.start).format("DD/MM/YYYY");
       $("#modalCalendar #titleModal").text('Novo agendamento para ' + startDate);
-  
+
       $("#modalCalendar").modal('show');
       $("#modalCalendar button.deleteEvent").css("display", "none");
-  
-      // Preencher os inputs com a hora selecionada
-      let startTime = moment(element.start).format("HH:mm"); // Apenas a hora
+
+      let startTime = moment(element.start).format("HH:mm");
       $("#modalCalendar input[name='start']").val(startTime);
-  
-      let endTime = moment(element.end).format("HH:mm"); // Apenas a hora
+
+      let endTime = moment(element.end).format("HH:mm");
       $("#modalCalendar input[name='end']").val(endTime);
-  
-      // Armazena a data selecionada em um campo oculto
+
       $("#modalCalendar input[name='eventDate']").val(moment(element.start).format("YYYY-MM-DD"));
-  
       $("#modalCalendar input[name='color']").val("#9D9D9B");
-  
+
       // Limpa o campo do médico
-      $("#modalCalendar input[name='medico']").val(''); // Adicione esta linha para limpar o campo médico
-  
-      calendar.unselect(); // Desmarcar a seleção
+      $("#modalCalendar input[name='medico']").val('');
+
+      calendar.unselect();
     },
 
-    events: routeEvents('routeLoadEvents'),
-});
+    events: function(fetchInfo, successCallback, failureCallback) {
+      var medicoId = document.getElementById('medicoSelect').value; // Captura o ID do médico selecionado
 
-calendar.render();
+      $.ajax({
+        url: routeEvents('routeLoadEvents'),
+        method: 'GET',
+        data: { medico_id: medicoId }, // Adiciona o ID do médico à requisição
+        success: function(data) {
+          successCallback(data);
+        },
+        error: function() {
+          failureCallback();
+        }
+      });
+    },
+  });
+
+  calendar.render();
+
+  // Adiciona o listener para o dropdown de médicos
+  document.getElementById('medicoSelect').addEventListener('change', function() {
+    calendar.refetchEvents(); // Recarrega os eventos quando um médico é selecionado
+  });
 });

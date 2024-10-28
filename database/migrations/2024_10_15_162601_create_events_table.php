@@ -14,10 +14,12 @@ return new class extends Migration
             $table->dateTime('end');
             $table->string('color', 7);
             $table->unsignedBigInteger('procedimento_id'); // Foreign key
-            $table->string('medico'); // Changed to unsignedInteger
+            $table->unsignedInteger('medico'); // Alterado para unsignedInteger
             $table->string('convenio'); // Alterado para armazenar o nome do convênio
             
+            // Definindo as chaves estrangeiras
             $table->foreign('procedimento_id')->references('pk_cod_proc')->on('procedimentos');
+            $table->foreign('medico')->references('pk_crm_med')->on('medicos'); // Chave estrangeira para medicos
 
             $table->timestamps();
             $table->softDeletes();
@@ -28,8 +30,7 @@ return new class extends Migration
     {
         Schema::table('events', function (Blueprint $table) {
             $table->dropForeign(['procedimento_id']);
-            $table->dropForeign(['medico']);
-            $table->dropForeign(['convenio']);
+            $table->dropForeign(['medico']); // Removendo a chave estrangeira do medico
         });
         Schema::dropIfExists('events');
     }

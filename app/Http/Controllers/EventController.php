@@ -18,19 +18,31 @@ class EventController extends Controller
     {
         $this->middleware('auth');
     }
+    // No EventController
 
-    public function loadEvents()
+
+    public function loadEvents(Request $request)
     {
-        $events = Event::with('procedimento')->get();
+        $medicoId = $request->get('medico_id');
+        $query = Event::with('procedimento');
+    
+        // Filtra eventos por médico, se um ID for fornecido
+        if ($medicoId) {
+            $query->where('medico', $medicoId);
+        }
+    
+        $events = $query->get();
         return response()->json($events);
     }
-
+    
     public function index()
     {
-        $procedimentos = Procedimento::all(); // Busca todos os procedimentos
-        return view('agenda.home', compact('procedimentos')); // Passa para a view
+        $procedimentos = Procedimento::all(); // Fetch all procedures
+        $medicos = Medico::all(); // Fetch all doctors
+       
+        return view('agenda.home', compact('procedimentos', 'medicos')); // Pass to the view
     }
-
+    
     public function store(EventRequest $request)
     {
         $event = new Event();
