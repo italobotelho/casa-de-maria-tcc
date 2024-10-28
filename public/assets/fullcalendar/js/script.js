@@ -29,7 +29,7 @@ $(document).ready(function () {
 
         // Carregar convênios
         $.ajax({
-            url: '/get-convenios', // URL para buscar convênios
+            url: '/get-convenios',
             method: 'GET',
             success: function (data) {
                 let select = $('#convenio_id'); // Certifique-se de que o ID do select é correto

@@ -46,6 +46,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
       let procedimentoId = element.event.procedimento_id || element.event.extendedProps.procedimento_id;
       let medico = element.event.medico || element.event.extendedProps.medico;
+
+        console.log('Evento clicado:', element);
+        console.log('Convênio:', element.event.convenio); // Adicione esta linha para verificar
+        // ... restante do seu código
+     
       let convenio = element.event.convenio || element.event.extendedProps.convenio;
 
       clearMessages('#message');
@@ -59,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
       $("#modalCalendar input[name='id']").val(element.event.id);
       $("#modalCalendar input[name='paciente']").val(element.event.title);
       $("#modalCalendar input[name='medico']").val(medico || '');
-      $("#modalCalendar input[name='convenio']").val(convenio || '');
+      $("#modalCalendar input[name='convenio_id']").val(convenio || '');
       $("#modalCalendar select[name='procedimento_id']").val(procedimentoId || '');
 
       let startTime = moment(element.event.start).format("HH:mm");
