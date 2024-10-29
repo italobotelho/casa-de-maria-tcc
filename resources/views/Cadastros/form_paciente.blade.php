@@ -11,9 +11,10 @@
 </head>
 
 <body>
-    <div class="container">
+    
         <h1>CADASTRE UM NOVO PACIENTE</h1>
 
+        <div class="container">
         <div class="card">
             <form action="{{ route('paciente.store') }}" method="POST">
                 @csrf <!-- CSRF token for form submission -->
@@ -124,6 +125,7 @@
                 <br><br>
             </form>
         </div>
+      <br>
         <a href="pacientes">VOLTAR</a>
     
        

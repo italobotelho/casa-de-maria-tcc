@@ -1,8 +1,9 @@
 /* Estilo para o container principal */
 .container {
-    max-width: 800px;
+    max-width: 150rem;
     margin: 0 auto;
     padding: 20px;
+    justify-content: center;
 }
 
 /* Estilo do card */
@@ -115,7 +116,7 @@ h1 {
 button {
     background-color: #D3B69A;
     color: white;
-    padding: 10px;
+    padding: 10px 20px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
