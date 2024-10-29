@@ -116,15 +116,17 @@
                     </div>
                 @endif
 
-                <br>
-
+                
                 <!-- Submit Button -->
                 <button type="submit" class="btn btn-primary">Cadastrar Paciente</button>
+
+               
+                <br><br>
             </form>
         </div>
-
-        <br>
         <a href="pacientes">VOLTAR</a>
+    
+       
 
         <!-- JavaScript Section -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
