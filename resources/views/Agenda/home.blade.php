@@ -18,7 +18,7 @@
   <div class="form-group">
     <label for="medicoSelect">Selecione um Médico:</label>
     <select id="medicoSelect" class="form-control">
-        <option value="">Selecione um Médico</option>
+        <option value="">Todos</option>
         @foreach ($medicos as $medico)
             <option value="{{ $medico->pk_crm_med}}">{{ $medico->nome_med }}</option>
         @endforeach
