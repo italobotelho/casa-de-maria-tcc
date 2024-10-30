@@ -80,9 +80,11 @@
     </div>
 </div>
 
-            <script src="js/paciente.js"></script>
+//Rotas da Tela Configurações Convenios
 
-  
+Route::get('/convenios', [ConvenioController::class, 'index'])->name('convenios.index');
+Route::get('/convenios/create', [ConvenioController::class, 'create'])->name('convenios.create');
+Route::post('/convenios', [ConvenioController::class, 'store'])->name('convenios.store');
 
     <a class="cad" href="menu">VOLTAR</a>
 </body>
