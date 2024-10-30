@@ -8,16 +8,16 @@ use App\Models\Convenio;
 
 class PersonController extends Controller
 {
-    //filtro na tela busca pacintes
     public function buscarPacientes(Request $request)
     {
         $nome = $request->input('nome_paci');
         $dataNascimento = $request->input('data_nasc_paci');
     
-        // Filtra pacientes com base no nome e/ou data de nascimento
+        // Verifica se algum filtro foi aplicado
         $query = Paciente::query();
     
         if ($nome || $dataNascimento) {
+            // Se houver filtro, aplica o filtro de nome e/ou data de nascimento
             $query->where(function($q) use ($nome, $dataNascimento) {
                 if ($nome) {
                     $q->where('nome_paci', 'like', '%' . $nome . '%');
@@ -29,11 +29,14 @@ class PersonController extends Controller
             });
         }
     
+        // Caso contrário, retorna todos os pacientes
         $pacientes = $query->get();
+        $convenios = Convenio::all(); // Recupera todos os convênios
     
-        // Ajuste aqui para o caminho correto da view
-        return view('Menu.pacientes', compact('pacientes'));
+        // Retorna a view com todos os pacientes ou com os pacientes filtrados
+        return view('Menu.pacientes', compact('pacientes', 'convenios'));
     }
+    
     
     public function ListarConvenio() // Nome do método corrigido
     {
