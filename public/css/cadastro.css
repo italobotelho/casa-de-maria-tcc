@@ -1,36 +1,102 @@
-/* Estilo para o container principal */
-.container {
-    max-width: 150rem;
-    margin: 0 auto;
-    padding: 20px;
-    justify-content: center;
+@charset "UTF-8";
+
+body {
+    background-image: url(../img/fundo-cadastro.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Inter', sans-serif; /* Adiciona a fonte Inter ao body */
 }
 
-/* Estilo do card */
-.card {
-    padding: 20px;
-    border: 1px solid #C99C65;
-    border-radius: 15px; /* Bordas mais retangulares */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: white;
-    margin: 20px auto; /* Centraliza o card horizontalmente */
-    width: 100%; /* Deixe ele ocupar toda a largura do container */
-    max-width: 900px; /* Define o máximo de largura */
-    height: auto; /* Deixa o card crescer com o conteúdo */
-}
-
-/* Título principal */
 h1 {
-    font-size: 28px;
+    font-size: 40px;
     text-align: left; /* Alinhamento à esquerda em relação ao card */
     margin-bottom: 20px;
     color: #6F4E37; /* Cor do título */
 }
 
+.card {
+    margin: auto;
+    border: 3px solid #C99C65;
+    border-radius: 15px;
+    width: 50rem; /* Diminui a largura do card */
+    box-shadow: 0 16px 26px rgba(0, 0, 0, 0.1);
+    color: black;
+    padding: 40px; /* Ajusta o padding do card */
+    position: relative;
+}
+
+
+.form-group {
+    display: flex; /* Coloca a label e o input lado a lado */
+    align-items: center; /* Alinha verticalmente a label e o input */
+    margin-bottom: 10px; /* Diminui o espaço entre os campos */
+    width: 100%; /* Ajusta a largura da seção do grupo */
+}
+
+.form-group label {
+    width: 150px; /* Define uma largura fixa para as labels */
+    margin-right: 25px; /* Espaço entre a label e o input */
+    text-align: right; /* Alinha o texto da label à direita */
+}
+
+.form-control {
+    border-radius: 10px; /* Inputs mais arredondados */
+    padding: 5px; /* Ajusta o padding dos inputs */
+    width: 200px; /* Define um comprimento menor para todos os inputs */
+    border: 1px solid #C99C65; /* Adiciona uma borda colorida aos inputs */
+    transition: border-color 0.3s; /* Transição suave para o foco */
+    height: 15px; /* Diminui a altura dos inputs */
+}
+
+.form-control:focus {
+    border-color: #A76A4D; /* Altera a cor da borda ao focar no input */
+    outline: none; /* Remove o contorno padrão */
+}
+
+button {
+    display: inline-block;
+    background: transparent;
+    border-radius: 10px;
+    border: none;
+    background-color: #C99C65;
+    padding: 8px 15px;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    position: relative; /* Mantém o botão no fluxo normal */
+    margin-top: 20px; /* Espaço acima do botão */
+}
+
+button:hover {
+    background-color: #A76A4D; /* Muda a cor do botão ao passar o mouse */
+}
+
+.section-title .icon {
+    width: 30px; /* Largura do ícone */
+    height: 30px; /* Altura do ícone */
+    margin-right: 10px; /* Espaço entre o ícone e o texto */
+    fill: #C99C65; /* Cor do ícone */
+}
+
+button {
+    background-color: #b07d48;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    float: right;
+    transition: transform 0.6s ease, background-color 0.6s ease;
+    will-change: transform; 
+}
+
+button:hover {
+    background-color: #BA8C6A;
+    transform: scale(1.1);
+}
+
 /* Estilo das seções */
 .section-title {
     font-size: 22px; /* Aumentado o tamanho da fonte do título da seção */
-    font-weight: bold;
     color: #000000; /* Cor do título da seção */
     margin-top: 20px;
     margin-bottom: 30px; /* Aumentado o espaço abaixo do título da seção */
@@ -49,98 +115,21 @@ h1 {
     left: 0;
 }
 
-/* Linha de divisão entre seções */
-.section {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid rgba(211, 182, 154, 0.5); /* Linha que divide as seções com sombreado */
-}
-
-/* Remover borda inferior da última seção */
-.section:last-of-type {
-    border-bottom: none;
-}
-
-/* Formulário com inputs e labels à direita */
-.form-group {
-    display: flex; 
-    flex-direction: row; /* Alinha label e input lado a lado */
-    align-items: center; /* Alinha verticalmente */
-    margin-bottom: 25px; /* Aumenta a distância entre as linhas do formulário */
-}
-
-/* Para colunas à esquerda */
-.dados-pessoais-left, .dados-pessoais-right {
-    flex: 1; /* Permite que ambas as colunas ocupem espaço igual */
-}
-
-.dados-pessoais-right {
-    margin-left: 30px; /* Distância entre as colunas esquerda e direita */
-}
-
-/* Ajustar a largura das labels */
-.form-group label {
-    width: 30%; /* Largura da label (ajuste conforme necessário) */
-    text-align: left; /* Alinhamento do texto à esquerda */
-}
-
-/* Garantir que todos os inputs ocupem a mesma largura */
-.form-group input,
-.form-group select {
-    width: 70%; /* Ajuste a largura dos inputs para ocupar 70% */
-    padding: 10px;
-    border: 1px solid #D3B69A;
-    border-radius: 13px; /* Bordas mais arredondadas */
-    font-size: 14px;
-}
-
-/* Ajuste específico para campos menores */
-.form-group .small-input {
-    width: 100%; /* Largura total para campos pequenos */
-}
-
-/* Ajuste de margem para o input de cidade */
-.form-group.cidade {
-    flex-direction: column; /* Alinha label e input verticalmente */
-}
-
-.form-group.cidade label {
-    margin-bottom: 10px; /* Aumenta a distância entre a label e o input */
-}
-
-.form-group.cidade input {
-    margin-top: 0; /* Remove qualquer margem superior do input de cidade */
-}
-
-/* Estilo do botão */
-button {
-    background-color: #D3B69A;
+.voltar{
+    background-color: #b07d48;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    float: right; /* Mantém o botão à direita */
+    float: right;
+    transition: transform 0.6s ease, background-color 0.6s ease;
+    will-change: transform; 
+    text-decoration: none; 
 }
-
-button:hover {
+.voltar:hover {
     background-color: #BA8C6A;
+    transform: scale(1.1);
+    text-decoration: none; 
+    
 }
-
-/* Links e botões de ação */
-a {
-    color: #6F4E37;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* Ícones */
-.icon {
-    width: 24px;
-    height: 24px;
-}
-

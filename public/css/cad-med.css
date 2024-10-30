@@ -7,44 +7,24 @@ body {
     font-family: 'Inter', sans-serif; /* Adiciona a fonte Inter ao body */
 }
 
-
 h1 {
-    margin: 35px;
-    text-align: left;
+    font-size: 40px;
+    text-align: left; /* Alinhamento à esquerda em relação ao card */
+    margin-bottom: 20px;
+    color: #6F4E37; /* Cor do título */
 }
 
 .card {
     margin: auto;
     border: 3px solid #C99C65;
     border-radius: 15px;
-    width: 70rem; /* Card mais retangular */
+    width: 50rem; /* Diminui a largura do card */
     box-shadow: 0 16px 26px rgba(0, 0, 0, 0.1);
     color: black;
     padding: 40px; /* Ajusta o padding do card */
     position: relative;
 }
 
-.section-title {
-    font-size: 1.5rem; /* Tamanho da fonte alterado */
-    font-weight: normal; /* Altera para sem negrito */
-    text-align: left;
-    margin-bottom: 5px;
-    color: black;
-    border-bottom: 1px solid #C99C65; /* Linha abaixo do título */
-    padding-bottom: 3px; /* Espaço entre o texto e a linha */
-    width: 25%;
-}
-
-.section-divider {
-    border: 1px solid #C99C65;
-    margin: 20px 0;
-}
-
-.form-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px; /* Ajusta o espaço entre as linhas */
-}
 
 .form-group {
     display: flex; /* Coloca a label e o input lado a lado */
@@ -53,18 +33,19 @@ h1 {
     width: 100%; /* Ajusta a largura da seção do grupo */
 }
 
-.label {
-    width: 30%; /* Ajusta a largura da label para um tamanho fixo */
-    margin-right: 10px; /* Adiciona um espaço entre a label e o input */
+.form-group label {
+    width: 150px; /* Define uma largura fixa para as labels */
+    margin-right: 25px; /* Espaço entre a label e o input */
+    text-align: right; /* Alinha o texto da label à direita */
 }
 
 .form-control {
     border-radius: 10px; /* Inputs mais arredondados */
-    padding: 8px; /* Ajusta o padding dos inputs */
-    width: 300px; /* Define um comprimento fixo para todos os inputs */
+    padding: 5px; /* Ajusta o padding dos inputs */
+    width: 200px; /* Define um comprimento menor para todos os inputs */
     border: 1px solid #C99C65; /* Adiciona uma borda colorida aos inputs */
     transition: border-color 0.3s; /* Transição suave para o foco */
-    height: 40px; /* Define uma altura fixa para os inputs */
+    height: 15px; /* Diminui a altura dos inputs */
 }
 
 .form-control:focus {
@@ -94,4 +75,61 @@ button:hover {
     height: 30px; /* Altura do ícone */
     margin-right: 10px; /* Espaço entre o ícone e o texto */
     fill: #C99C65; /* Cor do ícone */
+}
+
+button {
+    background-color: #b07d48;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    float: right;
+    transition: transform 0.6s ease, background-color 0.6s ease;
+    will-change: transform; 
+}
+
+button:hover {
+    background-color: #BA8C6A;
+    transform: scale(1.1);
+}
+
+/* Estilo das seções */
+.section-title {
+    font-size: 22px; /* Aumentado o tamanho da fonte do título da seção */
+    color: #000000; /* Cor do título da seção */
+    margin-top: 20px;
+    margin-bottom: 30px; /* Aumentado o espaço abaixo do título da seção */
+    position: relative;
+}
+
+/* Linha curta abaixo do título da seção */
+.section-title::after {
+    content: '';
+    display: block;
+    width: 200px; /* Largura da linha curta */
+    height: 2px;
+    background-color: #D3B69A;
+    position: absolute;
+    bottom: -5px; /* Ajuste de posicionamento abaixo do título */
+    left: 0;
+}
+
+.voltar{
+    background-color: #b07d48;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    float: right;
+    transition: transform 0.6s ease, background-color 0.6s ease;
+    will-change: transform; 
+    text-decoration: none; 
+}
+.voltar:hover {
+    background-color: #BA8C6A;
+    transform: scale(1.1);
+    text-decoration: none; 
+    
 }
