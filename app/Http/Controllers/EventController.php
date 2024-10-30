@@ -31,7 +31,19 @@ class EventController extends Controller
             $query->where('medico', $medicoId);
         }
     
-        $events = $query->get();
+        $events = $query->get()->map(function ($event) {
+            return [
+                'id' => $event->id,
+                'title' => $event->title,
+                'start' => $event->start,
+                'end' => $event->end,
+                'procedimento_id' => $event->procedimento_id, // Certifique-se de que isso esteja presente
+                'medico' => $event->medico,
+                'convenio' => $event->convenio,
+                'backgroundColor' => $event->color,
+            ];
+        });
+    
         return response()->json($events);
     }
     

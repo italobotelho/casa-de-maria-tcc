@@ -51,8 +51,8 @@
                         <div class="col-12">
                             <label for="procedimento_id" class="form-label">Procedimento</label>
                             <select class="form-select" id="procedimento_id" name="procedimento_id" aria-label="Default select example">
-                                <option selected>Selecione um Procedimento</option>
-                                @foreach($procedimentos as $procedimento) <!-- Loop para adicionar opções de procedimentos -->
+                                <option value="">Selecione um Procedimento</option> <!-- A opção padrão deve ter um valor vazio -->
+                                @foreach($procedimentos as $procedimento)
                                     <option value="{{ $procedimento->pk_cod_proc }}">{{ $procedimento->nome_proc }}</option>
                                 @endforeach
                             </select>
