@@ -8,6 +8,7 @@ use App\Models\Convenio;
 
 class PersonController extends Controller
 {
+    //filtro na tela busca pacintes
     public function buscarPacientes(Request $request)
     {
         $nome = $request->input('nome_paci');
