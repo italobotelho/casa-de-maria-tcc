@@ -71,15 +71,17 @@ function buscarMedico(query) {
             sugestoesDiv.innerHTML = ''; // Limpa sugestões anteriores
             if (data.length > 0) { // Se houver médicos retornados
                 // Para cada médico retornado, cria um item de sugestão
-                data.forEach(nome => {
+                data.forEach(medico => {
                     const item = document.createElement('a'); // Cria um novo elemento <a> para a sugestão
                     item.className = 'list-group-item list-group-item-action'; // Define classes para estilização
                     item.href = '#'; // Define o href como '#' para que não redirecione
-                    item.textContent = nome; // Define o texto da sugestão como o nome do médico
+                    item.textContent = medico.nome_med; // Use o nome do médico
+                    item.dataset.id = medico.pk_crm_med; // Armazena o ID do médico
 
                     // Adiciona um evento de clique para o item de sugestão
                     item.onclick = function () {
-                        document.getElementById('medico').value = nome; // Preenche o campo com o nome do médico
+                        document.getElementById('medico').value = medico.pk_crm_med; // Preenche o campo oculto com o ID do médico
+                        document.getElementById('medico_nome').value = medico.nome_med; // Se você tiver um campo para o nome do médico
                         sugestoesDiv.style.display = 'none'; // Esconde a div de sugestões após a seleção
                     };
                     sugestoesDiv.appendChild(item); // Adiciona o item de sugestão à div
@@ -113,7 +115,7 @@ function preencherConvenio(pacienteId) {
 // Função para ocultar sugestões ao clicar fora
 document.addEventListener('click', function(event) {
     const sugestoesDivPaciente = document.getElementById('pacienteSuggestions');
-    const sugestoesDivMedico = document.getElementById('me  dicoSuggestions');
+    const sugestoesDivMedico = document.getElementById('medicoSuggestions');
 
     // Verifica se o clique foi fora das sugestões de pacientes
     if (sugestoesDivPaciente && !sugestoesDivPaciente.contains(event.target) && event.target.id !== 'paciente') {

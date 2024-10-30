@@ -52,7 +52,12 @@ class EventController extends Controller
         $event->color = $request->input('color');
         $event->procedimento_id = $request->input('procedimento_id');
         $event->convenio = $request->input('convenio');
-        $event->medico = $request->input('medico'); // Adicione esta linha para salvar o médico
+        $event->medico = $request->input('medico'); // Certifique-se de que está pegando o campo correto
+    
+        // Verifique se o ID do médico não é nulo
+        if (empty($event->medico)) {
+            return response()->json(['error' => 'O campo médico é obrigatório.'], 400);
+        }
     
         $event->save();
         return response()->json(true);
@@ -68,7 +73,7 @@ class EventController extends Controller
             $event->end = $request->input('end');
             $event->color = $request->input('color');
             $event->procedimento_id = $request->input('procedimento_id');
-            $event->medico = $request->input('medico'); // Adicione esta linha para atualizar o médico
+            $event->medico = $request->input('medico'); // Use o ID do médico
     
             $event->save();
             return response()->json(true);
