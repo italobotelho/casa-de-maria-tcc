@@ -4,88 +4,66 @@
     <meta charset="pt-br">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>PACI</title>
+    <title>Pacientes</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-    <style>
-      .cad{
-        margin:15px;
-        color:white;
-        background-color:#EABF8A;
-        border-radius:5px;
-        border:none;
-        padding:15px;
-        }
-    
-        .modal-content {
-        padding: 20px;
-        background-color: white;
-        border-radius: 5px;
-        border: 1px solid #ddd;
-        }
-
-    </style>
 </head>
 <body>
     <br><br>
+    <h1>Buscar paciente</h1>
     
     <a class="cad" href="form_paciente">CADASTRAR PACIENTE</a>
 
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 mt-4">
+        <!-- Formulário de busca -->
+        <form action="{{ url('/buscar_pacientes') }}" method="GET" class="form-inline mb-4">
+            <div class="form-group">
+                <label for="nome_paci">Nome:</label>
+                <input type="text" name="nome_paci" id="nome_paci" class="form-control" placeholder="Nome do paciente">
             </div>
+            <div class="form-group">
+                <label for="data_nasc_paci">Data de Nascimento:</label>
+                <input type="date" name="data_nasc_paci" id="data_nasc_paci" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
+
+        <h3>RESULTADOS</h3>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 mt-4"></div>
             <div class="col-lg-8">
                 <div class="card shadow">
-                    <div class="card-header text-white d-flex justify-content-between">
-                       <h1>Pacientes</h1>
-                    </div>
-
-                        <div class="modal-content">
-                            <div class="card-body p-4">
-                                <table class="table table-striped">
+                    <div class="card-header text-white d-flex justify-content-between"></div>
+                    <div class="modal-content">
+                        <div class="card-body p-4">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                    <th scope="col">codigo</th>
-                                    <th scope="col">Nome</th>
-                                    <th scope="col">Data nascimento</th>
-                                    <th scope="col">Convenio</th>
-                                    <th scope="col">Telefone</th>
-                                    <th scope="col">CPF</th>
-                                    <th scope="col">Cidade</th>
-
+                                        <th scope="col">CÓDIGO</th>
+                                        <th scope="col">NOME</th>
+                                        <th scope="col">DATA NASC.</th>
+                                        <th scope="col">CONVÊNIO</th>
+                                        <th scope="col">TELEFONE</th>
+                                        <th scope="col">CPF</th>
+                                        <th scope="col">CIDADE</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse($pacientes as $paciente)
                                         <tr>
-                                        <th scope="row">{{$paciente->pk_cod_paci}}</th>
-                                        <td>{{$paciente->nome_paci}}</td>
-                                        <td>{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('d/m/Y') }}</td>
-                                        <td>{{$paciente->convenio->nome_conv}}</td>
-                                        <td>{{$paciente->telefone_paci}}</td>
-                                        <td>{{$paciente->cpf_paci}}</td>
-                                        <td>{{$paciente->nome_cidade}}</td>
-                                        {{-- <td>
-                                            <div class="d-flex gap-1">
-                                            <a href="/pacientes/{{$paciente->id}}" class="btn btn-secondary">Editar</a>
-                                            <form action="/pacientes/{{$paciente->id}}" method="POST">
-                                                @method('delete')
-                                                @csrf
-                                                <button class="btn btn-danger">
-                                                    Excluir
-                                                </button>
-                                            </form>
-                                            </div>
-                                        </td> --}}
+                                            <th scope="row">{{$paciente->pk_cod_paci}}</th>
+                                            <td>{{$paciente->nome_paci}}</td>
+                                            <td>{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('d/m/Y') }}</td>
+                                            <td>{{$paciente->convenio->nome_conv}}</td>
+                                            <td>{{$paciente->telefone_paci}}</td>
+                                            <td>{{$paciente->cpf_paci}}</td>
+                                            <td>{{$paciente->nome_cidade}}</td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="8" class="text-center fs-4">
-                                                Nenhum paciente cadastrado
-                                            </td>
+                                            <td colspan="8" class="text-center fs-4">Nenhum paciente cadastrado</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -98,6 +76,5 @@
     </div> <!-- fim do container -->
 
     <a class="cad" href="menu">VOLTAR</a>
-
 </body>
 </html>

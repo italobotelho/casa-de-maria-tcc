@@ -53,6 +53,11 @@ Route::get('Menu/pacientes', [PersonController::class, 'index'])->name('paciente
 Route::get('/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
 
 
+// routes/web.php
+Route::get('/buscar_pacientes', [PersonController::class, 'buscarPacientes'])->name('buscar.pacientes');
+
+
+
 
 
 
