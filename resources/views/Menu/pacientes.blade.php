@@ -80,13 +80,10 @@
     </div>
 </div>
 
-<<<<<<< HEAD
             <script src="js/paciente.js"></script>
 
   
 
-=======
     <a class="cad" href="menu">VOLTAR</a>
->>>>>>> tela-busca
 </body>
 </html>
