@@ -8,10 +8,10 @@ body {
 }
 
 h1 {
-    font-size: 40px;
+    font-size: 35px;
     text-align: left; /* Alinhamento à esquerda em relação ao card */
     margin-bottom: 20px;
-    color: #6F4E37; /* Cor do título */
+    color: #000000; /* Cor do título */
 }
 
 .card {
@@ -61,21 +61,15 @@ button {
     background-color: #C99C65;
     padding: 8px 15px;
     cursor: pointer;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     position: relative; /* Mantém o botão no fluxo normal */
     margin-top: 20px; /* Espaço acima do botão */
 }
 
 button:hover {
-    background-color: #A76A4D; /* Muda a cor do botão ao passar o mouse */
+    background-color: #7a3f24; /* Muda a cor do botão ao passar o mouse */
 }
 
-.section-title .icon {
-    width: 30px; /* Largura do ícone */
-    height: 30px; /* Altura do ícone */
-    margin-right: 10px; /* Espaço entre o ícone e o texto */
-    fill: #C99C65; /* Cor do ícone */
-}
 
 button {
     background-color: #b07d48;
