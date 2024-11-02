@@ -39,7 +39,7 @@
 <body>
 
 
-    <a href="form_paciente">CADASTRAR PACIENTE</a>
+
 
     <h1>Buscar paciente </h1>
 
@@ -175,8 +175,6 @@
     </div>
 </div>
 
-<p><strong>Nome:</strong>
-
   {{-- modal edicao --}}
 
   <div class="modal fade" id="editarPacienteModal" tabindex="-1" role="dialog" aria-labelledby="editarPacienteModalLabel" aria-hidden="true">
@@ -259,8 +257,8 @@
         </div>
     </div>
 </div>
-
-            <script src="js/paciente.js"></script>
+        
+            <script src="/js/paciente.js"></script>
 
   
 
