@@ -8,23 +8,22 @@ body {
 }
 
 h1 {
-    font-size: 40px;
+    font-size: 35px;
     text-align: left; /* Alinhamento à esquerda em relação ao card */
     margin-bottom: 20px;
-    color: #6F4E37; /* Cor do título */
+    color: #000000; /* Cor do título */
 }
 
 .card {
     margin: auto;
     border: 3px solid #C99C65;
     border-radius: 15px;
-    width: 50rem; /* Diminui a largura do card */
+    width: 55rem; /* Diminui a largura do card */
     box-shadow: 0 16px 26px rgba(0, 0, 0, 0.1);
     color: black;
-    padding: 40px; /* Ajusta o padding do card */
+    padding: 50px; /* Ajusta o padding do card */
     position: relative;
 }
-
 
 .form-group {
     display: flex; /* Coloca a label e o input lado a lado */
@@ -61,61 +60,53 @@ button {
     background-color: #C99C65;
     padding: 8px 15px;
     cursor: pointer;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     position: relative; /* Mantém o botão no fluxo normal */
-    margin-top: 20px; /* Espaço acima do botão */
+    margin-top: 25px; /* Espaço acima do botão */
 }
+
 
 button:hover {
-    background-color: #A76A4D; /* Muda a cor do botão ao passar o mouse */
+    background-color: #7a3f24; /* Muda a cor do botão ao passar o mouse */
 }
 
-.section-title .icon {
-    width: 30px; /* Largura do ícone */
-    height: 30px; /* Altura do ícone */
-    margin-right: 10px; /* Espaço entre o ícone e o texto */
-    fill: #C99C65; /* Cor do ícone */
-}
-
-button {
-    background-color: #b07d48;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    float: right;
-    transition: transform 0.6s ease, background-color 0.6s ease;
-    will-change: transform; 
-}
-
-button:hover {
-    background-color: #BA8C6A;
-    transform: scale(1.1);
-}
-
-/* Estilo das seções */
 .section-title {
     font-size: 22px; /* Aumentado o tamanho da fonte do título da seção */
     color: #000000; /* Cor do título da seção */
     margin-top: 20px;
-    margin-bottom: 30px; /* Aumentado o espaço abaixo do título da seção */
+    margin-bottom: 25px; /* Ajusta o espaço abaixo do título da seção */
     position: relative;
+    font-family: 'Abel', sans-serif; /* Fonte dos títulos das seções */
+}
+
+.icon-section {
+    width: 25px; /* Ajuste o tamanho do ícone conforme necessário */
+    height: auto; /* Mantém a proporção do ícone */
+    margin-right: 8px; /* Espaço à direita do ícone */
+    vertical-align: middle; /* Alinha verticalmente com o texto */
+}
+
+
+/* Linha divisória entre as seções */
+.section-divider {
+    height: 2px; /* Altura da linha */
+    background-color: #D3B69A; /* Cor da linha */
+    margin: 40px 0; /* Espaço acima e abaixo da linha */
 }
 
 /* Linha curta abaixo do título da seção */
 .section-title::after {
     content: '';
     display: block;
-    width: 200px; /* Largura da linha curta */
-    height: 2px;
+    width: 300px; /* Largura da linha curta */
+    height: 1px;
     background-color: #D3B69A;
     position: absolute;
-    bottom: -5px; /* Ajuste de posicionamento abaixo do título */
+    bottom: -7px; /* Ajuste de posicionamento abaixo do título */
     left: 0;
 }
 
-.voltar{
+.voltar {
     background-color: #b07d48;
     color: white;
     padding: 10px 20px;
@@ -124,12 +115,12 @@ button:hover {
     cursor: pointer;
     float: right;
     transition: transform 0.6s ease, background-color 0.6s ease;
-    will-change: transform; 
-    text-decoration: none; 
+    will-change: transform;
+    text-decoration: none;
 }
+
 .voltar:hover {
     background-color: #BA8C6A;
     transform: scale(1.1);
-    text-decoration: none; 
-    
+    text-decoration: none;
 }

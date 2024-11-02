@@ -81,11 +81,11 @@
                     </div>
 
                     <div class="form-group">
-                                <label for="fk_convenio_paci">Convênio</label>
-                                <select name="fk_convenio_paci" class="form-control" id="fk_convenio_paci" required>
-                                    <option value="">Selecione um convênio</option>
-                                </select>
-                            </div>
+                                    <label for="fk_convenio_paci">Convênio</label>
+                                    <select name="fk_convenio_paci" id="fk_convenio_paci" required>
+                                        <option value="">Selecione um convênio</option>
+                                    </select>
+                                </div> 
 
                             <div class="form-group" id="carteira-convenio-field">
                                 <label for="carteira_convenio_paci">Carteira do Convênio</label>
