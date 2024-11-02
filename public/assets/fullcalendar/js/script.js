@@ -108,6 +108,13 @@ $(document).ready(function () {
             alert('Não é possível agendar. Paciente não cadastrado.'); // Alerta ao usuário
             return; // Impede o agendamento
         }
+        
+        // Verifique se a sugestão de médico está vazia ou se contém "Médico não cadastrado"
+        const medicoSuggestionsText = $('#medicoSuggestions').text();
+        if (!medicoSuggestionsText || medicoSuggestionsText.includes('Médico não cadastrado')) {
+            alert('Não é possível agendar. Médico não cadastrado.'); // Alerta ao usuário
+            return; // Impede o agendamento
+        }
     
         let id = $("#modalCalendar input[name='id']").val();
         let title = $("#modalCalendar input[name='paciente']").val();
@@ -155,7 +162,7 @@ $(document).ready(function () {
         sendEvent(route, Event);
     });
 });
-  
+
 function sendEvent(route, data_) {
     $.ajax({
         url: route,
@@ -197,3 +204,6 @@ function clearMessages(element) {
 function resetForm(form) {
     $(form)[0].reset();
 }
+
+
+
