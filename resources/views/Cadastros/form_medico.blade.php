@@ -13,7 +13,7 @@
     </head>
 
     <body>
-        <H1>Cadastre um novo profissional</H1>
+        <H1>CADASTRE UM NOVO MÉDICO</H1>
         <div class="card">
             <form action="{{ route('medico.store') }}" method="POST">
                 @csrf
