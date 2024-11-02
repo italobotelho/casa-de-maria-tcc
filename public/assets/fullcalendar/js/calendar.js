@@ -45,55 +45,68 @@
 
         eventClick: function(element) {
           currentEvent = element.event; // Armazena o evento clicado
-          console.log('Evento clicado:', element.event); // Verifique a estrutura do evento
-
-          // Obtenha os dados do evento
-          let procedimentoId = element.event.procedimento_id || element.event.extendedProps.procedimento_id;
-          console.log('Procedimento ID:', procedimentoId); // Verifique o ID do procedimento
-          let medico = element.event.medico || element.event.extendedProps.medico;
-          let convenio = element.event.convenio || element.event.extendedProps.convenio; // Aqui é onde a variável convenio é definida
-      
+          
+          console.log('Evento clicado:', element.event); // Log para verificar se o evento foi capturado
+        
+          // Obtenha o ID do médico do evento
+          let medicoId = element.event.medico || element.event.extendedProps.medico;
+          console.log('ID do Médico:', medicoId); // Log para verificar se o ID do médico foi encontrado
+        
+          // Limpa mensagens e reseta o formulário
           clearMessages('#message');
           resetForm("#formEvent");
-      
+        
           let startDate = moment(element.event.start).format("DD/MM/YYYY");
-      
+        
+          // Configuração básica do modal
           $("#modalViewCalendar #modalViewCalendarLabel").text('Visualização de agendamento para ' + startDate);
           $("#modalViewCalendar").modal('show');
-      
           $("#modalCalendar #titleModal").text('Alteração de agendamento para ' + startDate);
           $("#modalCalendar button.deleteEvent").css("display", "flex");
-      
-          // Preenchendo os campos do modal
+        
+          // Preencher os campos iniciais do modal
           $("#modalCalendar input[name='id']").val(element.event.id);
           $("#modalCalendar input[name='paciente']").val(element.event.title);
-          $("#modalCalendar input[name='medico']").val(medico || ''); // Preenche o campo oculto do médico
-          $("#modalCalendar input[name='convenio_id']").val(convenio || ''); // Preenche o campo de convênio
-      
+          $("#modalCalendar input[name='convenio_id']").val(element.event.extendedProps.convenio || '');
+        
           // Preenchendo o campo de procedimento
-          if (procedimentoId) {
-              $("#modalCalendar select[name='procedimento_id']").val(procedimentoId).change(); // Preenche o campo de procedimento e dispara o evento change
+          if (element.event.extendedProps.procedimento_id) {
+            $("#modalCalendar select[name='procedimento_id']").val(element.event.extendedProps.procedimento_id).change();
           } else {
-              $("#modalCalendar select[name='procedimento_id']").val('').change(); // Caso não haja procedimento, define como vazio
+            $("#modalCalendar select[name='procedimento_id']").val('').change();
           }
-
-          // Adicione um listener para ver se o valor é redefinido
-          $("#modalCalendar").on('shown.bs.modal', function() {
-            console.log('Modal aberto, valor do campo:', $("#modalCalendar select[name='procedimento_id']").val());
-          });
-      
+        
           let startTime = moment(element.event.start).format("HH:mm");
           $("#modalCalendar input[name='start']").val(startTime);
-      
+        
           let endTime = moment(element.event.end).format("HH:mm");
           $("#modalCalendar input[name='end']").val(endTime);
-      
+        
           let eventDate = moment(element.event.start).format("YYYY-MM-DD");
           $("#modalCalendar input[name='eventDate']").val(eventDate);
-      
+        
           let color = element.event.backgroundColor || "#9D9D9B";
           $("#modalCalendar input[name='color']").val(color);
-      },
+        
+          $.ajax({
+            url: '/get-medico/' + medicoId, // Now using the correct variable
+            type: 'GET',
+            success: function(response) {
+                console.log('Resposta do servidor:', response);
+                $('#nomeMedico').text(response.nome_medico);
+                $('#modal').modal('show');
+            },
+            error: function(xhr) {
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    alert('Erro ao buscar médico: ' + xhr.responseJSON.message);
+                } else {
+                    alert('Erro ao buscar médico: ' + xhr.statusText);
+                }
+            }
+        });
+        
+        },
+        
 
         eventResize: function(element) {
           let start = moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");

@@ -32,6 +32,8 @@ Route::get('/get-convenios', [EventController::class, 'getConvenios'])->name('ge
 Route::get('/home', [EventController::class, 'index'])->name('agenda.home');
 Route::get('/load-events-by-paciente', [EventController::class, 'loadEventsByPaciente'])->name('routeLoadEventsByPaciente');
 Route::get('/home', [EventController::class, 'index'])->name('agenda.home');
+Route::get('/get-medico/{id}', [MedicoController::class, 'getMedico']);
+
 
 
 
