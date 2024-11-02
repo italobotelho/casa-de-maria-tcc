@@ -8,62 +8,39 @@ use App\Models\Convenio;
 
 class PersonController extends Controller
 {
-
-    public function __construct()
+    public function buscarPacientes(Request $request)
     {
-        $this->middleware('auth');
-    }
-    
-    public function update(Request $request)
-    {
-        
-        $data = $request->all();
-        // Validação
-        $request->validate([
-     
-            'id' => 'required|exists:paciente,pk_cod_paci',
-            'nome' => 'required|string|max:54',
-            'email' => 'required|email',
-            'data_nasci' => 'required|date',
-            'telefone' => 'required|string|max:15',
-            'cpf' => 'required|string|max:14',
-            'cidade' => 'required|string|max:100',
-            'responsavel' => 'string|max:54',
-            'cpf_responsavel' => 'string|max:14',
-            'fk_convenio_paci' => 'nullable|string',
-            'carteira_convenio_paci' => 'nullable|string'
+        $nome = $request->input('nome_paci');
+        $dataNascimento = $request->input('data_nasc_paci');
 
-        ]);
+        // Filtra pacientes com base no nome e/ou data de nascimento
+        // Verifica se algum filtro foi aplicado
+        $query = Paciente::query();
 
-        $paciente = Paciente::find($request->input('id'));
+        if ($nome || $dataNascimento) {
+            // Se houver filtro, aplica o filtro de nome e/ou data de nascimento
+            $query->where(function($q) use ($nome, $dataNascimento) {
+                if ($nome) {
+                    $q->where('nome_paci', 'like', '%' . $nome . '%');
+                }
 
-        if ($paciente) {
-            $paciente->nome_paci = $request->input('nome');
-            $paciente->data_nasci_paci = $request->input('data_nasci');
-            $paciente->telefone_paci = $request->input('telefone');
-            $paciente->cpf_paci = $request->input('cpf');
-            $paciente->nome_cidade = $request->input('cidade');
-            $paciente->responsavel_paci = $request->input('responsavel');
-            $paciente->cpf_responsavel_paci = $request->input('cpf_responsavel');
-            $paciente->fk_convenio_paci = $request->input('fk_convenio_paci');
-            $paciente->carteira_convenio_paci = $request->input('carteira_convenio_paci');
-            
-
-
-
-            if ($paciente->save()) {
-                return response()->json(['success' => true, 'message' => 'Dados do paciente atualizados com sucesso!']);
-            } else {
-                return response()->json(['error' => 'Erro ao atualizar paciente'], 422);
-            }
-        } else {
-            return response()->json(['error' => 'Paciente não encontrado'], 404);
+                if ($dataNascimento) {
+                    $q->whereDate('data_nasci_paci', $dataNascimento);
+                }
+            });
         }
+
+        // Caso contrário, retorna todos os pacientes
+        $pacientes = $query->get();
+        $convenios = Convenio::all(); // Recupera todos os convênios
+
+        // Ajuste aqui para o caminho correto da view
+        return view('Menu.pacientes', compact('pacientes'));
+        // Retorna a view com todos os pacientes ou com os pacientes filtrados
+        return view('Menu.pacientes', compact('pacientes', 'convenios'));
     }
-
-
     
-
+    
     public function ListarConvenio() // Nome do método corrigido
     {
         $convenios = Convenio::all(); // Recupera todos os convênios

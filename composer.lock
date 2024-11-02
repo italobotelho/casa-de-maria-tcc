@@ -1511,6 +1511,7 @@
                 "source": "https://github.com/laravel/tinker/tree/v2.10.0"
             },
             "time": "2024-09-23T13:32:56+00:00"
+<<<<<<< HEAD
         },
         {
             "name": "laravel/ui",
@@ -1574,6 +1575,8 @@
                 "source": "https://github.com/laravel/ui/tree/v4.5.2"
             },
             "time": "2024-05-08T18:07:10+00:00"
+=======
+>>>>>>> tela-busca
         },
         {
             "name": "league/commonmark",
@@ -5924,6 +5927,26 @@
         },
         {
             "name": "laravel/sail",
+<<<<<<< HEAD
+            "version": "v1.37.0",
+=======
+<<<<<<< HEAD
+            "version": "v1.35.0",
+>>>>>>> main
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/sail.git",
+                "reference": "5d385f2e698f0f774cdead82aff5d989fb95309b"
+            },
+            "dist": {
+                "type": "zip",
+<<<<<<< HEAD
+                "url": "https://api.github.com/repos/laravel/sail/zipball/5d385f2e698f0f774cdead82aff5d989fb95309b",
+                "reference": "5d385f2e698f0f774cdead82aff5d989fb95309b",
+=======
+                "url": "https://api.github.com/repos/laravel/sail/zipball/992bc2d9e52174c79515967f30849d21daa334d8",
+                "reference": "992bc2d9e52174c79515967f30849d21daa334d8",
+=======
             "version": "v1.37.0",
             "source": {
                 "type": "git",
@@ -5934,6 +5957,8 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/sail/zipball/5d385f2e698f0f774cdead82aff5d989fb95309b",
                 "reference": "5d385f2e698f0f774cdead82aff5d989fb95309b",
+>>>>>>> tela-busca
+>>>>>>> main
                 "shasum": ""
             },
             "require": {
@@ -5983,7 +6008,15 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
+<<<<<<< HEAD
             "time": "2024-10-21T17:13:38+00:00"
+=======
+<<<<<<< HEAD
+            "time": "2024-10-08T14:45:26+00:00"
+=======
+            "time": "2024-10-21T17:13:38+00:00"
+>>>>>>> tela-busca
+>>>>>>> main
         },
         {
             "name": "mockery/mockery",
@@ -6665,7 +6698,12 @@
         },
         {
             "name": "phpunit/phpunit",
+<<<<<<< HEAD
             "version": "10.5.38",
+=======
+<<<<<<< HEAD
+            "version": "10.5.36",
+>>>>>>> main
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
@@ -6673,8 +6711,25 @@
             },
             "dist": {
                 "type": "zip",
+<<<<<<< HEAD
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a86773b9e887a67bc53efa9da9ad6e3f2498c132",
                 "reference": "a86773b9e887a67bc53efa9da9ad6e3f2498c132",
+=======
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/aa0a8ce701ea7ee314b0dfaa8970dc94f3f8c870",
+                "reference": "aa0a8ce701ea7ee314b0dfaa8970dc94f3f8c870",
+=======
+            "version": "10.5.37",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpunit.git",
+                "reference": "c7cffa0efa2b70c22366523e6d804c9419eb2400"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c7cffa0efa2b70c22366523e6d804c9419eb2400",
+                "reference": "c7cffa0efa2b70c22366523e6d804c9419eb2400",
+>>>>>>> tela-busca
+>>>>>>> main
                 "shasum": ""
             },
             "require": {
@@ -6746,7 +6801,15 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
+<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.38"
+=======
+<<<<<<< HEAD
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.36"
+=======
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.37"
+>>>>>>> tela-busca
+>>>>>>> main
             },
             "funding": [
                 {
@@ -6762,7 +6825,15 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2024-10-28T13:06:21+00:00"
+=======
+<<<<<<< HEAD
+            "time": "2024-10-08T15:36:51+00:00"
+=======
+            "time": "2024-10-19T13:03:41+00:00"
+>>>>>>> tela-busca
+>>>>>>> main
         },
         {
             "name": "sebastian/cli-parser",
