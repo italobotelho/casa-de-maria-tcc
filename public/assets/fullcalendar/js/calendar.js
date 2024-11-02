@@ -88,22 +88,25 @@
           let color = element.event.backgroundColor || "#9D9D9B";
           $("#modalCalendar input[name='color']").val(color);
         
-          $.ajax({
-            url: '/get-medico/' + medicoId, // Now using the correct variable
-            type: 'GET',
-            success: function(response) {
-                console.log('Resposta do servidor:', response);
-                $('#nomeMedico').text(response.nome_medico);
-                $('#modal').modal('show');
-            },
-            error: function(xhr) {
-                if (xhr.responseJSON && xhr.responseJSON.message) {
-                    alert('Erro ao buscar médico: ' + xhr.responseJSON.message);
-                } else {
-                    alert('Erro ao buscar médico: ' + xhr.statusText);
-                }
+      // AJAX para obter informações do médico
+      $.ajax({
+        url: '/get-medico/' + medicoId, // Agora usando a variável correta
+        type: 'GET',
+        success: function(response) {
+            console.log('Resposta do servidor:', response);
+            // Supondo que você tenha um elemento para mostrar o nome do médico
+            $('#modalCalendar input[name="medico_nome"]').val(response.nome_medico); // Preencher o campo de entrada
+            $('#modal').modal('show');
+        },
+        error: function(xhr) {
+            if (xhr.responseJSON && xhr.responseJSON.message) {
+                alert('Erro ao buscar médico: ' + xhr.responseJSON.message);
+            } else {
+                alert('Erro ao buscar médico: ' + xhr.statusText);
             }
-        });
+        }
+      });
+
         
         },
         
