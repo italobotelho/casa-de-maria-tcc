@@ -12,7 +12,12 @@
     <link rel="stylesheet" href="css/busca-pac.css">
 </head>
 <body>
-    <a href="form_paciente">CADASTRAR PACIENTE</a>
+    <h1>Buscar paciente </h1>
+
+    <button class="btn">
+        <a href="form_paciente">CADASTRAR PACIENTE</a>
+    </button>
+    
 
     <div class="container">
         <div class="row justify-content-center">
@@ -35,10 +40,11 @@
                                     <th scope="col">Cidade</th>
                                     <th scope="col">Nome Responsável</th>
                                     <th scope="col">CPF Responsável</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($pacientes as $paciente)
+                            @forelse($pacientes as $paciente)
                                     <tr>
                                         <th scope="row">{{ $paciente->pk_cod_paci }}</th>
                                         <td>
@@ -55,7 +61,17 @@
                                                data-carteira-convenio="{{ $paciente->carteira_convenio_paci }}">
                                                 {{ $paciente->nome_paci }}
                                             </a>
-                                            <button class="btn btn-warning btn-sm editar-paciente" 
+                                            
+                                        </td>
+                                        <td>{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('d/m/Y') }}</td>
+                                        <td>{{ $paciente->convenio->nome_conv }}</td>
+                                        <td>{{ $paciente->carteira_convenio_paci }}</td>
+                                        <td>{{ $paciente->telefone_paci }}</td>
+                                        <td>{{ $paciente->cpf_paci }}</td>
+                                        <td>{{ $paciente->nome_cidade }}</td>
+                                        <td>{{ $paciente->responsavel_paci }}</td>
+                                        <td>{{ $paciente->cpf_responsavel_paci }}</td>
+                                        <td ><button class="editar-medico btn-sm" 
                                                     data-id="{{ $paciente->pk_cod_paci }}" 
                                                     data-nome="{{ $paciente->nome_paci }}" 
                                                     data-email="{{ $paciente->email_paci }}" 
@@ -67,17 +83,9 @@
                                                     data-responsavel="{{ $paciente->responsavel_paci }}"        
                                                     data-cpf-responsavel="{{ $paciente->cpf_responsavel_paci }}"
                                                     data-carteira-convenio="{{ $paciente->carteira_convenio_paci }}">
-                                                Editar
-                                            </button>
-                                        </td>
-                                        <td>{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('d/m/Y') }}</td>
-                                        <td>{{ $paciente->convenio->nome_conv }}</td>
-                                        <td>{{ $paciente->carteira_convenio_paci }}</td>
-                                        <td>{{ $paciente->telefone_paci }}</td>
-                                        <td>{{ $paciente->cpf_paci }}</td>
-                                        <td>{{ $paciente->nome_cidade }}</td>
-                                        <td>{{ $paciente->responsavel_paci }}</td>
-                                        <td>{{ $paciente->cpf_responsavel_paci }}</td>
+                                            <img src="img/editar.png" alt="Ícone de edição" class="icon">
+                                        </button>
+                                            </td>
                                     </tr>
                                 @empty
                                     <tr>
@@ -94,7 +102,10 @@
         </div><!-- fim da row -->
     </div> <!-- fim do container -->
 
-    <a href="menu">VOLTAR</a>
+    <button class="btn">
+     <a href="menu">VOLTAR</a>
+    </button>
+    
 
     <div id="pacienteModal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -124,7 +135,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="editarPacienteModalLabel">Editar Paciente</h3>
+                   <h3 class="modal-title" id="editarPacienteModalLabel">Editar Paciente</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -180,11 +191,19 @@
                             <label for="editar-cpf-responsavel">CPF do Responsável</label>
                             <input type="text" class="form-control" id="editar-cpf-responsavel" name="cpf_responsavel">
                         </div>
+                        <div class="form-group">
+                            <label for="editar-nome">Nome</label>
+                            <input type="text" class="form-control" id="editar-nome" name="nome" required>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                         <button type="submit" class="btn btn-primary">Salvar alterações</button>
                     </div>
+                    <div class="form-group">
+                            <label for="editar-responsavel">Nome do Responsável</label>
+                            <input type="text" class="form-control" id="editar-responsavel" name="responsavel">
+                        </div>
                 </form>
             </div>
         </div>

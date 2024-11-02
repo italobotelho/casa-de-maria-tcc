@@ -7,13 +7,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/busca-pac.css">
    
     <title>Document</title>
 
     <style>
+        body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f2eb;
+        color: #333;
+        }
+
        .fund { 
-        background-color: #795127;
-        opacity: 0.8;
+        background-color: #b3885b;
+        color: white;
+        padding: 12px ;
+        font-size: 1.5em;
+        width: 100%; 
        }
       
        button {
@@ -36,12 +46,10 @@
        }
      
 
-       /* Estilização para o ícone de edição */
        .icon {
         width: 26px;
         height: 25px;
         float: left; /* Faz com que o botão flutue à direita */
-      
        }
 
        /* Estilização do link do nome */
@@ -81,6 +89,7 @@
                                     <th scope="col">2 Especialidade</th>
                                     <th scope="col">Telefone</th>
                                     <th scope="col">Email</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -97,7 +106,13 @@
                                            data-email="{{ $medico->email_med }}">
                                             {{ $medico->nome_med }}
                                         </a>
-                                        <button class="editar-medico btn-sm" 
+                                        
+                                    </td>
+                                    <td>{{ $medico->especialidade1_med }}</td>
+                                    <td>{{ $medico->especialidade2_med }}</td>
+                                    <td>{{ $medico->telefone_med }}</td>
+                                    <td>{{ $medico->email_med }}</td> 
+                                    <td><button class="editar-medico btn-sm" 
                                             data-id="{{ $medico->pk_crm_med }}" 
                                             data-nome="{{ $medico->nome_med }}" 
                                             data-especialidade="{{ $medico->especialidade1_med }}" 
@@ -105,12 +120,8 @@
                                             data-telefone="{{ $medico->telefone_med }}" 
                                             data-email="{{ $medico->email_med }}">
                                             <img src="img/editar.png" alt="Ícone de edição" class="icon">
-                                        </button>   
-                                    </td>
-                                    <td>{{ $medico->especialidade1_med }}</td>
-                                    <td>{{ $medico->especialidade2_med }}</td>
-                                    <td>{{ $medico->telefone_med }}</td>
-                                    <td>{{ $medico->email_med }}</td>
+                                        </button> </td> 
+                                     
                                 </tr>
                             @empty
                                 <tr>

@@ -22,17 +22,17 @@ a:hover {
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: white;
+    width: 115rem;
 }
 
 .card-header {
     background-color: #b3885b;
     color: white;
-    padding: 12px 20px;
+    padding: 12px ;
     border-top-left-radius: 15px; 
     border-top-right-radius: 15px; 
     font-size: 1.5em;
     width: 100%; /* Garante que o cabeçalho ocupe toda a largura do card */
-    box-sizing: border-box; /* Inclui o padding no cálculo da largura */
 }
 
 .table {
@@ -71,7 +71,7 @@ a:hover {
     border: none;
     padding: 10px 15px; /* Aumenta o padding para um botão mais espaçoso */
     border-radius: 8px; /* Bordas arredondadas */
-    margin-left: 5px;
+    margin-left: 15px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -81,11 +81,13 @@ a:hover {
 .btn:hover {
     background-color: #c5a67a; /* Cor do fundo ao passar o mouse */
     transform: scale(1.05); /* Efeito de leve aumento ao passar o mouse */
+    decoration:none;
 }
 
 .btn:active {
     background-color: #b3885b; /* Cor do fundo quando pressionado */
     box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.2);
+    decoration:none;
 }
 
 .modal-content {
@@ -120,3 +122,22 @@ a:hover {
     color: #555;
     width: 100%; /* A label ocupa toda a largura disponível */
 }
+
+.icon {
+    width: 26px;
+    height: 25px;
+    float: left; /* Faz com que o botão flutue à direita */
+   }
+   button.editar-medico {
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    color: white;
+    margin-left: 5px;
+   }
+
+   a{
+    decoration:none;
+    color:white; 
+   }
