@@ -9,26 +9,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-    <style>
-        #convenio-suggestions {
-            position: absolute;
-            background-color: #f9f9f9;
-            border: 1px solid #ccc;
-            padding: 10px;
-            width: 200px;
-            z-index: 1000;
-        }
-        
-        #convenio-suggestions li {
-            padding: 5px;
-            cursor: pointer;
-        }
-        
-        #convenio-suggestions li:hover {
-            background-color: #ccc;
-        }
-    </style>
+    <link rel="stylesheet" href="css/busca-pac.css">
 </head>
 <body>
     <a href="form_paciente">CADASTRAR PACIENTE</a>
@@ -46,7 +27,7 @@
                                 <tr>
                                     <th scope="col">Código</th>
                                     <th scope="col">Nome</th>
-                                    <th scope="col">Data Nascimento</th>
+                                    <th scope="col">Data de Nasc</th>
                                     <th scope="col">Convênio</th>
                                     <th scope="col">Carteira</th>
                                     <th scope="col">Telefone</th>

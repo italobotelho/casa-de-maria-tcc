@@ -53,18 +53,16 @@ h1 {
 }
 
 button {
-    display: inline-block;
-    background: transparent;
-    border-radius: 10px;
+    background-color: #b07d48;
+    color: white;
+    padding: 10px 20px;
     border: none;
-    background-color: #C99C65;
-    padding: 8px 15px;
+    border-radius: 10px;
     cursor: pointer;
-    color: rgb(255, 255, 255);
-    position: relative; /* Mantém o botão no fluxo normal */
-    margin-top: 25px; /* Espaço acima do botão */
+    float: right;
+    transition: transform 0.6s ease, background-color 0.6s ease;
+    will-change: transform; 
 }
-
 
 button:hover {
     background-color: #7a3f24; /* Muda a cor do botão ao passar o mouse */
@@ -79,7 +77,7 @@ button:hover {
     font-family: 'Abel', sans-serif; /* Fonte dos títulos das seções */
 }
 
-.icon-section {
+.section-icon {
     width: 25px; /* Ajuste o tamanho do ícone conforme necessário */
     height: auto; /* Mantém a proporção do ícone */
     margin-right: 8px; /* Espaço à direita do ícone */
@@ -87,11 +85,12 @@ button:hover {
 }
 
 
-/* Linha divisória entre as seções */
-.section-divider {
-    height: 2px; /* Altura da linha */
-    background-color: #D3B69A; /* Cor da linha */
-    margin: 40px 0; /* Espaço acima e abaixo da linha */
+.divider {
+    border: none; /* Remove a borda padrão */
+    height: 1px; /* Define a altura da linha */
+    background-color: #C99C65; /* Cor da linha */
+    margin: 30px 0; /* Espaçamento acima e abaixo da linha */
+    box-shadow: 0 2px 4px #C99C65; /* Sombra: deslocamento x, deslocamento y, desfoque, cor */
 }
 
 /* Linha curta abaixo do título da seção */

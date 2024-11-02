@@ -97,16 +97,33 @@ button:hover {
     position: relative;
 }
 
+.section-icon {
+    width: 28px; /* Ajuste a largura do ícone conforme necessário */
+    height: auto; /* Mantém a proporção da imagem */
+    margin-right: 5px; /* Espaçamento à direita do ícone em relação ao título */
+    vertical-align: middle; /* Alinha verticalmente o ícone com o texto */
+    opacity: 0.8; /* Opacidade do ícone (opcional) */
+}
+
 /* Linha curta abaixo do título da seção */
 .section-title::after {
     content: '';
     display: block;
-    width: 200px; /* Largura da linha curta */
-    height: 2px;
+    width: 300px; /* Largura da linha curta */
+    height: 1px;
     background-color: #D3B69A;
     position: absolute;
     bottom: -5px; /* Ajuste de posicionamento abaixo do título */
     left: 0;
+}
+
+
+.divider {
+    border: none; /* Remove a borda padrão */
+    height: 1px; /* Define a altura da linha */
+    background-color: #C99C65; /* Cor da linha */
+    margin: 30px 0; /* Espaçamento acima e abaixo da linha */
+    box-shadow: 0 2px 4px #C99C65; /* Sombra: deslocamento x, deslocamento y, desfoque, cor */
 }
 
 .voltar{
