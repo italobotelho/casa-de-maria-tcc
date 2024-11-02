@@ -9,21 +9,69 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
    
     <title>Document</title>
+
+    <style>
+       .fund { 
+        background-color: #795127;
+        opacity: 0.8;
+       }
+      
+       button {
+        display: inline-block;
+        border-radius: 10px;
+        border: none;
+        background-color: #C99C65;
+        padding: 8px 15px;
+        color: white;
+        margin: 5px;
+       }
+
+       button.editar-medico {
+        display: inline-flex;
+        align-items: center;
+        border: none;
+        background-color: transparent;
+        color: white;
+        margin-left: 5px;
+       }
+     
+
+       /* Estilização para o ícone de edição */
+       .icon {
+        width: 26px;
+        height: 25px;
+        float: left; /* Faz com que o botão flutue à direita */
+      
+       }
+
+       /* Estilização do link do nome */
+       .nome-medico {
+        color: black;
+        font-weight: bold;
+        text-decoration: none;
+       }
+       .card{
+        width: 980px;
+       }
+       .cad{
+        text-decoration: none;
+        color:white;
+       }
+    </style>
 </head>
 <body>
     
-
-    <h1>Médicos</h1>
+<br>
 
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 mt-4"></div>
             <div class="col-lg-8">
                 <div class="card shadow">
-                    <div class="card-header bg-success text-white d-flex justify-content-between">
+                    <div class="card-header text-white d-flex justify-content-between fund">
                         <h1 class="fw-bold">Médicos</h1>
                     </div>
-                    <div class="card-body p-4">
+                    <div class="card-body">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -49,15 +97,15 @@
                                            data-email="{{ $medico->email_med }}">
                                             {{ $medico->nome_med }}
                                         </a>
-                                        <button class="btn btn-warning btn-sm editar-medico" 
-                                                data-id="{{ $medico->pk_crm_med }}" 
-                                                data-nome="{{ $medico->nome_med }}" 
-                                                data-especialidade="{{ $medico->especialidade1_med }}" 
-                                                data-especialidade2="{{ $medico->especialidade2_med }}" 
-                                                data-telefone="{{ $medico->telefone_med }}" 
-                                                data-email="{{ $medico->email_med }}">
-                                            Editar
-                                        </button>
+                                        <button class="editar-medico btn-sm" 
+                                            data-id="{{ $medico->pk_crm_med }}" 
+                                            data-nome="{{ $medico->nome_med }}" 
+                                            data-especialidade="{{ $medico->especialidade1_med }}" 
+                                            data-especialidade2="{{ $medico->especialidade2_med }}" 
+                                            data-telefone="{{ $medico->telefone_med }}" 
+                                            data-email="{{ $medico->email_med }}">
+                                            <img src="img/editar.png" alt="Ícone de edição" class="icon">
+                                        </button>   
                                     </td>
                                     <td>{{ $medico->especialidade1_med }}</td>
                                     <td>{{ $medico->especialidade2_med }}</td>
@@ -78,30 +126,26 @@
             </div><!-- fim da col -->
         </div><!-- fim da row -->
     </div> <!-- fim do container -->
-    
-    <a href="form_medico">CADASTRAR MÉDICO</a>
-    
- 
+   
+    <button>
+    <a class="cad" href="form_medico">CADASTRAR MÉDICO</a>
+    </button>
 <!-- Modal para exibir informações do médico -->
 <div id="medicoModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Informações do Médico</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                
             </div>
             <div class="modal-body">
                 <p><strong>Nome:</strong> <span id="nome-medico"></span></p>
-                <p><strong> 1 Especialidade:</strong> <span id="especialidade"></span></p>
-                <p><strong> 2 Especialidade:</strong> <span id="especialidade2"></span></p>
+                <p><strong>1 Especialidade:</strong> <span id="especialidade"></span></p>
+                <p><strong>2 Especialidade:</strong> <span id="especialidade2"></span></p>
                 <p><strong>Telefone:</strong> <span id="telefone"></span></p>
                 <p><strong>Email:</strong> <span id="email"></span></p>
             </div>
         </div>
-    </div>
+    </div> 
 </div>
 
 <!-- Modal para editar informações do médico -->
@@ -110,7 +154,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title" id="editarMedicoModalLabel">Editar Médico</h3>
-
             </div>
             <form action="{{ route('medico.update') }}" id="formEditarMedico">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -139,7 +182,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="submit" class="btn btn-primary">Salvar alterações</button>
+                    <button type="submit">Salvar alterações</button>
                 </div>
             </form>
         </div>
@@ -152,10 +195,7 @@
 
 <script src="js/medico.js"></script>
     
-    
-    @endsection
-
-
+@endsection
 
 </body>
 </html>
