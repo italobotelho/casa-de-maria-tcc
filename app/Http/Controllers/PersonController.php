@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers; // Define o namespace do controlador
 
-use Illuminate\Http\Request; 
-use App\Models\Paciente; 
-use App\Models\Convenio; 
+use Illuminate\Http\Request;
+use App\Models\Paciente;
+use App\Models\Convenio;
 
 class PersonController extends Controller
 {
-   
+
     public function __construct()
     {
         $this->middleware('auth'); // Aplica middleware de autenticação para proteger as rotas
     }
+
     public function getPaciente($id)
     {
         $paciente = Paciente::with('convenio')->find($id); // Busca o paciente com o convênio associado
@@ -21,7 +22,8 @@ class PersonController extends Controller
         }
         return response()->json($paciente); // Retorna o paciente em formato JSON
     }
-// Método para buscar pacientes com base em uma consulta
+    
+    // Método para buscar pacientes com base em uma consulta
     public function buscar(Request $request)
     {
         $query = $request->input('query'); // Obtém a consulta do request
@@ -30,7 +32,7 @@ class PersonController extends Controller
             ->get(); // Obtém os resultados
         return response()->json($pacientes); // Retorna os pacientes em formato JSON
     }
-        
+
     // Método para listar todos os pacientes e convênios
     public function index()
     {
@@ -80,7 +82,7 @@ class PersonController extends Controller
     }
 
     // Método para listar todos os convênios
-    public function ListarConvenio() 
+    public function ListarConvenio()
     {
         $convenios = Convenio::all(); // Recupera todos os convênios
         return response()->json($convenios); // Retorna os convênios em formato JSON

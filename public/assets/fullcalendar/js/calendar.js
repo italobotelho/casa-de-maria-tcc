@@ -188,3 +188,7 @@
         calendar.refetchEvents(); // Recarrega os eventos quando um médico é selecionado
       });
     });
+
+    
+
+    
