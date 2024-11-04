@@ -8,8 +8,57 @@ use App\Models\Convenio;
 
 class PersonController extends Controller
 {
-    public function buscarPacientes(Request $request)
+    public function update(Request $request)
     {
+        
+        $data = $request->all();
+        // Validação
+        $request->validate([
+     
+            'id' => 'required|exists:paciente,pk_cod_paci',
+            'nome' => 'required|string|max:54',
+            'email' => 'required|email',
+            'data_nasci' => 'required|date',
+            'telefone' => 'required|string|max:15',
+            'cpf' => 'required|string|max:14',
+            'cidade' => 'required|string|max:100',
+            'responsavel' => 'string|max:54',
+            'cpf_responsavel' => 'string|max:14',
+            'fk_convenio_paci' => 'nullable|string',
+            'carteira_convenio_paci' => 'nullable|string'
+
+        ]);
+
+        $paciente = Paciente::find($request->input('id'));
+
+        if ($paciente) {
+            $paciente->nome_paci = $request->input('nome');
+            $paciente->data_nasci_paci = $request->input('data_nasci');
+            $paciente->telefone_paci = $request->input('telefone');
+            $paciente->cpf_paci = $request->input('cpf');
+            $paciente->nome_cidade = $request->input('cidade');
+            $paciente->responsavel_paci = $request->input('responsavel');
+            $paciente->cpf_responsavel_paci = $request->input('cpf_responsavel');
+            $paciente->fk_convenio_paci = $request->input('fk_convenio_paci');
+            $paciente->carteira_convenio_paci = $request->input('carteira_convenio_paci');
+            
+
+
+
+            if ($paciente->save()) {
+                return response()->json(['success' => true, 'message' => 'Dados do paciente atualizados com sucesso!']);
+            } else {
+                return response()->json(['error' => 'Erro ao atualizar paciente'], 422);
+            }
+        } else {
+            return response()->json(['error' => 'Paciente não encontrado'], 404);
+        }
+    }
+
+
+    
+    public function buscarPacientes(Request $request)
+    {   
         $nome = $request->input('nome_paci');
         $dataNascimento = $request->input('data_nasc_paci');
     
