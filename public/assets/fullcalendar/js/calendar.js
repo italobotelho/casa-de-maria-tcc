@@ -85,22 +85,24 @@
         $("#modalCalendar input[name='color']").val(color);
 
         // AJAX para obter informações do médico
-        $.ajax({
-          url: '/get-medico/' + medicoId,
-          type: 'GET',
-          success: function(response) {
-            console.log('Resposta do servidor:', response);
-            $('#modalCalendar input[name="medico_nome"]').val(response.nome_medico);
-            $('#modalCalendar input[name="medico"]').val(medicoId); // Preenche o campo oculto com o ID do médico
-          },
-          error: function(xhr) {
+          // Após preencher os campos do modal
+      $.ajax({
+        url: '/get-medico/' + medicoId,
+        type: 'GET',
+        success: function(response) {
+          console.log('Resposta do servidor:', response);
+          $('#modalCalendar input[name="medico_nome"]').val(response.nome_medico);
+          $('#modalCalendar input[name="medico"]').val(medicoId); // Preenche o campo oculto com o ID do médico
+          console.log('ID do Médico preenchido:', $('#modalCalendar input[name="medico"]').val());
+        },
+        error: function(xhr) {
             if (xhr.responseJSON && xhr.responseJSON.message) {
-              alert('Erro ao buscar médico: ' + xhr.responseJSON.message);
+                alert('Erro ao buscar médico: ' + xhr.responseJSON.message);
             } else {
-              alert('Erro ao buscar médico: ' + xhr.statusText);
+                alert('Erro ao buscar médico: ' + xhr.statusText);
             }
-          }
-        });
+        }
+      });
       },
 
       eventResize: function(element) {
@@ -185,6 +187,7 @@
       alert('Não é possível agendar. Paciente não cadastrado.');
       return;
     }
+    
 
     let id = $("#modalCalendar input[name='id']").val();
     let title = $("#modalCalendar input[name='paciente']").val();

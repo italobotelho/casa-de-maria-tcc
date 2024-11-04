@@ -8,44 +8,74 @@ $(document).ready(function () {
         }
     }
 
-    // Quando o modal for aberto
-    $('#modalCalendar').on('show.bs.modal', function () {
-        // Carregar procedimentos apenas uma vez ou adicionar lógica para verificar se já foram carregados
-        if ($("#modalCalendar select[name='procedimento_id'] option").length === 0) {
-            $.ajax({
-                url: '/get-procedimentos',
-                method: 'GET',
-                success: function (data) {
-                    let select = $('#procedimento_id');
-                    select.empty();
-                    select.append('<option selected>Selecione um Procedimento</option>');
-                    $.each(data, function (index, procedimento) {
-                        select.append('<option value="' + procedimento.pk_cod_proc + '">' + procedimento.nome_proc + '</option>');
-                    });
-                },
-                error: function (xhr, status, error) {
-                    console.error('Erro ao carregar procedimentos:', error);
-                }
-            });
-        }
-
-        // Carregar convênios
+ // Quando o modal for aberto
+$('#modalCalendar').on('show.bs.modal', function () {
+    // Carregar procedimentos apenas uma vez ou adicionar lógica para verificar se já foram carregados
+    if ($("#modalCalendar select[name='procedimento_id'] option").length === 0) {
         $.ajax({
-            url: '/get-convenios',
+            url: '/get-procedimentos',
             method: 'GET',
             success: function (data) {
-                let select = $('#convenio_id'); // Certifique-se de que o ID do select é correto
+                let select = $('#procedimento_id');
                 select.empty();
-                select.append('<option selected>Selecione um Convênio</option>');
-                $.each(data, function (index, convenio) {
-                    select.append('<option value="' + convenio.id + '">' + convenio.nome + '</option>');
+                select.append('<option selected>Selecione um Procedimento</option>');
+                $.each(data, function (index, procedimento) {
+                    select.append('<option value="' + procedimento.pk_cod_proc + '">' + procedimento.nome_proc + '</option>');
                 });
             },
             error: function (xhr, status, error) {
-                console.error('Erro ao carregar convênios:', error);
+                console.error('Erro ao carregar procedimentos:', error);
             }
         });
+    }
+
+    // Carregar convênios
+    $.ajax({
+        url: '/get-convenios',
+        method: 'GET',
+        success: function (data) {
+            let select = $('#convenio_id'); // Certifique-se de que o ID do select é correto
+            select.empty();
+            select.append('<option selected>Selecione um Convênio</option>');
+            $.each(data, function (index, convenio) {
+                select.append('<option value="' + convenio.id + '">' + convenio.nome + '</option>');
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error('Erro ao carregar convênios:', error);
+        }
     });
+
+    // Carregar dados do evento 
+    let id = $("#modalCalendar input[name='id']").val(); 
+    if (id) {
+        $.ajax({
+            url: `/get-event/${id}`, // Substitua pela URL correta para obter o evento
+            method: 'GET',
+            success: function (data) {
+                // Preencher outros campos do modal
+                $("#modalCalendar input[name='paciente']").val(data.paciente);
+                $("#modalCalendar select[name='procedimento_id']").val(data.procedimento_id);
+                $("#modalCalendar input[name='convenio_id']").val(data.convenio);
+                $("#modalCalendar input[name='eventDate']").val(moment(data.start).format("YYYY-MM-DD"));
+                $("#modalCalendar input[name='start']").val(moment(data.start).format("HH:mm"));
+                $("#modalCalendar input[name='end']").val(moment(data.end).format("HH:mm"));
+                $("#modalCalendar input[name='medico']").val(data.medico); // Definindo o médico aqui
+
+                // Verificar se o médico está cadastrado
+                if (!data.medico || data.medico === 'Médico não cadastrado') {
+                    $('#medicoSuggestions').text('Médico não cadastrado');
+                } else {
+                    $('#medicoSuggestions').text(data.medico);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Erro ao carregar os dados do evento:', xhr.responseText); // Exibir a resposta completa
+            }
+        });
+    }
+});
+
 
     // Mostrar botões ao clicar no input
     $("#start").focus(function () {
@@ -109,7 +139,7 @@ $(document).ready(function () {
     });
 
     $(".saveEvent").off("click").on("click", function () {
-        // seu código aqui
+
         // Verifique se a mensagem de paciente não cadastrado está presente
         const pacienteNaoCadastrado = $('#pacienteSuggestions').text().includes('Paciente não cadastrado');
         if (pacienteNaoCadastrado) {
@@ -189,15 +219,13 @@ function sendEvent(route, data_, isDelete = false) {
                 if (!isDelete) { // Verifica se não é uma operação de exclusão
                     let message;
                     if (data_.id) { // Verifica se é uma atualização
-                        message = "Evento atualizado com sucesso!";
                         $('#successAlterationModal').modal('show'); // Mostra o modal de alteração realizada
                     } else {
-                        message = "Evento cadastrado com sucesso!";
                         $('#successModal').modal('show'); // Mostra o modal de cadastro realizado
                     }
                     $("#successMessageContent").text(message);
                     $('#modalCalendar').modal('hide');
-                    location.reload();
+                    //location.reload();
                 }
             }
         },
