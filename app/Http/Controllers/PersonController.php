@@ -8,11 +8,11 @@ use App\Models\Convenio;
 
 class PersonController extends Controller
 {
-   
     public function __construct()
     {
         $this->middleware('auth'); // Aplica middleware de autenticação para proteger as rotas
     }
+
     public function getPaciente($id)
     {
         $paciente = Paciente::with('convenio')->find($id); // Busca o paciente com o convênio associado
@@ -21,7 +21,8 @@ class PersonController extends Controller
         }
         return response()->json($paciente); // Retorna o paciente em formato JSON
     }
-// Método para buscar pacientes com base em uma consulta
+
+    // Método para buscar pacientes com base em uma consulta
     public function buscar(Request $request)
     {
         $query = $request->input('query'); // Obtém a consulta do request
@@ -37,6 +38,20 @@ class PersonController extends Controller
         $pacientes = Paciente::with('convenio')->get(); // Recupera todos os pacientes com seus convênios associados
         $convenios = Convenio::all(); // Recupera todos os convênios
         return view('pacientes.pacientes', ['pacientes' => $pacientes, 'convenios' => $convenios]); // Retorna a view com os dados
+    }
+
+    public function show($id)
+    {
+        // Tente encontrar o paciente pelo ID
+        $paciente = Paciente::find($id);
+        
+        // Verifique se o paciente foi encontrado
+        if (!$paciente) {
+            return response()->json(['message' => 'Paciente não encontrado'], 404);
+        }
+    
+        // Retorne os dados do paciente como JSON
+        return response()->json($paciente);
     }
 
     // Método para atualizar os dados de um paciente

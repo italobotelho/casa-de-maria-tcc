@@ -44,8 +44,37 @@
         },
 
         eventClick: function(element) {
-          currentEvent = element.event; // Armazena o evento clicado
-          console.log('Evento clicado:', element.event); // Verifique a estrutura do evento
+        currentEvent = element.event; // Armazena o evento clicado
+        console.log('Evento clicado:', element.event); // Verifique a estrutura do evento
+
+        // Obtenha o ID do paciente a partir do evento
+        let pacienteId = element.event.id; // Supondo que o ID do evento é o ID do paciente
+
+        // Requisição para buscar os dados do paciente
+        fetch(`/paciente/${pacienteId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Paciente não encontrado');
+                }
+                return response.json();
+            })
+            .then(paciente => {
+                // Preencher os campos do modal com os dados do paciente
+                $("#modalViewCalendar #pacienteNome").text(paciente.nome_paci);
+                $("#modalViewCalendar #pacienteTelefone").text(paciente.telefone_paci);
+                $("#modalViewCalendar #pacienteEmail").text(paciente.email_paci);
+                $("#modalViewCalendar #pacienteDataNascimento").text(moment(paciente.data_nasci_paci).format("DD/MM/YYYY"));
+                $("#modalViewCalendar #pacienteCpf").text(paciente.cpf_paci);
+                $("#modalViewCalendar #pacienteResponsavel").text(paciente.responsavel_paci);
+                // Adicione outros campos conforme necessário
+
+                // Exibir o modal
+                $("#modalViewCalendar").modal('show');
+            })
+            .catch(error => {
+                console.error('Erro ao buscar paciente:', error);
+                alert('Erro ao buscar dados do paciente.');
+            });
 
           // Obtenha os dados do evento
           let procedimentoId = element.event.procedimento_id || element.event.extendedProps.procedimento_id;

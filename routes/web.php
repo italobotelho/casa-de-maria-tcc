@@ -31,11 +31,6 @@ Route::get('/get-procedimentos', [EventController::class, 'getProcedimentos'])->
 Route::get('/get-convenios', [EventController::class, 'getConvenios'])->name('getConvenios');
 Route::get('/home', [EventController::class, 'index'])->name('agenda.home');
 Route::get('/load-events-by-paciente', [EventController::class, 'loadEventsByPaciente'])->name('routeLoadEventsByPaciente');
-Route::get('/home', [EventController::class, 'index'])->name('agenda.home');
-
-
-
-
 
 // Rota Perfil
 Route::get('/perfil', [UserController::class, 'index'])->name('perfil.index');
@@ -56,14 +51,12 @@ Route::post('/form_medico', [MedicoController::class, 'store'])->name('medico.st
 // Rota para listar convênios
 Route::get('/convenio', [PersonController::class, 'ListarConvenio'])->name('convenio.listar');
 
-
-
-
-
 //PACIENTES
 Route::post('/update-paciente', [PersonController::class, 'update'])->name('paciente.update');
 Route::post('/convenios', 'PersonController@ListarConvenio');
 Route::get('/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
+Route::get('/paciente/{id}', [PersonController::class, 'show']);
+
 // Rota para o formulário de cadastro de paciente
 Route::get('/form_paciente', [PersonController::class, 'index'])->name('paciente.index');
 // Rota para armazenar um novo paciente
