@@ -31,6 +31,15 @@ Route::get('/get-procedimentos', [EventController::class, 'getProcedimentos'])->
 Route::get('/get-convenios', [EventController::class, 'getConvenios'])->name('getConvenios');
 Route::get('/home', [EventController::class, 'index'])->name('agenda.home');
 Route::get('/load-events-by-paciente', [EventController::class, 'loadEventsByPaciente'])->name('routeLoadEventsByPaciente');
+Route::get('/home', [EventController::class, 'index'])->name('agenda.home');
+Route::get('/get-medico/{id}', [MedicoController::class, 'getMedico']);
+Route::get('/get-event/{id}', [EventController::class, 'show']);
+
+
+
+
+
+
 
 // Rota Perfil
 Route::get('/perfil', [UserController::class, 'index'])->name('perfil.index');

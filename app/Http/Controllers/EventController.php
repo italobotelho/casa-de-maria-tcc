@@ -18,7 +18,16 @@ class EventController extends Controller
     {
         $this->middleware('auth');
     }
-    // No EventController
+   
+            public function show($id)
+        {
+            $event = Event::find($id);
+            if (!$event) {
+                return response()->json(['message' => 'Evento não encontrado'], 404);
+            }
+            return response()->json($event);
+        }
+
 
 
     public function loadEvents(Request $request)

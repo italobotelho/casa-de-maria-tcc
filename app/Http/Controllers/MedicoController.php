@@ -5,13 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\Medico;
 use Illuminate\Http\Request;
 
+
 class MedicoController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
+    
 
+    public function getMedico($id)
+    {
+  
+        $medico = Medico::find($id);
+    
+        if (!$medico) {
+            return response()->json(['message' => 'Médico não encontrado'], 404);
+        }
+        return response()->json([
+            'nome_medico' => $medico->nome_med, // Corrigido para usar 'nome_med'
+        ]);
+    }
+
+    
     public function buscarMedico(Request $request)
     {
         $query = $request->input('query');
@@ -26,8 +42,7 @@ class MedicoController extends Controller
             $medicos = Medico::where('nome_med', 'LIKE', "%{$query}%")->get();
             return response()->json($medicos);
         } catch (\Exception $e) {
-            // Log do erro para depuração
-            Log::error('Erro ao buscar médicos: ' . $e->getMessage());
+            
             return response()->json(['error' => 'Erro ao buscar médicos.'], 500);
         }
     }
