@@ -129,8 +129,11 @@
         <br>
         <a href="pacientes" class="btn btn-primary voltar">VOLTAR</a>
 
+        <!-- JavaScript Section -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+        <script src="js/paciente.js"></script>
+        
     </div>
 </body>
 
