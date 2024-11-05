@@ -45,7 +45,7 @@
                         
                         <form id="formEvent" class="row g-3"> <!-- Formulário com classe para estilo de grade -->
                             <input type="hidden" name="id" id="id"> <!-- Campo oculto para ID -->
-                            <input type="hidden" name="color" id="color" value="#9D9D9B"> <!-- Campo oculto para cor -->
+                            <input type="hidden" name="color" id="color" value=""> <!-- Campo oculto para cor -->
 
                             <!-- Campo para paciente -->
                             <div class="col-12">

@@ -34,7 +34,7 @@ Route::get('/load-events-by-paciente', [EventController::class, 'loadEventsByPac
 Route::get('/home', [EventController::class, 'index'])->name('agenda.home');
 Route::get('/get-medico/{id}', [MedicoController::class, 'getMedico']);
 Route::get('/get-event/{id}', [EventController::class, 'show']);
-
+Route::post('/event-update-color', [EventController::class, 'updateColor']);
 
 
 

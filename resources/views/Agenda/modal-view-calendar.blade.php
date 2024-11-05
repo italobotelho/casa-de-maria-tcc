@@ -14,48 +14,48 @@
             <p><strong>Responsável:</strong> <span id="pacienteResponsavel"></span></p>
           </div>
           <div class="modal-footer d-flex justify-content-between">
-              <div class="dropup-center dropup">
-                  <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Alterar Status
-                  </button>
-                  <ul class="dropdown-menu">
-                      <li>
-                          <a class="dropdown-item" href="#" data-color="#008000"> <!-- Cor: Verde -->
-                              <span class="dot" style="background-color: #008000;"></span> Finalizado
-                          </a>
-                      </li>
-                      <li>
-                          <a class="dropdown-item" href="#" data-color="#9D9D9B"> <!-- Cor: Cinza -->
-                              <span class="dot" style="background-color: #9D9D9B;"></span> Agendado
-                          </a>
-                      </li>
-                      <li>
-                          <a class="dropdown-item" href="#" data-color="#0000ff"> <!-- Cor: Azul -->
-                              <span class="dot" style="background-color: #0000ff;"></span> Confirmado
-                          </a>
-                      </li>
-                      <li>
-                          <a class="dropdown-item" href="#" data-color="#ffa500"> <!-- Cor: Laranja -->
-                              <span class="dot" style="background-color: #ffa500;"></span> Esperando
-                          </a>
-                      </li>
-                      <li>
-                          <a class="dropdown-item" href="#" data-color="#ff7bff"> <!-- Cor: Rosa -->
-                              <span class="dot" style="background-color: #ff7bff;"></span> Não Compareceu
-                          </a>
-                      </li>
-                      <li>
-                          <a class="dropdown-item" href="#" data-color="#ff0000"> <!-- Cor: Vermelho -->
-                              <span class="dot" style="background-color: #ff0000;"></span> Cancelado
-                          </a>
-                      </li>
-                      <li>
-                          <a class="dropdown-item" href="#" data-color="#a52a2a"> <!-- Cor: Marrom -->
-                              <span class="dot" style="background-color: #a52a2a;"></span> Reagendado
-                          </a>
-                      </li>
-                  </ul>
-              </div>
+            <div class="dropup-center dropup">
+                <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Alterar Cor do Evento
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item" href="#" data-color="#008000"> <!-- Cor: Verde -->
+                            <span class="dot" style="background-color: #008000;"></span> Finalizado
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#" data-color="#9D9D9B"> <!-- Cor: Cinza -->
+                            <span class="dot" style="background-color: #9D9D9B;"></span> Agendado
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#" data-color="#0000ff"> <!-- Cor: Azul -->
+                            <span class="dot" style="background-color: #0000ff;"></span> Confirmado
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#" data-color="#ffa500"> <!-- Cor: Laranja -->
+                            <span class="dot" style="background-color: #ffa500;"></span> Esperando
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#" data-color="#ff7bff"> <!-- Cor: Rosa -->
+                            <span class="dot" style="background-color: #ff7bff;"></span> Não Compareceu
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#" data-color="#ff0000"> <!-- Cor: Vermelho -->
+                            <span class="dot" style="background-color: #ff0000;"></span> Cancelado
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#" data-color="#a52a2a"> <!-- Cor: Marrom -->
+                            <span class="dot" style="background-color: #a52a2a;"></span> Reagendado
+                        </a>
+                    </li>
+                </ul>
+            </div>
               <button class="btn btn-primary" data-bs-target="#modalCalendar" data-bs-toggle="modal">Alterar Agendamento</button>
           </div>
       </div>

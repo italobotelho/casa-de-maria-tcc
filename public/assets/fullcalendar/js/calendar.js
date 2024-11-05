@@ -23,13 +23,26 @@
         let medico = element.event.extendedProps.medico;
         let convenio = element.event.extendedProps.convenio;
 
+        // Verifica se existe um item no dropdown que contém "Reagendado"
+        let dropdownItem = $('.dropdown-item').filter(function() {
+          return $(this).text().includes("Reagendado");
+        });
+
+        let newColor = element.event.backgroundColor; // Cor atual do evento
+
+        // Se o item "Reagendado" foi encontrado, altera a cor
+        if (dropdownItem.length > 0) {
+          newColor = dropdownItem.data('color'); // Obtém a nova cor do item dropdown
+          element.event.setProp('backgroundColor', newColor); // Atualiza a cor do evento no calendário
+        }
+
         let newEvent = {
           _method: 'PUT',
           title: element.event.title,
           id: element.event.id,
           start: start,
           end: end,
-          color: color,
+          color: newColor,
           procedimento_id: procedimentoId,
           medico: medico,
           convenio: convenio
@@ -113,13 +126,26 @@
         let medico = element.event.extendedProps.medico;
         let convenio = element.event.extendedProps.convenio;
 
+        // Verifica se existe um item no dropdown que contém "Reagendado"
+        let dropdownItem = $('.dropdown-item').filter(function() {
+          return $(this).text().includes("Reagendado");
+        });
+
+        let newColor = element.event.backgroundColor; // Cor atual do evento
+
+        // Se o item "Reagendado" foi encontrado, altera a cor
+        if (dropdownItem.length > 0) {
+          newColor = dropdownItem.data('color'); // Obtém a nova cor do item dropdown
+          element.event.setProp('backgroundColor', newColor); // Atualiza a cor do evento no calendário
+        }
+
         let newEvent = {
           _method: 'PUT',
           title: element.event.title,
           id: element.event.id,
           start: start,
           end: end,
-          color: color,
+          color: newColor,
           procedimento_id: procedimentoId,
           medico: medico,
           convenio: convenio
@@ -180,58 +206,3 @@
       calendar.refetchEvents();
     });
   });
-
-  $(".saveEvent").click(function() {
-    const pacienteNaoCadastrado = $('#pacienteSuggestions').text().includes('Paciente não cadastrado');
-    if (pacienteNaoCadastrado) {
-      alert('Não é possível agendar. Paciente não cadastrado.');
-      return;
-    }
-    
-
-    let id = $("#modalCalendar input[name='id']").val();
-    let title = $("#modalCalendar input[name='paciente']").val();
-    let procedimentoId = $("#modalCalendar select[name='procedimento_id']").val();
-    let convenioId = $("#modalCalendar input[name='convenio_id']").val();
-    let selectedDate = $("#modalCalendar input[name='eventDate']").val();
-    let startTime = $("#modalCalendar input[name='start']").val();
-    let endTime = $("#modalCalendar input[name='end']").val();
-    let medico = $("#modalCalendar input[name='medico']").val(); // Captura o ID do médico
-
-    if (!procedimentoId || procedimentoId === 'Selecione um Procedimento') {
-      alert('Procedimento não selecionado. Por favor, escolha um procedimento para continuar.');
-      return;
-    }
-
-    if (!selectedDate || !startTime || !endTime) {
-      console.error("Data ou horário não definidos.");
-      return;
-    }
-
-    let color = $("#modalCalendar input[name='color']").val() || "#9D9D9B";
-    let start = moment(`${selectedDate}T${startTime}`, "YYYY-MM-DDTHH:mm").format("YYYY-MM-DD HH:mm:ss");
-    let end = moment(`${selectedDate}T${endTime}`, "YYYY-MM-DDTHH:mm").format("YYYY-MM-DD HH:mm:ss");
-
-    let Event = {
-      title: title,
-      start: start,
-      end: end,
-      color: color,
-      procedimento_id: procedimentoId,
-      convenio: convenioId,
-      medico: medico
-    };
-
-    let route;
-    if (id === '') {
-      route = routeEvents('routeEventStore');
-    } else {
-      route = routeEvents('routeEventUpdate');
-      Event.id = id;
-      Event._method = "PUT";
-    }
-
-    sendEvent(route, Event);
-  });
-
-

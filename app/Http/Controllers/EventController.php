@@ -56,6 +56,20 @@ class EventController extends Controller
         return response()->json($events);
     }
     
+    public function updateColor(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:events,id',
+            'color' => 'required',
+        ]);
+
+        $event = Event::find($request->id);
+        $event->color = $request->color;
+        $event->save();
+
+        return response()->json(['message' => 'Cor atualizada com sucesso.']);
+    }
+
     public function index()
     {
         $procedimentos = Procedimento::all(); // Fetch all procedures

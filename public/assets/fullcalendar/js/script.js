@@ -116,6 +116,41 @@ $('#modalCalendar').on('show.bs.modal', function () {
         adjustTime("#end", -30);
     });
 
+    // Adiciona o evento de clique para os itens do dropdown
+    $('.dropdown-item').click(function() {
+        let color = $(this).data('color'); // Obtém a cor do item clicado
+        $("#color").val(color); // Atualiza o campo oculto de cor no modal
+    
+        // Se você quiser também mudar a cor do evento no calendário imediatamente
+        if (currentEvent) {
+            currentEvent.setProp('backgroundColor', color); // Muda a cor do evento no calendário
+        }
+    
+        // Envia a nova cor para o backend
+        let eventId = currentEvent ? currentEvent.id : null; // Obtém o ID do evento atual
+        if (eventId) {
+            let route = '/event-update-color'; // Nova rota para atualização de cor
+            let updatedColor = {
+                id: eventId,
+                color: color
+            };
+
+            // Envia a requisição AJAX para salvar a nova cor
+            $.ajax({
+                url: route,
+                method: 'POST',
+                data: updatedColor,
+                success: function(response) {
+                    // Atualiza a página ou o calendário após a resposta
+                    location.reload(); // Atualiza a página
+                },
+                error: function(xhr) {
+                    console.error('Erro ao salvar a cor:', xhr.responseText);
+                }
+            });
+        }
+    });
+
     // Configuração do AJAX para CSRF
     $.ajaxSetup({
         headers: {
@@ -137,6 +172,60 @@ $('#modalCalendar').on('show.bs.modal', function () {
         $('#confirmDeleteModal').modal('hide'); // Fecha o modal de confirmação após a exclusão
         $('#successMessage').hide(); // Esconde a mensagem de sucesso
     });
+
+    $(".saveEvent").click(function() {
+        const pacienteNaoCadastrado = $('#pacienteSuggestions').text().includes('Paciente não cadastrado');
+        if (pacienteNaoCadastrado) {
+          alert('Não é possível agendar. Paciente não cadastrado.');
+          return;
+        }
+        
+    
+        let id = $("#modalCalendar input[name='id']").val();
+        let title = $("#modalCalendar input[name='paciente']").val();
+        let procedimentoId = $("#modalCalendar select[name='procedimento_id']").val();
+        let convenioId = $("#modalCalendar input[name='convenio_id']").val();
+        let selectedDate = $("#modalCalendar input[name='eventDate']").val();
+        let startTime = $("#modalCalendar input[name='start']").val();
+        let endTime = $("#modalCalendar input[name='end']").val();
+        let medico = $("#modalCalendar input[name='medico']").val();
+        let color = $("#modalCalendar input[name='color']").val() || "#9D9D9B"; // Captura o ID do médico
+    
+        if (!procedimentoId || procedimentoId === 'Selecione um Procedimento') {
+          alert('Procedimento não selecionado. Por favor, escolha um procedimento para continuar.');
+          return;
+        }
+    
+        if (!selectedDate || !startTime || !endTime) {
+          console.error("Data ou horário não definidos.");
+          return;
+        }
+    
+        
+        let start = moment(`${selectedDate}T${startTime}`, "YYYY-MM-DDTHH:mm").format("YYYY-MM-DD HH:mm:ss");
+        let end = moment(`${selectedDate}T${endTime}`, "YYYY-MM-DDTHH:mm").format("YYYY-MM-DD HH:mm:ss");
+    
+        let Event = {
+          title: title,
+          start: start,
+          end: end,
+          color: color,
+          procedimento_id: procedimentoId,
+          convenio: convenioId,
+          medico: medico
+        };
+    
+        let route;
+        if (id === '') {
+          route = routeEvents('routeEventStore');
+        } else {
+          route = routeEvents('routeEventUpdate');
+          Event.id = id;
+          Event._method = "PUT";
+        }
+    
+        sendEvent(route, Event);
+      });
 
     $(".saveEvent").off("click").on("click", function () {
 
