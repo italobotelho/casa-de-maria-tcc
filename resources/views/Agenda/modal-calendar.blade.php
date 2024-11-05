@@ -145,6 +145,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <p>Consulta cadastrada com sucesso!</p> <!-- Mensagem de sucesso -->
+            </div>
                 <p id="successMessageContent"></p> <!-- Conteúdo da mensagem de sucesso -->
             </div>
         </div>
