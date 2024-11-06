@@ -136,7 +136,7 @@ class EventController extends Controller
                 $event->end = $request->input('end');
                 $event->color = $request->input('color');
                 $event->procedimento_id = $request->input('procedimento_id');
-                $event->medico = $request->input('medico'); // Certifique-se de que isso é um ID
+                $event->medico = $request->input('medico');
                 $event->paciente_id = $request->input('paciente_id');
         
                 $event->save();
@@ -146,7 +146,6 @@ class EventController extends Controller
             return response()->json(['error' => 'Evento não encontrado'], 404);
         } catch (\Exception $e) {
             Log::error('Erro ao atualizar evento: ' . $e->getMessage());
-            Log::error('Dados recebidos para atualização: ', $request->all());
             return response()->json(['error' => 'Erro ao atualizar evento.'], 500);
         }
     }
