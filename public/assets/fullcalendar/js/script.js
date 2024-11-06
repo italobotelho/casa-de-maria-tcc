@@ -362,3 +362,11 @@ function clearMessages(element) {
 function resetForm(form) {
     $(form)[0].reset();
 }
+// Limpar o modal ao ser fechado
+$('#modalCalendar').on('hidden.bs.modal', function () {
+    // Limpa os campos do modal
+    $(this).find('input, select').val(''); // Limpa todos os campos de input e select
+    $(this).find('select').prop('selectedIndex', 0); // Reseta os selects para o primeiro valor
+    $(this).find('.alert').remove(); // Remove qualquer mensagem de erro ou alerta
+    clearMessages('#message'); // Limpa as mensagens de erro ou sucesso
+});
