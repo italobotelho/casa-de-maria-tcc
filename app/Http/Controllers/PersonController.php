@@ -20,8 +20,14 @@ class PersonController extends Controller
         if (!$paciente) {
             return response()->json(['message' => 'Paciente não encontrado'], 404);
         }
-        return response()->json($paciente); // Retorna o paciente em formato JSON
+        return response()->json([
+            'nome_paciente' => $paciente->nome_paci,
+            'telefone_paciente' => $paciente->telefone_paci,
+            'convenio' => $paciente->convenio ? $paciente->convenio->nome_conv : 'Nenhum convênio associado', // Acesse o nome do convênio
+
+        ]); // Retorna o paciente em formato JSON
     }
+
     
     // Método para buscar pacientes com base em uma consulta
     public function buscar(Request $request)

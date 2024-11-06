@@ -18,8 +18,8 @@
       eventDrop: function(element) {
         let start = moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
         let end = moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
-        let color = element.event.backgroundColor;
         let procedimentoId = element.event.extendedProps.procedimento_id;
+        let pacienteId = element.event.extendedProps.pacieente_id;
         let medico = element.event.extendedProps.medico;
         let convenio = element.event.extendedProps.convenio;
 
@@ -45,7 +45,8 @@
           color: newColor,
           procedimento_id: procedimentoId,
           medico: medico,
-          convenio: convenio
+          convenio: convenio,
+          pacieente_id: pacienteId
         };
 
         if (!medico || !procedimentoId || !convenio) {
@@ -61,6 +62,11 @@
         
         console.log('Evento clicado:', element.event); // Log para verificar se o evento foi capturado
 
+        let eventoId = element.event.id; // ID do evento
+
+        let pacienteId = element.event.extendedProps.paciente_id;
+        console.log('ID do Paciente:', pacienteId);
+
         // Obtenha o ID do médico do evento
         let medicoId = element.event.extendedProps.medico;
         console.log('ID do Médico:', medicoId); // Log para verificar se o ID do médico foi encontrado
@@ -73,7 +79,7 @@
 
         // Configuração básica do modal
         $("#modalViewCalendar #modalViewCalendarLabel").text('Visualização de agendamento para ' + startDate);
-        $("#modalViewCalendar").modal('show');
+        
         $("#modalCalendar #titleModal").text('Alteração de agendamento para ' + startDate);
         $("#modalCalendar button.deleteEvent").css("display", "flex");
 
@@ -116,12 +122,53 @@
             }
         }
       });
+
+      // AJAX para obter informações do evento
+      $.ajax({
+        url: `/get-event/${eventoId}`, // URL para obter o evento
+        type: 'GET',
+        success: function(response) {
+            console.log('Resposta do servidor:', response);
+            $('#medicoNome').text(response.medico.nome_med); // Preenche o nome do médico
+            $('#horaInicial').text(moment(response.start).format("HH:mm")); // Preenche a hora inicial
+            $('#horaFinal').text(moment(response.end).format("HH:mm")); // Preenche a hora final
+        },
+        error: function(xhr) {
+            if (xhr.responseJSON && xhr.responseJSON.message) {
+                alert('Erro ao buscar evento: ' + xhr.responseJSON.message);
+            } else {
+                alert('Erro ao buscar evento: ' + xhr.statusText);
+            }
+        }
+      });
+
+      $.ajax({
+        url: '/get-paciente/' + pacienteId,
+        type: 'GET',
+        success: function(response) {
+          console.log('Resposta do servidor:', response);
+          $('#modalCalendar input[name="paciente"]').val(response.nome_paciente);
+          $('#modalCalendar input[name="paciente_id"]').val(pacienteId); // Preenche o campo oculto com o ID do médico
+          $('#pacienteNome').text(response.nome_paciente); // Preenche o nome do paciente
+          $('#pacienteTelefone').text(response.telefone_paciente); // Preenche o telefone do paciente
+          $('#pacienteConvenio').text(response.convenio);
+          console.log('ID do Paciente preenchido:', $('#modalCalendar input[name="paciente_id"]').val());
+        },
+        error: function(xhr) {
+            if (xhr.responseJSON && xhr.responseJSON.message) {
+                alert('Erro ao buscar paciente: ' + xhr.responseJSON.message);
+            } else {
+                alert('Erro ao buscar paciente: ' + xhr.statusText);
+            }
+        }
+      });
+
+      $("#modalViewCalendar").modal('show');
       },
 
       eventResize: function(element) {
         let start = moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
         let end = moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
-        let color = element.event.backgroundColor;
         let procedimentoId = element.event.extendedProps.procedimento_id;
         let medico = element.event.extendedProps.medico;
         let convenio = element.event.extendedProps.convenio;

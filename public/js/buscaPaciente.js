@@ -22,9 +22,12 @@ function buscarPacientes(query) {
                     item.className = 'list-group-item list-group-item-action';
                     item.href = '#';
                     item.textContent = `${paciente.nome_paci} - ${dataFormatada}`;
+                    item.dataset.id = paciente.pk_cod_paci; // Armazena o ID do médico
 
                     item.onclick = function () {
                         document.getElementById('paciente').value = paciente.nome_paci;
+                        document.getElementById('paciente_id').value = paciente.pk_cod_paci; // Preenche o campo oculto com o ID do médico
+                        sugestoesDiv.style.display = 'none'; // Esconde a div de sugestões após a seleção
                         preencherConvenio(paciente.pk_cod_paci);
                     
                         // Remova o setTimeout e verifique o valor do convênio diretamente após o preenchimento

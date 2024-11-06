@@ -54,7 +54,6 @@ class Paciente extends Model
     {
         return $this->belongsTo(Convenio::class, 'fk_convenio_paci','pk_id_conv');
     }
-
    
 }
 

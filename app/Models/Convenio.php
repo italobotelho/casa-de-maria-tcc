@@ -19,4 +19,9 @@ class Convenio extends Model
     protected $primaryKey = 'pk_id_conv';
 
     protected $keyType = 'string';
+
+    public function pacientes()
+    {
+        return $this->hasMany(Paciente::class, 'convenio_id'); // Certifique-se de que o campo 'convenio_id' está correto
+    }
 }

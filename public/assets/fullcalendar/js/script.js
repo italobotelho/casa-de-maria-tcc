@@ -61,12 +61,19 @@ $('#modalCalendar').on('show.bs.modal', function () {
                 $("#modalCalendar input[name='start']").val(moment(data.start).format("HH:mm"));
                 $("#modalCalendar input[name='end']").val(moment(data.end).format("HH:mm"));
                 $("#modalCalendar input[name='medico']").val(data.medico); // Definindo o médico aqui
+                $("#modalCalendar input[name='paciente_id']").val(data.paciente_id);
 
                 // Verificar se o médico está cadastrado
                 if (!data.medico || data.medico === 'Médico não cadastrado') {
                     $('#medicoSuggestions').text('Médico não cadastrado');
                 } else {
                     $('#medicoSuggestions').text(data.medico);
+                }
+
+                if (!data.paciente_id || data.paciente_id === 'Paciente não cadastrado') {
+                    $('#pacienteSuggestions').text('Paciente não cadastrado');
+                } else {
+                    $('#pacienteSuggestions').text(data.paciente_id);
                 }
             },
             error: function (xhr, status, error) {
@@ -180,9 +187,10 @@ $('#modalCalendar').on('show.bs.modal', function () {
           return;
         }
         
-    
         let id = $("#modalCalendar input[name='id']").val();
         let title = $("#modalCalendar input[name='paciente']").val();
+        let pacienteId = $("#modalCalendar input[name='paciente_id']").val(); // Certifique-se de que este valor está correto
+         console.log("Paciente ID:", pacienteId); // Adicione este log para depuração
         let procedimentoId = $("#modalCalendar select[name='procedimento_id']").val();
         let convenioId = $("#modalCalendar input[name='convenio_id']").val();
         let selectedDate = $("#modalCalendar input[name='eventDate']").val();
@@ -212,7 +220,8 @@ $('#modalCalendar').on('show.bs.modal', function () {
           color: color,
           procedimento_id: procedimentoId,
           convenio: convenioId,
-          medico: medico
+          medico: medico,
+          paciente_id: pacienteId
         };
     
         let route;
@@ -245,6 +254,8 @@ $('#modalCalendar').on('show.bs.modal', function () {
 
         let id = $("#modalCalendar input[name='id']").val();
         let title = $("#modalCalendar input[name='paciente']").val();
+        let pacienteId = $("#modalCalendar input[name='paciente_id']").val(); // Certifique-se de que este valor está correto
+          console.log("Paciente ID:", pacienteId); // Adicione este log para depuração
         let procedimentoId = $("#modalCalendar select[name='procedimento_id']").val();
         let convenioId = $("#modalCalendar input[name='convenio_id']").val(); // Acesse o valor do convênio aqui
         let selectedDate = $("#modalCalendar input[name='eventDate']").val();
@@ -274,7 +285,8 @@ $('#modalCalendar').on('show.bs.modal', function () {
             color: color,
             procedimento_id: procedimentoId,
             convenio: convenioId, // Inclua o convênio no objeto Event
-            medico: medico // Inclua o médico no objeto Event
+            medico: medico, // Inclua o médico no objeto Event
+            paciente_id: pacienteId
         };
 
         let route;

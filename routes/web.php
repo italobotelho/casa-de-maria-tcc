@@ -33,13 +33,10 @@ Route::get('/home', [EventController::class, 'index'])->name('agenda.home');
 Route::get('/load-events-by-paciente', [EventController::class, 'loadEventsByPaciente'])->name('routeLoadEventsByPaciente');
 Route::get('/home', [EventController::class, 'index'])->name('agenda.home');
 Route::get('/get-medico/{id}', [MedicoController::class, 'getMedico']);
+Route::get('/get-paciente/{id}', [PersonController::class, 'getPaciente']);
 Route::get('/get-event/{id}', [EventController::class, 'show']);
 Route::post('/event-update-color', [EventController::class, 'updateColor']);
-
-
-
-
-
+Route::get('/get-event/{id}', [EventController::class, 'getEvent']);
 
 // Rota Perfil
 Route::get('/perfil', [UserController::class, 'index'])->name('perfil.index');

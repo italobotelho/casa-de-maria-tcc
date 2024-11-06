@@ -19,16 +19,24 @@ class EventController extends Controller
         $this->middleware('auth');
     }
    
-            public function show($id)
-        {
-            $event = Event::find($id);
-            if (!$event) {
-                return response()->json(['message' => 'Evento não encontrado'], 404);
-            }
-            return response()->json($event);
+    public function show($id)
+    {
+        $event = Event::with(['procedimento', 'medico'])->find($id); // Carrega o evento, procedimento e médico associado
+        if (!$event) {
+            return response()->json(['message' => 'Evento não encontrado'], 404);
         }
-
-
+    
+        return response()->json([
+            'id' => $event->id,
+            'title' => $event->title,
+            'start' => $event->start,
+            'end' => $event->end,
+            'procedimento_id' => $event->procedimento_id,
+            'medico' => $event->medico ? $event->medico->nome_med : 'Médico não encontrado', // Acesse o nome do médico
+            'convenio' => $event->convenio,
+            'paciente_id' => $event->paciente_id,
+        ]);
+    }
 
     public function loadEvents(Request $request)
     {
@@ -50,10 +58,22 @@ class EventController extends Controller
                 'medico' => $event->medico,
                 'convenio' => $event->convenio,
                 'backgroundColor' => $event->color,
+                'paciente_id' => $event->paciente_id,
             ];
         });
     
         return response()->json($events);
+    }
+
+    public function getEvent($id)
+    {
+        try {
+            $event = Event::with(['procedimento', 'medico'])->findOrFail($id); // Carrega o evento, procedimento e médico associado
+            return response()->json($event);
+        } catch (\Exception $e) {
+            Log::error('Erro ao buscar evento: ' . $e->getMessage());
+            return response()->json(['error' => 'Evento não encontrado.'], 404);
+        }
     }
     
     public function updateColor(Request $request)
@@ -80,6 +100,7 @@ class EventController extends Controller
     
     public function store(EventRequest $request)
     {
+        Log::info('Dados recebidos:', $request->all());
         $event = new Event();
         $event->title = $request->input('title');
         $event->start = $request->input('start');
@@ -88,10 +109,16 @@ class EventController extends Controller
         $event->procedimento_id = $request->input('procedimento_id');
         $event->convenio = $request->input('convenio');
         $event->medico = $request->input('medico'); // Certifique-se de que está pegando o campo correto
+        $event->paciente_id = $request->input('paciente_id');
     
         // Verifique se o ID do médico não é nulo
         if (empty($event->medico)) {
             return response()->json(['error' => 'O campo médico é obrigatório.'], 400);
+        }
+
+        // Verifique se o ID do paciente não é nulo
+        if (empty($event->paciente_id)) {
+            return response()->json(['error' => 'O campo paciente é obrigatório.'], 400);
         }
     
         $event->save();
@@ -109,6 +136,7 @@ class EventController extends Controller
             $event->color = $request->input('color');
             $event->procedimento_id = $request->input('procedimento_id');
             $event->medico = $request->input('medico'); // Use o ID do médico
+            $event->paciente_id = $request->input('paciente_id');
     
             $event->save();
             return response()->json(true);

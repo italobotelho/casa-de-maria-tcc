@@ -50,6 +50,7 @@
                             <!-- Campo para paciente -->
                             <div class="col-12">
                                 <label for="paciente" class="form-label">Paciente</label>
+                                <input type="hidden" name="paciente_id" id="paciente_id" value="">
                                 <input type="text" class="form-control" name="paciente" id="paciente" placeholder="Informe o nome" oninput="buscarPacientes(this.value)">
                                 <div id="pacienteSuggestions" class="list-group" style="display: none; position: absolute; z-index: 1000;"></div> <!-- Sugestões para pacientes -->
                             </div>

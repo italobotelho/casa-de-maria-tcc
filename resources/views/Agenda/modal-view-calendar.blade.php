@@ -8,10 +8,10 @@
           <div class="modal-body">
             <p><strong>Nome:</strong> <span id="pacienteNome"></span></p>
             <p><strong>Telefone:</strong> <span id="pacienteTelefone"></span></p>
-            <p><strong>Email:</strong> <span id="pacienteEmail"></span></p>
-            <p><strong>Data de Nascimento:</strong> <span id="pacienteDataNascimento"></span></p>
-            <p><strong>CPF:</strong> <span id="pacienteCpf"></span></p>
-            <p><strong>Responsável:</strong> <span id="pacienteResponsavel"></span></p>
+            <p><strong>Convênio:</strong> <span id="pacienteConvenio"></span></p>
+            <p><strong>Médico:</strong> <span id="medicoNome"></span></p>
+            <p><strong>Hora Inicial:</strong> <span id="horaInicial"></span></p>
+            <p><strong>Hora Final:</strong> <span id="horaFinal"></span></p>
           </div>
           <div class="modal-footer d-flex justify-content-between">
             <div class="dropup-center dropup">
