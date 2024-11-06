@@ -8,43 +8,43 @@ $(document).ready(function () {
         }
     }
 
- // Quando o modal for aberto
-$('#modalCalendar').on('show.bs.modal', function () {
-    // Carregar procedimentos apenas uma vez ou adicionar lógica para verificar se já foram carregados
-    if ($("#modalCalendar select[name='procedimento_id'] option").length === 0) {
+    // Quando o modal for aberto
+    $('#modalCalendar').on('show.bs.modal', function () {
+        // Carregar procedimentos apenas uma vez ou adicionar lógica para verificar se já foram carregados
+        if ($("#modalCalendar select[name='procedimento_id'] option").length === 0) {
+            $.ajax({
+                url: '/get-procedimentos',
+                method: 'GET',
+                success: function (data) {
+                    let select = $('#procedimento_id');
+                    select.empty();
+                    select.append('<option selected>Selecione um Procedimento</option>');
+                    $.each(data, function (index, procedimento) {
+                        select.append('<option value="' + procedimento.pk_cod_proc + '">' + procedimento.nome_proc + '</option>');
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('Erro ao carregar procedimentos:', error);
+                }
+            });
+        }
+
+        // Carregar convênios
         $.ajax({
-            url: '/get-procedimentos',
+            url: '/get-convenios',
             method: 'GET',
             success: function (data) {
-                let select = $('#procedimento_id');
+                let select = $('#convenio_id'); // Certifique-se de que o ID do select é correto
                 select.empty();
-                select.append('<option selected>Selecione um Procedimento</option>');
-                $.each(data, function (index, procedimento) {
-                    select.append('<option value="' + procedimento.pk_cod_proc + '">' + procedimento.nome_proc + '</option>');
+                select.append('<option selected>Selecione um Convênio</option>');
+                $.each(data, function (index, convenio) {
+                    select.append('<option value="' + convenio.id + '">' + convenio.nome + '</option>');
                 });
             },
             error: function (xhr, status, error) {
-                console.error('Erro ao carregar procedimentos:', error);
+                console.error('Erro ao carregar convênios:', error);
             }
         });
-    }
-
-    // Carregar convênios
-    $.ajax({
-        url: '/get-convenios',
-        method: 'GET',
-        success: function (data) {
-            let select = $('#convenio_id'); // Certifique-se de que o ID do select é correto
-            select.empty();
-            select.append('<option selected>Selecione um Convênio</option>');
-            $.each(data, function (index, convenio) {
-                select.append('<option value="' + convenio.id + '">' + convenio.nome + '</option>');
-            });
-        },
-        error: function (xhr, status, error) {
-            console.error('Erro ao carregar convênios:', error);
-        }
-    });
 
     // Carregar dados do evento 
     let id = $("#modalCalendar input[name='id']").val(); 
@@ -129,15 +129,15 @@ $('#modalCalendar').on('show.bs.modal', function () {
     });
 
     // Adiciona o evento de clique para os itens do dropdown
-    $('.dropdown-item').click(function() {
+    $('.dropdown-item').click(function () {
         let color = $(this).data('color'); // Obtém a cor do item clicado
         $("#color").val(color); // Atualiza o campo oculto de cor no modal
-    
+
         // Se você quiser também mudar a cor do evento no calendário imediatamente
         if (currentEvent) {
             currentEvent.setProp('backgroundColor', color); // Muda a cor do evento no calendário
         }
-    
+
         // Envia a nova cor para o backend
         let eventId = currentEvent ? currentEvent.id : null; // Obtém o ID do evento atual
         if (eventId) {
@@ -152,11 +152,11 @@ $('#modalCalendar').on('show.bs.modal', function () {
                 url: route,
                 method: 'POST',
                 data: updatedColor,
-                success: function(response) {
+                success: function (response) {
                     // Atualiza a página ou o calendário após a resposta
                     location.reload(); // Atualiza a página
                 },
-                error: function(xhr) {
+                error: function (xhr) {
                     console.error('Erro ao salvar a cor:', xhr.responseText);
                 }
             });
@@ -185,11 +185,11 @@ $('#modalCalendar').on('show.bs.modal', function () {
         $('#successMessage').hide(); // Esconde a mensagem de sucesso
     });
 
-    $(".saveEvent").click(function() {
+    $(".saveEvent").click(function () {
         const pacienteNaoCadastrado = $('#pacienteSuggestions').text().includes('Paciente não cadastrado');
         if (pacienteNaoCadastrado) {
-          alert('Não é possível agendar. Paciente não cadastrado.');
-          return;
+            alert('Não é possível agendar. Paciente não cadastrado.');
+            return;
         }
         
         let id = $("#modalCalendar input[name='id']").val();
@@ -203,21 +203,21 @@ $('#modalCalendar').on('show.bs.modal', function () {
         let endTime = $("#modalCalendar input[name='end']").val();
         let medico = $("#modalCalendar input[name='medico']").val();
         let color = $("#modalCalendar input[name='color']").val() || "#9D9D9B"; // Captura o ID do médico
-    
+
         if (!procedimentoId || procedimentoId === 'Selecione um Procedimento') {
-          alert('Procedimento não selecionado. Por favor, escolha um procedimento para continuar.');
-          return;
+            alert('Procedimento não selecionado. Por favor, escolha um procedimento para continuar.');
+            return;
         }
-    
+
         if (!selectedDate || !startTime || !endTime) {
-          console.error("Data ou horário não definidos.");
-          return;
+            console.error("Data ou horário não definidos.");
+            return;
         }
-    
-        
+
+
         let start = moment(`${selectedDate}T${startTime}`, "YYYY-MM-DDTHH:mm").format("YYYY-MM-DD HH:mm:ss");
         let end = moment(`${selectedDate}T${endTime}`, "YYYY-MM-DDTHH:mm").format("YYYY-MM-DD HH:mm:ss");
-    
+
         let Event = {
           title: title,
           start: start,
@@ -228,18 +228,18 @@ $('#modalCalendar').on('show.bs.modal', function () {
           medico: medico,
           paciente_id: pacienteId
         };
-    
+
         let route;
         if (id === '') {
-          route = routeEvents('routeEventStore');
+            route = routeEvents('routeEventStore');
         } else {
-          route = routeEvents('routeEventUpdate');
-          Event.id = id;
-          Event._method = "PUT";
+            route = routeEvents('routeEventUpdate');
+            Event.id = id;
+            Event._method = "PUT";
         }
-    
+
         sendEvent(route, Event);
-      });
+    });
 
     $(".saveEvent").off("click").on("click", function () {
 
@@ -376,3 +376,11 @@ function clearMessages(element) {
 function resetForm(form) {
     $(form)[0].reset();
 }
+// Limpar o modal ao ser fechado
+$('#modalCalendar').on('hidden.bs.modal', function () {
+    // Limpa os campos do modal
+    $(this).find('input, select').val(''); // Limpa todos os campos de input e select
+    $(this).find('select').prop('selectedIndex', 0); // Reseta os selects para o primeiro valor
+    $(this).find('.alert').remove(); // Remove qualquer mensagem de erro ou alerta
+    clearMessages('#message'); // Limpa as mensagens de erro ou sucesso
+});
