@@ -267,6 +267,12 @@ $(document).ready(function () {
         let startTime = $("#modalCalendar input[name='start']").val();
         let endTime = $("#modalCalendar input[name='end']").val();
         let medico = $("#modalCalendar input[name='medico']").val(); // Adicione esta linha para obter o médico
+        console.log("ID do Médico:", medico); 
+
+        // Verifique se o ID do médico não é um objeto
+        if (typeof medico === 'object') {
+            console.error("O valor do médico é um objeto:", medico);
+        }
 
         // Verifique se o procedimento foi selecionado
         if (!procedimentoId || procedimentoId === 'Selecione um Procedimento') {

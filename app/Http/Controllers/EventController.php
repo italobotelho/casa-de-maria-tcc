@@ -111,9 +111,14 @@ class EventController extends Controller
         $event->medico = $request->input('medico'); // Certifique-se de que está pegando o campo correto
         $event->paciente_id = $request->input('paciente_id');
     
-        // Verifique se o ID do médico não é nulo
         if (empty($event->medico)) {
             return response()->json(['error' => 'O campo médico é obrigatório.'], 400);
+        }
+        
+        // Verifique se o médico existe no banco de dados
+        $medico = Medico::find($event->medico);
+        if (!$medico) {
+            return response()->json(['error' => 'Médico não encontrado.'], 404);
         }
 
         // Verifique se o ID do paciente não é nulo
@@ -130,20 +135,25 @@ class EventController extends Controller
         try {
             $event = Event::find($request->id);
         
-            if ($event) {
-                $event->title = $request->input('title');
-                $event->start = $request->input('start');
-                $event->end = $request->input('end');
-                $event->color = $request->input('color');
-                $event->procedimento_id = $request->input('procedimento_id');
-                $event->medico = $request->input('medico');
-                $event->paciente_id = $request->input('paciente_id');
-        
-                $event->save();
-                return response()->json(true);
+            if (!$event) {
+                return response()->json(['error' => 'Evento não encontrado'], 404);
             }
-        
-            return response()->json(['error' => 'Evento não encontrado'], 404);
+    
+            // Validações adicionais
+            if (empty($request->input('title')) || empty($request->input('start')) || empty($request->input('end'))) {
+                return response()->json(['error' => 'Título, início e fim são obrigatórios.'], 400);
+            }
+    
+            $event->title = $request->input('title');
+            $event->start = $request->input('start');
+            $event->end = $request->input('end');
+            $event->color = $request->input('color');
+            $event->procedimento_id = $request->input('procedimento_id');
+            $event->medico = $request->input('medico');
+            $event->paciente_id = $request->input('paciente_id');
+    
+            $event->save();
+            return response()->json(true);
         } catch (\Exception $e) {
             Log::error('Erro ao atualizar evento: ' . $e->getMessage());
             return response()->json(['error' => 'Erro ao atualizar evento.'], 500);

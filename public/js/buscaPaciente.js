@@ -57,44 +57,40 @@ function buscarPacientes(query) {
 
 // Função para buscar médicos no modal de agendamento
 function buscarMedico(query) {
-    console.log("Buscando medico com a consulta:", query); // Loga a consulta no console
-    const sugestoesDiv = document.getElementById('medicoSuggestions'); // Obtém a div para sugestões
+    const sugestoesDiv = document.getElementById('medicoSuggestions');
 
-    // Se a consulta for vazia, esconde as sugestões e limpa o conteúdo
     if (query.length < 1) {
-        sugestoesDiv.style.display = 'none'; // Esconde a div
-        sugestoesDiv.innerHTML = ''; // Limpa o conteúdo
-        return; // Sai da função
+        sugestoesDiv.style.display = 'none';
+        sugestoesDiv.innerHTML = '';
+        return;
     }
 
-    // Faz uma requisição para buscar médicos que correspondam à consulta
     fetch(`/medico/buscar?query=${query}`)
-        .then(response => response.json()) // Converte a resposta em JSON
+        .then(response => response.json())
         .then(data => {
-            sugestoesDiv.innerHTML = ''; // Limpa sugestões anteriores
-            if (data.length > 0) { // Se houver médicos retornados
-                // Para cada médico retornado, cria um item de sugestão
+            sugestoesDiv.innerHTML = '';
+            if (data.length > 0) {
                 data.forEach(medico => {
-                    const item = document.createElement('a'); // Cria um novo elemento <a> para a sugestão
-                    item.className = 'list-group-item list-group-item-action'; // Define classes para estilização
-                    item.href = '#'; // Define o href como '#' para que não redirecione
-                    item.textContent = medico.nome_med; // Use o nome do médico
+                    const item = document.createElement('a');
+                    item.className = 'list-group-item list-group-item-action';
+                    item.href = '#';
+                    item.textContent = medico.nome_med;
                     item.dataset.id = medico.pk_crm_med; // Armazena o ID do médico
 
-                    // Adiciona um evento de clique para o item de sugestão
                     item.onclick = function () {
+                        // Preenche os campos corretamente
                         document.getElementById('medico').value = medico.pk_crm_med; // Preenche o campo oculto com o ID do médico
-                        document.getElementById('medico_nome').value = medico.nome_med; // Se você tiver um campo para o nome do médico
+                        document.getElementById('medico_nome').value = medico.nome_med; // Preenche o campo visível com o nome do médico
                         sugestoesDiv.style.display = 'none'; // Esconde a div de sugestões após a seleção
                     };
-                    sugestoesDiv.appendChild(item); // Adiciona o item de sugestão à div
+                    sugestoesDiv.appendChild(item);
                 });
-                sugestoesDiv.style.display = 'block'; // Exibe a div de sugestões
+                sugestoesDiv.style.display = 'block';
             } else {
-                sugestoesDiv.style.display = 'none'; // Esconde a div se não houver sugestões
+                sugestoesDiv.style.display = 'none';
             }
         })
-        .catch(error => console.error('Erro:', error)); // Tratamento de erro na requisição
+        .catch(error => console.error('Erro:', error));
 }
 
 function preencherConvenio(pacienteId) {
