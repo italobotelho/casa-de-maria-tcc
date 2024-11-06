@@ -54,7 +54,12 @@ $('#modalCalendar').on('show.bs.modal', function () {
             method: 'GET',
             success: function (data) {
                 // Preencher outros campos do modal
-                $("#modalCalendar input[name='paciente']").val(data.paciente);
+
+                 $("#modalCalendar").on('shown.bs.modal', function() {
+                // Forçar o preenchimento do campo quando o modal é exibido
+                 $("#modalCalendar input[name='paciente']").val(data.paciente);
+                 });
+                 
                 $("#modalCalendar select[name='procedimento_id']").val(data.procedimento_id);
                 $("#modalCalendar input[name='convenio_id']").val(data.convenio);
                 $("#modalCalendar input[name='eventDate']").val(moment(data.start).format("YYYY-MM-DD"));
