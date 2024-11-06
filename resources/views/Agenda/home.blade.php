@@ -13,8 +13,6 @@
   @include('agenda.modal-calendar')
   @include('agenda.modal-view-calendar')
 
-  <div id='wrap'>
-
   <div class="form-group">
     <label for="medicoSelect">Selecione um Médico:</label>
     <select id="medicoSelect" class="form-control">
@@ -23,20 +21,29 @@
             <option value="{{ $medico->pk_crm_med}}">{{ $medico->nome_med }}</option>
         @endforeach
     </select>
-</div>
+  </div>
 
+  <div id='wrap'>
 
-
-    <div>
+    <div style="flex: 2;">
+      <!-- Calendário principal com visualização de horários -->
       <div id='calendar'
         data-route-load-events="{{ route('routeLoadEvents') }}"
         data-route-event-update="{{ route('routeEventUpdate') }}"
         data-route-event-store="{{ route('routeEventStore') }}"
         data-route-event-delete="{{ route('routeEventDelete') }}">
       </div>
-
     </div>
 
+    <div style="flex: 1;">
+      <span>-0- Agendamentos</span>
+      <!-- Calendário de visualização do mês -->
+      <div id="calendarMonth"></div>
+      <button><a href="#">Buscar Agendamento</a></button>
+      <button><a href="#">Imprimir Agenda</a></button>
+      <button><a href="#">Exportar Agenda</a></button>
+
+    </div>
 
   </div>
 </div>

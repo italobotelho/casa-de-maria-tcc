@@ -2,13 +2,42 @@
 
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
+    var calendarMonthEl = document.getElementById('calendarMonth');
+
+    // Evento de criação do calendário principal
     var calendar = new FullCalendar.Calendar(calendarEl, {
+
+      initialView: 'timeGridDay', // Definindo a visualização inicial como o "Day View"
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+        right: 'timeGridDay,timeGridWeek,dayGridMonth,listWeek'
       },
 
+      businessHours: {
+        daysOfWeek: [1, 2, 3, 4, 5], // Segunda - Sexta
+        startTime: '10:00', // horário de início para dias úteis
+        endTime: '18:00',   // horário de término para dias úteis
+      },
+  
+      allDaySlot: false, // Remove o slot de "dia inteiro"
+  
+      // Limita a exibição do calendário ao horário de businessHours
+      slotMinTime: '10:00', // Define o horário inicial para exibição
+      slotMaxTime: '18:00', // Define o horário final para exibição
+  
+      slotDuration: '00:30', // duração dos slots de 30 minutos
+
+      slotLabelInterval: '00:30',  // Exibe rótulos a cada 30 minutos
+
+      slotLabelFormat: {
+        hour: '2-digit',
+        minute: '2-digit',
+        omitZeroMinute: false,
+        meridiem: false
+      },
+
+      height: '700px',
       locale: 'pt-br',
       navLinks: true,
       selectable: true,
@@ -19,7 +48,7 @@
         let start = moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
         let end = moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
         let procedimentoId = element.event.extendedProps.procedimento_id;
-        let pacienteId = element.event.extendedProps.pacieente_id;
+        let pacienteId = element.event.extendedProps.paciente_id;
         let medico = element.event.extendedProps.medico;
         let convenio = element.event.extendedProps.convenio;
 
@@ -46,7 +75,7 @@
           procedimento_id: procedimentoId,
           medico: medico,
           convenio: convenio,
-          pacieente_id: pacienteId
+          paciente_id: pacienteId
         };
 
         if (!medico || !procedimentoId || !convenio) {
@@ -169,6 +198,7 @@
       eventResize: function(element) {
         let start = moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
         let end = moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
+        let pacienteId = element.event.extendedProps.paciente_id;
         let procedimentoId = element.event.extendedProps.procedimento_id;
         let medico = element.event.extendedProps.medico;
         let convenio = element.event.extendedProps.convenio;
@@ -195,7 +225,8 @@
           color: newColor,
           procedimento_id: procedimentoId,
           medico: medico,
-          convenio: convenio
+          convenio: convenio,
+          paciente_id: pacienteId
         };
 
         if (!medico || !procedimentoId || !convenio) {
@@ -247,9 +278,34 @@
       },
     });
 
+    // Inicialização do calendário mensal
+    var calendarMonth = new FullCalendar.Calendar(calendarMonthEl, {
+      initialView: 'dayGridMonth', // Visualização inicial do mês
+      // Personalização da barra de navegação
+      headerToolbar: {
+        left: 'prev',    // Adiciona as setas de navegação (prev e next)
+        center: 'title',      // Exibe apenas o título do mês
+        right: 'next'             // Não adiciona nada no lado direito
+      },
+
+      
+      locale: 'pt-br',
+      events: calendar.getEvents(), // Sincroniza eventos entre os dois calendários
+      dateClick: function(info) {
+        calendar.gotoDate(info.date); // Sincroniza a navegação com o calendário principal
+      }
+    });
+
+    // Sincroniza os dois calendários
+    calendar.on('dateClick', function(info) {
+      calendarMonth.gotoDate(info.date); // Sincroniza a navegação ao clicar em um dia no calendário principal
+    });
+
+    // Renderiza ambos os calendários
     calendar.render();
+    calendarMonth.render();  // Aqui estava o erro, agora é chamado corretamente
 
     document.getElementById('medicoSelect').addEventListener('change', function() {
-      calendar.refetchEvents();
+    calendar.refetchEvents();
     });
   });

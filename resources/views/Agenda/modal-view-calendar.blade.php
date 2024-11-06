@@ -16,7 +16,7 @@
           <div class="modal-footer d-flex justify-content-between">
             <div class="dropup-center dropup">
                 <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Alterar Cor do Evento
+                    Status
                 </button>
                 <ul class="dropdown-menu">
                     <li>

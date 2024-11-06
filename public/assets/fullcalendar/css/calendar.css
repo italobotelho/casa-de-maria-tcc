@@ -1,10 +1,23 @@
 body {
-    margin-top: 40px;
-    font-size: 14px;
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-  }
+  margin-top: 40px;
+  font-size: 14px;
+  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+}
 
-  #calendar {
-    max-width: 1100px;
-    margin: 0 auto 10px auto;
-  }
+#wrap {
+  display: flex; /* Cria um layout flexível */
+  justify-content: space-between; /* Espaço entre os calendários */
+  gap: 20px; /* Espaçamento entre os calendários */
+}
+
+#calendar {
+  flex: 2; /* O calendário principal ocupa 2 partes do espaço disponível */
+  min-width: 100%; /* Limita a largura ao máximo disponível */
+  padding-bottom: 50px; /* Adiciona o padding inferior */
+}
+
+#calendarMonth {
+  flex: 1; /* O calendário mensal ocupa 1 parte do espaço disponível */
+  padding-bottom: 50px;
+  max-width: 100%px;
+}
