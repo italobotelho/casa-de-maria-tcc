@@ -104,7 +104,7 @@
         $("#modalCalendar input[name='color']").val(color);
 
         // AJAX para obter informações do médico
-          // Após preencher os campos do modal
+  
       $.ajax({
         url: '/get-medico/' + medicoId,
         type: 'GET',
