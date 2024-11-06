@@ -71,7 +71,7 @@ a:hover {
     border: none;
     padding: 10px 15px; /* Aumenta o padding para um botão mais espaçoso */
     border-radius: 8px; /* Bordas arredondadas */
-    margin-left: 15px;
+    margin-left: 45px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -124,10 +124,10 @@ a:hover {
 }
 
 .icon {
-    width: 26px;
-    height: 25px;
+     width: 26px;
+     height: 25px;
     float: left; /* Faz com que o botão flutue à direita */
-   }
+}
    button.editar-medico {
     display: inline-flex;
     align-items: center;
@@ -139,5 +139,16 @@ a:hover {
 
    a{
     decoration:none;
-    color:red ; 
+    color:white;
+   }
+
+   .borda{
+    border: 2px solid rgba(68, 68, 68, 0.096);  /* Definindo a borda */
+    border-radius: 5px;
+    padding: 70px;
+    width: 137rem;  /* Largura do container */
+    margin-left:15%;
+   }
+   .marg{
+        margin-left: 45px;
    }

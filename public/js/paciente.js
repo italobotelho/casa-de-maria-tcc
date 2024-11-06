@@ -161,12 +161,12 @@ $("#formEditarPaciente").submit(function (event) {
     $.ajax({
         type: "POST",
         url: "/update-paciente",
-        data: JSON.stringify(data), 
+        data: JSON.stringify(data), // Envia os dados como JSON
         contentType: "application/json",
 
         success: function (data) {
             if (data.success) {
-       
+                // Atualize a tabela aqui
                 var pacienteRow = $( 'tr[data-id="' + $("#editar-id").val() + '"]' );
                 pacienteRow.find("td:eq(1)").text($("#editar-nome").val());
                 pacienteRow.find("td:eq(2)").text($("#editar-data-nasci").val());
@@ -264,4 +264,4 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Elemento carteira-convenio-field não encontrado.");
         }
     });
-}); 
+});

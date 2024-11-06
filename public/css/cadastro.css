@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 body {
-    background-image: url(../img/fundo-cadastro.png);
+    
     background-size: cover;
     background-repeat: no-repeat;
     font-family: 'Inter', sans-serif; /* Adiciona a fonte Inter ao body */

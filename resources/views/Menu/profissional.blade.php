@@ -7,9 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/busca-pac.css">
+    <link rel="stylesheet" href="css/busca-med.css">
+
    
-    <title>Document</title>
+    <title>Médicos</title>
 
     <style>
         body {
@@ -21,7 +22,6 @@
        .fund { 
         background-color: #b3885b;
         color: white;
-        padding: 12px ;
         font-size: 1.5em;
         width: 100%; 
        }
@@ -65,19 +65,33 @@
         text-decoration: none;
         color:white;
        }
+       .borda{
+        border: 2px solid rgba(68, 68, 68, 0.096);  /* Definindo a borda */
+        border-radius: 5px;
+        padding:70px;
+        width: 72rem;  /* Largura do container */
+        margin-left:15%;
+   }
+
     </style>
 </head>
 <body>
     
-<br>
+
+<h1>Buscar médicos</h1>
+
+<div class="borda">
+<button>
+    <a class="cad" href="form_medico">CADASTRAR MÉDICO</a>
+    </button>
 
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row ">
             <div class="col-lg-8 mt-4"></div>
             <div class="col-lg-8">
                 <div class="card shadow">
                     <div class="card-header text-white d-flex justify-content-between fund">
-                        <h1 class="fw-bold">Médicos</h1>
+                        
                     </div>
                     <div class="card-body">
                         <table class="table table-striped">
@@ -125,7 +139,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center fs-4">
+                                    <td colspan="7" class="text-center fs-4">
                                         Nenhum médico cadastrado
                                     </td>
                                 </tr>
@@ -137,10 +151,7 @@
             </div><!-- fim da col -->
         </div><!-- fim da row -->
     </div> <!-- fim do container -->
-   
-    <button>
-    <a class="cad" href="form_medico">CADASTRAR MÉDICO</a>
-    </button>
+</div>
 <!-- Modal para exibir informações do médico -->
 <div id="medicoModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">

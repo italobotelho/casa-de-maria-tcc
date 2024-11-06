@@ -31,17 +31,30 @@
             #convenio-suggestions li:hover {
                 background-color: #ccc;
             }
+             h1{
+                 margin-left: 15%;
+             }
+             .col{
+                 color: black
+             }
         </style>
 
 
     </head>
 
+
     <h1>Buscar paciente</h1>
 
-
+    <div class="borda">
+    <button class="btn">
         <a href="form_paciente">CADASTRAR PACIENTE</a>
-            <h5>Filtro para busca:</h5>
+    </button>
+    <br><br>
+
+
+            <h5 class="marg">FILTRO PARA BUSCA:</h5>
             <!-- Formulário de busca -->
+            <div class="marg">
             <form action="{{ url('/buscar_pacientes') }}" method="GET" class="form-inline mb-4">
                 <div class="form-group">
                     <label for="nome_paci">Nome:</label>
@@ -53,8 +66,9 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Buscar</button>
             </form>
+        </div>
 
-
+           
         <div class="container">
     
     <script>
@@ -67,76 +81,76 @@
     </script>
 
             <div class="row justify-content-center">
-                <div class="col-lg-8 mt-4"></div>
+                <div class="col-lg-8 mt-4">RESULTADOS:</div>
                 <div class="col-lg-8">
                     <div class="card shadow">
                         <div class="card-header bg-success text-white d-flex justify-content-between">
-                            <h1 class="fw-bold">Pacientes</h1>      
+                             
                         </div>
                         <div class="card-body p-4">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Código</th>
-                                            <th scope="col">Nome</th>
-                                            <th scope="col">Data Nascimento</th>
-                                            <th scope="col">Convênio</th>
-                                            <th scope="col">Carteira</th>
-                                            <th scope="col">Telefone</th>
-                                            <th scope="col">CPF</th>
-                                            <th scope="col">Cidade</th>
-                                            <th scope="col">Nome Responsável</th>
-                                            <th scope="col">CPF Responsável</th>
-                                        </tr>
-                                    </thead>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Código</th>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Data Nascimento</th>
+                                        <th scope="col">Convênio</th>
+                                        <th scope="col">Carteira</th>
+                                        <th scope="col">Telefone</th>
+                                        <th scope="col">CPF</th>
+                                        <th scope="col">Cidade</th>
+                                        <th scope="col">Nome Responsável</th>
+                                        <th scope="col">CPF Responsável</th>
+                                    </tr>
+                                </thead>
                                 <tbody>
                                     @forelse($pacientes as $paciente)
-                                    <tr>
-                                        <th scope="row">{{ $paciente->pk_cod_paci }}</th>
-                                        <td>
-                                            <a href="#" class="nome-paciente"
-                                                data-id="{{ $paciente->pk_cod_paci }}"
-                                                data-nome="{{ $paciente->nome_paci }}"
-                                                data-data-nasci="{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('d/m/Y') }}"
-                                                data-convenio="{{ $paciente->convenio->nome_conv }}"
-                                                data-telefone="{{ $paciente->telefone_paci }}"
-                                                data-cpf="{{ $paciente->cpf_paci }}"
-                                                data-cidade="{{ $paciente->nome_cidade }}"
-                                                data-responsavel="{{ $paciente->responsavel_paci }}"
-                                                data-cpf-responsavel="{{ $paciente->cpf_responsavel_paci }}"
-                                                data-carteira-convenio="{{ $paciente->carteira_convenio_paci }}">
-                                                {{ $paciente->nome_paci }}
-                                            </a>
-                                            <button class="btn btn-warning btn-sm editar-paciente"
-                                                data-id="{{ $paciente->pk_cod_paci }}"
-                                                data-nome="{{ $paciente->nome_paci }}"
-                                                data-email="{{ $paciente->email_paci }}"
-                                                data-data-nasci="{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('Y-m-d') }}"
-                                                data-convenio-id="{{ $paciente->fk_convenio_paci }}"
-                                                data-telefone="{{ $paciente->telefone_paci }}"
-                                                data-cpf="{{ $paciente->cpf_paci }}"
-                                                data-cidade="{{ $paciente->nome_cidade }}"
-                                                data-responsavel="{{ $paciente->responsavel_paci }}"
-                                                data-cpf-responsavel="{{ $paciente->cpf_responsavel_paci }}"
-                                                data-carteira-convenio="{{ $paciente->carteira_convenio_paci }}">
-                                                Editar
-                                            </button>
-                                        </td>
-                                        <td>{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('d/m/Y') }}</td>
-                                        <td>{{ $paciente->convenio->nome_conv }}</td>
-                                        <td>{{ $paciente->carteira_convenio_paci }}</td>
-                                        <td>{{ $paciente->telefone_paci }}</td>
-                                        <td>{{ $paciente->cpf_paci }}</td>
-                                        <td>{{ $paciente->nome_cidade }}</td>
-                                        <td>{{ $paciente->responsavel_paci }}</td>
-                                        <td>{{ $paciente->cpf_responsavel_paci }}</td>
-                                    </tr>
+                                        <tr>
+                                            <th scope="row">{{ $paciente->pk_cod_paci }}</th>
+                                             <td>
+                                                 <a class="col" href="#" class="nome-paciente" 
+                                                 data-id="{{ $paciente->pk_cod_paci }}" 
+                                                 data-nome="{{ $paciente->nome_paci }}" 
+                                                 data-data-nasci="{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('d/m/Y') }}" 
+                                                 data-convenio="{{ $paciente->convenio->nome_conv }}" 
+                                                 data-telefone="{{ $paciente->telefone_paci }}" 
+                                                 data-cpf="{{ $paciente->cpf_paci }}" 
+                                                 data-cidade="{{ $paciente->nome_cidade }}" 
+                                                 data-responsavel="{{ $paciente->responsavel_paci }}" 
+                                                 data-cpf-responsavel="{{ $paciente->cpf_responsavel_paci }}" 
+                                                 data-carteira-convenio="{{ $paciente->carteira_convenio_paci }}">
+                                                 {{ $paciente->nome_paci }}
+                                             </a>
+                                                <button class="btn btn-warning btn-sm editar-paciente" 
+                                                        data-id="{{ $paciente->pk_cod_paci }}" 
+                                                        data-nome="{{ $paciente->nome_paci }}" 
+                                                        data-email="{{ $paciente->email_paci }}" 
+                                                        data-data-nasci="{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('Y-m-d') }}" 
+                                                        data-convenio-id="{{ $paciente->fk_convenio_paci }}"
+                                                        data-telefone="{{ $paciente->telefone_paci }}" 
+                                                        data-cpf="{{ $paciente->cpf_paci }}" 
+                                                        data-cidade="{{ $paciente->nome_cidade }}" 
+                                                        data-responsavel="{{ $paciente->responsavel_paci }}"        
+                                                        data-cpf-responsavel="{{ $paciente->cpf_responsavel_paci }}"
+                                                        data-carteira-convenio="{{ $paciente->carteira_convenio_paci }}">
+                                                    Editar
+                                                </button>
+                                            </td>
+                                            <td>{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('d/m/Y') }}</td>
+                                            <td>{{ $paciente->convenio->nome_conv }}</td>
+                                            <td>{{ $paciente->carteira_convenio_paci }}</td>
+                                            <td>{{ $paciente->telefone_paci }}</td>
+                                            <td>{{ $paciente->cpf_paci }}</td>
+                                            <td>{{ $paciente->nome_cidade }}</td>
+                                            <td>{{ $paciente->responsavel_paci }}</td>
+                                            <td>{{ $paciente->cpf_responsavel_paci }}</td>
+                                        </tr>
                                     @empty
-                                    <tr>
-                                        <td colspan="10" class="text-center fs-4">
-                                            Nenhum paciente cadastrado
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td colspan="10" class="text-center fs-4">
+                                                Nenhum paciente cadastrado
+                                            </td>
+                                        </tr>
                                     @endforelse
                                 </tbody>
                             </table>
@@ -145,9 +159,10 @@
                 </div><!-- fim da col -->
             </div><!-- fim da row -->
         </div> <!-- fim do container -->
-
-        <a href="menu">VOLTAR</a>
-
+</div>
+    <button class="btn">
+        <a href="home">VOLTAR</a>
+    </button>
         <div id="pacienteModal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -196,7 +211,7 @@
                             <div class="form-group">
                                 <label for="editar-email">E-mail</label>
                                 <input type="email" maxlength="255" class="form-control" id="editar-email" name="email" required>
-                            </div>
+                            </div>  
                             <div class="form-group">
                                 <label for="editar-data-nasci">Data de Nascimento</label>
                                 <input type="date" class="form-control" id="editar-data-nasci" name="data_nasci" required>
