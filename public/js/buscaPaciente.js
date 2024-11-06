@@ -25,10 +25,10 @@ function buscarPacientes(query) {
                     item.dataset.id = paciente.pk_cod_paci; // Armazena o ID do médico
 
                     item.onclick = function () {
-                        document.getElementById('paciente').value = paciente.nome_paci;
-                        document.getElementById('paciente_id').value = paciente.pk_cod_paci; // Preenche o campo oculto com o ID do médico
+                        document.getElementById('paciente').value = paciente.nome_paci; // Preenche o campo do nome do paciente
+                        document.getElementById('paciente_id').value = paciente.pk_cod_paci; // Preenche o campo oculto com o ID do paciente
                         sugestoesDiv.style.display = 'none'; // Esconde a div de sugestões após a seleção
-                        preencherConvenio(paciente.pk_cod_paci);
+                        preencherConvenio(paciente.pk_cod_paci); // Chama a função para preencher o convênio
                     
                         // Remova o setTimeout e verifique o valor do convênio diretamente após o preenchimento
                         preencherConvenio(paciente.pk_cod_paci).then(() => {
@@ -103,9 +103,10 @@ function preencherConvenio(pacienteId) {
         .then(data => {
             console.log('Dados recebidos:', data); // Verifique a estrutura exata dos dados
 
-            if (data && data.convenio && data.convenio.nome_conv) {
-                document.getElementById('convenio_id').value = data.convenio.nome_conv; // Preencha com 'nome_conv'
-                console.log("Convênio preenchido:", data.convenio.nome_conv); // Verifique se o valor está correto
+            // Acesse o nome do convênio diretamente
+            if (data && data.convenio) {
+                document.getElementById('convenio_id').value = data.convenio; // Preencha com o valor do convênio
+                console.log("Convênio preenchido:", data.convenio); // Verifique se o valor está correto
             } else {
                 console.error('A estrutura dos dados não contém o nome do convênio');
             }

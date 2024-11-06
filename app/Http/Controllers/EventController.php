@@ -127,22 +127,28 @@ class EventController extends Controller
     
     public function update(EventRequest $request)
     {
-        $event = Event::find($request->id);
-    
-        if ($event) {
-            $event->title = $request->input('title');
-            $event->start = $request->input('start');
-            $event->end = $request->input('end');
-            $event->color = $request->input('color');
-            $event->procedimento_id = $request->input('procedimento_id');
-            $event->medico = $request->input('medico'); // Use o ID do médico
-            $event->paciente_id = $request->input('paciente_id');
-    
-            $event->save();
-            return response()->json(true);
+        try {
+            $event = Event::find($request->id);
+        
+            if ($event) {
+                $event->title = $request->input('title');
+                $event->start = $request->input('start');
+                $event->end = $request->input('end');
+                $event->color = $request->input('color');
+                $event->procedimento_id = $request->input('procedimento_id');
+                $event->medico = $request->input('medico'); // Certifique-se de que isso é um ID
+                $event->paciente_id = $request->input('paciente_id');
+        
+                $event->save();
+                return response()->json(true);
+            }
+        
+            return response()->json(['error' => 'Evento não encontrado'], 404);
+        } catch (\Exception $e) {
+            Log::error('Erro ao atualizar evento: ' . $e->getMessage());
+            Log::error('Dados recebidos para atualização: ', $request->all());
+            return response()->json(['error' => 'Erro ao atualizar evento.'], 500);
         }
-    
-        return response()->json(['error' => 'Evento não encontrado'], 404);
     }
 
     public function destroy(Request $request){

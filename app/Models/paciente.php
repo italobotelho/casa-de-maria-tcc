@@ -52,7 +52,7 @@ class Paciente extends Model
 
     public function convenio()
     {
-        return $this->belongsTo(Convenio::class, 'fk_convenio_paci','pk_id_conv');
+        return $this->belongsTo(Convenio::class, 'fk_convenio_paci','pk_id_conv', 'convenio_id');
     }
    
 }
