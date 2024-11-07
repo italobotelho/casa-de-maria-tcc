@@ -1,5 +1,5 @@
 @extends('Layout/configuracoes')
-
+<link rel="stylesheet" href="{{ asset('css/conf.css')}}">
 @section('nav-procedimentos')
 <li class="nav-item">
     <a class="nav-link" aria-current="page" href="gerais">Gerais</a>

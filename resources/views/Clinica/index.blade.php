@@ -1,5 +1,5 @@
 @extends('Layout/configuracoes')
-
+<link rel="stylesheet" href="{{ asset('css/conf.css') }}">
 @section('nav-gerais')
   <li class="nav-item">
     <a class="nav-link active" aria-current="page" href="gerais">Gerais</a>
@@ -11,48 +11,20 @@
     <a class="nav-link" aria-current="page" href="convenios">Convênios</a>
   </li>
 @endsection
+<style>
+.modal-content button {
+    background-color: #EABF8A;
+    border-radius: 10px;
+    border: 2px solid #EABF8A;
+    margin: 10px;
+    padding:  6px 19px;
+    color: white;
+}
+
+</style>
 
 @section('main-configuracoes')
 
-  <style>
-    /* Ajuste da barra de navegação */
-  .nav-item a {
-      color: #333;
-      text-decoration: none;
-      padding: 10px 15px;
-      display: block;
-      text-transform: uppercase;
-  }
-
-  .nav-item a.active {
-      border-bottom: 2px solid #f0ad4e;
-      color: #f0ad4e;
-  }
-
-  .nav-item a:hover {
-      color: #ec971f;
-  }
-
-    button{
-      background-color:#EABF8A;
-      border-radius: 13px;
-      font-size:20px;
-      font-weight: 200;
-      border:2px;
-      border-color:#653C11;
-      width: 100px;
-      height: 50px;
-      margin:10px;
-    }
-
-    .modal-content {
-    padding: 20px;
-    background-color: white;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-
-}
-  </style>
   <div class="modal-content">
         <div class="h-100">
             <h2 class="mt-3 fs-4">DADOS DA CLÍNICA</h2>
@@ -120,7 +92,9 @@
                     <input type="text" class="form-control" id="cod_ibge_clin" name="cod_ibge_clin" value="{{ old('cod_ibge_clin', $clinica?->cod_ibge_clin) }}" size="7" maxlength="7">
                 </div>
               <div class="col-12">
-                <button type="submit">Salvar</button>
+                
+                <button  type="submit" >Salvar</button>
+              
               </div>
             </form>
             </div>

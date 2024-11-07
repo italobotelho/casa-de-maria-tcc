@@ -1,5 +1,5 @@
 @extends('Layout/configuracoes')
-
+<link rel="stylesheet" href="{{ asset('css/conf.css')}}">
 @section('nav-procedimentos')
 <li class="nav-item">
     <a class="nav-link" aria-current="page" href="gerais">Gerais</a>
@@ -17,13 +17,6 @@
 
     <style>
 
-.modal-content {
-    padding: 20px;
-    background-color: white;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-
-}
 
 /* Inputs de formulário */
 input[type="text"], textarea, select {
@@ -34,24 +27,6 @@ input[type="text"], textarea, select {
     margin-bottom: 10px;
 }
 
-/* Ajuste da barra de navegação */
-.nav-item a {
-    color: #333;
-    text-decoration: none;
-    padding: 10px 15px;
-    display: block;
-    text-transform: uppercase;
-}
-
-.nav-item a.active {
-    border-bottom: 2px solid #f0ad4e;
-    color: #f0ad4e;
-}
-
-.nav-item a:hover {
-    color: #ec971f;
-}
-
 button{
       background-color:#EABF8A;
       border-radius: 13px;
@@ -60,28 +35,17 @@ button{
       border:2px;
       border-color:#653C11;
       margin:15px;
-      padding:10px;
+      padding:5px 10px;
       margin:10px;
+      color:white;
     }
 
-    .save{
-        background-color:#EABF8A;
-        border:3px;
-        margin:10px;
-    }
-    .close{
-        background-color:#808080;
-        border:3px;
-        margin:10px;
-    }
     </style>
 
 <div class="modal-content">
     <div class="modal-header">
         <h4 class="modal-title">Cadastrar Novo Procedimento</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-            <span aria-hidden="true">&times;</span>
-        </button>
+        
     </div>
     <div class="modal-body">
         <form method="POST" action="{{ route('procedimentos.store') }}">
@@ -126,10 +90,7 @@ button{
             </div>
         @endif
     </div>
-    <div class="modal-footer">
-        <button type="button" class="close" data-dismiss="modal">Fechar</button>
-        <button type="button" class="save">Salvar</button>
-    </div>
+
 </div>
 @endsection
 

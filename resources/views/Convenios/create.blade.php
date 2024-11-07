@@ -1,7 +1,7 @@
 {{-- resources/views/convenios/create.blade.php --}}
 
 @extends('Layout/configuracoes')
-
+<link rel="stylesheet" href="{{ asset('css/conf.css')}}">
 @section('nav-convenios')
 <li class="nav-item">
     <a class="nav-link " aria-current="page" href="gerais">Gerais</a>
@@ -22,8 +22,18 @@
     background-color: white;
     border-radius: 5px;
     border: 1px solid #ddd;
-
 }
+button{
+      background-color:#EABF8A;
+      border-radius: 13px;
+      font-size:20px;
+      font-weight: 200;
+      border:2px;
+      border-color:#653C11;
+      margin:10px;
+      color: white;
+      padding: 8px;
+    }
 </style>
     <h2>Cadastro de Convênio</h2>
 <div class="modal-content">
@@ -40,7 +50,7 @@
             <input type="text" maxlength="6" id="ans_conv" name="ans_conv" class="form-control" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Cadastrar Convênio</button>
+        <button type="submit">Cadastrar Convênio</button>
     </form>
     </div>
 @endsection

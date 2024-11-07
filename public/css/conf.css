@@ -1,0 +1,25 @@
+  /* Ajuste da barra de navegação */
+  .nav-item a {
+    color: #333;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    text-transform: uppercase;
+}
+
+.nav-item a.active {
+    border-bottom: 2px solid #f0ad4e;
+    color: #f0ad4e;
+}
+
+.nav-item a:hover {
+    color: #ec971f;
+}
+
+
+  .modal-content {
+  padding: 20px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  }

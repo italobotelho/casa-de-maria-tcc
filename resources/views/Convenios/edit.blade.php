@@ -1,7 +1,7 @@
 {{-- resources/views/convenios/edit.blade.php --}}
 
 @extends('Layout/configuracoes')
-
+<link rel="stylesheet" href="{{ asset('css/conf.css') }}">
 @section('nav-convenios')
 <li class="nav-item">
     <a class="nav-link " aria-current="page" href="gerais">Gerais</a>
@@ -22,8 +22,18 @@
     background-color: white;
     border-radius: 5px;
     border: 1px solid #ddd;
-
 }
+button{
+      background-color:#EABF8A;
+      border-radius: 13px;
+      font-size:18px;
+      font-weight: 200;
+      border:2px;
+      border-color:#653C11;
+      margin:10px;
+      color: white;
+      padding:5px 10px; 
+    }
 </style>
 
 <h2>Editar Convênio</h2>
@@ -42,7 +52,7 @@
         <input type="text" id="ans_conv" name="ans_conv" class="form-control" value="{{ $convenio->ans_conv }}" required>
     </div>
 
-    <button type="submit" class="btn btn-primary">Atualizar Convênio</button>
+    <button type="submit" >Atualizar Convênio</button>
 </form>
 </div>
 
