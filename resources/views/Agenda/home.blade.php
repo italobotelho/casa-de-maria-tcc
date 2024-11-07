@@ -20,7 +20,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="medicoSelect">Selecione o Profissional:</label>
-                <select id="medicoSelect" class="form-control">
+                <select id="medicoSelect" class="form-select" aria-label="Default select example">
                     <option value="">Todos</option>
                     @foreach ($medicos as $medico)
                         <option value="{{ $medico->pk_crm_med }}">{{ $medico->nome_med }}</option>
@@ -44,9 +44,7 @@
         <div id="calendarMonth">
             <!-- Calendário de visualização do mês -->
             <div id="calendarMonth"></div>
-            <button class="btn btn-primary my-1">Buscar Agendamento</button>
-            <button class="btn btn-primary my-1">Imprimir Agenda</button>
-            <button class="btn btn-primary my-1">Exportar Agenda</button>
+            <button class="btn my-1" style="background-color: #E5D5C0;">Buscar Agendamento</button>
         </div>
     </div>
 </div>
@@ -68,7 +66,5 @@
 
 <script src="{{ asset('assets/fullcalendar/js/script.js') }}"></script>
 <script src="{{ asset('assets/fullcalendar/js/calendar.js') }}"></script>
-
-
 
 @endsection

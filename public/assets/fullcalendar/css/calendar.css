@@ -7,6 +7,7 @@ body {
 #wrap {
   display: flex; /* Cria um layout flexível */
   justify-content: space-between; /* Espaço entre os calendários */
+  align-items: center; /* Alinha os calendários verticalmente no centro */
   gap: 20px; /* Espaçamento entre os calendários */
 }
 
@@ -16,34 +17,10 @@ body {
   padding-bottom: 50px;
 }
 
-#calendarMonth {
-  flex: 1; /* Garante que o calendário menor ocupe menos espaço */
-  padding: 10px; /* Adiciona um pouco de preenchimento */
-}
-
-/* Define a altura das células do calendário mensal */
-#calendarMonth .fc-daygrid-day {
-  height: 0; /* Ajuste este valor conforme necessário */
-}
-
-/* Centraliza o número na célula */
-#calendarMonth .fc-daygrid-day .fc-daygrid-day-number {
-  line-height: 0; /* Centraliza o número na célula */
-}
-
 /* Estilizando os botões no cabeçalho (prev, next, today) */
 #calendar .fc-button-primary {
-  background-color: #fff; /* Cor do fundo do botão */
+  background-color: #E5D5C0; /* Cor do fundo do botão */
   color: #000; /* Cor do texto do botão */
-}
-
-#calendar .fc-button-primary:hover {
-  background-color: #795127; /* Cor ao passar o mouse */
-}
-
-/* Efeito ao clicar no botão */
-#calendar .fc-button-primary:active {
-  background-color: #5C3103; /* Cor de fundo ao clicar */
 }
 
 /* Estilo do título central do cabeçalho */
@@ -69,37 +46,58 @@ body {
   background-color: #ffebcd; /* Cor de fundo para o dia de hoje */
 }
 
-#calendar .fc-timegrid-day .fc-timegrid-axis {
-  background-color: #5C3103; /* Cor de fundo */
-  color: white; /* Cor do texto */
-  font-weight: bold; /* Texto em negrito */
-}
-
-/* Cor de fundo das células de horário no TimeGrid */
-#calendar .fc-timegrid-slot {
-  background-color: #f6f6f6; /* Cor de fundo das células de horário */
-}
-
 /* Aumentar a altura das células de horário no timeGridDay */
 #calendar .fc-timegrid .fc-timegrid-slot {
   min-height: 60px; /* Ajusta a altura mínima de cada célula de horário */
   height: auto;     /* Permite que as células se ajustem automaticamente */
   padding-top: 15px;  /* Adiciona um pouco de espaço acima do conteúdo */
   padding-bottom: 15px; /* Adiciona um pouco de espaço abaixo do conteúdo */
+  background-color: #f2f2f2;  /* Cor de fundo para a coluna dos horários */
 }
 
 /* Cor das células de horário quando são hover (ao passar o mouse sobre) */
 #calendar .fc-timegrid-slot:hover {
-  background-color: #EABF8A; /* Cor de fundo ao passar o mouse */
+  background-color: #E5D5C0; /* Cor de fundo ao passar o mouse */
 }
 
-/* Alterar a cor de fundo da coluna onde aparecem os horários (ex: 10:00, 11:00, etc.) */
-#calendar .fc-timegrid .fc-timegrid-slot {
-  background-color: #fff;  /* Cor de fundo para a coluna dos horários */
+#calendarMonth {
+  flex: 1; /* Garante que o calendário menor ocupe menos espaço */
+  padding: 10px; /* Adiciona um pouco de preenchimento */
+  max-width: 300px; /* Definindo uma largura máxima para o calendário mensal */
+  margin: 0 auto; /* Centraliza o calendário mensal */
 }
 
+/* Estilo do título central do cabeçalho do calendário mensal */
+#calendarMonth .fc-toolbar-title {
+  font-size: 1.2rem; /* Ajuste o tamanho da fonte aqui conforme necessário */
+  color: #000; /* Cor do título */
+}
 
+/* Estilo para o botão 'prev' e 'next' */
+#calendarMonth .fc-prev-button, 
+#calendarMonth .fc-next-button {
+  font-size: 1rem; /* Ajusta o tamanho da fonte */
+  border: none; /* Remove borda */
+  box-shadow: none; /* Remove sombra */
+  background-color: transparent; /* Fundo transparente */
+  color: #795127; /* Cor do ícone */
+  padding: 5px 10px; /* Ajusta o padding */
+  height: 30px; /* Ajusta a altura */
+  width: 30px; /* Ajusta a largura */
+  display: inline-flex; /* Certifica-se de que os botões estão no mesmo estilo */
+  align-items: center; /* Centraliza o conteúdo dentro do botão */
+  justify-content: center; /* Centraliza o conteúdo dentro do botão */
+}
 
+/* Efeito de hover */
+#calendarMonth .fc-prev-button:hover, 
+#calendarMonth .fc-next-button:hover {
+  background-color: transparent;
+  color: #795127;
+}
 
-
-
+/* Estilo para o ícone (seta) */
+#calendarMonth .fc-prev-button:before,
+#calendarMonth .fc-next-button:before {
+  font-size: 1.5rem; /* Tamanho da seta */
+}

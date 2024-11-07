@@ -382,6 +382,7 @@ function clearMessages(element) {
 function resetForm(form) {
     $(form)[0].reset();
 }
+
 // Limpar o modal ao ser fechado
 $('#modalCalendar').on('hidden.bs.modal', function () {
     // Limpa os campos do modal

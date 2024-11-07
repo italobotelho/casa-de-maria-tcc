@@ -23,7 +23,7 @@ let currentEvent = null; // Variável global para armazenar o evento atual
     // Evento de criação do calendário principal
     var calendar = new FullCalendar.Calendar(calendarEl, {
 
-      themeSystem: 'bootstrap5  ',
+      themeSystem: 'bootstrap5',
 
       initialView: 'timeGridDay', // Definindo a visualização inicial como o "Day View"
 
@@ -303,8 +303,8 @@ let currentEvent = null; // Variável global para armazenar o evento atual
       // Personalização da barra de navegação
       headerToolbar: {
         left: 'prev',    // Adiciona as setas de navegação (prev e next)
-        center: 'title',      // Exibe apenas o título do mês
-        right: 'next'             // Não adiciona nada no lado direito
+        center: 'title',  // Exibe apenas o título do mês
+        right: 'next'  // Não adiciona nada no lado direito
       },
 
       contentHeight: 'auto', // Remove o scroll
@@ -335,7 +335,7 @@ let currentEvent = null; // Variável global para armazenar o evento atual
     // Renderiza ambos os calendários
     calendar.render();
     calendarMonth.render();  // Aqui estava o erro, agora é chamado corretamente
-
+  
     document.getElementById('medicoSelect').addEventListener('change', function() {
     calendar.refetchEvents();
     });
