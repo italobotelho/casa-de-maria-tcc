@@ -1,4 +1,4 @@
-  let currentEvent = null; // Variável global para armazenar o evento atual
+let currentEvent = null; // Variável global para armazenar o evento atual
 
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
@@ -7,7 +7,10 @@
     // Evento de criação do calendário principal
     var calendar = new FullCalendar.Calendar(calendarEl, {
 
+      themeSystem: 'bootstrap5  ',
+
       initialView: 'timeGridDay', // Definindo a visualização inicial como o "Day View"
+
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
@@ -37,7 +40,7 @@
         meridiem: false
       },
 
-      height: '700px',
+      height: 'auto',
       locale: 'pt-br',
       navLinks: true,
       selectable: true,
@@ -288,12 +291,24 @@
         right: 'next'             // Não adiciona nada no lado direito
       },
 
-      
+      contentHeight: 'auto', // Remove o scroll
+      navLinks: false, // Remove links nos dias
+
       locale: 'pt-br',
+
       events: calendar.getEvents(), // Sincroniza eventos entre os dois calendários
       dateClick: function(info) {
         calendar.gotoDate(info.date); // Sincroniza a navegação com o calendário principal
-      }
+      },
+      
+      datesSet: function() {
+        // Define a altura das células após o calendário ser renderizado
+        const dayCells = calendarMonthEl.querySelectorAll('.fc-daygrid-day');
+        dayCells.forEach(function(cell) {
+          cell.style.height = '60px'; // Ajuste este valor conforme necessário
+        });
+      },
+
     });
 
     // Sincroniza os dois calendários
@@ -308,4 +323,5 @@
     document.getElementById('medicoSelect').addEventListener('change', function() {
     calendar.refetchEvents();
     });
+
   });

@@ -11,13 +11,32 @@ body {
 }
 
 #calendar {
-  flex: 2; /* O calendário principal ocupa 2 partes do espaço disponível */
-  min-width: 100%; /* Limita a largura ao máximo disponível */
-  padding-bottom: 50px; /* Adiciona o padding inferior */
+  flex: 4; /* Aumenta o espaço ocupado pelo calendário principal */
+  min-width: 70%; /* Limita a largura para o principal ocupar uma maior proporção da tela */
+  padding-bottom: 50px;
 }
 
 #calendarMonth {
-  flex: 1; /* O calendário mensal ocupa 1 parte do espaço disponível */
-  padding-bottom: 50px;
-  max-width: 100%px;
+  flex: 1; /* Garante que o calendário menor ocupe menos espaço */
+  padding: 10px; /* Adiciona um pouco de preenchimento */
 }
+
+/* Define a altura das células do calendário mensal */
+#calendarMonth .fc-daygrid-day {
+  height: 0; /* Ajuste este valor conforme necessário */
+}
+
+/* Centraliza o número na célula */
+#calendarMonth .fc-daygrid-day .fc-daygrid-day-number {
+  line-height: 0; /* Centraliza o número na célula */
+}
+
+.fc-toolbar .btn-primary {
+  background-color: #007bff; /* Cor do botão */
+  border-color: #0056b3;
+}
+
+.fc-toolbar .btn-primary:hover {
+  background-color: #0056b3;
+}
+
