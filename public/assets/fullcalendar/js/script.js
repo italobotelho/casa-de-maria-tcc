@@ -337,7 +337,8 @@ function sendEvent(route, data_, isDelete = false) {
                     }
                     $("#successMessageContent").text(message);
                     $('#modalCalendar').modal('hide');
-                    //location.reload();
+                    
+                    calendar.refetchEvents();
                 }
             }
         },

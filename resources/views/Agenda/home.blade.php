@@ -64,7 +64,8 @@
 {{-- cdn moments --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
 
-<script src="{{ asset('assets/fullcalendar/js/script.js') }}"></script>
+
 <script src="{{ asset('assets/fullcalendar/js/calendar.js') }}"></script>
+<script src="{{ asset('assets/fullcalendar/js/script.js') }}"></script>
 
 @endsection

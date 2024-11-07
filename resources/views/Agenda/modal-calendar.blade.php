@@ -54,7 +54,7 @@
                             <div class="col-12">
                                 <label for="paciente" class="form-label">Paciente</label>
                                 <input type="hidden" name="paciente_id" id="paciente_id" value="">
-                                <input type="text" class="form-control" name="paciente" id="paciente" placeholder="Informe o nome" oninput="buscarPacientes(this.value)">
+                                <input type="text" class="form-control" name="paciente" id="paciente" placeholder="Informe o nome" oninput="buscarPacientes(this.value)" autocomplete="off">
                                 <div id="pacienteSuggestions" class="list-group" style="display: none; position: absolute; z-index: 1000;"></div> <!-- Sugestões para pacientes -->
                             </div>
                         
@@ -62,7 +62,7 @@
                             <div class="col-12">
                                 <label for="medico" class="form-label">Profissional</label>
                                 <input type="hidden" id="medico" name="medico" value="">
-                                <input type="text" class="form-control" name="medico_nome" id="medico_nome" placeholder="Informe o medico" oninput="buscarMedico(this.value)">
+                                <input type="text" class="form-control" name="medico_nome" id="medico_nome" placeholder="Informe o medico" oninput="buscarMedico(this.value)" autocomplete="off">
                                 <div id="medicoSuggestions" class="list-group" style="display: none; position: absolute; z-index: 1000;"></div> <!-- Sugestões para médicos -->
                             </div>
                         

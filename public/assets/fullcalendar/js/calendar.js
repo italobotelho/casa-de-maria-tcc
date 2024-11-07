@@ -1,4 +1,5 @@
 let currentEvent = null; // Variável global para armazenar o evento atual
+var calendar;
 
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
@@ -21,7 +22,7 @@ let currentEvent = null; // Variável global para armazenar o evento atual
     });
 
     // Evento de criação do calendário principal
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+    calendar = new FullCalendar.Calendar(calendarEl, {
 
       themeSystem: 'bootstrap5',
 
