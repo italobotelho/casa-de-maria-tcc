@@ -4,6 +4,22 @@ let currentEvent = null; // Variável global para armazenar o evento atual
     var calendarEl = document.getElementById('calendar');
     var calendarMonthEl = document.getElementById('calendarMonth');
 
+    // Selecione todos os botões de navegação do FullCalendar
+    const buttons = document.querySelectorAll('#calendar .fc-button-primary');
+
+    buttons.forEach(function(button) {
+      // Adiciona o evento de clique a cada botão
+      button.addEventListener('click', function() {
+        // Remove a classe "clicked" de todos os botões
+        buttons.forEach(function(btn) {
+          btn.classList.remove('clicked');
+        });
+        
+        // Adiciona a classe "clicked" ao botão clicado
+        button.classList.add('clicked');
+      });
+    });
+
     // Evento de criação do calendário principal
     var calendar = new FullCalendar.Calendar(calendarEl, {
 

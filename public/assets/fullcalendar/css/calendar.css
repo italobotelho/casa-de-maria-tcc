@@ -31,12 +31,75 @@ body {
   line-height: 0; /* Centraliza o número na célula */
 }
 
-.fc-toolbar .btn-primary {
-  background-color: #007bff; /* Cor do botão */
-  border-color: #0056b3;
+/* Estilizando os botões no cabeçalho (prev, next, today) */
+#calendar .fc-button-primary {
+  background-color: #fff; /* Cor do fundo do botão */
+  color: #000; /* Cor do texto do botão */
 }
 
-.fc-toolbar .btn-primary:hover {
-  background-color: #0056b3;
+#calendar .fc-button-primary:hover {
+  background-color: #795127; /* Cor ao passar o mouse */
 }
+
+/* Efeito ao clicar no botão */
+#calendar .fc-button-primary:active {
+  background-color: #5C3103; /* Cor de fundo ao clicar */
+}
+
+/* Estilo do título central do cabeçalho */
+#calendar .fc-toolbar-title {
+  color: #000; /* Cor do título */
+  font-size: 1.5rem; /* Tamanho da fonte do título */
+  font-weight: bold; /* Deixar o título em negrito */
+}
+
+/* Cor das células de data (dias da semana) */
+#calendar .fc-daygrid-day {
+  background-color: #f2f2f2; /* Cor de fundo das células de data */
+}
+
+/* Cor das células de data selecionadas (quando o usuário clica em um dia) */
+#calendar .fc-daygrid-day.fc-day-selected {
+  background-color: #5C3103; /* Cor de fundo quando o dia é selecionado */
+  color: white; /* Cor do texto quando o dia é selecionado */
+}
+
+/* Cor das células de data para o mês atual */
+#calendar .fc-daygrid-day.fc-day-today {
+  background-color: #ffebcd; /* Cor de fundo para o dia de hoje */
+}
+
+#calendar .fc-timegrid-day .fc-timegrid-axis {
+  background-color: #5C3103; /* Cor de fundo */
+  color: white; /* Cor do texto */
+  font-weight: bold; /* Texto em negrito */
+}
+
+/* Cor de fundo das células de horário no TimeGrid */
+#calendar .fc-timegrid-slot {
+  background-color: #f6f6f6; /* Cor de fundo das células de horário */
+}
+
+/* Aumentar a altura das células de horário no timeGridDay */
+#calendar .fc-timegrid .fc-timegrid-slot {
+  min-height: 60px; /* Ajusta a altura mínima de cada célula de horário */
+  height: auto;     /* Permite que as células se ajustem automaticamente */
+  padding-top: 15px;  /* Adiciona um pouco de espaço acima do conteúdo */
+  padding-bottom: 15px; /* Adiciona um pouco de espaço abaixo do conteúdo */
+}
+
+/* Cor das células de horário quando são hover (ao passar o mouse sobre) */
+#calendar .fc-timegrid-slot:hover {
+  background-color: #EABF8A; /* Cor de fundo ao passar o mouse */
+}
+
+/* Alterar a cor de fundo da coluna onde aparecem os horários (ex: 10:00, 11:00, etc.) */
+#calendar .fc-timegrid .fc-timegrid-slot {
+  background-color: #fff;  /* Cor de fundo para a coluna dos horários */
+}
+
+
+
+
+
 

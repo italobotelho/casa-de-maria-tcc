@@ -29,20 +29,18 @@ class EventRequest extends FormRequest
             'color' => 'required',
             'procedimento_id' => 'required',
             'medico' => 'required',
-            'convenio' => 'required',
+            // 'convenio' => 'required',
          ];
      }
      
      public function messages(): array    
      {
          return [
-            'procedimento_id.required' => 'Selecione um procedimento',
-            'medico.required' => 'O campo médico é obrigatório.',
-            'convenio.required' => 'O campo convenio é obrigatório.',
-            'start.date_format' => 'Preencha uma data inicial com valor válido!',
-            'start.before' => 'A data/hora inicial deve ser menor que a data final',
-            'end.date_format' => 'Preencha uma data final com valor válido!',
-            'end.after' => 'A data/hora final deve ser maior que a data inicial',
+            'title.required' => 'O nome do paciente é obrigatório.',
+            'procedimento_id.required' => 'Selecione um procedimento.',
+            'medico.required' => 'Selecione um médico.',
+            'start.before' => 'A hora inicial deve ser menor que o horário final.',
+            'end.after' => 'A hora final deve ser maior que o horário inicial.',
          ];
      }
 }
