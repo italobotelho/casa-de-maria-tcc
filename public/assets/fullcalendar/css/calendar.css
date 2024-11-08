@@ -19,7 +19,7 @@ body {
 
 /* Estilizando os botões no cabeçalho (prev, next, today) */
 #calendar .fc-button-primary {
-  background-color: #E5D5C0; /* Cor do fundo do botão */
+  background-color: rgba(234, 191, 138, 0.85); /* Cor do fundo do botão */
   color: #000; /* Cor do texto do botão */
 }
 

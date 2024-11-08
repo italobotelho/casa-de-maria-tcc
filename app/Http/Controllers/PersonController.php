@@ -44,7 +44,7 @@ class PersonController extends Controller
     {
         $pacientes = Paciente::with('convenio')->get(); // Recupera todos os pacientes com seus convênios associados
         $convenios = Convenio::all(); // Recupera todos os convênios
-        return view('pacientes.pacientes', ['pacientes' => $pacientes, 'convenios' => $convenios]); // Retorna a view com os dados
+        return view('pacientes.index', ['pacientes' => $pacientes, 'convenios' => $convenios]); // Retorna a view com os dados
     }
 
     public function show($id)

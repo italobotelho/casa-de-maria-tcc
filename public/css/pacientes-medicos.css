@@ -1,0 +1,35 @@
+thead th {
+    background-color: rgba(234, 191, 138, 0.85) !important;
+}
+
+.novoMedico {
+    background-color: rgba(234, 191, 138, 0.85) !important;
+    color: #000;
+    text-decoration: none;
+    padding: 10px 20px; /* Define um padding consistente */
+    border: none; /* Remove qualquer borda extra */
+    transition: background-color 0.3s, transform 0.3s; /* Suaviza a transição de cor e evita animações de transformação */
+}
+
+.novoMedico:hover {
+    background-color: #c29865 !important; /* Ajuste a cor ao passar o mouse */
+    color: #000; /* Mantém a cor do texto */
+}
+
+.novoMedico a {
+    color: #000; /* Texto em preto */
+    text-decoration: none; /* Remove a decoração do texto */
+}
+
+/* Centraliza o texto em todas as células de cabeçalho e de dados da tabela */
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Aplica bordas arredondadas na tabela */
+.table {
+    border-radius: 8px; /* ajuste o valor conforme desejado */
+    overflow: hidden; /* garante que o arredondamento funcione corretamente */
+
+}
