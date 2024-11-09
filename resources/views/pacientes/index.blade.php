@@ -45,7 +45,7 @@
                 <h2 class="text-uppercase fs-5 fw-medium">Filtros para Busca:</h2>
             
                 <!-- Formulário de busca -->
-                <form action="{{ url('/buscar_pacientes') }}" method="GET" class="form-inline mb-4 d-flex align-items-center">
+                <form action="{{ url('/pacientes') }}" method="GET" class="form-inline mb-4 d-flex align-items-center">
                     <div class="form-group me-3">
                         <label for="nome_paci" class="me-2">Nome:</label>
                         <input type="text" name="nome_paci" id="nome_paci" class="form-control" placeholder="Nome do paciente">

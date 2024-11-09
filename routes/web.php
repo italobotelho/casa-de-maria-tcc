@@ -110,7 +110,7 @@ Route::put('/convenios/{pk_id_conv}', [ConvenioController::class, 'update'])->na
 Route::delete('/convenios/{pk_id_conv}', [ConvenioController::class, 'destroy'])->name('convenios.destroy');
 
 // routes/web.php
-Route::get('/buscar_pacientes', [PersonController::class, 'buscarPacientes'])->name('buscar.pacientes');
+Route::get('/pacientes', [PersonController::class, 'buscarPacientes'])->name('buscar.pacientes');
 
 
 

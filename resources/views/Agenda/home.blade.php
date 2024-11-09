@@ -12,6 +12,7 @@
 <div class="container">
     @include('agenda.modal-calendar')
     @include('agenda.modal-view-calendar')
+    @include('agenda.modal-buscar')
 
     <div class="row justify-content-between my-3">
         <div class="col-md-6">
@@ -41,10 +42,16 @@
             </div>
         </div>
         <div style="flex: 1;">
-            <div><p>C0 Agendamentos</p></div>
-            <div id="calendarMonth"></div>
-            <!-- Calendário de visualização do mês -->
-            <button class="btn my-1" style="background-color: #E5D5C0;">Buscar Agendamento</button>
+            <div class="text-center border rounded-4">
+                <p id="eventCount"><span id="visibleEventCount">0</span> agendamento(s)</p>
+            </div>
+            
+            <div class="my-4" id="calendarMonth"></div>
+            <div class="d-grid my-3">
+                <!-- Calendário de visualização do mês -->
+                <button type="button" class="btn my-1 " data-bs-toggle="modal" data-bs-target="#searchPatientModal" style="background-color: #E5D5C0;">Buscar Agendamento</button>
+            </div>
+            
         </div>
     </div>
 </div>

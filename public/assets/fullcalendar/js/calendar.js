@@ -71,6 +71,7 @@ var calendar;
       datesSet: function(dateInfo) {
         // Atualiza o calendário mensal para o mesmo mês
         calendarMonth.gotoDate(dateInfo.start);
+        updateVisibleEventCount();
       },
 
       // Sincroniza a navegação ao clicar em um dia no calendário principal
@@ -304,6 +305,7 @@ var calendar;
           data: { medico: medico },
           success: function(data) {
             successCallback(data);
+            updateVisibleEventCount();
           },
           error: function() {
             failureCallback();
@@ -342,18 +344,27 @@ var calendar;
       },
 
     });
-
     // Sincroniza a navegação ao clicar em um dia no calendário principal
-  calendar.on('dateClick', function(info) {
+    calendar.on('dateClick', function(info) {
     calendarMonth.gotoDate(info.date); // Sincroniza a navegação ao clicar em um dia no calendário principal
   });
 
-    // Renderiza ambos os calendários
-    calendar.render();
-    calendarMonth.render();
-  
-    document.getElementById('medicoSelect').addEventListener('change', function() {
-    calendar.refetchEvents();
-
+  // Função para atualizar a contagem de eventos visíveis
+  function updateVisibleEventCount() {
+    const events = calendar.getEvents(); // Obtém todos os eventos do calendário principal
+    const visibleEvents = events.filter(event => {
+        // Verifica se o evento está dentro do intervalo visível (pode ser ajustado conforme necessário)
+        return event.start >= calendar.view.currentStart && event.end <= calendar.view.currentEnd;
     });
+    document.getElementById('visibleEventCount').innerText = visibleEvents.length; // Atualiza o texto com a contagem
+  }
+
+  // Renderiza ambos os calendários
+  calendar.render();
+  calendarMonth.render();
+
+  document.getElementById('medicoSelect').addEventListener('change', function() {
+  calendar.refetchEvents();
+
   });
+});
