@@ -40,12 +40,12 @@ class EventController extends Controller
 
     public function loadEvents(Request $request)
     {
-        $medicoId = $request->get('medico_id');
+        $medico = $request->get('medico');
         $query = Event::with('procedimento');
     
         // Filtra eventos por médico, se um ID for fornecido
-        if ($medicoId) {
-            $query->where('medico', $medicoId);
+        if ($medico) {
+            $query->where('medico', $medico);
         }
     
         $events = $query->get()->map(function ($event) {

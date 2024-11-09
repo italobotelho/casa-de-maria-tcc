@@ -53,6 +53,7 @@ $(document).ready(function () {
             url: `/get-event/${id}`, // Substitua pela URL correta para obter o evento
             method: 'GET',
             success: function (data) {
+                console.log(data);
                 // Preencher outros campos do modal
 
                  $("#modalCalendar").on('shown.bs.modal', function() {
@@ -65,7 +66,7 @@ $(document).ready(function () {
                 $("#modalCalendar input[name='eventDate']").val(moment(data.start).format("YYYY-MM-DD"));
                 $("#modalCalendar input[name='start']").val(moment(data.start).format("HH:mm"));
                 $("#modalCalendar input[name='end']").val(moment(data.end).format("HH:mm"));
-                $("#modalCalendar input[name='medico']").val(data.medico); // Definindo o médico aqui
+                $("#modalCalendar input[name='medico']").val(data.medico.pk_crm_med);
                 $("#modalCalendar input[name='paciente_id']").val(data.paciente_id);
 
                 // Verificar se o médico está cadastrado
@@ -185,62 +186,6 @@ $(document).ready(function () {
         $('#successMessage').hide(); // Esconde a mensagem de sucesso
     });
 
-    $(".saveEvent").click(function () {
-        const pacienteNaoCadastrado = $('#pacienteSuggestions').text().includes('Paciente não cadastrado');
-        if (pacienteNaoCadastrado) {
-            alert('Não é possível agendar. Paciente não cadastrado.');
-            return;
-        }
-        
-        let id = $("#modalCalendar input[name='id']").val();
-        let title = $("#modalCalendar input[name='paciente']").val();
-        let pacienteId = $("#modalCalendar input[name='paciente_id']").val(); // Certifique-se de que este valor está correto
-         console.log("Paciente ID:", pacienteId); // Adicione este log para depuração
-        let procedimentoId = $("#modalCalendar select[name='procedimento_id']").val();
-        let convenioId = $("#modalCalendar input[name='convenio_id']").val();
-        let selectedDate = $("#modalCalendar input[name='eventDate']").val();
-        let startTime = $("#modalCalendar input[name='start']").val();
-        let endTime = $("#modalCalendar input[name='end']").val();
-        let medico = $("#modalCalendar input[name='medico']").val();
-        let color = $("#modalCalendar input[name='color']").val() || "#9D9D9B"; // Captura o ID do médico
-
-        if (!procedimentoId || procedimentoId === 'Selecione um Procedimento') {
-            alert('Procedimento não selecionado. Por favor, escolha um procedimento para continuar.');
-            return;
-        }
-
-        if (!selectedDate || !startTime || !endTime) {
-            console.error("Data ou horário não definidos.");
-            return;
-        }
-
-
-        let start = moment(`${selectedDate}T${startTime}`, "YYYY-MM-DDTHH:mm").format("YYYY-MM-DD HH:mm:ss");
-        let end = moment(`${selectedDate}T${endTime}`, "YYYY-MM-DDTHH:mm").format("YYYY-MM-DD HH:mm:ss");
-
-        let Event = {
-          title: title,
-          start: start,
-          end: end,
-          color: color,
-          procedimento_id: procedimentoId,
-          convenio: convenioId,
-          medico: medico,
-          paciente_id: pacienteId
-        };
-
-        let route;
-        if (id === '') {
-            route = routeEvents('routeEventStore');
-        } else {
-            route = routeEvents('routeEventUpdate');
-            Event.id = id;
-            Event._method = "PUT";
-        }
-
-        sendEvent(route, Event);
-    });
-
     $(".saveEvent").off("click").on("click", function () {
 
         // Verifique se a mensagem de paciente não cadastrado está presente
@@ -258,21 +203,21 @@ $(document).ready(function () {
         }
 
         let id = $("#modalCalendar input[name='id']").val();
+
         let title = $("#modalCalendar input[name='paciente']").val();
-        let pacienteId = $("#modalCalendar input[name='paciente_id']").val(); // Certifique-se de que este valor está correto
-          console.log("Paciente ID:", pacienteId); // Adicione este log para depuração
+        let pacienteId = $("#modalCalendar input[name='paciente_id']").val();
+        console.log("Paciente ID:", pacienteId);
+
+        let medico = $("#modalCalendar input[name='medico_nome']").val(); // Adicione esta linha para obter o médico
+        let medicoId = $("#modalCalendar input[name='medico']").val();
+        console.log("ID do Médico:", medicoId); 
+
         let procedimentoId = $("#modalCalendar select[name='procedimento_id']").val();
-        let convenioId = $("#modalCalendar input[name='convenio_id']").val(); // Acesse o valor do convênio aqui
+        let convenioId = $("#modalCalendar input[name='convenio_id']").val();
+        
         let selectedDate = $("#modalCalendar input[name='eventDate']").val();
         let startTime = $("#modalCalendar input[name='start']").val();
         let endTime = $("#modalCalendar input[name='end']").val();
-        let medico = $("#modalCalendar input[name='medico']").val(); // Adicione esta linha para obter o médico
-        console.log("ID do Médico:", medico); 
-
-        // Verifique se o ID do médico não é um objeto
-        if (typeof medico === 'object') {
-            console.error("O valor do médico é um objeto:", medico);
-        }
 
         // Verifique se o procedimento foi selecionado
         if (!procedimentoId || procedimentoId === 'Selecione um Procedimento') {
@@ -295,8 +240,9 @@ $(document).ready(function () {
             end: end,
             color: color,
             procedimento_id: procedimentoId,
-            convenio: convenioId, // Inclua o convênio no objeto Event
-            medico: medico, // Inclua o médico no objeto Event
+            convenio: convenioId, 
+            medico: medicoId,
+            medico_nome: medico,
             paciente_id: pacienteId
         };
 

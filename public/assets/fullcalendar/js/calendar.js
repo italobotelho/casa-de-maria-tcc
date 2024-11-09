@@ -131,8 +131,8 @@ var calendar;
         console.log('ID do Paciente:', pacienteId);
 
         // Obtenha o ID do médico do evento
-        let medicoId = element.event.extendedProps.medico;
-        console.log('ID do Médico:', medicoId); // Log para verificar se o ID do médico foi encontrado
+        let medico = element.event.extendedProps.medico;
+        console.log('ID do Médico:', medico); // Log para verificar se o ID do médico foi encontrado
 
         // Limpa mensagens e reseta o formulário
         clearMessages('#message');
@@ -169,12 +169,12 @@ var calendar;
         // AJAX para obter informações do médico
   
       $.ajax({
-        url: '/get-medico/' + medicoId,
+        url: '/get-medico/' + medico,
         type: 'GET',
         success: function(response) {
           console.log('Resposta do servidor:', response);
           $('#modalCalendar input[name="medico_nome"]').val(response.nome_medico);
-          $('#modalCalendar input[name="medico"]').val(medicoId); // Preenche o campo oculto com o ID do médico
+          $('#modalCalendar input[name="medico"]').val(medico); // Preenche o campo oculto com o ID do médico
           console.log('ID do Médico preenchido:', $('#modalCalendar input[name="medico"]').val());
         },
         error: function(xhr) {
@@ -296,12 +296,12 @@ var calendar;
       },
 
       events: function(fetchInfo, successCallback, failureCallback) {
-        var medicoId = document.getElementById('medicoSelect').value;
+        var medico= document.getElementById('medicoSelect').value;
 
         $.ajax({
           url: routeEvents('routeLoadEvents'),
           method: 'GET',
-          data: { medico_id: medicoId },
+          data: { medico: medico },
           success: function(data) {
             successCallback(data);
           },
