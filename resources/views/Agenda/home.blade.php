@@ -13,15 +13,15 @@
     @include('agenda.modal-calendar')
     @include('agenda.modal-view-calendar')
 
-    <div class="row align-items-center mb-3">
+    <div class="row justify-content-between my-3">
         <div class="col-md-6">
             <h1 class="display-4">AGENDA</h1> <!-- Exibindo o título diretamente -->
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
-                <label for="medicoSelect">Selecione o Profissional:</label>
-                <select id="medicoSelect" class="form-select" aria-label="Default select example">
-                    <option value="">Todos</option>
+                <label for="medicoSelect">Selecione o profissinal</label>
+                <select id="medicoSelect" class="form-select custom-select" aria-label="Default select example">    
+                    <option value="">Todos os profissionais</option>
                     @foreach ($medicos as $medico)
                         <option value="{{ $medico->pk_crm_med }}">{{ $medico->nome_med }}</option>
                     @endforeach
@@ -43,8 +43,7 @@
 
         <div id="calendarMonth">
             <!-- Calendário de visualização do mês -->
-            <div id="calendarMonth"></div>
-            <button class="btn my-1" style="background-color: #E5D5C0;">Buscar Agendamento</button>
+            {{-- <button class="btn my-1" style="background-color: #E5D5C0;">Buscar Agendamento</button> --}}
         </div>
     </div>
 </div>

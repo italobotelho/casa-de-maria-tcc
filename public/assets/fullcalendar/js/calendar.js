@@ -57,12 +57,26 @@ var calendar;
         meridiem: false
       },
 
+      noEventsContent: 'Não há agendamentos para mostrar',
+
       height: 'auto',
       locale: 'pt-br',
+
       navLinks: true,
       selectable: true,
       editable: true,
       droppable: true,
+
+      // Adicionando o evento para sincronizar o mês
+      datesSet: function(dateInfo) {
+        // Atualiza o calendário mensal para o mesmo mês
+        calendarMonth.gotoDate(dateInfo.start);
+      },
+
+      // Sincroniza a navegação ao clicar em um dia no calendário principal
+      dateClick: function(info) {
+          calendarMonth.gotoDate(info.date); // Sincroniza a navegação ao clicar em um dia no calendário principal
+      },
 
       eventDrop: function(element) {
         let start = moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
@@ -300,7 +314,12 @@ var calendar;
 
     // Inicialização do calendário mensal
     var calendarMonth = new FullCalendar.Calendar(calendarMonthEl, {
+
+      height: '100%',
+      contentHeight: 'auto',
+
       initialView: 'dayGridMonth', // Visualização inicial do mês
+  
       // Personalização da barra de navegação
       headerToolbar: {
         left: 'prev',    // Adiciona as setas de navegação (prev e next)
@@ -308,37 +327,33 @@ var calendar;
         right: 'next'  // Não adiciona nada no lado direito
       },
 
-      contentHeight: 'auto', // Remove o scroll
-      navLinks: false, // Remove links nos dias
+      businessHours: {
+        daysOfWeek: [1, 2, 3, 4, 5], // Segunda - Sexta
+      },
 
       locale: 'pt-br',
+      fixedWeekCount: false,
+      selectable: true,
 
       events: calendar.getEvents(), // Sincroniza eventos entre os dois calendários
+
       dateClick: function(info) {
         calendar.gotoDate(info.date); // Sincroniza a navegação com o calendário principal
       },
-      
-      datesSet: function() {
-        // Define a altura das células após o calendário ser renderizado
-        const dayCells = calendarMonthEl.querySelectorAll('.fc-daygrid-day');
-        dayCells.forEach(function(cell) {
-          cell.style.height = '60px'; // Ajuste este valor conforme necessário
-        });
-      },
 
     });
 
-    // Sincroniza os dois calendários
-    calendar.on('dateClick', function(info) {
-      calendarMonth.gotoDate(info.date); // Sincroniza a navegação ao clicar em um dia no calendário principal
-    });
+    // Sincroniza a navegação ao clicar em um dia no calendário principal
+  calendar.on('dateClick', function(info) {
+    calendarMonth.gotoDate(info.date); // Sincroniza a navegação ao clicar em um dia no calendário principal
+  });
 
     // Renderiza ambos os calendários
     calendar.render();
-    calendarMonth.render();  // Aqui estava o erro, agora é chamado corretamente
+    calendarMonth.render();
   
     document.getElementById('medicoSelect').addEventListener('change', function() {
     calendar.refetchEvents();
-    });
 
+    });
   });
