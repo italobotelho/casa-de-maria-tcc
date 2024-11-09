@@ -2,170 +2,250 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/pacientes-medicos.css') }}">
+<style>
+    #convenio-suggestions {
+        position: absolute;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 200px;
+        z-index: 1000;
+    }
+
+    #convenio-suggestions li {
+        padding: 5px;
+        cursor: pointer;
+    }
+
+    #convenio-suggestions li:hover {
+        background-color: #ccc;
+    }
+</style>
 @endsection
 
 @section('title')
 @stop
-    
+
 @section('content')
-
-<div class="col-md-6">
-    <h1 class="display-5">BUSCAR PACIENTE</h1>
-</div>
-
-<div class="col-md-10">
-    <p class="display-8">Listagem dos últimos pacientes cadastrados e busca geral.</p>
-</div>
-
-<div class="container border border-1 rounded shadow-sm">
-
-    <div class="my-4 mx-1"><button class="btn novoMedico" onclick="window.location.href='/form_paciente'">CADASTRAR NOVO PACIENTE</button></div>
-
-    <div class="my-3 mx-1"><h2 class="text-uppercase">Filtros para Busca:</h2></div>
-
-    <div class="my-3 mx-1"><h3 class="text-uppercase">Resultados:</h3></div>
-
-    <table class="table border">
-        <thead>
-            <tr>
-            <th scope="col">ID</th>
-            <th scope="col">NOME</th>
-            <th scope="col">DT. NASC.</th>
-            <th scope="col">CONVÊNIO</th>
-            <th scope="col">TELEFONE</th>
-            <th scope="col">CPF</th>
-            <th scope="col">CIDADE</th>
-            <th scope="col">NOME RESPONSÁVEL</th>
-            <th scope="col">CPF RESPONSÁVEL</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($pacientes as $paciente)
-                <tr>
-                <th scope="row">{{$paciente->pk_cod_paci}}</th>
+    
+    <div class="container">
+        <div class="col-md-6">
+            <h1 class="display-5">BUSCAR PACIENTE</h1>
+        </div>
+        
+        <div class="col-md-10">
+            <p class="display-8">Listagem dos últimos pacientes cadastrados e busca geral.</p>
+        </div>
+        
+        <div class="container border border-1 rounded shadow-sm">
+        
+            <div class="my-4 mx-1"><button class="btn novoCadastro" onclick="window.location.href='/form_paciente'">CADASTRAR NOVO PACIENTE</button></div>
+        
+            <div class="my-3 mx-1">
+                <h2 class="text-uppercase">Filtros para Busca:</h2>
             
-                <td>
-                    <a href="#" class="nome-paciente" data-id="{{ $paciente->pk_cod_paci }}" data-nome="{{ $paciente->nome_paci }}" data-data-nasci="{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('d/m/Y') }}" data-convenio="{{ $paciente->convenio->nome_conv }}" data-telefone="{{ $paciente->telefone_paci }}" data-cpf="{{ $paciente->cpf_paci }}" data-cidade="{{ $paciente->nome_cidade }}" data-responsavel="{{ $paciente->responsavel_paci }}" data-cpf-responsavel="{{ $paciente->cpf_responsavel_paci }}">
-                        {{ $paciente->nome_paci }}
-                    </a>
-                    <button class="btn btn-warning btn-sm editar-paciente" 
-                    data-id="{{ $paciente->pk_cod_paci }}" 
-                    data-nome="{{ $paciente->nome_paci }}" 
-                    data-email="{{ $paciente->email_paci }}" 
-                    data-data-nasci="{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('Y-m-d') }}" 
-                    data-convenio-id="{{ $paciente->fk_convenio_paci }}"
-                    data-telefone="{{ $paciente->telefone_paci }}" 
-                    data-cpf="{{ $paciente->cpf_paci }}" 
-                    data-cidade="{{ $paciente->nome_cidade }}" 
-                    data-responsavel="{{ $paciente->responsavel_paci }}"        
-                    data-cpf-responsavel="{{ $paciente->cpf_responsavel_paci }}">
-                    Editar
-                </button>
-            
-                </td>
-                
+                <!-- Formulário de busca -->
+                <form action="{{ url('/buscar_pacientes') }}" method="GET" class="form-inline mb-4 d-flex align-items-center">
+                    <div class="form-group me-3">
+                        <label for="nome_paci" class="me-2">Nome:</label>
+                        <input type="text" name="nome_paci" id="nome_paci" class="form-control" placeholder="Nome do paciente">
+                    </div>
+                    <div class="form-group me-3">
+                        <label for="data_nasc_paci" class="me-2">Data de Nascimento:</label>
+                        <input type="date" name="data_nasc_paci" id="data_nasc_paci" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </form>
+            </div>            
+        
+            <div class="my-3 mx-1"><h3 class="text-uppercase">Resultados:</h3></div>
 
-                <td>{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('d/m/Y') }}</td>
-                <td>{{$paciente->convenio->nome_conv}}</td>
-                <td>{{$paciente->telefone_paci}}</td>
-                <td>{{$paciente->cpf_paci}}</td>
-                <td>{{$paciente->nome_cidade}}</td>
-                <td>{{$paciente->responsavel_paci}}</td>
-                <td>{{$paciente->cpf_responsavel_paci}}</td>
-                
-            
-            
-            
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="9" class="text-center fs-4">
-                        Nenhum paciente cadastrado
-                    </td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
-
-<!-- Modal de Paciente -->
-<div class="modal fade" id="pacienteModal" tabindex="-1" aria-labelledby="pacienteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="pacienteModalLabel">Detalhes do Paciente</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p><strong>Nome:</strong> {{ $paciente->nome }}</p>
-                <p><strong>CPF:</strong> {{ $paciente->cpf }}</p>
-                <p><strong>Data de Nascimento:</strong> {{ $paciente->data_nascimento }}</p>
-                <!-- Mais informações sobre o paciente -->
-                
-                <!-- Botão Editar -->
-                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editarPacienteModal">Editar</button>
+                        <table class="table border">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Código</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Data Nascimento</th>
+                                    <th scope="col">Convênio</th>
+                                    <th scope="col">Carteira</th>
+                                    <th scope="col">Telefone</th>
+                                    <th scope="col">CPF</th>
+                                    <th scope="col">Cidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($pacientes as $paciente)
+                                <tr>
+                                    <th scope="row">{{ $paciente->pk_cod_paci }}</th>
+                                    <td>
+                                        <a href="#" class="nome-paciente"
+                                            data-id="{{ $paciente->pk_cod_paci }}"
+                                            data-nome="{{ $paciente->nome_paci }}"
+                                            data-data-nasci="{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('d/m/Y') }}"
+                                            data-convenio="{{ $paciente->convenio->nome_conv }}"
+                                            data-telefone="{{ $paciente->telefone_paci }}"
+                                            data-cpf="{{ $paciente->cpf_paci }}"
+                                            data-cidade="{{ $paciente->nome_cidade }}"
+                                            data-responsavel="{{ $paciente->responsavel_paci }}"
+                                            data-cpf-responsavel="{{ $paciente->cpf_responsavel_paci }}"
+                                            data-carteira-convenio="{{ $paciente->carteira_convenio_paci }}">
+                                            {{ $paciente->nome_paci }}
+                                        </a>
+                                        <button class="btn btn-warning btn-sm editar-paciente"
+                                            data-id="{{ $paciente->pk_cod_paci }}"
+                                            data-nome="{{ $paciente->nome_paci }}"
+                                            data-email="{{ $paciente->email_paci }}"
+                                            data-data-nasci="{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('Y-m-d') }}"
+                                            data-convenio-id="{{ $paciente->fk_convenio_paci }}"
+                                            data-telefone="{{ $paciente->telefone_paci }}"
+                                            data-cpf="{{ $paciente->cpf_paci }}"
+                                            data-cidade="{{ $paciente->nome_cidade }}"
+                                            data-responsavel="{{ $paciente->responsavel_paci }}"
+                                            data-cpf-responsavel="{{ $paciente->cpf_responsavel_paci }}"
+                                            data-carteira-convenio="{{ $paciente->carteira_convenio_paci }}">
+                                            Editar
+                                        </button>
+                                    </td>
+                                    <td>{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('d/m/Y') }}</td>
+                                    <td>{{ $paciente->convenio->nome_conv }}</td>
+                                    <td>{{ $paciente->carteira_convenio_paci }}</td>
+                                    <td>{{ $paciente->telefone_paci }}</td>
+                                    <td>{{ $paciente->cpf_paci }}</td>
+                                    <td>{{ $paciente->nome_cidade }}</td>
+                                </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="10" class="text-center fs-4">
+                                        Nenhum paciente cadastrado
+                                    </td>
+                                </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Modal de Edição do Paciente -->
-<div class="modal fade" id="editarPacienteModal" tabindex="-1" aria-labelledby="editarPacienteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editarPacienteModalLabel">Editar Paciente</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div id="pacienteModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Informações do Paciente</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Nome:</strong> <span id="nome-paciente"></span></p>
+                    <p><strong>Data de Nascimento:</strong> <span id="data-nascimento"></span></p>
+                    <p><strong>Convênio:</strong><span id="convenio"></span></p>
+                    <p><strong>Carteira do Convênio:</strong><span id="carteira_convenio"></span></p>
+                    <p><strong>Telefone:</strong> <span id="telefone"></span></p>
+                    <p><strong>CPF:</strong><span id="cpf"></span></p>
+                    <p><strong>Cidade:</strong><span id="cidade"></span></p>
+                    <p><strong>Responavel:</strong><span id="responsavel"></span></p>
+                    <p><strong>CPF do Responsavel:</strong><span id="cpf-responsavel"></span></p>
+                </div>
             </div>
-            <div class="modal-body">
-                <form action="{{ route('perfil.updateProfile', $paciente->id) }}" method="POST">
-                    @csrf
-                    @method('PUT')
+        </div>
+    </div>
 
-                    <div class="form-group mb-3">
-                        <label for="nome">Nome</label>
-                        <input type="text" class="form-control" id="nome" name="nome" value="{{ old('nome', $paciente->nome) }}" required>
+    {{-- modal edicao --}}
+
+    <div class="modal fade" id="editarPacienteModal" tabindex="-1" role="dialog" aria-labelledby="editarPacienteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="editarPacienteModalLabel">Editar Paciente</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('paciente.update') }}" id="formEditarPaciente">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="modal-body">
+                        <input maxlength="54" type="text" id="editar-id" name="id">
+                        <div class="form-group">
+                            <label for="editar-nome">Nome</label>
+                            <input type="text" class="form-control" id="editar-nome" name="nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editar-email">E-mail</label>
+                            <input type="email" maxlength="255" class="form-control" id="editar-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editar-data-nasci">Data de Nascimento</label>
+                            <input type="date" class="form-control" id="editar-data-nasci" name="data_nasci" required>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="fk_convenio_paci">Convênio</label>
+                            <select name="fk_convenio_paci" id="fk_convenio_paci">
+                                @foreach($convenios as $convenio)
+                                <option value="{{ $convenio->pk_id_conv }}"
+                                    @if(isset($paciente) && $convenio->pk_id_conv === $paciente->fk_convenio_paci) selected @endif>
+                                    {{ $convenio->nome_conv }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div id="carteira-convenio-field" style="display: none;">
+                            <label for="editar-carteira-convenio">Carteira do Convênio:</label>
+                            <input type="text" maxlength="255" id="editar-carteira-convenio" name="carteira_convenio">
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="editar-telefone">Telefone</label>
+                            <input type="text"
+                                maxlength="15"
+                                class="form-control" id="editar-telefone" name="telefone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editar-cpf">CPF</label>
+                            <input type="text"
+                                maxlength="14"
+                                class="form-control" id="editar-cpf" name="cpf" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editar-cidade">Cidade</label>
+                            <input type="text"
+                                maxlength="100" class="form-control" id="editar-cidade" name="cidade" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editar-responsavel">Nome do Responsável</label>
+                            <input type="text" class="form-control" id="editar-responsavel" name="responsavel">
+                        </div>
+                        <div class="form-group">
+                            <label for="editar-cpf-responsavel">CPF do Responsável</label>
+                            <input type="text" class="form-control" id="editar-cpf-responsavel" name="cpf_responsavel">
+                        </div>
                     </div>
-
-                    <div class="form-group mb-3">
-                        <label for="cpf">CPF</label>
-                        <input type="text" class="form-control" id="cpf" name="cpf" value="{{ old('cpf', $paciente->cpf) }}" required>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Salvar alterações</button>
                     </div>
-
-                    <div class="form-group mb-3">
-                        <label for="data_nascimento">Data de Nascimento</label>
-                        <input type="date" class="form-control" id="data_nascimento" name="data_nascimento" value="{{ old('data_nascimento', $paciente->data_nascimento) }}" required>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                 </form>
             </div>
         </div>
     </div>
-</div>
+</body>
 @endsection
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-<style>
-    #convenio-suggestions {
-    position: absolute;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    padding: 10px;
-    width: 200px;
-    z-index: 1000;
-}
-
-#convenio-suggestions li {
-    padding: 5px;
-    cursor: pointer;
-}
-
-#convenio-suggestions li:hover {
-    background-color: #ccc;
-}
-</style>
-
+@section('scripts')
+<!-- Por fim, carregue seu script personalizado -->
 <script src="js/paciente.js"></script>
+
+<script>
+    window.onload = function() {
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+    }
+</script>
+@endsection

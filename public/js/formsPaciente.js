@@ -1,4 +1,3 @@
-
 // Função para aplicar a máscara de CPF
 function aplicarMascaraCPF(input) {
     let cpf = input.value.replace(/\D/g, ''); // Remove tudo que não for dígito

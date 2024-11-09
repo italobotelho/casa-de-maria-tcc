@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('especialidade2_med', 40)->nullable();
             $table->string('email_med', 255);
             $table->string('uf_med', 18);
-            $table->string('telefone_med', 12);
+            $table->string('telefone_med', 20);
             $table->string('nome_med', 50);
             $table->timestamps();
         });

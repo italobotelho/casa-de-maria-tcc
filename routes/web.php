@@ -104,12 +104,20 @@ Route::get('/convenios/edit', [ConvenioController::class, 'edit'])->name('conven
 Route::put('/convenios/{pk_id_conv}', [ConvenioController::class, 'update'])->name('convenios.update');
 Route::delete('/convenios/{pk_id_conv}', [ConvenioController::class, 'destroy'])->name('convenios.destroy');
 
+// routes/web.php
+Route::get('/buscar_pacientes', [PersonController::class, 'buscarPacientes'])->name('buscar.pacientes');
 
+// Rota para o formulário de edição de médico
+Route::get('/medicos', [MedicoController::class, 'edit'])->name('medico.edit');
+
+// Rota para atualizar os dados de um médico
+Route::post('/update-medico', [MedicoController::class, 'update'])->name('medico.update');
 
 // Rota para o formulário de cadastro de paciente
 Route::get('/form_paciente', function () {
     return view('pacientes/form_paciente');
 });
+
 Route::get('/form_medico', function () {
     return view('medicos/form_medico');
 });

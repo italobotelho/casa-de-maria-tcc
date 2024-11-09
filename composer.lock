@@ -1143,13 +1143,17 @@
         {
             "name": "guzzlehttp/promises",
             "version": "2.0.4",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
                 "reference": "f9c436286ab2892c7db7be8c8da4ef61ccf7b455"
+                "reference": "f9c436286ab2892c7db7be8c8da4ef61ccf7b455"
             },
             "dist": {
                 "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/f9c436286ab2892c7db7be8c8da4ef61ccf7b455",
+                "reference": "f9c436286ab2892c7db7be8c8da4ef61ccf7b455",
                 "url": "https://api.github.com/repos/guzzle/promises/zipball/f9c436286ab2892c7db7be8c8da4ef61ccf7b455",
                 "reference": "f9c436286ab2892c7db7be8c8da4ef61ccf7b455",
                 "shasum": ""
@@ -1206,6 +1210,7 @@
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
                 "source": "https://github.com/guzzle/promises/tree/2.0.4"
+                "source": "https://github.com/guzzle/promises/tree/2.0.4"
             },
             "funding": [
                 {
@@ -1221,6 +1226,7 @@
                     "type": "tidelift"
                 }
             ],
+            "time": "2024-10-17T10:06:22+00:00"
             "time": "2024-10-17T10:06:22+00:00"
         },
         {
@@ -2451,6 +2457,7 @@
                 "source": "https://github.com/laravel/tinker/tree/v2.10.0"
             },
             "time": "2024-09-23T13:32:56+00:00"
+<<<<<<< HEAD
         },
         {
             "name": "laravel/ui",
@@ -2514,6 +2521,8 @@
                 "source": "https://github.com/laravel/ui/tree/v4.5.2"
             },
             "time": "2024-05-08T18:07:10+00:00"
+=======
+>>>>>>> tela-busca
         },
         {
             "name": "league/commonmark",
@@ -3308,13 +3317,17 @@
         {
             "name": "nunomaduro/termwind",
             "version": "v1.16.0",
+            "version": "v1.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/termwind.git",
                 "reference": "dcf1ec3dfa36137b7ce41d43866644a7ab8fc257"
+                "reference": "dcf1ec3dfa36137b7ce41d43866644a7ab8fc257"
             },
             "dist": {
                 "type": "zip",
+                "url": "https://api.github.com/repos/nunomaduro/termwind/zipball/dcf1ec3dfa36137b7ce41d43866644a7ab8fc257",
+                "reference": "dcf1ec3dfa36137b7ce41d43866644a7ab8fc257",
                 "url": "https://api.github.com/repos/nunomaduro/termwind/zipball/dcf1ec3dfa36137b7ce41d43866644a7ab8fc257",
                 "reference": "dcf1ec3dfa36137b7ce41d43866644a7ab8fc257",
                 "shasum": ""
@@ -3323,8 +3336,18 @@
                 "ext-mbstring": "*",
                 "php": "^8.1",
                 "symfony/console": "^6.4.12"
+                "php": "^8.1",
+                "symfony/console": "^6.4.12"
             },
             "require-dev": {
+                "illuminate/console": "^10.48.22",
+                "illuminate/support": "^10.48.22",
+                "laravel/pint": "^1.18.1",
+                "pestphp/pest": "^2",
+                "pestphp/pest-plugin-mock": "2.0.0",
+                "phpstan/phpstan": "^1.12.6",
+                "phpstan/phpstan-strict-rules": "^1.6.1",
+                "symfony/var-dumper": "^6.4.11",
                 "illuminate/console": "^10.48.22",
                 "illuminate/support": "^10.48.22",
                 "laravel/pint": "^1.18.1",
@@ -3373,6 +3396,7 @@
             "support": {
                 "issues": "https://github.com/nunomaduro/termwind/issues",
                 "source": "https://github.com/nunomaduro/termwind/tree/v1.16.0"
+                "source": "https://github.com/nunomaduro/termwind/tree/v1.16.0"
             },
             "funding": [
                 {
@@ -3388,6 +3412,7 @@
                     "type": "github"
                 }
             ],
+            "time": "2024-10-15T15:27:12+00:00"
             "time": "2024-10-15T15:27:12+00:00"
         },
         {
@@ -7206,27 +7231,45 @@
         {
             "name": "nunomaduro/collision",
             "version": "v7.11.0",
+            "version": "v7.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/collision.git",
+                "reference": "994ea93df5d4132f69d3f1bd74730509df6e8a05"
                 "reference": "994ea93df5d4132f69d3f1bd74730509df6e8a05"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/nunomaduro/collision/zipball/994ea93df5d4132f69d3f1bd74730509df6e8a05",
                 "reference": "994ea93df5d4132f69d3f1bd74730509df6e8a05",
+                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/994ea93df5d4132f69d3f1bd74730509df6e8a05",
+                "reference": "994ea93df5d4132f69d3f1bd74730509df6e8a05",
                 "shasum": ""
             },
             "require": {
                 "filp/whoops": "^2.16.0",
+                "filp/whoops": "^2.16.0",
                 "nunomaduro/termwind": "^1.15.1",
                 "php": "^8.1.0",
+                "symfony/console": "^6.4.12"
                 "symfony/console": "^6.4.12"
             },
             "conflict": {
                 "laravel/framework": ">=11.0.0"
             },
             "require-dev": {
+                "brianium/paratest": "^7.3.1",
+                "laravel/framework": "^10.48.22",
+                "laravel/pint": "^1.18.1",
+                "laravel/sail": "^1.36.0",
+                "laravel/sanctum": "^3.3.3",
+                "laravel/tinker": "^2.10.0",
+                "nunomaduro/larastan": "^2.9.8",
+                "orchestra/testbench-core": "^8.28.3",
+                "pestphp/pest": "^2.35.1",
+                "phpunit/phpunit": "^10.5.36",
+                "sebastian/environment": "^6.1.0",
+                "spatie/laravel-ignition": "^2.8.0"
                 "brianium/paratest": "^7.3.1",
                 "laravel/framework": "^10.48.22",
                 "laravel/pint": "^1.18.1",
@@ -7297,6 +7340,7 @@
                     "type": "patreon"
                 }
             ],
+            "time": "2024-10-15T15:12:40+00:00"
             "time": "2024-10-15T15:12:40+00:00"
         },
         {
@@ -7771,6 +7815,7 @@
                 "sebastian/cli-parser": "^2.0.1",
                 "sebastian/code-unit": "^2.0.0",
                 "sebastian/comparator": "^5.0.3",
+                "sebastian/comparator": "^5.0.3",
                 "sebastian/diff": "^5.1.1",
                 "sebastian/environment": "^6.1.0",
                 "sebastian/exporter": "^5.1.2",
@@ -8010,13 +8055,17 @@
         {
             "name": "sebastian/comparator",
             "version": "5.0.3",
+            "version": "5.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
                 "reference": "a18251eb0b7a2dcd2f7aa3d6078b18545ef0558e"
+                "reference": "a18251eb0b7a2dcd2f7aa3d6078b18545ef0558e"
             },
             "dist": {
                 "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/a18251eb0b7a2dcd2f7aa3d6078b18545ef0558e",
+                "reference": "a18251eb0b7a2dcd2f7aa3d6078b18545ef0558e",
                 "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/a18251eb0b7a2dcd2f7aa3d6078b18545ef0558e",
                 "reference": "a18251eb0b7a2dcd2f7aa3d6078b18545ef0558e",
                 "shasum": ""
@@ -8029,6 +8078,7 @@
                 "sebastian/exporter": "^5.0"
             },
             "require-dev": {
+                "phpunit/phpunit": "^10.5"
                 "phpunit/phpunit": "^10.5"
             },
             "type": "library",
@@ -8075,6 +8125,7 @@
                 "issues": "https://github.com/sebastianbergmann/comparator/issues",
                 "security": "https://github.com/sebastianbergmann/comparator/security/policy",
                 "source": "https://github.com/sebastianbergmann/comparator/tree/5.0.3"
+                "source": "https://github.com/sebastianbergmann/comparator/tree/5.0.3"
             },
             "funding": [
                 {
@@ -8082,6 +8133,7 @@
                     "type": "github"
                 }
             ],
+            "time": "2024-10-18T14:56:07+00:00"
             "time": "2024-10-18T14:56:07+00:00"
         },
         {

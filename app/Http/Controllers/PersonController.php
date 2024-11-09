@@ -28,7 +28,6 @@ class PersonController extends Controller
         ]); // Retorna o paciente em formato JSON
     }
 
-    
     // Método para buscar pacientes com base em uma consulta
     public function buscar(Request $request)
     {
@@ -64,18 +63,23 @@ class PersonController extends Controller
     // Método para atualizar os dados de um paciente
     public function update(Request $request)
     {
-        // Validação dos dados recebidos
+        
+        $data = $request->all();
+        // Validação
         $request->validate([
-            'id' => 'required|exists:paciente,pk_cod_paci', // O ID deve existir
-            'nome' => 'required|string|max:54', // Valida o nome
-            'email' => 'required|email', // Valida o email
-            'data_nasci' => 'required|date', // Valida a data de nascimento
-            'telefone' => 'required|string|max:15', // Valida o telefone
-            'cpf' => 'required|string|max:14', // Valida o CPF
-            'cidade' => 'required|string|max:100', // Valida a cidade
-            'responsavel' => 'string|max:54', // Valida o responsável (opcional)
-            'cpf_responsavel' => 'string|max:14', // Valida o CPF do responsável (opcional)
-            'fk_convenio_paci' => 'nullable|string' // Valida o convênio (opcional)
+     
+            'id' => 'required|exists:pacientes,pk_cod_paci',
+            'nome' => 'required|string|max:54',
+            'email' => 'required|email',
+            'data_nasci' => 'required|date',
+            'telefone' => 'required|string|max:15',
+            'cpf' => 'required|string|max:14',
+            'cidade' => 'required|string|max:100',
+            'responsavel' => 'string|max:54',
+            'cpf_responsavel' => 'string|max:14',
+            'fk_convenio_paci' => 'nullable|string',
+            'carteira_convenio_paci' => 'nullable|string'
+
         ]);
 
         $paciente = Paciente::find($request->input('id')); // Busca o paciente pelo ID
@@ -91,7 +95,9 @@ class PersonController extends Controller
             $paciente->cpf_responsavel_paci = $request->input('cpf_responsavel');
             $paciente->fk_convenio_paci = $request->input('fk_convenio_paci');
 
-            if ($paciente->save()) { // Salva as alterações
+
+
+            if ($paciente->save()) {
                 return response()->json(['success' => true, 'message' => 'Dados do paciente atualizados com sucesso!']);
             } else {
                 return response()->json(['error' => 'Erro ao atualizar paciente'], 422); // Retorna erro em caso de falha
@@ -101,8 +107,38 @@ class PersonController extends Controller
         }
     }
 
-    // Método para listar todos os convênios
-    public function ListarConvenio()
+    
+    public function buscarPacientes(Request $request)
+    {   
+        $nome = $request->input('nome_paci');
+        $dataNascimento = $request->input('data_nasc_paci');
+    
+        // Verifica se algum filtro foi aplicado
+        $query = Paciente::query();
+    
+        if ($nome || $dataNascimento) {
+            // Se houver filtro, aplica o filtro de nome e/ou data de nascimento
+            $query->where(function($q) use ($nome, $dataNascimento) {
+                if ($nome) {
+                    $q->where('nome_paci', 'like', '%' . $nome . '%');
+                }
+    
+                if ($dataNascimento) {
+                    $q->whereDate('data_nasci_paci', $dataNascimento);
+                }
+            });
+        }
+    
+        // Caso contrário, retorna todos os pacientes
+        $pacientes = $query->get();
+        $convenios = Convenio::all(); // Recupera todos os convênios
+    
+        // Retorna a view com todos os pacientes ou com os pacientes filtrados
+        return view('pacientes.index', compact('pacientes', 'convenios'));
+    }
+    
+    
+    public function ListarConvenio() // Nome do método corrigido
     {
         $convenios = Convenio::all(); // Recupera todos os convênios
         return response()->json($convenios); // Retorna os convênios em formato JSON
