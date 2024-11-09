@@ -21,9 +21,9 @@
 
         <div class="my-4 mx-1"><button class="btn novoCadastro" onclick="window.location.href='/form_medico'">CADASTRAR NOVO MÉDICO</button></div>
 
-        <div class="my-3 mx-1"><h2 class="text-uppercase">Filtros para Busca:</h2></div>
+        <div class="my-3 mx-1"><h2 class="text-uppercase fs-5 fw-medium">Filtros para Busca:</h2></div>
 
-        <div class="my-3 mx-1"><h3 class="text-uppercase">Resultados:</h3></div>
+        <div class="my-3 mx-1"><h3 class="text-uppercase fs-5 fw-medium">Resultados:</h3></div>
 
                         <table class="table border">
                             <thead>
@@ -146,9 +146,7 @@
 @endsection
 
 @section('scripts')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 
 <script src="js/medico.js"></script>
 @endsection

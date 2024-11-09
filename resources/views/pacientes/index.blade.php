@@ -42,7 +42,7 @@
             <div class="my-4 mx-1"><button class="btn novoCadastro" onclick="window.location.href='/form_paciente'">CADASTRAR NOVO PACIENTE</button></div>
         
             <div class="my-3 mx-1">
-                <h2 class="text-uppercase">Filtros para Busca:</h2>
+                <h2 class="text-uppercase fs-5 fw-medium">Filtros para Busca:</h2>
             
                 <!-- Formulário de busca -->
                 <form action="{{ url('/buscar_pacientes') }}" method="GET" class="form-inline mb-4 d-flex align-items-center">
@@ -58,7 +58,7 @@
                 </form>
             </div>            
         
-            <div class="my-3 mx-1"><h3 class="text-uppercase">Resultados:</h3></div>
+            <div class="my-3 mx-1"><h3 class="text-uppercase fs-5 fw-medium">Resultados:</h3></div>
 
                         <table class="table border">
                             <thead>
@@ -128,7 +128,7 @@
         </div>
     </div>
 
-    <div id="pacienteModal" class="modal fade" tabindex="-1" role="dialog">
+    <div id="pacienteModal" class="modal fade modal-xl" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

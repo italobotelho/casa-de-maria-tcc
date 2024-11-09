@@ -108,6 +108,6 @@ class MedicoController extends Controller
 
         $medico->save();
 
-        return redirect()->route('medicos.form_medico')->with('success', 'Medico cadastrado com sucesso!');
+        return redirect()->route('medico.store')->with('success', 'Medico cadastrado com sucesso!');
     }
 }

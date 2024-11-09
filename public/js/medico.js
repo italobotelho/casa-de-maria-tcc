@@ -38,6 +38,14 @@ $(document).ready(function () {
 
         $("#editarMedicoModal").modal("show");
     });
+
+    // Adicionar a máscara ao campo de telefone
+    const telefoneInput = document.getElementById("telefone_med");
+    if (telefoneInput) { // Verifica se o elemento existe
+        telefoneInput.addEventListener("input", function () {
+            aplicarMascaraTelefone(telefoneInput);
+        });
+    }
 });
 
 
@@ -117,13 +125,13 @@ function aplicarMascaraTelefone(input) {
     input.value = telefone;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Aplica a máscara no campo de telefone
-    const telefoneInput = document.getElementById("telefone_med");
-    telefoneInput.addEventListener("input", function () {
-        aplicarMascaraTelefone(telefoneInput);
-    });
-});
+// document.addEventListener("DOMContentLoaded", function () {
+//     // Aplica a máscara no campo de telefone
+//     const telefoneInput = document.getElementById("telefone_med");
+//     telefoneInput.addEventListener("input", function () {
+//         aplicarMascaraTelefone(telefoneInput);
+//     });
+// });
  
 
 

@@ -53,6 +53,11 @@ Route::get('/form_medico', [MedicoController::class, 'index'])->name('medico.ind
 // Rota para armazenar um novo médico
 Route::post('/form_medico', [MedicoController::class, 'store'])->name('medico.store');
 
+// Rota para o formulário de edição de médico
+Route::get('/medicos', [MedicoController::class, 'edit'])->name('medico.edit');
+
+// Rota para atualizar os dados de um médico
+Route::post('/update-medico', [MedicoController::class, 'update'])->name('medico.update');
 
 // Rota para listar convênios
 Route::get('/convenio', [PersonController::class, 'ListarConvenio'])->name('convenio.listar');
@@ -107,11 +112,7 @@ Route::delete('/convenios/{pk_id_conv}', [ConvenioController::class, 'destroy'])
 // routes/web.php
 Route::get('/buscar_pacientes', [PersonController::class, 'buscarPacientes'])->name('buscar.pacientes');
 
-// Rota para o formulário de edição de médico
-Route::get('/medicos', [MedicoController::class, 'edit'])->name('medico.edit');
 
-// Rota para atualizar os dados de um médico
-Route::post('/update-medico', [MedicoController::class, 'update'])->name('medico.update');
 
 // Rota para o formulário de cadastro de paciente
 Route::get('/form_paciente', function () {
