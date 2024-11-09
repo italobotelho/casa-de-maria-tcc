@@ -1,4 +1,4 @@
-// Função para buscar pacientes com base em uma consulta
+
 // Função para buscar pacientes com base em uma consulta
 function buscarPacientes(query) {
     const sugestoesDiv = document.getElementById('pacienteSuggestions');

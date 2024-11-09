@@ -48,6 +48,25 @@ class MedicoController extends Controller
     
             return view('medicos/index', ['medicos' => $medico]); // Retorna os dados dos médicos em formato JSON
     }
+
+    public function buscarMedico(Request $request)
+    {
+        $query = $request->input('query');
+        
+        // Certifique-se de que a consulta não esteja vazia
+        if (empty($query)) {
+            return response()->json([]); // Retorna um array vazio se a consulta estiver vazia
+        }
+    
+        // Tente buscar médicos
+        try {
+            $medicos = Medico::where('nome_med', 'LIKE', "%{$query}%")->get();
+            return response()->json($medicos);
+        } catch (\Exception $e) {
+            
+            return response()->json(['error' => 'Erro ao buscar médicos.'], 500);
+        }
+    }
     
     
     
