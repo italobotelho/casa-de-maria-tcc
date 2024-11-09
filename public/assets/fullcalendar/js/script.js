@@ -338,3 +338,4 @@ $('#modalCalendar').on('hidden.bs.modal', function () {
     $(this).find('.alert').remove(); // Remove qualquer mensagem de erro ou alerta
     clearMessages('#message'); // Limpa as mensagens de erro ou sucesso
 });
+

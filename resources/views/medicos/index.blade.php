@@ -169,5 +169,51 @@
             window.history.replaceState(null, null, window.location.pathname);
         }
     }
+    document.addEventListener('DOMContentLoaded', function() {
+    // Usando delegação de eventos
+    document.querySelector('.table tbody').addEventListener('click', function(e) {
+        if (e.target.classList.contains('editar-medico')) {
+            // Lógica para abrir o modal de edição
+            const btn = e.target;
+            const id = btn.dataset.id;
+            const nome = btn.dataset.nome;
+            const especialidade = btn.dataset.especialidade;
+            const especialidade2 = btn.dataset.especialidade2;
+            const telefone = btn.dataset.telefone;
+            const email = btn.dataset.email;
+
+            // Preencher o modal com as informações do médico
+            document.getElementById('editar-id').value = id;
+            document.getElementById('editar-nome').value = nome;
+            document.getElementById('editar-especialidade').value = especialidade;
+            document.getElementById('editar-especialidade2').value = especialidade2;
+            document.getElementById('editar-telefone').value = telefone;
+            document.getElementById('editar-email').value = email;
+
+            // Exibir o modal
+            $('#editarMedicoModal').modal('show');
+        }
+
+        // Lógica para abrir o modal de informações do médico ao clicar no nome
+        if (e.target.classList.contains('nome-medico')) {
+            const link = e.target;
+            const nome = link.dataset.nome;
+            const especialidade = link.dataset.especialidade;
+            const especialidade2 = link.dataset.especialidade2;
+            const telefone = link.dataset.telefone;
+            const email = link.dataset.email;
+
+            // Preencher o modal de informações
+            document.getElementById('nome-medico').textContent = nome;
+            document.getElementById('especialidade').textContent = especialidade;
+            document.getElementById('especialidade2').textContent = especialidade2;
+            document.getElementById('telefone').textContent = telefone;
+            document.getElementById('email').textContent = email;
+
+            // Exibir o modal de informações
+            $('#medicoModal').modal('show');
+        }
+    });
+});
 </script>
 @endsection

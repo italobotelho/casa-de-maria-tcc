@@ -18,14 +18,29 @@ class EventController extends Controller
     {
         $this->middleware('auth');
     }
-   
+
+    public function buscarAgendamentos(Request $request)
+    {
+        $nomePaciente = $request->input('nome');
+
+        // Busque os agendamentos que correspondem ao nome do paciente
+        $agendamentos = Event::with('paciente')
+            ->whereHas('paciente', function ($query) use ($nomePaciente) {
+                $query->where('nome_paci', 'like', '%' . $nomePaciente . '%');
+            })
+            ->get();
+
+        return response()->json($agendamentos);
+    }
+
+
     public function show($id)
     {
         $event = Event::with(['procedimento', 'medico'])->find($id); // Carrega o evento, procedimento e médico associado
         if (!$event) {
             return response()->json(['message' => 'Evento não encontrado'], 404);
         }
-    
+
         return response()->json([
             'id' => $event->id,
             'title' => $event->title,
@@ -42,12 +57,12 @@ class EventController extends Controller
     {
         $medico = $request->get('medico');
         $query = Event::with('procedimento');
-    
+
         // Filtra eventos por médico, se um ID for fornecido
         if ($medico) {
             $query->where('medico', $medico);
         }
-    
+
         $events = $query->get()->map(function ($event) {
             return [
                 'id' => $event->id,
@@ -61,7 +76,7 @@ class EventController extends Controller
                 'paciente_id' => $event->paciente_id,
             ];
         });
-    
+
         return response()->json($events);
     }
 
@@ -75,7 +90,7 @@ class EventController extends Controller
             return response()->json(['error' => 'Evento não encontrado.'], 404);
         }
     }
-    
+
     public function updateColor(Request $request)
     {
         $request->validate([
@@ -94,10 +109,10 @@ class EventController extends Controller
     {
         $procedimentos = Procedimento::all(); // Fetch all procedures
         $medicos = Medico::all(); // Fetch all doctors
-       
+
         return view('agenda.home', compact('procedimentos', 'medicos')); // Pass to the view
     }
-    
+
     public function store(EventRequest $request)
     {
         Log::info('Dados recebidos:', $request->all());
@@ -110,11 +125,11 @@ class EventController extends Controller
         $event->convenio = $request->input('convenio');
         $event->medico = $request->input('medico'); // Certifique-se de que está pegando o campo correto
         $event->paciente_id = $request->input('paciente_id');
-    
+
         if (empty($event->medico)) {
             return response()->json(['error' => 'O campo médico é obrigatório.'], 400);
         }
-        
+
         // Verifique se o médico existe no banco de dados
         $medico = Medico::find($event->medico);
         if (!$medico) {
@@ -125,25 +140,25 @@ class EventController extends Controller
         if (empty($event->paciente_id)) {
             return response()->json(['error' => 'O campo paciente é obrigatório.'], 400);
         }
-    
+
         $event->save();
         return response()->json(true);
     }
-    
+
     public function update(EventRequest $request)
     {
         try {
             $event = Event::find($request->id);
-        
+
             if (!$event) {
                 return response()->json(['error' => 'Evento não encontrado'], 404);
             }
-    
+
             // Validações adicionais
             if (empty($request->input('title')) || empty($request->input('start')) || empty($request->input('end'))) {
                 return response()->json(['error' => 'Título, início e fim são obrigatórios.'], 400);
             }
-    
+
             $event->title = $request->input('title');
             $event->start = $request->input('start');
             $event->end = $request->input('end');
@@ -151,7 +166,7 @@ class EventController extends Controller
             $event->procedimento_id = $request->input('procedimento_id');
             $event->medico = $request->input('medico');
             $event->paciente_id = $request->input('paciente_id');
-    
+
             $event->save();
             return response()->json(true);
         } catch (\Exception $e) {
@@ -160,7 +175,8 @@ class EventController extends Controller
         }
     }
 
-    public function destroy(Request $request){
+    public function destroy(Request $request)
+    {
         Event::where('id', $request->id)->delete();
 
         return response()->json(true);
