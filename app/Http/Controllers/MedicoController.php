@@ -12,6 +12,8 @@ class MedicoController extends Controller
     {
         $this->middleware('auth');
     }
+
+
     
 
     public function getMedico($id)
@@ -26,27 +28,29 @@ class MedicoController extends Controller
             'nome_medico' => $medico->nome_med, // Corrigido para usar 'nome_med'
         ]);
     }
-
     
-    public function buscarMedico(Request $request)
+    public function buscar1(Request $request)
     {
-        $query = $request->input('query');
-        
-        // Certifique-se de que a consulta não esteja vazia
-        if (empty($query)) {
-            return response()->json([]); // Retorna um array vazio se a consulta estiver vazia
+        $nome = $request->input('nome_med');
+        $crm = $request->input('pk_crm_med');
+    
+        $medico = Medico::query();
+    
+        if ($nome) {
+            $medico->where('nome_med', 'like', '%' . $nome . '%');
         }
     
-        // Tente buscar médicos
-        try {
-            $medicos = Medico::where('nome_med', 'LIKE', "%{$query}%")->get();
-            return response()->json($medicos);
-        } catch (\Exception $e) {
-            
-            return response()->json(['error' => 'Erro ao buscar médicos.'], 500);
+        if ($crm) {
+            $medico->orWhere('pk_crm_med', 'like', '%' . $crm . '%');
         }
+    
+        $medico = $medico->select('pk_crm_med', 'nome_med', 'especialidade1_med', 'especialidade2_med', 'telefone_med', 'email_med')->get();
+    
+            return view('medicos/index', ['medicos' => $medico]); // Retorna os dados dos médicos em formato JSON
     }
-
+    
+    
+    
     public function update(Request $request)
     {
         $request->validate([

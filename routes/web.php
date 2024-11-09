@@ -46,6 +46,7 @@ Route::post('/perfil/update-password', [UserController::class, 'updatePassword']
 // Rota para o profissional (medico)
 Route::get('/profissional', [MedicoController::class, 'index'])->name('medicos.index');
 Route::get('/medico/buscar', [MedicoController::class, 'buscarMedico'])->name('medico.buscar');
+Route::get('/medico/buscar1', [MedicoController::class, 'buscar1'])->name('medico.buscar1');
 
 // Rota para o formulário de cadastro de médico
 Route::get('/form_medico', [MedicoController::class, 'index'])->name('medico.index');
