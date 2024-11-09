@@ -40,10 +40,11 @@
                 data-route-event-delete="{{ route('routeEventDelete') }}">
             </div>
         </div>
-
-        <div id="calendarMonth">
+        <div style="flex: 1;">
+            <div><p>C0 Agendamentos</p></div>
+            <div id="calendarMonth"></div>
             <!-- Calendário de visualização do mês -->
-            {{-- <button class="btn my-1" style="background-color: #E5D5C0;">Buscar Agendamento</button> --}}
+            <button class="btn my-1" style="background-color: #E5D5C0;">Buscar Agendamento</button>
         </div>
     </div>
 </div>
