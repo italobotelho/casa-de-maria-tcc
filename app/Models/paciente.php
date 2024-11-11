@@ -35,12 +35,16 @@ class Paciente extends Model
         'responsavel_paci',
         'data_nasci_paci',
         'nome_paci',
-        'nome_cidade',
         'cpf_responsavel_paci',
         'telefone_paci',
         'cpf_paci',
-
-
+        'cep_paci',
+        'rua_paci',
+        'numero_paci',
+        'bairro_paci',
+        'complemento_paci',
+        'cidade_paci',
+        'uf_paci',
     ];
 
     // Define os campos que devem ser tratados como datas

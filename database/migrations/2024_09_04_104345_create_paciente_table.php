@@ -23,9 +23,18 @@ return new class extends Migration
             $table->string('cpf_paci', 14)->nullable();
             $table->string('cpf_responsavel_paci', 14)->nullable();
             $table->string('responsavel_paci', 50)->nullable();
-            $table->string('nome_cidade', 100)->nullable();
             $table->string('carteira_convenio_paci', 20)->nullable();
             $table->dateTime('data_obito_paci')->nullable();
+            $table->enum('genero', ['masc', 'fem'])->nullable();
+            $table->string('cep_paci', 9)->nullable();
+            $table->string('rua_paci', 17)->nullable();
+            $table->string('numero_paci', 5)->nullable();
+            $table->string('bairro_paci', 50)->nullable();
+            $table->string('complemento_paci', 100)->nullable();
+            $table->string('cidade_paci', 30)->nullable();
+            $table->string('uf_paci', 2)->nullable();
+
+
             $table->timestamps();
         });
     }
