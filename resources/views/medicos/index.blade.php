@@ -39,7 +39,7 @@
 
         <div class="my-3 mx-1"><h3 class="text-uppercase fs-5 fw-medium">Resultados:</h3></div>
 
-                        <table class="table border">
+                        <table class="table border table-responsive">
                             <thead>
                                 <tr>
                                     <th scope="col">CRM</th>

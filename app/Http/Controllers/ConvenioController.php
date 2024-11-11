@@ -54,6 +54,18 @@ class ConvenioController extends Controller
         $convenio->nome_conv = $request->input('nome_conv');
         $convenio->ans_conv = $request->input('ans_conv');
         $convenio->save();
+        
         return redirect()->route('convenios.index');
     }
+
+    public function atualizarStatus(Request $request, $id)
+    {
+        $convenio = Convenio::findOrFail($id);
+        $convenio->status = $request->status;
+        $convenio->save();
+
+        return response()->json(['success' => true]);
+    }
+
 }
+

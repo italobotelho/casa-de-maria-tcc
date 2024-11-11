@@ -12,10 +12,10 @@
             @method('PUT')
 
             <label for="inputNomeProcedimento" class="form-label">Procedimento</label>
-            <input type="text" class="form-control" id="nome_proc" name="nome_proc" value="{{ $procedimento->nome_proc }}" required>
+            <input type="text" class="form-control" id="nome_proc" name="nome_proc" value="{{ $procedimento->nome_proc }}" maxlength="20" required>
 
             <label for="inputDescricaoProcedimento" class="form-label">Descrição</label>
-            <input type="text" class="form-control" id="descricao_proc" name="descricao_proc" value="{{ $procedimento->descricao_proc }}" required>
+            <input type="text" class="form-control" id="descricao_proc" name="descricao_proc" value="{{ $procedimento->descricao_proc }}" maxlength="30" required>
 
             <input type="hidden" name="pk_cod_proc" value="{{ $procedimento->pk_cod_proc }}">
 

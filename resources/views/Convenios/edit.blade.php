@@ -11,13 +11,11 @@
             @csrf
             @method('PUT')
 
-            
-
             <label for="inputNomeConvenio" class="form-label">Convênio</label>
-            <input type="text" class="form-control" id="nome_conv" name="nome_conv" value="{{ $convenio->nome_conv }}" required>
+            <input type="text" class="form-control" id="nome_conv" name="nome_conv" value="{{ $convenio->nome_conv }}" maxlength="55" required>
 
             <label for="inputANSConvenio" class="form-label">Registro ANS</label>
-            <input type="text" class="form-control" id="ans_conv" name="ans_conv" value="{{ $convenio->ans_conv }}" required>
+            <input type="text" class="form-control" id="ans_conv" name="ans_conv" value="{{ $convenio->ans_conv }}" maxlength="6" required>
 
             <input type="hidden" name="pk_id_conv" value="{{ $convenio->pk_id_conv }}">
 

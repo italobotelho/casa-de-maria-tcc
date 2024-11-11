@@ -10,10 +10,10 @@
           <form action="{{route('procedimentos.store')}}" method="post">
             @csrf
             <label for="inputNomeProcedimento" class="form-label">Procedimento</label>
-            <input type="text" class="form-control" id="nome_proc" name="nome_proc" required>
+            <input type="text" class="form-control" id="nome_proc" name="nome_proc" maxlength="20" required>
 
             <label for="inputDescricaoProcedimento" class="form-label">Descrição</label>
-            <input type="text" class="form-control" id="descricao_proc" name="descricao_proc" required>
+            <input type="text" class="form-control" id="descricao_proc" maxlength="30" name="descricao_proc" required>
           </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>

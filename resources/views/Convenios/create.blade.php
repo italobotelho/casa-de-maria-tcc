@@ -10,10 +10,10 @@
           <form action="{{route('convenios.store')}}" method="post">
             @csrf
             <label for="inputConvenio" class="form-label">Convênio</label>
-            <input type="text" class="form-control" id="nome_conv" name="nome_conv" required>
+            <input type="text" class="form-control" id="nome_conv" name="nome_conv" maxlength="55" required>
 
             <label for="inputNome" class="form-label">Registro ANS</label>
-        <input type="text" class="form-control" id="ans_conv" name="ans_conv" required>
+        <input type="text" class="form-control" id="ans_conv" name="ans_conv" maxlength="6" required>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>

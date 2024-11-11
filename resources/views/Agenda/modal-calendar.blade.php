@@ -73,10 +73,12 @@
                                 <select class="form-select" id="procedimento_id" name="procedimento_id" aria-label="Default select example">
                                     <option value="">Selecione um Procedimento</option> <!-- A opção padrão deve ter um valor vazio -->
                                     @foreach($procedimentos as $procedimento)
-                                    <option value="{{ $procedimento->pk_cod_proc }}">{{ $procedimento->nome_proc }}</option>
+                                        @if($procedimento->status == 'ativo') <!-- Exibe apenas procedimentos ativos -->
+                                            <option value="{{ $procedimento->pk_cod_proc }}">{{ $procedimento->nome_proc }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
-                            </div>
+                            </div>                            
 
                             <!-- Campo para data do evento -->
                             <input type="hidden" class="form-control" name="eventDate" id="eventDate">

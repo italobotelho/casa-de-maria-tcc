@@ -12,6 +12,7 @@ return new class extends Migration
             $table->BigIncrements('pk_id_conv');
             $table->string('ans_conv', 6)->nullable();
             $table->string('nome_conv', 55)->unique();
+            $table->enum('status', ['ativo', 'inativo'])->default('ativo');
 
             $table->timestamps();
         });

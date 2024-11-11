@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('procedimentos', function (Blueprint $table) {
             $table->id('pk_cod_proc');
-            $table->string('descricao_proc', 100);
-            $table->string('nome_proc', 50);
+            $table->string('descricao_proc', 30);
+            $table->string('nome_proc', 20);
+            $table->enum('status', ['ativo', 'inativo'])->default('ativo');
+
             $table->timestamps();
         });
     }

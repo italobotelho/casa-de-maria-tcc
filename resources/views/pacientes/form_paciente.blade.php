@@ -206,19 +206,22 @@
 
         // Função para carregar convênios
         document.addEventListener('DOMContentLoaded', function() {
-            fetch('/convenio')
-                .then(response => response.json())
-                .then(data => {
-                    const select = document.getElementById('fk_convenio_paci');
-                    data.forEach(convenio => {
+        fetch('/convenio')
+            .then(response => response.json())
+            .then(data => {
+                const select = document.getElementById('fk_convenio_paci');
+                data.forEach(convenio => {
+                    if (convenio.status === 'ativo') { // Verifica se o convênio está ativo
                         const option = document.createElement('option');
                         option.value = convenio.pk_id_conv;
                         option.text = convenio.nome_conv;
                         select.add(option);
-                    });
-                })
-                .catch(error => console.error('Erro ao carregar convênios:', error));
-        });
+                    }
+                });
+            })
+            .catch(error => console.error('Erro ao carregar convênios:', error));
+         });
+
 
         // Função para alternar campo da Carteira do Convênio
         document.addEventListener('DOMContentLoaded', function() {

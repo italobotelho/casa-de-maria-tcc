@@ -19,14 +19,8 @@ class ProcedimentoController extends Controller
     public function index()
     {
         $procedimentos = Procedimento::all();
-        $medicos = Medico::all(); 
-        return view('procedimentos.index', compact('procedimentos', 'medicos')); // Return the view with the Procedimentos data
-    }
-
-    public function create()
-    {
-        $medicos = Medico::all(); // Busca todos os médicos
-        return view('procedimentos.create', compact('medicos'));
+        
+        return view('procedimentos.index', compact('procedimentos')); // Return the view with the Procedimentos data
     }
 
     public function store(Request $request)
@@ -61,4 +55,13 @@ class ProcedimentoController extends Controller
         $procedimento->delete();
         return redirect()->route('procedimentos.index')->with('success', 'Procedimento excluído com sucesso!');
     }
+
+    public function atualizarStatus(Request $request, $id)
+    {
+        $procedimento = Procedimento::findOrFail($id);
+        $procedimento->status = $request->status;
+        $procedimento->save();
+
+        return response()->json(['success' => true]);
+    }    
 }

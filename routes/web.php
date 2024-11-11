@@ -92,12 +92,14 @@ Route::patch('/clinica', [ClinicaController::class, 'update'])->name('clinica.up
 Route::resource('procedimentos', ProcedimentoController::class);
 
 Route::get('/procedimentos', [ProcedimentoController::class, 'index'])->name('procedimentos.index');
-Route::get('/procedimentos/create', [ProcedimentoController::class, 'create'])->name('procedimentos.create');
+
 Route::post('/procedimentos', [ProcedimentoController::class, 'store'])->name('procedimentos.store');
 
 Route::get('/procedimentos/edit', [ConvenioController::class, 'edit'])->name('procedimentos.edit');
 Route::put('/procedimentos/{pk_cod_proc}', [ConvenioController::class, 'update'])->name('procedimentos.update');
 Route::delete('/procedimentos/{pk_cod_proc}', [ProcedimentoController::class, 'destroy'])->name('procedimentos.destroy');
+
+Route::patch('/procedimentos/{id}/atualizar-status', [ProcedimentoController::class, 'atualizarStatus']);
 
 //Rotas da Tela Configurações Convênios
 Route::resource('convenios', ConvenioController::class);
@@ -109,6 +111,8 @@ Route::post('/convenios', [ConvenioController::class, 'store'])->name('convenios
 Route::get('/convenios/edit', [ConvenioController::class, 'edit'])->name('convenios.edit');
 Route::put('/convenios/{pk_id_conv}', [ConvenioController::class, 'update'])->name('convenios.update');
 Route::delete('/convenios/{pk_id_conv}', [ConvenioController::class, 'destroy'])->name('convenios.destroy');
+
+Route::patch('/convenios/{id}/atualizar-status', [ConvenioController::class, 'atualizarStatus']);
 
 // routes/web.php
 Route::get('/pacientes', [PersonController::class, 'buscarPacientes'])->name('buscar.pacientes');
