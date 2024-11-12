@@ -1,0 +1,71 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f2eb;
+    color: #333;
+}
+
+a {
+    margin-top: 10px;
+    text-decoration: none;
+    color: white;
+}
+
+/* Background and Text Colors */
+.fund {
+    background-color: #b3885b;
+    color: white;
+    font-size: 1.5em;
+    width: 100%;
+}
+
+/* Button Styles */
+button {
+    display: inline-block;
+    border-radius: 10px;
+    border: none;
+    background-color: #C99C65;
+    padding: 8px 15px;
+    color: white;
+    margin: 10px;
+}
+
+button.editar-medico {
+    display: inline-flex;
+    align-items: center;
+    background-color: transparent;
+    color: white;
+    margin-left: 5px;
+}
+
+/* Icon Style */
+.icon {
+    width: 26px;
+    height: 25px;
+    float: left;
+}
+
+/* Link Styles */
+.nome-medico {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.cad {
+    text-decoration: none;
+    color: white;
+}
+
+/* Card and Border Container */
+.card {
+    width: 980px;
+}
+
+.borda {
+    border: 2px solid rgba(68, 68, 68, 0.096);
+    border-radius: 5px;
+    padding: 70px;
+    width: 72rem;
+    margin-left: 15%;
+}
