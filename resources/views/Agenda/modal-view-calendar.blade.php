@@ -7,18 +7,12 @@
             </div>
             <div class="modal-body">
                 <div>
-                    profile
-                </div>
-                <div>
                     <p><strong>Nome:</strong> <span id="pacienteNome"></span></p>
                     <p><strong>Telefone:</strong> <span id="pacienteTelefone"></span></p>
                     <p><strong>Convênio:</strong> <span id="pacienteConvenio"></span></p>
                     <p><strong>Médico:</strong> <span id="medicoNome"></span></p>
                     <p><strong>Hora Inicial:</strong> <span id="horaInicial"></span></p>
                     <p><strong>Hora Final:</strong> <span id="horaFinal"></span></p>
-                </div>
-                <div>
-                    Últimas consultas
                 </div>
             </div>
             <div class="modal-footer d-flex justify-content-between">

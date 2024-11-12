@@ -54,7 +54,9 @@
                         <label for="data_nasc_paci" class="me-2">Data de Nascimento:</label>
                         <input type="date" name="data_nasc_paci" id="data_nasc_paci" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-primary">Buscar</button>
+                    <div class="">
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    </div>
                 </form>
             </div>            
         

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Recado;
+use App\Models\Procedimento;
+use App\Models\Medico;
 
 class HomeController extends Controller
 {
@@ -25,4 +28,5 @@ class HomeController extends Controller
     {
         return view('agenda.home');
     }
+    
 }

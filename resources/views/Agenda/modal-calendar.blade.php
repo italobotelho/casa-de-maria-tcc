@@ -71,12 +71,12 @@
                             <div class="col-12">
                                 <label for="procedimento_id" class="form-label">Procedimento</label>
                                 <select class="form-select" id="procedimento_id" name="procedimento_id" aria-label="Default select example">
-                                    <option value="">Selecione um Procedimento</option> <!-- A opção padrão deve ter um valor vazio -->
-                                    @foreach($procedimentos as $procedimento)
-                                        @if($procedimento->status == 'ativo') <!-- Exibe apenas procedimentos ativos -->
+                                    <option value="">Selecione um Procedimento</option>
+                                    @isset($procedimentos)
+                                        @foreach($procedimentos as $procedimento)
                                             <option value="{{ $procedimento->pk_cod_proc }}">{{ $procedimento->nome_proc }}</option>
-                                        @endif
-                                    @endforeach
+                                        @endforeach
+                                    @endisset
                                 </select>
                             </div>                            
 

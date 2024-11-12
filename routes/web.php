@@ -9,6 +9,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RecadoController;
 use App\Models\Medico;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -129,3 +130,9 @@ Route::get('/form_paciente', function () {
 Route::get('/form_medico', function () {
     return view('medicos/form_medico');
 })->middleware('auth'); // Middleware para garantir que o usuário esteja autenticado
+
+// Defina a rota agenda.home para o RecadoController@index
+Route::get('/home', [RecadoController::class, 'index'])->name('agenda.home');
+Route::post('/recados', [RecadoController::class, 'store'])->name('recados.store');
+Route::delete('/recados/{id}', [RecadoController::class, 'destroy'])->name('recados.destroy');
+
