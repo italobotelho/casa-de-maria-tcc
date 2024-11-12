@@ -13,7 +13,7 @@
 
 @section('content')
 
-<div class="container border rounded pb-3">
+<div class="container border rounded pb-3 shadow-sm">
     <!-- Error and Success Messages -->
     @if ($errors->any())
     <div class="alert alert-danger my-3">

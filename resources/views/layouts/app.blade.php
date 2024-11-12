@@ -31,7 +31,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-personalizada shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/home') }}">
-                    <img src="{{ asset('img/logo.png') }}" alt="{{ config('app.name', 'Laravel') }}" width="15" height="">
+                    <img src="{{ asset('img/logo.png') }}" alt="{{ config('app.name', 'Laravel') }}" width="20" height="">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>   
@@ -39,7 +39,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav w-100 d-flex justify-content-between">
-                        <li class="nav-item"><a class="nav-link" href="{{ url('/home') }}">Agenda</a></li>
+                        <li class="nav-item"><a class="nav-link fw-4" href="{{ url('/home') }}">Agenda</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ url('/pacientes') }}">Pacientes</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ url('/profissional') }}">Profissionais</a></li>
                         <!-- Add more links here -->
