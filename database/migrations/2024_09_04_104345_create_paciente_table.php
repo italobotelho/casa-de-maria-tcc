@@ -15,7 +15,8 @@ return new class extends Migration
             $table->unsignedBigInteger('fk_convenio_paci'); // Should match 'bigIncrements' type from 'convenio' table
             $table->foreign('fk_convenio_paci')->references('pk_id_conv')->on('convenios')->onDelete('cascade');
 
-
+            $table->string('img_paci')->nullable;
+            $table->integer('angulo_rotacao')->nullable();
             $table->string('nome_paci', 54)->nullable();
             $table->string('telefone_paci', 15)->nullable();
             $table->string('email_paci', 255)->nullable();

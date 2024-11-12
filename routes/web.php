@@ -64,7 +64,7 @@ Route::post('/update-medico', [MedicoController::class, 'update'])->name('medico
 Route::get('/convenio', [PersonController::class, 'ListarConvenio'])->name('convenio.listar');
 
 //PACIENTES
-Route::post('/update-paciente', [PersonController::class, 'update'])->name('paciente.update');
+Route::put('/form_paciente', [PersonController::class, 'update'])->name('paciente.update');
 Route::post('/convenios', 'PersonController@ListarConvenio');
 Route::get('/pacientes', [PersonController::class, 'index'])->name('pacientes.index');
 Route::get('/paciente/{id}', [PersonController::class, 'show']);
@@ -117,13 +117,15 @@ Route::patch('/convenios/{id}/atualizar-status', [ConvenioController::class, 'at
 // routes/web.php
 Route::get('/pacientes', [PersonController::class, 'buscarPacientes'])->name('buscar.pacientes');
 
+Route::get('/form_paciente/{id}', [PersonController::class, 'edit'])->name('paciente.edit');
 
 
 // Rota para o formulário de cadastro de paciente
 Route::get('/form_paciente', function () {
     return view('pacientes/form_paciente');
-});
+})->middleware('auth'); // Middleware para garantir que o usuário esteja autenticado
 
+// Rota para o formulário de cadastro de médico
 Route::get('/form_medico', function () {
     return view('medicos/form_medico');
-});
+})->middleware('auth'); // Middleware para garantir que o usuário esteja autenticado

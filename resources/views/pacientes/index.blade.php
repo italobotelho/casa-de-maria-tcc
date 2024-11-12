@@ -67,7 +67,6 @@
                                     <th scope="col">Nome</th>
                                     <th scope="col">Data Nascimento</th>
                                     <th scope="col">Convênio</th>
-                                    <th scope="col">Carteira</th>
                                     <th scope="col">Telefone</th>
                                     <th scope="col">CPF</th>
                                     <th scope="col">Cidade</th>
@@ -75,43 +74,14 @@
                             </thead>
                             <tbody>
                                 @forelse($pacientes as $paciente)
-                                <tr>
+                                <tr onclick="window.location.href='/form_paciente/{{ $paciente->pk_cod_paci }}'">
                                     <th scope="row">{{ $paciente->pk_cod_paci }}</th>
-                                    <td>
-                                        <a href="#" class="nome-paciente"
-                                            data-id="{{ $paciente->pk_cod_paci }}"
-                                            data-nome="{{ $paciente->nome_paci }}"
-                                            data-data-nasci="{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('d/m/Y') }}"
-                                            data-convenio="{{ $paciente->convenio->nome_conv }}"
-                                            data-telefone="{{ $paciente->telefone_paci }}"
-                                            data-cpf="{{ $paciente->cpf_paci }}"
-                                            data-cidade="{{ $paciente->nome_cidade }}"
-                                            data-responsavel="{{ $paciente->responsavel_paci }}"
-                                            data-cpf-responsavel="{{ $paciente->cpf_responsavel_paci }}"
-                                            data-carteira-convenio="{{ $paciente->carteira_convenio_paci }}">
-                                            {{ $paciente->nome_paci }}
-                                        </a>
-                                        <button class="btn btn-warning btn-sm editar-paciente"
-                                            data-id="{{ $paciente->pk_cod_paci }}"
-                                            data-nome="{{ $paciente->nome_paci }}"
-                                            data-email="{{ $paciente->email_paci }}"
-                                            data-data-nasci="{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('Y-m-d') }}"
-                                            data-convenio-id="{{ $paciente->fk_convenio_paci }}"
-                                            data-telefone="{{ $paciente->telefone_paci }}"
-                                            data-cpf="{{ $paciente->cpf_paci }}"
-                                            data-cidade="{{ $paciente->nome_cidade }}"
-                                            data-responsavel="{{ $paciente->responsavel_paci }}"
-                                            data-cpf-responsavel="{{ $paciente->cpf_responsavel_paci }}"
-                                            data-carteira-convenio="{{ $paciente->carteira_convenio_paci }}">
-                                            Editar
-                                        </button>
-                                    </td>
+                                    <td> {{ $paciente->nome_paci }}</td>
                                     <td>{{ \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('d/m/Y') }}</td>
                                     <td>{{ $paciente->convenio->nome_conv }}</td>
-                                    <td>{{ $paciente->carteira_convenio_paci }}</td>
                                     <td>{{ $paciente->telefone_paci }}</td>
                                     <td>{{ $paciente->cpf_paci }}</td>
-                                    <td>{{ $paciente->nome_cidade }}</td>
+                                    <td>{{ $paciente->cidade_paci}}</td>
                                 </tr>
                                 @empty
                                 <tr>
@@ -128,112 +98,7 @@
         </div>
     </div>
 
-    <div id="pacienteModal" class="modal fade modal-xl" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Informações do Paciente</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Nome:</strong> <span id="nome-paciente"></span></p>
-                    <p><strong>Data de Nascimento:</strong> <span id="data-nascimento"></span></p>
-                    <p><strong>Convênio:</strong><span id="convenio"></span></p>
-                    <p><strong>Carteira do Convênio:</strong><span id="carteira_convenio"></span></p>
-                    <p><strong>Telefone:</strong> <span id="telefone"></span></p>
-                    <p><strong>CPF:</strong><span id="cpf"></span></p>
-                    <p><strong>Cidade:</strong><span id="cidade"></span></p>
-                    <p><strong>Responavel:</strong><span id="responsavel"></span></p>
-                    <p><strong>CPF do Responsavel:</strong><span id="cpf-responsavel"></span></p>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    {{-- modal edicao --}}
-
-    <div class="modal fade" id="editarPacienteModal" tabindex="-1" role="dialog" aria-labelledby="editarPacienteModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="editarPacienteModalLabel">Editar Paciente</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="{{ route('paciente.update') }}" id="formEditarPaciente">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <div class="modal-body">
-                        <input maxlength="54" type="text" id="editar-id" name="id">
-                        <div class="form-group">
-                            <label for="editar-nome">Nome</label>
-                            <input type="text" class="form-control" id="editar-nome" name="nome" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="editar-email">E-mail</label>
-                            <input type="email" maxlength="255" class="form-control" id="editar-email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="editar-data-nasci">Data de Nascimento</label>
-                            <input type="date" class="form-control" id="editar-data-nasci" name="data_nasci" required>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="fk_convenio_paci">Convênio</label>
-                            <select name="fk_convenio_paci" id="fk_convenio_paci">
-                                @foreach($convenios as $convenio)
-                                <option value="{{ $convenio->pk_id_conv }}"
-                                    @if(isset($paciente) && $convenio->pk_id_conv === $paciente->fk_convenio_paci) selected @endif>
-                                    {{ $convenio->nome_conv }}
-                                </option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div id="carteira-convenio-field" style="display: none;">
-                            <label for="editar-carteira-convenio">Carteira do Convênio:</label>
-                            <input type="text" maxlength="255" id="editar-carteira-convenio" name="carteira_convenio">
-                        </div>
-
-
-
-                        <div class="form-group">
-                            <label for="editar-telefone">Telefone</label>
-                            <input type="text"
-                                maxlength="15"
-                                class="form-control" id="editar-telefone" name="telefone" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="editar-cpf">CPF</label>
-                            <input type="text"
-                                maxlength="14"
-                                class="form-control" id="editar-cpf" name="cpf" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="editar-cidade">Cidade</label>
-                            <input type="text"
-                                maxlength="100" class="form-control" id="editar-cidade" name="cidade" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="editar-responsavel">Nome do Responsável</label>
-                            <input type="text" class="form-control" id="editar-responsavel" name="responsavel">
-                        </div>
-                        <div class="form-group">
-                            <label for="editar-cpf-responsavel">CPF do Responsável</label>
-                            <input type="text" class="form-control" id="editar-cpf-responsavel" name="cpf_responsavel">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-primary">Salvar alterações</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 </body>
 @endsection
 

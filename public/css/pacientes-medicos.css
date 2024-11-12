@@ -31,5 +31,10 @@ thead th {
 .table {
     border-radius: 8px; /* ajuste o valor conforme desejado */
     overflow: hidden; /* garante que o arredondamento funcione corretamente */
+}
 
+ /* Estilo para a tabela */
+ .table-hover td:hover {
+    background-color: #f0f0f0; /* Cor de fundo ao passar o mouse */
+    cursor: pointer; /* Muda o cursor para ponteiro */
 }

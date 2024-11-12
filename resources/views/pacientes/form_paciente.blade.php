@@ -31,31 +31,88 @@
     </div>
     @endif
 
-    <form action="{{ route('paciente.store') }}" method="POST" id="paciente-form">
+    <form action="{{ isset($paciente) ? route('paciente.update', ['id' => $paciente->pk_cod_paci]) : route('paciente.store') }}" method="POST" id="paciente-form" enctype="multipart/form-data">
         @csrf
+
+        @if(isset($paciente))
+         @method('PUT') <!-- Especifica que o método é PUT para atualização -->
+        @endif
     <div class="d-flex">
         <div class="container border rounded my-4 d-flex flex-column" style="flex: 1; align-self: flex-start; height: auto;">
             <div class="d-flex flex-column align-items-center text-center">
                 <div class="profile-image-container mt-5 mb-2">
-                    <h2>Nome do Paciente</h2>
-                    <img id="profileImagePreview" src="img/default-profile-pic.png" alt="Imagem de Perfil" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+                    <!-- Título exibido apenas quando o paciente for encontrado -->
+                    <h2 @if(!isset($paciente)) style="visibility: hidden;" @endif>
+                        {{ isset($paciente) ? $paciente->nome_paci : '' }}
+                    </h2>
+                    <img id="img_paci" src="{{ asset('storage/' . (isset($paciente) ? $paciente->img_paci : 'imagens_pacientes/default-profile-pic.png')) }}" alt="Imagem de Perfil" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover; transition: transform 0.5s; transform: rotate({{ isset($paciente) ? $paciente->angulo_rotacao : 0 }}deg);">
                 </div>
                 <div class="dropdown">
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Ações foto
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Enviar Imagem</a></li>
-                        <li><a class="dropdown-item" href="#">Capturar Imagem</a></li>
-                        <li><a class="dropdown-item" href="#">Girar Foto</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="document.getElementById('uploadImage').click()">Enviar Imagem</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="capturarImagem()">Capturar Imagem</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="girarImagem()">Girar Foto</a></li>
                     </ul>
                 </div>
+                
+                <!-- Input invisível para upload de imagem -->
+                <input type="file" id="uploadImage" name="img_paci" style="display: none;" onchange="carregarImagem(event)">
+
+                <!-- Elemento de vídeo para captura de imagem -->
+                <video id="videoStream" style="display: none; width: 150px; height: 150px; object-fit: cover;" autoplay></video>
             </div>
-        
-            <!-- Submit Button -->
-            <div class="d-flex justify-content-center my-4">
+
+            <div class="my-4">
+                <!-- Exibindo Idade com anos, meses e dias com negrito no resultado -->
+                <p>Idade: 
+                    @if(isset($paciente) && $paciente->data_nasci_paci)
+                        @php
+                            $dataNascimento = new \Carbon\Carbon($paciente->data_nasci_paci);
+                            $idade = $dataNascimento->diff(\Carbon\Carbon::now());
+                        @endphp
+                        <span class="fw-bold text-end">{{ $idade->y }} anos, {{ $idade->m }} meses e {{ $idade->d }} dias</span>
+                    @endif
+                </p>
+
+                <!-- Exibindo os outros dados com negrito no resultado -->
+                <p>CPF: <span class="fw-bold text-end">{{ isset($paciente) ? $paciente->cpf_paci : '' }}</span></p>
+                <p>Celular: <span class="fw-bold text-end">{{ isset($paciente) ? $paciente->telefone_paci : '' }}</span></p>
+                <p>E-mail: <span class="fw-bold text-end">{{ isset($paciente) ? $paciente->email_paci : '' }}</span></p>
+                <p>Cidade: <span class="fw-bold text-end">{{ isset($paciente) ? $paciente->cidade_paci : '' }}</span></p>
+            </div>
+
+            @if(!isset($paciente)) <!-- Exibe o botão apenas se não for atualização -->
+            <div class="d-flex justify-content-center my-2">
                 <button type="submit" class="btn btn-success">Salvar novo paciente</button>
             </div>
+            @endif
+
+            @if(isset($paciente)) <!-- Mostrar botões apenas na atualização -->
+                <div class="d-flex justify-content-center my-2 gap-1">
+                    <!-- Botão Salvar e Sair -->
+                    <button type="submit" name="action" value="save_and_exit" class="btn btn-success">
+                        Salvar e Sair
+                    </button>
+
+                    <!-- Botão Salvar Dados e Continuar -->
+                    <button type="submit" name="action" value="save_and_stay" class="btn btn-outline-primary">
+                        Salvar Dados
+                    </button>
+                </div>
+
+                <div class="my-3 text-center">
+                    <p>Última alteração feita em: 
+                        <span class="fw-bold">
+                            @if(isset($paciente) && $paciente->updated_at)
+                                {{ \Carbon\Carbon::parse($paciente->updated_at)->format('d/m/Y H:i') }}
+                            @endif
+                        </span>
+                    </p>
+                </div>
+            @endif
         </div>
         
 
@@ -67,13 +124,13 @@
                 <!-- Nome -->
                 <div class="form-group col-md-8">
                     <label for="nome_paci">Nome Completo</label>
-                    <input maxlength="54" type="text" class="form-control" id="nome_paci" name="nome_paci" value="{{ old('nome_paci') }}" required>
+                    <input maxlength="54" type="text" class="form-control" id="nome_paci" name="nome_paci" value="{{ old('nome_paci', $paciente->nome_paci ?? '') }}" required>
                 </div>
 
                 <!-- Data de Nascimento -->
                 <div class="form-group col-md-4">
                     <label for="data_nasci_paci">Data de Nascimento</label>
-                    <input type="date" class="form-control" id="data_nasci_paci" name="data_nasci_paci" value="{{ old('data_nasci_paci') }}" size="8" required>
+                    <input type="date" class="form-control" id="data_nasci_paci" name="data_nasci_paci" value="{{ old('data_nasci_paci', isset($paciente) ? \Carbon\Carbon::parse($paciente->data_nasci_paci)->format('Y-m-d') : '') }}" size="8" required>
                 </div>
 
                 {{-- Gênero --}}
@@ -81,27 +138,27 @@
                     <label for="genero">Gênero</label>
                     <select name="genero" id="genero" class="form-select">
                         <option value="">Selecione</option>
-                        <option value="masc" {{ old('genero') == 'masc' ? 'selected' : '' }}>Masculino</option>
-                        <option value="fem" {{ old('genero') == 'fem' ? 'selected' : '' }}>Feminino</option>
+                        <option value="masc" {{ old('genero', $paciente->genero ?? '') == 'masc' ? 'selected' : '' }}>Masculino</option>
+                        <option value="fem" {{ old('genero', $paciente->genero ?? '') == 'fem' ? 'selected' : '' }}>Feminino</option>
                     </select>
                 </div>
 
                 <!-- Telefone -->
                 <div class="form-group col-md-4">
                     <label for="telefone_paci">Telefone</label>
-                    <input maxlength="15" class="form-control" id="telefone_paci" name="telefone_paci" value="{{ old('telefone_paci') }}" required oninput="aplicarMascaraTelefone(this);">
+                    <input maxlength="15" class="form-control" id="telefone_paci" name="telefone_paci" value="{{ old('telefone_paci', $paciente->telefone_paci ?? '') }}" required oninput="aplicarMascaraTelefone(this);">
                 </div>
 
                 <!-- Email -->
                 <div class="form-group col-md-6">
                     <label for="email_paci">E-mail</label>
-                    <input maxlength="255" type="email" class="form-control" id="email_paci" name="email_paci" value="{{ old('email_paci') }}" required>
+                    <input maxlength="255" type="email" class="form-control" id="email_paci" name="email_paci" value="{{ old('email_paci', $paciente->email_paci ?? '') }}" required>
                 </div>
 
                 <!-- CPF Paciente -->
                 <div class="form-group col-md-4">
                     <label for="cpf_paci">CPF</label>
-                    <input maxlength="14" type="text" class="form-control" id="cpf_paci" name="cpf_paci" value="{{ old('cpf_paci') }}" required oninput="aplicarMascaraCPF(this);">
+                    <input maxlength="14" type="text" class="form-control" id="cpf_paci" name="cpf_paci" value="{{ old('cpf_paci', $paciente->cpf_paci ?? '') }}" required oninput="aplicarMascaraCPF(this);">
                     <span id="cpf-error" style="color: red;"></span>
                 </div>
 
@@ -109,64 +166,72 @@
                 <div class="form-group col-md-4">
                     <label for="fk_convenio_paci">Convênio</label>
                     <select name="fk_convenio_paci" class="form-select" id="fk_convenio_paci" required>
-                        <option value="">Selecione um convênio</option>
+                    <option value="">Selecione um convênio</option>
+                    @if(isset($convenios) && $convenios->count() > 0)
+                        @foreach($convenios as $convenio)
+                        <option value="{{ $convenio->id }}" 
+                            @if(isset($paciente) && $paciente->fk_convenio_paci == $convenio->id)
+                                selected
+                            @endif>
+                            {{ $convenio->nome_conv }}
+                        </option>
+                        @endforeach
+                    @endif
                     </select>
                 </div>
 
                 <!-- Carteira do Convênio -->
                 <div class="form-group col-md-4" id="carteira-convenio-field">
                     <label for="carteira_convenio_paci">Carteira do Convênio</label>
-                    <input maxlength="12" type="text" class="form-control" id="carteira_convenio_paci" name="carteira_convenio_paci" value="{{ old('carteira_convenio_paci') }}" required>
+                    <input maxlength="12" type="text" class="form-control" id="carteira_convenio_paci" name="carteira_convenio_paci" value="{{ old('carteira_convenio_paci', $paciente->carteira_convenio_paci ?? '') }}" required>
                 </div>
             </div>
 
-            
-            
             {{-- Endereço --}}
             <div class="row g-3 my-2">
                 <h2 class="fs-4">ENDEREÇO</h2>
                 <div class="form-group col-md-2">
-                    <label for="inputCEP" >CEP</label>
-                    <input type="text" class="form-control" id="cep_paci" name="cep_paci" onblur="pesquisacep(this.value)" maxlength="9">
+                    <label for="inputCEP">CEP</label>
+                    <input type="text" class="form-control" id="cep_paci" name="cep_paci" value="{{ old('cep_paci', $paciente->cep_paci ?? '') }}" onblur="pesquisacep(this.value)" maxlength="9">
                 </div>
                 
                 <div class="form-group col-md-8">
-                    <label for="inputLogradouro" >LOGRADOURO</label>
-                    <input type="text" class="form-control" id="rua_paci" name="rua_paci" value="" size="60" maxlength="60">
+                    <label for="inputLogradouro">LOGRADOURO</label>
+                    <input type="text" class="form-control" id="rua_paci" name="rua_paci" value="{{ old('rua_paci', $paciente->rua_paci ?? '') }}" size="60" maxlength="60">
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="inputNumeroEstabelecimento" >NÚMERO</label>
-                    <input type="number" class="form-control" id="numero_paci" name="numero_paci" value="" size="10" maxlength="10">
+                    <label for="inputNumeroEstabelecimento">NÚMERO</label>
+                    <input type="number" class="form-control" id="numero_paci" name="numero_paci" value="{{ old('numero_paci', $paciente->numero_paci ?? '') }}" size="10" maxlength="10">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputCBairro" >BAIRRO</label>
-                    <input type="text" class="form-control" id="bairro_paci" name="bairro_paci" value="" size="40" maxlength="40">
+                    <label for="inputCBairro">BAIRRO</label>
+                    <input type="text" class="form-control" id="bairro_paci" name="bairro_paci" value="{{ old('bairro_paci', $paciente->bairro_paci ?? '') }}" size="40" maxlength="40">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputCidade" >CIDADE</label>
-                    <input type="text" class="form-control" id="cidade_paci" name="cidade_paci" value="" size="40" maxlength="40">
+                    <label for="inputCidade">CIDADE</label>
+                    <input type="text" class="form-control" id="cidade_paci" name="cidade_paci" value="{{ old('cidade_paci', $paciente->cidade_paci ?? '') }}" size="40" maxlength="40">
                 </div>
                 <div class="form-group col-md-10">
-                    <label for="inputComplemento" >COMPLEMENTO</label>
-                    <input type="text" class="form-control" id="complemento_paci" name="complemento_paci" value="" size="40" maxlength="40">
+                    <label for="inputComplemento">COMPLEMENTO</label>
+                    <input type="text" class="form-control" id="complemento_paci" name="complemento_paci" value="{{ old('complemento_paci', $paciente->complemento_paci ?? '') }}" size="40" maxlength="40">
                 </div>
                 
                 <div class="form-group col-md-2">
-                    <label for="inputUF" >UF (ESTADO)</label>
-                    <input type="text" class="form-control" id="uf_paci" name="uf_paci" value="" size="2" maxlength="2">
+                    <label for="inputUF">UF (ESTADO)</label>
+                    <input type="text" class="form-control" id="uf_paci" name="uf_paci" value="{{ old('uf_paci', $paciente->uf_paci ?? '') }}" size="2" maxlength="2">
                 </div>
             </div>
-            
+
             <!-- Campos do Responsável -->
             <div class="row g-3 my-2" id="responsavel-fields" style="display: none;">
                 <h2 class="fs-4">DADOS FAMILIARES</h2>
                 <div class="form-group col-md-7">
                     <label for="responsavel_paci">NOME RESPONSÁVEL</label>
-                    <input maxlength="54" type="text" class="form-control" id="responsavel_paci" name="responsavel_paci" value="{{ old('responsavel_paci') }}" required>
+                    <input maxlength="54" type="text" class="form-control" id="responsavel_paci" name="responsavel_paci" value="{{ old('responsavel_paci', $paciente->responsavel_paci ?? '') }}" required>
                 </div>
                 <div class="form-group col-md-5">
                     <label for="cpf_responsavel_paci">CPF</label>
-                    <input maxlength="14" type="text" class="form-control" name="cpf_responsavel_paci" id="cpf_responsavel_paci" value="{{ old('cpf_responsavel_paci') }}" required oninput="aplicarMascaraCPF(this);">
+                    <input maxlength="14" type="text" class="form-control" name="cpf_responsavel_paci" id="cpf_responsavel_paci" value="{{ old('cpf_responsavel_paci', $paciente->cpf_responsavel_paci ?? '') }}" required oninput="aplicarMascaraCPF(this);">
                     <span id="cpf-error-responsavel" style="color: red;"></span>
                 </div>
             </div>
@@ -330,6 +395,99 @@
         telefoneInput.addEventListener('input', function() {
             aplicarMascaraTelefone(telefoneInput);
         });
+    });
+</script>
+<script>
+    // Variável para rotação da imagem
+    let anguloRotacao = 0;
+
+    // Função para carregar imagem
+    function carregarImagem(event) {
+        const imagem = document.getElementById('img_paci');
+        const arquivo = event.target.files[0];
+        if (arquivo) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagem.src = e.target.result;
+            }
+            reader.readAsDataURL(arquivo);
+        }
+    }
+
+    // Função para capturar imagem da câmera
+    async function capturarImagem() {
+        const video = document.getElementById('videoStream');
+        const imagem = document.getElementById('img_paci');
+
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
+            video.style.display = 'block';
+            imagem.style.display = 'none';
+
+            // Capturar a imagem do vídeo ao clicar nele
+            video.addEventListener('click', function() {
+                const canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                canvas.getContext('2d').drawImage(video, 0, 0);
+                imagem.src = canvas.toDataURL('image/png');
+                imagem.style.display = 'block';
+                video.style.display = 'none';
+
+                // Parar o stream da câmera
+                stream.getTracks().forEach(track => track.stop());
+                
+                // Convertendo a imagem capturada em Base64 e colocando no input de arquivo
+                const base64Image = canvas.toDataURL('image/png');
+                const input = document.getElementById('uploadImage');
+                const dataUri = base64Image.split(',')[1]; // Remover o prefixo "data:image/png;base64,"
+                const blob = dataURItoBlob(dataUri);
+
+                // Criando um File para simular o upload da imagem
+                const file = new File([blob], "captura.png", { type: "image/png" });
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                input.files = dataTransfer.files;
+            });
+        } catch (error) {
+            console.error('Erro ao acessar a câmera:', error);
+            alert('Não foi possível acessar a câmera.');
+        }
+    }
+
+    // Função para converter base64 para Blob
+    function dataURItoBlob(dataURI) {
+        const byteString = atob(dataURI);
+        const arrayBuffer = new ArrayBuffer(byteString.length);
+        const uintArray = new Uint8Array(arrayBuffer);
+
+        for (let i = 0; i < byteString.length; i++) {
+            uintArray[i] = byteString.charCodeAt(i);
+        }
+
+        return new Blob([uintArray], { type: 'image/png' });
+    }
+
+    // Função para girar a imagem
+    function girarImagem() {
+        const imagem = document.getElementById('img_paci');
+        anguloRotacao += 90;
+        imagem.style.transform = `rotate(${anguloRotacao}deg)`;
+    }
+
+    // Função para enviar a rotação ao servidor
+    function enviarRotacaoParaServidor() {
+        const inputRotacao = document.createElement('input');
+        inputRotacao.setAttribute('type', 'hidden');
+        inputRotacao.setAttribute('name', 'angulo_rotacao');
+        inputRotacao.setAttribute('value', anguloRotacao);
+        document.getElementById('paciente-form').appendChild(inputRotacao);
+    }
+
+    // No envio do formulário, adiciona o ângulo da rotação
+    document.getElementById('paciente-form').addEventListener('submit', function(event) {
+        enviarRotacaoParaServidor();
     });
 </script>
 <script src="{{ asset('js/cep-paci.js') }}"></script>

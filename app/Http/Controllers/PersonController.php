@@ -60,77 +60,94 @@ class PersonController extends Controller
         return response()->json($paciente);
     }
 
-    // Método para armazenar um novo paciente
     public function store(Request $request)
     {
         // Calcula a idade com base na data de nascimento fornecida
         $birthDate = new \DateTime($request->input('data_nasci_paci'));
         $today = new \DateTime();
         $age = $today->diff($birthDate)->y; // Calcula a idade
-
+    
         // Regras de validação básicas
         $rules = [
+            'img_paci' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'angulo_rotacao' => 'nullable|integer',
             'nome_paci' => 'required|string|max:54',
             'data_nasci_paci' => 'required|date',
             'telefone_paci' => 'required|string|max:15',
             'email_paci' => 'required|email',
+            'genero' => 'required',
             'fk_convenio_paci' => 'required|string',
-            'data_obito_paci' => 'nullable|date', // Campo opcional
-            'cpf_paci' => 'required|string|max:14|cpf', // Validação de CPF
+            'data_obito_paci' => 'nullable|date',
+            'cpf_paci' => 'required|string|max:14|cpf',
             'cep_paci' => 'nullable|string|max:9',
             'rua_paci' => 'nullable|string|max:17',
             'numero_paci' => 'nullable|string|max:5',
             'bairro_paci' => 'nullable|string|max:50',
+            'cidade_paci' => 'nullable|string|max:30',
             'complemento_paci' => 'nullable|string|max:100',
             'uf_paci' => 'nullable|string|max:2',
         ];
-
-        // Se a idade for menor que 18 anos, adiciona as regras para o responsável
+    
         if ($age < 18) {
             $rules['cpf_responsavel_paci'] = 'required|string|max:14';
             $rules['responsavel_paci'] = 'required|string|max:54';
         }
-
-        // Aplica a validação com as regras definidas
+    
+        // Aplica a validação
         $request->validate($rules);
-
-        // Cria um novo paciente e atribui os dados do request
+    
+        // Cria um novo paciente
         $paciente = new Paciente();
+    
+        if ($request->hasFile('img_paci')) {
+            $imagem = $request->file('img_paci');
+            $nomeImagem = time() . '.' . $imagem->getClientOriginalExtension();
+            $path = $imagem->storeAs('public/imagens_pacientes', $nomeImagem);
+    
+            $paciente->img_paci = 'imagens_pacientes/' . $nomeImagem;
+
+            // Salvar o ângulo de rotação da imagem
+            $paciente->angulo_rotacao = $request->input('angulo_rotacao', 0);
+        } else {
+            $paciente->img_paci = 'imagens_pacientes/default-profile-pic.png';  // Imagem padrão
+            $paciente->angulo_rotacao = 0;  // Sem rotação
+        }
+    
+        // Atribui os outros dados do request
         $paciente->nome_paci = $request->nome_paci;
         $paciente->data_nasci_paci = $request->data_nasci_paci;
         $paciente->telefone_paci = $request->telefone_paci;
         $paciente->email_paci = $request->email_paci;
         $paciente->fk_convenio_paci = $request->fk_convenio_paci;
-        $paciente->data_obito_paci = $request->data_obito_paci; // Campo opcional
+        $paciente->data_obito_paci = $request->data_obito_paci;
         $paciente->cpf_paci = $request->cpf_paci;
-
+        $paciente->genero = $request->genero;
+    
         // Adicionando campos de endereço
         $paciente->cep_paci = $request->cep_paci;
         $paciente->rua_paci = $request->rua_paci;
         $paciente->numero_paci = $request->numero_paci;
         $paciente->bairro_paci = $request->bairro_paci;
+        $paciente->cidade_paci = $request->cidade_paci;
         $paciente->complemento_paci = $request->complemento_paci;
         $paciente->uf_paci = $request->uf_paci;
-
-        // Se a idade for menor de 18 anos, salva os dados do responsável
+    
         if ($age < 18) {
             $paciente->cpf_responsavel_paci = $request->cpf_responsavel_paci;
             $paciente->responsavel_paci = $request->responsavel_paci;
         }
-
-        // Se o convênio for "Particular", não salva o campo carteira_convenio_paci
+    
         if ($request->input('fk_convenio_paci') == 1) {
-            $paciente->carteira_convenio_paci = null; // Limpa o campo
+            $paciente->carteira_convenio_paci = null;
         } else {
             $paciente->carteira_convenio_paci = $request->carteira_convenio_paci;
         }
-
-        // Salva o paciente no banco de dados
+    
         $paciente->save();
-
-        // Redireciona com uma mensagem de sucesso
+    
         return redirect()->route('paciente.store')->with('success', 'Paciente cadastrado com sucesso!');
     }
+    
 
     // Método para atualizar os dados de um paciente
     public function update(Request $request)
@@ -139,51 +156,81 @@ class PersonController extends Controller
         
         // Validação
         $request->validate([
-            'id' => 'required|exists:pacientes,pk_cod_paci',
-            'nome' => 'required|string|max:54',
-            'email' => 'required|email',
-            'data_nasci' => 'required|date',
-            'telefone' => 'required|string|max:15',
-            'cpf' => 'required|string|max:14|cpf', // Validação de CPF
-            'responsavel' => 'string|max:54',
-            'cpf_responsavel' => 'string|max:14',
-            'fk_convenio_paci' => 'nullable|string',
-            'carteira_convenio_paci' => 'nullable|string',
-            'cep' => 'nullable|string|max:9',
-            'rua' => 'nullable|string|max:17',
-            'numero' => 'nullable|string|max:5',
-            'bairro' => 'nullable|string|max:50',
-            'complemento' => 'nullable|string|max:100',
-            'uf' => 'nullable|string|max:2',
-        ]);
+        'id' => 'required|exists:pacientes,pk_cod_paci',
+        'img_paci' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'angulo_rotacao' => 'nullable|integer',
+        'nome_paci' => 'required|string|max:54',
+        'email_paci' => 'required|email',
+        'data_nasci_paci' => 'required|date',
+        'telefone_paci' => 'required|string|max:15',
+        'genero' => 'required',
+        'cpf_paci' => 'required|string|max:14|cpf', // Validação de CPF
+        'responsavel_paci' => 'nullable|string|max:54',
+        'cpf_responsavel_paci' => 'nullable|string|max:14',
+        'fk_convenio_paci' => 'nullable|string',
+        'carteira_convenio_paci' => 'nullable|string',
+        'cep_paci' => 'nullable|string|max:9',
+        'rua_paci' => 'nullable|string|max:17',
+        'numero_paci' => 'nullable|string|max:5',
+        'bairro_paci' => 'nullable|string|max:50',
+        'cidade_paci' => 'nullable|string|max:30',
+        'complemento_paci' => 'nullable|string|max:100',
+        'uf_paci' => 'nullable|string|max:2',
+    ]);
 
-        $paciente = Paciente::find($request->input('id')); // Busca o paciente pelo ID
+    $paciente = Paciente::find($request->input('id')); // Busca o paciente pelo ID
 
-        if ($paciente) { // Se o paciente existir
-            // Atualiza os dados do paciente
-            $paciente->nome_paci = $request->input('nome');
-            $paciente->data_nasci_paci = $request->input('data_nasci');
-            $paciente->telefone_paci = $request->input('telefone');
-            $paciente->cpf_paci = $request->input('cpf');
-            $paciente->responsavel_paci = $request->input('responsavel');
-            $paciente->cpf_responsavel_paci = $request->input('cpf_responsavel');
-            $paciente->fk_convenio_paci = $request->input('fk_convenio_paci');
-            $paciente->cep_paci = $request->input('cep');
-            $paciente->rua_paci = $request->input('rua');
-            $paciente->numero_paci = $request->input('numero');
-            $paciente->bairro_paci = $request->input('bairro');
-            $paciente->complemento_paci = $request->input('complemento');
-            $paciente->uf_paci = $request->input('uf');
-            
-            if ($paciente->save()) {
-                return response()->json(['success' => true, 'message' => 'Dados do paciente atualizados com sucesso!']);
-            } else {
-                return response()->json(['error' => 'Erro ao atualizar paciente'], 422); // Retorna erro em caso de falha
+    if ($paciente) { // Se o paciente existir
+
+        // Verifica se uma imagem foi enviada
+        if ($request->hasFile('img_paci')) {
+            // Excluir a imagem antiga, caso exista
+            if ($paciente->img_paci && file_exists(storage_path('app/public/' . $paciente->img_paci))) {
+                unlink(storage_path('app/public/' . $paciente->img_paci));
             }
+    
+            // Armazenar a nova imagem
+            $imagem = $request->file('img_paci');
+            $nomeImagem = time() . '.' . $imagem->getClientOriginalExtension();
+            $path = $imagem->storeAs('public/imagens_pacientes', $nomeImagem);
+    
+            // Atualizar o caminho da imagem no banco de dados
+            $paciente->img_paci = 'imagens_pacientes/' . $nomeImagem;
+        }
+    
+        // Atualizar o ângulo de rotação da imagem
+        $paciente->angulo_rotacao = $request->input('angulo_rotacao', 0);
+
+        // Atualiza os dados do paciente
+        $paciente->nome_paci = $request->input('nome_paci');
+        $paciente->data_nasci_paci = $request->input('data_nasci_paci');
+        $paciente->telefone_paci = $request->input('telefone_paci');
+        $paciente->genero = $request->input('genero');
+        $paciente->cpf_paci = $request->input('cpf_paci');
+        $paciente->responsavel_paci = $request->input('responsavel_paci');
+        $paciente->cpf_responsavel_paci = $request->input('cpf_responsavel_paci');
+        $paciente->fk_convenio_paci = $request->input('fk_convenio_paci');
+        $paciente->cep_paci = $request->input('cep_paci');
+        $paciente->rua_paci = $request->input('rua_paci');
+        $paciente->numero_paci = $request->input('numero_paci');
+        $paciente->bairro_paci = $request->input('bairro_paci');
+        $paciente->cidade_paci = $request->input('cidade_paci');
+        $paciente->complemento_paci = $request->input('complemento_paci');
+        $paciente->uf_paci = $request->input('uf_paci');
+        }
+
+        $paciente->save();
+
+        // Verificar qual botão foi pressionado
+        if ($request->input('action') == 'save_and_exit') {
+            // Redirecionar para a lista de pacientes
+            return redirect('/pacientes');
         } else {
-            return response()->json(['error' => 'Paciente não encontrado'], 404); // Retorna erro se o paciente não for encontrado
+            // Redirecionar de volta para a tela de edição do paciente
+            return redirect()->route('paciente.edit', ['id' => $paciente->pk_cod_paci]);
         }
     }
+
 
     public function buscarPacientes(Request $request)
     {   
@@ -221,7 +268,7 @@ class PersonController extends Controller
         return response()->json($convenios); // Retorna os convênios em formato JSON
     }
 
-    // Método para obter um convênio específico pelo ID
+    // Método para obter um convênio específico pelo ID 
     public function convenios($id)
     {
         $convenio = Convenio::find($id); // Busca o convênio pelo ID
@@ -229,6 +276,18 @@ class PersonController extends Controller
             return response()->json(['message' => 'Convenio não encontrado'], 404); // Retorna erro se não encontrado
         }
         return response()->json($convenio); // Retorna o convênio em formato JSON
+    }
+
+    public function edit($id)
+    {
+        // Encontre o paciente pelo ID
+        $paciente = Paciente::findOrFail($id);
+        
+        // Busque todos os convênios disponíveis
+        $convenios = Convenio::all()->unique('id'); // Garanta que os convênios sejam únicos
+        
+        // Retorne a view com o paciente e os convênios
+        return view('pacientes.form_paciente', compact('paciente', 'convenios'));
     }
 
 }
