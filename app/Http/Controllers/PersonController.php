@@ -283,8 +283,8 @@ class PersonController extends Controller
         // Encontre o paciente pelo ID
         $paciente = Paciente::findOrFail($id);
         
-        // Busque todos os convênios disponíveis
-        $convenios = Convenio::all()->unique('id'); // Garanta que os convênios sejam únicos
+        // Busque todos os convênios disponíveis, garantindo que sejam únicos
+        $convenios = Convenio::distinct()->get(); // Usando distinct para garantir registros únicos
         
         // Retorne a view com o paciente e os convênios
         return view('pacientes.form_paciente', compact('paciente', 'convenios'));

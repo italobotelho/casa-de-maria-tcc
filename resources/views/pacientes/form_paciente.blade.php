@@ -167,16 +167,16 @@
                     <label for="fk_convenio_paci">Convênio</label>
                     <select name="fk_convenio_paci" class="form-select" id="fk_convenio_paci" required>
                     <option value="">Selecione um convênio</option>
-                    @if(isset($convenios) && $convenios->count() > 0)
-                        @foreach($convenios as $convenio)
+                    @foreach($convenios as $convenio) <!-- Agora não usamos unique aqui, pois já garantimos isso na consulta -->
                         <option value="{{ $convenio->id }}" 
                             @if(isset($paciente) && $paciente->fk_convenio_paci == $convenio->id)
                                 selected
+                            @elseif(old('fk_convenio_paci') == $convenio->id)
+                                selected
                             @endif>
-                            {{ $convenio->nome_conv }}
+                            {{ $convenio->nome_conv }} <!-- Exibe o nome do convênio -->
                         </option>
-                        @endforeach
-                    @endif
+                    @endforeach
                     </select>
                 </div>
 

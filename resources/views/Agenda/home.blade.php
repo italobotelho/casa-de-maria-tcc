@@ -69,19 +69,19 @@
                             </li>
                         @endforeach
                     </ul>
-
+                
                     <!-- Paginação -->
                     <div class="d-flex justify-content-center">
                         {{ $recados->links() }}
                     </div>
-            
+                
                     <!-- Checkbox para mostrar recados excluídos -->
                     <form method="GET" action="{{ route('agenda.home') }}" class="mb-3">
                         <input type="checkbox" class="form-check-input" id="mostrarExcluidos" name="mostrarExcluidos" 
                                onchange="this.form.submit()" {{ $mostrarExcluidos ? 'checked' : '' }}>
                         <label for="mostrarExcluidos">Mostrar recados excluídos</label>
                     </form>
-            
+                
                     <!-- Área para adicionar novo recado -->
                     @if(!$mostrarExcluidos)
                         <form action="{{ route('recados.store') }}" method="POST">
@@ -89,17 +89,13 @@
                             <div class="mb-3">
                                 <textarea name="texto" id="novo_recado" rows="2" class="form-control" placeholder="Digite seu recado aqui..." required></textarea>
                             </div>
-                            <div class="form-check mb-2">
-                                <input type="checkbox" class="form-check-input" id="somenteDia" name="somente_dia">
-                                <label class="form-check-label" for="somenteDia">Somente para este dia?</label>
-                            </div>
                             <div class="d-flex justify-content-center">
                                 <button type="submit" class="btn btn-primary">Salvar Recado</button>
                             </div>
                         </form>
                     @endif
                 </div>
-            </div>            
+            </div>                 
         </div>
     </div>
 </div>

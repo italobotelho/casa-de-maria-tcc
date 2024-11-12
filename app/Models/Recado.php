@@ -10,6 +10,6 @@ class Recado extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['texto', 'delete_at'];
+    protected $fillable = ['texto', 'deleted_at'];
     protected $dates = ['deleted_at'];
 }

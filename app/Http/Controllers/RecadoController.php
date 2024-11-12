@@ -14,13 +14,16 @@ class RecadoController extends Controller
         // Verifica se o usuário quer visualizar recados excluídos
         $mostrarExcluidos = $request->query('mostrarExcluidos', false);
         
-        $recados = $mostrarExcluidos ? Recado::onlyTrashed()->get() : Recado::all();
+        // Ajusta a consulta para buscar os recados com base na flag de exclusão
+        if ($mostrarExcluidos) {
+            $recados = Recado::onlyTrashed()->paginate(10); // Recados excluídos
+        } else {
+            $recados = Recado::paginate(10); // Recados não excluídos
+        }
+    
         $procedimentos = Procedimento::where('status', 'ativo')->get();
         $medicos = Medico::all();
-
-        // Exemplo: Paginação de recados com 10 itens por página
-        $recados = Recado::paginate(10);
-
+    
         return view('agenda.home', compact('recados', 'procedimentos', 'medicos', 'mostrarExcluidos'));
     }
 
