@@ -19,19 +19,6 @@ class EventController extends Controller
         $this->middleware('auth');
     }
 
-    public function buscarAgendamentos(Request $request)
-    {
-        $nomePaciente = $request->input('nome');
-
-        // Busque os agendamentos que correspondem ao nome do paciente
-        $agendamentos = Event::with('paciente')
-            ->whereHas('paciente', function ($query) use ($nomePaciente) {
-                $query->where('nome_paci', 'like', '%' . $nomePaciente . '%');
-            })
-            ->get();
-
-        return response()->json($agendamentos);
-    }
 
 
     public function show($id)
