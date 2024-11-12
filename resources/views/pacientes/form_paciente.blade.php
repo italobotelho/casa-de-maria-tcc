@@ -140,6 +140,7 @@
                         <option value="">Selecione</option>
                         <option value="masc" {{ old('genero', $paciente->genero ?? '') == 'masc' ? 'selected' : '' }}>Masculino</option>
                         <option value="fem" {{ old('genero', $paciente->genero ?? '') == 'fem' ? 'selected' : '' }}>Feminino</option>
+                        <option value="nao_informar" {{ old('genero', $paciente->genero ?? '') == 'nao_informar' ? 'selected' : '' }}>Não Informar</option>
                     </select>
                 </div>
 
@@ -166,17 +167,17 @@
                 <div class="form-group col-md-4">
                     <label for="fk_convenio_paci">Convênio</label>
                     <select name="fk_convenio_paci" class="form-select" id="fk_convenio_paci" required>
-                    <option value="">Selecione um convênio</option>
-                    @foreach($convenios as $convenio) <!-- Agora não usamos unique aqui, pois já garantimos isso na consulta -->
-                        <option value="{{ $convenio->id }}" 
-                            @if(isset($paciente) && $paciente->fk_convenio_paci == $convenio->id)
-                                selected
-                            @elseif(old('fk_convenio_paci') == $convenio->id)
-                                selected
-                            @endif>
-                            {{ $convenio->nome_conv }} <!-- Exibe o nome do convênio -->
-                        </option>
-                    @endforeach
+                        <option value="">Selecione um convênio</option>
+                        @isset($convenios) <!-- Verifica se a variável $convenios está definida -->
+                        @foreach($convenios as $convenio)
+                            <option value="{{ $convenio->id }}"
+                                @if((isset($paciente) && $paciente->fk_convenio_paci == $convenio->id) || old('fk_convenio_paci') == $convenio->id)
+                                    selected
+                                @endif>
+                                {{ $convenio->nome_conv }} <!-- Exibe o nome do convênio -->
+                            </option>
+                        @endforeach
+                    @endisset
                     </select>
                 </div>
 
