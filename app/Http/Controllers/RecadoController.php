@@ -16,9 +16,9 @@ class RecadoController extends Controller
         
         // Ajusta a consulta para buscar os recados com base na flag de exclusão
         if ($mostrarExcluidos) {
-            $recados = Recado::onlyTrashed()->paginate(10); // Recados excluídos
+            $recados = Recado::onlyTrashed()->paginate(5)->withQueryString(); // Recados excluídos
         } else {
-            $recados = Recado::paginate(10); // Recados não excluídos
+            $recados = Recado::paginate(3)->withQueryString(); // Recados não excluídos
         }
     
         $procedimentos = Procedimento::where('status', 'ativo')->get();

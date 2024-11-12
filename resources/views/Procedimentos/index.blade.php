@@ -18,7 +18,7 @@
             <p>Listagem com todos os procedimentos cadastrados na clínica.</p>
         </div>
         
-        <div class="col-md-4">
+        <div class="col-md-3 mx-3">
             <button type="button" class="btn btn-primary btn-lg my-3" data-bs-toggle="modal" data-bs-target="#ProcedimentoModal">
                 Cadastrar Novo Procedimento
             </button>

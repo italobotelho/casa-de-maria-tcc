@@ -11,25 +11,25 @@
     </style>
 @endsection
 
-@section('content')
+@section('content')<!-- Error and Success Messages -->
 
+@if ($errors->any())
+<div class="alert alert-danger my-3">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+@if (session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
 <div class="container border rounded pb-3 shadow-sm">
-    <!-- Error and Success Messages -->
-    @if ($errors->any())
-    <div class="alert alert-danger my-3">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-
-    @if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-    @endif
+    
 
     <form action="{{ isset($paciente) ? route('paciente.update', ['id' => $paciente->pk_cod_paci]) : route('paciente.store') }}" method="POST" id="paciente-form" enctype="multipart/form-data">
         @csrf
@@ -163,21 +163,14 @@
                     <span id="cpf-error" style="color: red;"></span>
                 </div>
 
+                <!-- Adicionando o valor de fk_convenio_paci ao HTML -->
+                <input type="hidden" id="paciente_fk_convenio_paci" value="{{ $paciente->fk_convenio_paci ?? '' }}">
+
                 <!-- Convênio -->
                 <div class="form-group col-md-4">
                     <label for="fk_convenio_paci">Convênio</label>
                     <select name="fk_convenio_paci" class="form-select" id="fk_convenio_paci" required>
                         <option value="">Selecione um convênio</option>
-                        @isset($convenios) <!-- Verifica se a variável $convenios está definida -->
-                        @foreach($convenios as $convenio)
-                            <option value="{{ $convenio->id }}"
-                                @if((isset($paciente) && $paciente->fk_convenio_paci == $convenio->id) || old('fk_convenio_paci') == $convenio->id)
-                                    selected
-                                @endif>
-                                {{ $convenio->nome_conv }} <!-- Exibe o nome do convênio -->
-                            </option>
-                        @endforeach
-                    @endisset
                     </select>
                 </div>
 
@@ -347,41 +340,51 @@
     });
 
 
-    // Função para carregar convênios
     document.addEventListener('DOMContentLoaded', function() {
+    const select = document.getElementById('fk_convenio_paci');
+    const pacienteConvenioId = document.getElementById('paciente_fk_convenio_paci').value; // Pega o valor do paciente
+    const carteiraConvenioField = document.getElementById('carteira-convenio-field');
+    const carteiraConvenioInput = document.getElementById('carteira_convenio_paci');
+
+    // Função para carregar convênios
     fetch('/convenio')
         .then(response => response.json())
         .then(data => {
-            const select = document.getElementById('fk_convenio_paci');
             data.forEach(convenio => {
                 if (convenio.status === 'ativo') { // Verifica se o convênio está ativo
                     const option = document.createElement('option');
                     option.value = convenio.pk_id_conv;
                     option.text = convenio.nome_conv;
+                    
+                    // Se o convênio do paciente for igual ao id do convênio, marque como selecionado
+                    if (convenio.pk_id_conv == pacienteConvenioId) {
+                        option.selected = true;
+                    }
+
                     select.add(option);
                 }
             });
+
+            // Após carregar as opções, faça a verificação inicial
+            verificarCarteiraConvenio();
         })
         .catch(error => console.error('Erro ao carregar convênios:', error));
-        });
-
 
     // Função para alternar campo da Carteira do Convênio
-    document.addEventListener('DOMContentLoaded', function() {
-        const convenioSelect = document.getElementById('fk_convenio_paci');
-        const carteiraConvenioField = document.getElementById('carteira-convenio-field');
-        const carteiraConvenioInput = document.getElementById('carteira_convenio_paci');
+    function verificarCarteiraConvenio() {
+        if (select.value === '1') { // Verifique se o convênio selecionado é "1"
+            carteiraConvenioField.style.display = 'none';
+            carteiraConvenioInput.removeAttribute('required');
+        } else {
+            carteiraConvenioField.style.display = 'block';
+            carteiraConvenioInput.setAttribute('required', true);
+        }
+    }
 
-        convenioSelect.addEventListener('change', function() {
-            if (this.value === '1') { // Altere o valor conforme necessário
-                carteiraConvenioField.style.display = 'none';
-                carteiraConvenioInput.removeAttribute('required');
-            } else {
-                carteiraConvenioField.style.display = 'block';
-                carteiraConvenioInput.setAttribute('required', true);
-            }
-        });
-    });
+    // Executa a verificação toda vez que o valor do select é alterado
+    select.addEventListener('change', verificarCarteiraConvenio);
+});
+
 
     // Função para aplicar máscara de telefone
     function aplicarMascaraTelefone(input) {

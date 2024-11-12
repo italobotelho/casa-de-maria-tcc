@@ -62,7 +62,7 @@
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
                                     {{ $recado->texto }}
-                                    <small class="text-muted d-block">Enviado em: {{ $recado->created_at->format('d/m/Y H:i') }}</small>
+                                    <small class="text-muted d-block my-1">Enviado em: {{ $recado->created_at->format('d/m/Y H:i') }}</small>
                                 </div>
                                 <!-- Condição para exibir o botão de deletar apenas quando não estiver mostrando recados excluídos -->
                                 @if(!$mostrarExcluidos)
@@ -78,17 +78,15 @@
                 
                     <!-- Paginação -->
                     <div class="d-flex justify-content-center">
-                        {{ $recados->links() }}
+                        {{ $recados->links('pagination::bootstrap-5') }}
                     </div>
-                
-                    
                 
                     <!-- Área para adicionar novo recado -->
                     @if(!$mostrarExcluidos)
                         <form action="{{ route('recados.store') }}" method="POST">
                             @csrf
                             <div class="mb-3">
-                                <textarea name="texto" id="novo_recado" rows="2" class="form-control" placeholder="Digite seu recado aqui..." required></textarea>
+                                <textarea name="texto" id="novo_recado" rows="2" class="form-control mt-1" placeholder="Digite seu recado aqui..." required></textarea>
                             </div>
                             <div class="d-flex justify-content-center">
                                 <button type="submit" class="btn btn-primary">Salvar Recado</button>

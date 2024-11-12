@@ -12,26 +12,29 @@
 @endsection
 
 @section('content')
+
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 <div class="container border rounded shadow-sm">
 
     <form action="{{ route('medico.store') }}" method="POST">
         @csrf
 
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
 
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
         
         <div class="row g-3 my-2">
             <h1 class="fs-4">DADOS PESSOAIS</h1>
