@@ -29,13 +29,16 @@
 @section('content')
     
     <div class="container">
-        <div class="col-md-6">
-            <h1 class="display-5">BUSCAR PACIENTE</h1>
+        <div class="d-flex gap-4">
+            <div>
+                <h1 class="display-5">BUSCAR PACIENTE</h1>
+            </div>
+            
+            <div class="mt-4">
+                <p class="display-8">Listagem dos últimos pacientes cadastrados e busca geral.</p>
+            </div>
         </div>
         
-        <div class="col-md-10">
-            <p class="display-8">Listagem dos últimos pacientes cadastrados e busca geral.</p>
-        </div>
         
         <div class="container border border-1 rounded shadow-sm">
         

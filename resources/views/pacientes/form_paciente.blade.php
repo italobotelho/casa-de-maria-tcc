@@ -16,7 +16,7 @@
 <div class="container border rounded pb-3">
     <!-- Error and Success Messages -->
     @if ($errors->any())
-    <div class="alert alert-danger">
+    <div class="alert alert-danger my-3">
         <ul>
             @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>

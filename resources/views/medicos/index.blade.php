@@ -9,15 +9,18 @@
 
 @section('content')
 
-<div class="col-md-6">
-    <h1 class="display-5">BUSCAR PROFISSIONAL</h1>
+<div class="d-flex gap-4">
+    <div class="">
+        <h1 class="display-5">BUSCAR PROFISSIONAL</h1>
+    </div>
+    
+    <div class=" mt-4">
+        <p class="display-8">Listagem dos últimos médicos cadastrados e busca geral.</p>
+    </div>
 </div>
 
-<div class="col-md-10">
-    <p class="display-8">Listagem dos últimos médicos cadastrados e busca geral.</p>
-</div>
 
-    <div class="container border border-1 rounded shadow-sm">
+    <div class="container border border-1 rounded shadow-sm mb-5">
 
         <div class="my-4 mx-1"><button class="btn novoCadastro" onclick="window.location.href='/form_medico'">CADASTRAR NOVO MÉDICO</button></div>  
 
@@ -44,40 +47,36 @@
                                 <tr>
                                     <th scope="col">CRM</th>
                                     <th scope="col">Nome</th>
-                                    <th scope="col">1 Especialidade</th>
-                                    <th scope="col">2 Especialidade</th>
                                     <th scope="col">Telefone</th>
                                     <th scope="col">Email</th>
+                                    <th scope="col">UF</th>
+                                    <th scope="col">1 Especialidade</th>
+                                    <th scope="col">2 Especialidade</th>
+                                    <th scope="col">Ação</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse($medicos as $medico)
                                 <tr>
                                     <th scope="row">{{ $medico->pk_crm_med }}</th>
-                                    <td>
-                                        <a href="#" class="nome-medico" 
-                                           data-id="{{ $medico->pk_crm_med }}" 
-                                           data-nome="{{ $medico->nome_med }}" 
-                                           data-especialidade="{{ $medico->especialidade1_med }}" 
-                                           data-especialidade2="{{ $medico->especialidade2_med }}" 
-                                           data-telefone="{{ $medico->telefone_med }}" 
-                                           data-email="{{ $medico->email_med }}">
-                                            {{ $medico->nome_med }}
-                                        </a>
-                                        <button class="btn btn-warning btn-sm editar-medico" 
-                                                data-id="{{ $medico->pk_crm_med }}" 
-                                                data-nome="{{ $medico->nome_med }}" 
-                                                data-especialidade="{{ $medico->especialidade1_med }}" 
-                                                data-especialidade2="{{ $medico->especialidade2_med }}" 
-                                                data-telefone="{{ $medico->telefone_med }}" 
-                                                data-email="{{ $medico->email_med }}">
-                                            Editar
-                                        </button>
-                                    </td>
-                                    <td>{{ $medico->especialidade1_med }}</td>
-                                    <td>{{ $medico->especialidade2_med }}</td>
+                                    <td>{{ $medico->nome_med }}</td>
                                     <td>{{ $medico->telefone_med }}</td>
                                     <td>{{ $medico->email_med }}</td>
+                                    <td>{{ $medico->uf_med }}</td>
+                                    <td>{{ $medico->especialidade1_med }}</td>
+                                    <td>{{ $medico->especialidade2_med }}</td>
+                                    
+                                    <td><button class="btn btn-warning btn-sm editar-medico" 
+                                        data-id="{{ $medico->pk_crm_med }}" 
+                                        data-nome="{{ $medico->nome_med }}"
+                                        data-telefone="{{ $medico->telefone_med }}" 
+                                        data-email="{{ $medico->email_med }}"
+                                        data-uf="{{ $medico->uf_med }}"
+                                        data-especialidade="{{ $medico->especialidade1_med }}" 
+                                        data-especialidade2="{{ $medico->especialidade2_med }}" 
+                                        >
+                                    Editar
+                                </button></td>
                                 </tr>
                             @empty
                                 <tr>
@@ -94,27 +93,6 @@
         </div><!-- fim da row -->
     </div> <!-- fim do container -->
 
-<!-- Modal para exibir informações do médico -->
-<div id="medicoModal" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Informações do Médico</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                
-            </div>
-            <div class="modal-body">
-                <p><strong>Nome:</strong> <span id="nome-medico"></span></p>
-                <p><strong> 1 Especialidade:</strong> <span id="especialidade"></span></p>
-                <p><strong> 2 Especialidade:</strong> <span id="especialidade2"></span></p>
-                <p><strong>Telefone:</strong> <span id="telefone"></span></p>
-                <p><strong>Email:</strong> <span id="email"></span></p>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Modal para editar informações do médico -->
 <div class="modal fade" id="editarMedicoModal" tabindex="-1" role="dialog" aria-labelledby="editarMedicoModalLabel" aria-hidden="true">
@@ -133,20 +111,24 @@
                         <input type="text" class="form-control" id="editar-nome" name="nome" required>
                     </div>
                     <div class="form-group">
-                        <label for="editar-especialidade">Especialidade</label>
-                        <input type="text" class="form-control" id="editar-especialidade" name="especialidade" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editar-especialidade2">2ª Especialidade</label>
-                        <input type="text" class="form-control" id="editar-especialidade2" name="especialidade2">
-                    </div>
-                    <div class="form-group">
                         <label for="editar-telefone">Telefone</label>
                         <input type="text" maxlength="15" class="form-control" id="editar-telefone" name="telefone" required>
                     </div>
                     <div class="form-group">
                         <label for="editar-email">Email</label>
                         <input type="email" class="form-control" id="editar-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editar-telefone">UF</label>
+                        <input type="text" maxlength="2" class="form-control" id="editar-uf" name="uf" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editar-especialidade">Especialidade</label>
+                        <input type="text" class="form-control" id="editar-especialidade" name="especialidade" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editar-especialidade2">2ª Especialidade</label>
+                        <input type="text" class="form-control" id="editar-especialidade2" name="especialidade2">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -181,6 +163,7 @@
             const especialidade2 = btn.dataset.especialidade2;
             const telefone = btn.dataset.telefone;
             const email = btn.dataset.email;
+            const uf = btn.dataset.uf;
 
             // Preencher o modal com as informações do médico
             document.getElementById('editar-id').value = id;
@@ -189,29 +172,10 @@
             document.getElementById('editar-especialidade2').value = especialidade2;
             document.getElementById('editar-telefone').value = telefone;
             document.getElementById('editar-email').value = email;
+            document.getElementById('editar-uf').value = uf;
 
             // Exibir o modal
             $('#editarMedicoModal').modal('show');
-        }
-
-        // Lógica para abrir o modal de informações do médico ao clicar no nome
-        if (e.target.classList.contains('nome-medico')) {
-            const link = e.target;
-            const nome = link.dataset.nome;
-            const especialidade = link.dataset.especialidade;
-            const especialidade2 = link.dataset.especialidade2;
-            const telefone = link.dataset.telefone;
-            const email = link.dataset.email;
-
-            // Preencher o modal de informações
-            document.getElementById('nome-medico').textContent = nome;
-            document.getElementById('especialidade').textContent = especialidade;
-            document.getElementById('especialidade2').textContent = especialidade2;
-            document.getElementById('telefone').textContent = telefone;
-            document.getElementById('email').textContent = email;
-
-            // Exibir o modal de informações
-            $('#medicoModal').modal('show');
         }
     });
 });
