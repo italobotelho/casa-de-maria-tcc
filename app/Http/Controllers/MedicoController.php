@@ -79,6 +79,7 @@ class MedicoController extends Controller
             'especialidade2' => 'nullable|string|max:255',
             'telefone' => 'required|string|max:15',
             'email' => 'required|email|max:255',
+            'uf' => 'string|max:2',
         ]);
     
         // Atualize o médico
@@ -88,6 +89,7 @@ class MedicoController extends Controller
         $medico->especialidade2_med = $request->especialidade2;
         $medico->telefone_med = $request->telefone;
         $medico->email_med = $request->email;
+        $medico->uf_med = $request->uf;
         $medico->save();
     
         return response()->json(['success' => true, 'message' => 'Médico atualizado com sucesso!']);
@@ -106,7 +108,7 @@ class MedicoController extends Controller
         $request->validate([
             'nome_med' => 'required|string|max:54',
             'telefone_med' => 'required|string|max:15',
-            'uf_med' => 'required|string|max:18',
+            'uf_med' => 'required|string|max:2',
             'email_med' => 'required|email',
             'especialidade1_med' => 'required|string|max:40',
             'especialidade2_med' => 'nullable|string|max:40',
