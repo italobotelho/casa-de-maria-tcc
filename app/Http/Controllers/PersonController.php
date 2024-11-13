@@ -38,13 +38,14 @@ class PersonController extends Controller
         return response()->json($pacientes); // Retorna os pacientes em formato JSON
     }
 
-    // Método para listar todos os pacientes e convênios
     public function index()
     {
-        $pacientes = Paciente::with('convenio')->get(); // Recupera todos os pacientes com seus convênios associados
+        // Paginação de pacientes com 10 itens por página
+        $pacientes = Paciente::with('convenio')->paginate(15); // Paginação de 10 pacientes por página
         $convenios = Convenio::all(); // Recupera todos os convênios
         return view('pacientes.index', ['pacientes' => $pacientes, 'convenios' => $convenios]); // Retorna a view com os dados
     }
+    
 
     public function show($id)
     {
@@ -219,15 +220,15 @@ class PersonController extends Controller
         $paciente->uf_paci = $request->input('uf_paci');
         }
 
-        $paciente->save();
-
-        // Verificar qual botão foi pressionado
-        if ($request->input('action') == 'save_and_exit') {
-            // Redirecionar para a lista de pacientes
-            return redirect('/pacientes');
-        } else {
-            // Redirecionar de volta para a tela de edição do paciente
-            return redirect()->route('paciente.edit', ['id' => $paciente->pk_cod_paci]);
+        if ($paciente) {
+            $paciente->save();
+            
+            // Verificar qual botão foi pressionado
+            if ($request->input('action') == 'save_and_exit') {
+                return redirect('/pacientes');
+            } else {
+                return redirect()->route('paciente.edit', ['id' => $paciente->pk_cod_paci]);
+            }
         }
     }
 
@@ -253,13 +254,14 @@ class PersonController extends Controller
             });
         }
     
-        // Caso contrário, retorna todos os pacientes
-        $pacientes = $query->get();
+        // Caso contrário, retorna todos os pacientes com paginação
+        $pacientes = $query->paginate(15); // Adiciona paginação
         $convenios = Convenio::all(); // Recupera todos os convênios
     
         // Retorna a view com todos os pacientes ou com os pacientes filtrados
         return view('pacientes.index', compact('pacientes', 'convenios'));
     }
+    
     
     
     public function ListarConvenio() // Nome do método corrigido

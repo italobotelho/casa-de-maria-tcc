@@ -17,7 +17,7 @@ return new class extends Migration
 
             $table->string('img_paci')->nullable;
             $table->integer('angulo_rotacao')->nullable();
-            $table->string('nome_paci', 54)->nullable();
+            $table->string('nome_paci', 50)->nullable();
             $table->string('telefone_paci', 15)->nullable();
             $table->string('email_paci', 255)->nullable();
             $table->dateTime('data_nasci_paci')->nullable();
@@ -28,8 +28,8 @@ return new class extends Migration
             $table->dateTime('data_obito_paci')->nullable();
             $table->enum('genero', ['masc', 'fem', 'nao_informar'])->nullable();
             $table->string('cep_paci', 9)->nullable();
-            $table->string('rua_paci', 17)->nullable();
-            $table->string('numero_paci', 5)->nullable();
+            $table->string('rua_paci', 50)->nullable();
+            $table->string('numero_paci',10)->nullable();
             $table->string('bairro_paci', 50)->nullable();
             $table->string('complemento_paci', 100)->nullable();
             $table->string('cidade_paci', 30)->nullable();

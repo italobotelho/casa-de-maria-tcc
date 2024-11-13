@@ -87,6 +87,9 @@
                             @endforelse
                             </tbody>
                         </table>
+                        <div>
+                            {{ $medicos->links('pagination::bootstrap-5') }}
+                        </div>
                     </div>
                 </div>
             </div><!-- fim da col -->

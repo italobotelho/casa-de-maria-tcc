@@ -13,8 +13,14 @@ class ProcedimentoSeeder extends Seeder
     public function run(): void
     {
         DB::table('procedimentos')->insert([
-            'nome_proc' => 'Consulta',
-            'descricao_proc' => 'Consulta padrão',
+            [
+                'nome_proc' => 'Consulta',
+                'descricao_proc' => 'Consulta padrão',
+            ],
+            [
+                'nome_proc' => 'Retorno',
+                'descricao_proc' => 'Retorno padrão de 30 dias',
+            ],          
         ]);
     }
 }

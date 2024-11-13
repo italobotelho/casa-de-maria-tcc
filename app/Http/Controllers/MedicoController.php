@@ -13,9 +13,6 @@ class MedicoController extends Controller
         $this->middleware('auth');
     }
 
-
-    
-
     public function getMedico($id)
     {
   
@@ -44,10 +41,13 @@ class MedicoController extends Controller
             $medico->orWhere('pk_crm_med', 'like', '%' . $crm . '%');
         }
     
-        $medico = $medico->select('pk_crm_med', 'nome_med', 'especialidade1_med', 'especialidade2_med', 'telefone_med', 'email_med')->get();
+        // Alterado para utilizar a paginação com 10 médicos por página
+        $medico = $medico->select('pk_crm_med', 'nome_med', 'especialidade1_med', 'especialidade2_med', 'telefone_med', 'email_med')
+                         ->paginate(10); // Paginação de 10 registros por página
     
-            return view('medicos/index', ['medicos' => $medico]); // Retorna os dados dos médicos em formato JSON
+        return view('medicos.index', ['medicos' => $medico]); // Passa os médicos paginados para a view
     }
+    
 
     public function buscarMedico(Request $request)
     {
@@ -95,11 +95,9 @@ class MedicoController extends Controller
         return response()->json(['success' => true, 'message' => 'Médico atualizado com sucesso!']);
     }
 
-
-
     public function index()
     {
-        $medicos = Medico::all();
+        $medicos = Medico::paginate(10); // Paginação de 10 registros por página
         return view('medicos.index', compact('medicos'));
     }
 

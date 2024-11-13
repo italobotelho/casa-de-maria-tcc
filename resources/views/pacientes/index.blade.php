@@ -97,6 +97,9 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        <div>
+                            {{ $pacientes->links('pagination::bootstrap-5') }}  <!-- Este método gera os links de navegação -->
+                        </div>
                     </div>
                 </div>
             </div>

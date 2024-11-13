@@ -14,7 +14,13 @@ class ConvenioSeeder extends Seeder
     public function run(): void
     {
         DB::table('convenios')->insert([
-            'nome_conv' => 'Particular'
+            [
+                'nome_conv' => 'Particular'
+            ],
+            
+            [
+                'nome_conv' => 'Unimed'
+            ]
         ]);
     }
 }

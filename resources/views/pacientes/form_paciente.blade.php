@@ -153,7 +153,7 @@
                 <!-- Email -->
                 <div class="form-group col-md-6">
                     <label for="email_paci">E-mail</label>
-                    <input maxlength="255" type="email" class="form-control" id="email_paci" name="email_paci" value="{{ old('email_paci', $paciente->email_paci ?? '') }}" required>
+                    <input maxlength="100" type="email" class="form-control" id="email_paci" name="email_paci" value="{{ old('email_paci', $paciente->email_paci ?? '') }}" required>
                 </div>
 
                 <!-- CPF Paciente -->
