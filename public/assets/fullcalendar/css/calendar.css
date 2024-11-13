@@ -7,10 +7,12 @@ body {
 
 /* Adiciona uma sombra interna ao select */
 .custom-select {
-  background-color: #ddb17c !important;
+  background-color: #8B451333 !important; /* Cor marrom com 90% de transparência */
   box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.2); /* Sombra interna suave */
-  border-radius: 4px; /* Mantém o arredondamento, se desejado */
+  border-radius: 4px; /* Mantém o arredondamento */
+ 
 }
+
 
 #wrap {
   display: flex; /* Cria um layout flexível */
