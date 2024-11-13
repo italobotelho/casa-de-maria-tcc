@@ -38,14 +38,16 @@
                 </button>
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav w-100 d-flex justify-content-center">
-                        <li class="nav-item fs-6"><a class="nav-link fw-4" href="{{ url('/home') }}">Agenda</a></li>
-                        <li class="nav-item fs-6"><a class="nav-link" href="{{ url('/pacientes') }}">Pacientes</a></li>
-                        <li class="nav-item fs-6"><a class="nav-link" href="{{ url('/profissional') }}">Profissionais</a></li>
-                        <!-- Add more links here -->
-                        @guest
-                        @else
-                            <li class="nav-item dropdown fs-6 ms-auto">
+                    <ul class="navbar-nav w-100 d-flex justify-content-center mx-auto">
+                        <li class="nav-item fs-6"><a class="nav-link mx-4" href="{{ url('/home') }}">Agenda</a></li>
+                        <li class="nav-item fs-6"><a class="nav-link mx-4" href="{{ url('/pacientes') }}">Pacientes</a></li>
+                        <li class="nav-item fs-6"><a class="nav-link mx-4" href="{{ url('/profissional') }}">Profissionais</a></li>
+                    </ul>
+        
+                    @guest
+                    @else
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item dropdown fs-6">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
@@ -60,11 +62,13 @@
                                     </form>
                                 </div>
                             </li>
-                        @endguest
-                    </ul>
+                        </ul>
+                    @endguest
                 </div>
             </div>
         </nav>
+        
+        
         
         <main class="vh-100">
             <section class="container h-100 py-4">
