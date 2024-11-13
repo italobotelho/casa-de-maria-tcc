@@ -28,24 +28,24 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-personalizada shadow-sm">
-            <div class="container">
+        <nav class="navbar navbar-expand-md navbar-light navbar-personalizada shadow">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/home') }}">
-                    <img src="{{ asset('img/logo.png') }}" alt="{{ config('app.name', 'Laravel') }}" width="20" height="">
+                    <img src="{{ asset('img/logo-navbar.png') }}" alt="{{ config('app.name', 'Laravel') }}" width="110" height="">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>   
                 </button>
-
+                
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav w-100 d-flex justify-content-between">
-                        <li class="nav-item"><a class="nav-link fw-4" href="{{ url('/home') }}">Agenda</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ url('/pacientes') }}">Pacientes</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ url('/profissional') }}">Profissionais</a></li>
+                    <ul class="navbar-nav w-100 d-flex justify-content-center">
+                        <li class="nav-item fs-6"><a class="nav-link fw-4" href="{{ url('/home') }}">Agenda</a></li>
+                        <li class="nav-item fs-6"><a class="nav-link" href="{{ url('/pacientes') }}">Pacientes</a></li>
+                        <li class="nav-item fs-6"><a class="nav-link" href="{{ url('/profissional') }}">Profissionais</a></li>
                         <!-- Add more links here -->
                         @guest
                         @else
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown fs-6 ms-auto">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
@@ -65,6 +65,7 @@
                 </div>
             </div>
         </nav>
+        
         <main class="vh-100">
             <section class="container h-100 py-4">
                 <h1 class="display-5">@yield('title', 'Título Padrão')</h1> <!-- Título padrão se não definido -->
