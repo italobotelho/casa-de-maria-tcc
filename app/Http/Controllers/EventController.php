@@ -67,17 +67,6 @@ class EventController extends Controller
         return response()->json($events);
     }
 
-    public function getEvent($id)
-    {
-        try {
-            $event = Event::with(['procedimento', 'medico'])->findOrFail($id); // Carrega o evento, procedimento e médico associado
-            return response()->json($event);
-        } catch (\Exception $e) {
-            Log::error('Erro ao buscar evento: ' . $e->getMessage());
-            return response()->json(['error' => 'Evento não encontrado.'], 404);
-        }
-    }
-
     public function updateColor(Request $request)
     {
         $request->validate([
@@ -182,5 +171,19 @@ class EventController extends Controller
 
         // Retorna os convênios como JSON
         return response()->json($convenios);
+    }
+
+    public function getEvent($id)
+    {
+        try {
+            // Carrega o evento, procedimento, médico e paciente associado
+            $event = Event::with(['procedimento', 'medico', 'paciente'])->findOrFail($id);
+
+            return response()->json($event);
+
+        } catch (\Exception $e) {
+            Log::error('Erro ao buscar evento: ' . $e->getMessage());
+            return response()->json(['error' => 'Evento não encontrado.'], 404);
+        }
     }
 }

@@ -122,6 +122,10 @@ var calendar;
       },
 
       eventClick: function(element) {
+        // Limpa mensagens e reseta o formulário
+        clearMessages('#message');
+        resetForm("#formEvent");
+
         currentEvent = element.event; // Armazena o evento clicado
         
         console.log('Evento clicado:', element.event); // Log para verificar se o evento foi capturado
@@ -129,20 +133,8 @@ var calendar;
         let eventoId = element.event.id; // ID do evento
 
         let pacienteId = element.event.extendedProps.paciente_id;
-        console.log('ID do Paciente:', pacienteId);
-
-        // Obtenha o ID do médico do evento
-        let medico = element.event.extendedProps.medico;
-        console.log('ID do Médico:', medico); // Log para verificar se o ID do médico foi encontrado
-
-        // Limpa mensagens e reseta o formulário
-        clearMessages('#message');
-        resetForm("#formEvent");
 
         let startDate = moment(element.event.start).format("DD/MM/YYYY");
-
-        // Configuração básica do modal
-        $("#modalViewCalendar #modalViewCalendarLabel").text('Visualização de agendamento para ' + startDate);
         
         $("#modalCalendar #titleModal").text('Alteração de agendamento para ' + startDate);
         $("#modalCalendar button.deleteEvent").css("display", "flex");
@@ -150,6 +142,13 @@ var calendar;
         // Preencher os campos iniciais do modal
         $("#modalCalendar input[name='id']").val(element.event.id);
         $("#modalCalendar input[name='paciente']").val(element.event.title);
+
+        $("#modalCalendar input[name='paciente_id']").val(pacienteId);
+
+        $("#modalCalendar input[name='medico']").val(element.event.extendedProps.medico);
+
+        $("#modalCalendar input[name='medico_nome']").val();
+
         $("#modalCalendar input[name='convenio_id']").val(element.event.extendedProps.convenio || '');
 
         // Preenchendo o campo de procedimento
@@ -167,35 +166,27 @@ var calendar;
         let color = element.event.backgroundColor || "#9D9D9B";
         $("#modalCalendar input[name='color']").val(color);
 
-        // AJAX para obter informações do médico
-  
-      $.ajax({
-        url: '/get-medico/' + medico,
-        type: 'GET',
-        success: function(response) {
-          console.log('Resposta do servidor:', response);
-          $('#modalCalendar input[name="medico_nome"]').val(response.nome_medico);
-          $('#modalCalendar input[name="medico"]').val(medico); // Preenche o campo oculto com o ID do médico
-          console.log('ID do Médico preenchido:', $('#modalCalendar input[name="medico"]').val());
-        },
-        error: function(xhr) {
-            if (xhr.responseJSON && xhr.responseJSON.message) {
-                alert('Erro ao buscar médico: ' + xhr.responseJSON.message);
-            } else {
-                alert('Erro ao buscar médico: ' + xhr.statusText);
-            }
-        }
-      });
-
+      // Configuração básica do modal
+      $("#modalViewCalendar #modalViewCalendarLabel").text('Visualização de agendamento para ' + startDate);
       // AJAX para obter informações do evento
       $.ajax({
         url: `/get-event/${eventoId}`, // URL para obter o evento
         type: 'GET',
         success: function(response) {
             console.log('Resposta do servidor:', response);
+            $('#pacienteNome').text(response.title); // Preenche a hora final
+            $('#pacienteCPF').text(response.paciente.cpf_paci); // Preenche a hora final
+            $('#pacienteTelefone').text(response.paciente.telefone_paci); // Preenche a hora final
+            $('#pacienteEmail').text(response.paciente.email_paci); // Preenche a hora final
+            $('#pacienteConvenio').text(response.convenio); // Preenche a hora final
             $('#medicoNome').text(response.medico.nome_med); // Preenche o nome do médico
+            $('#procedimento').text(response.procedimento.nome_proc); // Preenche a hora final
             $('#horaInicial').text(moment(response.start).format("HH:mm")); // Preenche a hora inicial
             $('#horaFinal').text(moment(response.end).format("HH:mm")); // Preenche a hora final
+
+            $("#modalCalendar input[name='medico_nome']").val(response.medico.nome_med);
+
+            $("#modalViewCalendar").modal('show');
         },
         error: function(xhr) {
             if (xhr.responseJSON && xhr.responseJSON.message) {
@@ -205,29 +196,6 @@ var calendar;
             }
         }
       });
-
-      $.ajax({
-        url: '/get-paciente/' + pacienteId,
-        type: 'GET',
-        success: function(response) {
-          console.log('Resposta do servidor:', response);
-          $('#modalCalendar input[name="paciente"]').val(response.nome_paciente);
-          $('#modalCalendar input[name="paciente_id"]').val(pacienteId); // Preenche o campo oculto com o ID do médico
-          $('#pacienteNome').text(response.nome_paciente); // Preenche o nome do paciente
-          $('#pacienteTelefone').text(response.telefone_paciente); // Preenche o telefone do paciente
-          $('#pacienteConvenio').text(response.convenio);
-          console.log('ID do Paciente preenchido:', $('#modalCalendar input[name="paciente_id"]').val());
-        },
-        error: function(xhr) {
-            if (xhr.responseJSON && xhr.responseJSON.message) {
-                alert('Erro ao buscar paciente: ' + xhr.responseJSON.message);
-            } else {
-                alert('Erro ao buscar paciente: ' + xhr.statusText);
-            }
-        }
-      });
-
-      $("#modalViewCalendar").modal('show');
       },
 
       eventResize: function(element) {
@@ -273,6 +241,7 @@ var calendar;
       },
 
       select: function(element) {
+        
         clearMessages('#message');
         resetForm("#formEvent");
 

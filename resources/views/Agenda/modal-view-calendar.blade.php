@@ -8,9 +8,12 @@
             <div class="modal-body">
                 <div>
                     <p><strong>Nome:</strong> <span id="pacienteNome"></span></p>
+                    <p><strong>CPF:</strong> <span id="pacienteCPF"></span></p>
                     <p><strong>Telefone:</strong> <span id="pacienteTelefone"></span></p>
+                    <p><strong>E-mail:</strong> <span id="pacienteEmail"></span></p>
                     <p><strong>Convênio:</strong> <span id="pacienteConvenio"></span></p>
                     <p><strong>Médico:</strong> <span id="medicoNome"></span></p>
+                    <p><strong>Procedimento:</strong> <span id="procedimento"></span></p>
                     <p><strong>Hora Inicial:</strong> <span id="horaInicial"></span></p>
                     <p><strong>Hora Final:</strong> <span id="horaFinal"></span></p>
                 </div>

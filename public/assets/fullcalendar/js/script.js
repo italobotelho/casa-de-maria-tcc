@@ -45,48 +45,6 @@ $(document).ready(function () {
                 console.error('Erro ao carregar convênios:', error);
             }
         });
-
-    // Carregar dados do evento 
-    let id = $("#modalCalendar input[name='id']").val(); 
-    if (id) {
-        $.ajax({
-            url: `/get-event/${id}`, // Substitua pela URL correta para obter o evento
-            method: 'GET',
-            success: function (data) {
-                console.log(data);
-                // Preencher outros campos do modal
-
-                 $("#modalCalendar").on('shown.bs.modal', function() {
-                // Forçar o preenchimento do campo quando o modal é exibido
-                 $("#modalCalendar input[name='paciente']").val(data.paciente);
-                 });
-                 
-                $("#modalCalendar select[name='procedimento_id']").val(data.procedimento_id);
-                $("#modalCalendar input[name='convenio_id']").val(data.convenio);
-                $("#modalCalendar input[name='eventDate']").val(moment(data.start).format("YYYY-MM-DD"));
-                $("#modalCalendar input[name='start']").val(moment(data.start).format("HH:mm"));
-                $("#modalCalendar input[name='end']").val(moment(data.end).format("HH:mm"));
-                $("#modalCalendar input[name='medico']").val(data.medico.pk_crm_med);
-                $("#modalCalendar input[name='paciente_id']").val(data.paciente_id);
-
-                // Verificar se o médico está cadastrado
-                if (!data.medico || data.medico === 'Médico não cadastrado') {
-                    $('#medicoSuggestions').text('Médico não cadastrado');
-                } else {
-                    $('#medicoSuggestions').text(data.medico);
-                }
-
-                if (!data.paciente_id || data.paciente_id === 'Paciente não cadastrado') {
-                    $('#pacienteSuggestions').text('Paciente não cadastrado');
-                } else {
-                    $('#pacienteSuggestions').text(data.paciente_id);
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error('Erro ao carregar os dados do evento:', xhr.responseText); // Exibir a resposta completa
-            }
-        });
-    }
 });
 
 

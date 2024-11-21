@@ -19,7 +19,12 @@ class Event extends Model
 
     public function medico()
     {
-        return $this->belongsTo(Medico::class, 'medico'); // 'medico' é o campo que armazena o ID do médico
+        return $this->belongsTo(Medico::class, 'medico', 'pk_crm_med'); // Aqui, 'medico' é o campo que armazena o ID do médico
+    }
+    
+    public function paciente()
+    {
+        return $this->belongsTo(Paciente::class, 'paciente_id'); // Ajuste o campo conforme sua estrutura
     }
 
     public function getStartAttribute($value)
