@@ -28,6 +28,15 @@ var calendar;
 
       initialView: 'timeGridDay', // Definindo a visualização inicial como o "Day View"
 
+      dayMaxEventRows: true, // for all non-TimeGrid views
+      views: {
+        dayGrid: {
+          dayMaxEventRows: 3 // adjust to 6 only for timeGridWeek/timeGridDay
+        }
+      },
+      
+      eventMaxStack: 3,
+
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
@@ -79,7 +88,26 @@ var calendar;
           calendarMonth.gotoDate(info.date); // Sincroniza a navegação ao clicar em um dia no calendário principal
       },
 
+      selectAllow: function(selectInfo) {
+        // Verifica se o dia selecionado é final de semana
+        const day = selectInfo.start.getDay(); // 0 = Domingo, 6 = Sábado
+        return day !== 0 && day !== 6; // Permite apenas de segunda a sexta
+      },
+
       eventDrop: function(element) {
+        let newStart = element.event.start; // Nova data de início
+        let day = newStart.getDay(); // 0 = Domingo, 6 = Sábado
+      
+        // Verifica se é final de semana
+        if (day === 0 || day === 6) {
+          // Reverte a movimentação do evento
+          element.revert();
+      
+          // Exibe uma mensagem de aviso
+          alert('Não é permitido agendar para finais de semana.');
+          return;
+        }
+
         let start = moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
         let end = moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
         let procedimentoId = element.event.extendedProps.procedimento_id;
@@ -136,7 +164,8 @@ var calendar;
 
         let startDate = moment(element.event.start).format("DD/MM/YYYY");
         
-        $("#modalCalendar #titleModal").text('Alteração de agendamento para ' + startDate);
+        $("#modalCalendar #titleModal").html('Alteração de agendamento para <strong>' + startDate + '</strong>');
+
         $("#modalCalendar button.deleteEvent").css("display", "flex");
 
         // Preencher os campos iniciais do modal
@@ -167,14 +196,17 @@ var calendar;
         $("#modalCalendar input[name='color']").val(color);
 
       // Configuração básica do modal
-      $("#modalViewCalendar #modalViewCalendarLabel").text('Visualização de agendamento para ' + startDate);
+      $("#modalViewCalendar #modalViewCalendarLabel").html('Visualizar agendamento <strong>' + startDate + '</strong>');
+
       // AJAX para obter informações do evento
       $.ajax({
         url: `/get-event/${eventoId}`, // URL para obter o evento
         type: 'GET',
         success: function(response) {
             console.log('Resposta do servidor:', response);
+            $('#pacienteFoto').attr('src', '/storage/' + response.paciente.img_paci); // Corrigido para incluir o prefixo 'storage'
             $('#pacienteNome').text(response.title); // Preenche a hora final
+            $('#pacienteDataNasci').text(moment(response.paciente.data_nasci_paci).format("DD/MM/YYYY")); // Preenche a hora final
             $('#pacienteCPF').text(response.paciente.cpf_paci); // Preenche a hora final
             $('#pacienteTelefone').text(response.paciente.telefone_paci); // Preenche a hora final
             $('#pacienteEmail').text(response.paciente.email_paci); // Preenche a hora final
@@ -241,12 +273,11 @@ var calendar;
       },
 
       select: function(element) {
-        
         clearMessages('#message');
         resetForm("#formEvent");
 
         let startDate = moment(element.start).format("DD/MM/YYYY");
-        $("#modalCalendar #titleModal").text('Novo agendamento para ' + startDate);
+        $("#modalCalendar #titleModal").html('Novo agendamento para <strong>' + startDate + '</strong>');
 
         $("#modalCalendar").modal('show');
         $("#modalCalendar button.deleteEvent").css("display", "none");

@@ -150,87 +150,87 @@ class PersonController extends Controller
     }
     
 
-    // Método para atualizar os dados de um paciente
     public function update(Request $request)
     {
         $data = $request->all();
-        
+    
         // Validação
         $request->validate([
-        'id' => 'required|exists:pacientes,pk_cod_paci',
-        'img_paci' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'angulo_rotacao' => 'nullable|integer',
-        'nome_paci' => 'required|string|max:54',
-        'email_paci' => 'required|email',
-        'data_nasci_paci' => 'required|date',
-        'telefone_paci' => 'required|string|max:15',
-        'genero' => 'required',
-        'cpf_paci' => 'required|string|max:14|cpf', // Validação de CPF
-        'responsavel_paci' => 'nullable|string|max:54',
-        'cpf_responsavel_paci' => 'nullable|string|max:14',
-        'fk_convenio_paci' => 'nullable|string',
-        'carteira_convenio_paci' => 'nullable|string',
-        'cep_paci' => 'nullable|string|max:9',
-        'rua_paci' => 'nullable|string|max:50',
-        'numero_paci' => 'nullable|string|max:5',
-        'bairro_paci' => 'nullable|string|max:50',
-        'cidade_paci' => 'nullable|string|max:30',
-        'complemento_paci' => 'nullable|string|max:100',
-        'uf_paci' => 'nullable|string|max:2',
-    ]);
-
-    $paciente = Paciente::find($request->input('id')); // Busca o paciente pelo ID
-
-    if ($paciente) { // Se o paciente existir
-
-        // Verifica se uma imagem foi enviada
-        if ($request->hasFile('img_paci')) {
-            // Excluir a imagem antiga, caso exista
-            if ($paciente->img_paci && file_exists(storage_path('app/public/' . $paciente->img_paci))) {
-                unlink(storage_path('app/public/' . $paciente->img_paci));
-            }
+            'id' => 'required|exists:pacientes,pk_cod_paci',
+            'img_paci' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'angulo_rotacao' => 'nullable|integer',
+            'nome_paci' => 'required|string|max:54',
+            'email_paci' => 'required|email',
+            'data_nasci_paci' => 'required|date',
+            'telefone_paci' => 'required|string|max:15',
+            'genero' => 'required',
+            'cpf_paci' => 'required|string|max:14|cpf',
+            'responsavel_paci' => 'nullable|string|max:54',
+            'cpf_responsavel_paci' => 'nullable|string|max:14',
+            'fk_convenio_paci' => 'nullable|string',
+            'carteira_convenio_paci' => 'nullable|string',
+            'cep_paci' => 'nullable|string|max:9',
+            'rua_paci' => 'nullable|string|max:50',
+            'numero_paci' => 'nullable|string|max:5',
+            'bairro_paci' => 'nullable|string|max:50',
+            'cidade_paci' => 'nullable|string|max:30',
+            'complemento_paci' => 'nullable|string|max:100',
+            'uf_paci' => 'nullable|string|max:2',
+        ]);
     
-            // Armazenar a nova imagem
-            $imagem = $request->file('img_paci');
-            $nomeImagem = time() . '.' . $imagem->getClientOriginalExtension();
-            $path = $imagem->storeAs('public/imagens_pacientes', $nomeImagem);
+        $paciente = Paciente::find($request->input('id')); // Busca o paciente pelo ID
     
-            // Atualizar o caminho da imagem no banco de dados
-            $paciente->img_paci = 'imagens_pacientes/' . $nomeImagem;
-        }
-    
-        // Atualizar o ângulo de rotação da imagem
-        $paciente->angulo_rotacao = $request->input('angulo_rotacao', 0);
-
-        // Atualiza os dados do paciente
-        $paciente->nome_paci = $request->input('nome_paci');
-        $paciente->data_nasci_paci = $request->input('data_nasci_paci');
-        $paciente->telefone_paci = $request->input('telefone_paci');
-        $paciente->genero = $request->input('genero');
-        $paciente->cpf_paci = $request->input('cpf_paci');
-        $paciente->responsavel_paci = $request->input('responsavel_paci');
-        $paciente->cpf_responsavel_paci = $request->input('cpf_responsavel_paci');
-        $paciente->fk_convenio_paci = $request->input('fk_convenio_paci');
-        $paciente->cep_paci = $request->input('cep_paci');
-        $paciente->rua_paci = $request->input('rua_paci');
-        $paciente->numero_paci = $request->input('numero_paci');
-        $paciente->bairro_paci = $request->input('bairro_paci');
-        $paciente->cidade_paci = $request->input('cidade_paci');
-        $paciente->complemento_paci = $request->input('complemento_paci');
-        $paciente->uf_paci = $request->input('uf_paci');
-        }
-
         if ($paciente) {
+            // Verifica se uma nova imagem foi enviada
+            if ($request->hasFile('img_paci')) {
+                // Verifica se a imagem atual é diferente da padrão
+                $defaultImage = 'imagens_pacientes/default-profile-pic.png';
+                if ($paciente->img_paci !== $defaultImage && file_exists(storage_path('app/public/' . $paciente->img_paci))) {
+                    unlink(storage_path('app/public/' . $paciente->img_paci)); // Remove a imagem antiga
+                }
+    
+                // Armazena a nova imagem
+                $imagem = $request->file('img_paci');
+                $nomeImagem = time() . '.' . $imagem->getClientOriginalExtension();
+                $path = $imagem->storeAs('public/imagens_pacientes', $nomeImagem);
+    
+                // Atualiza o caminho da imagem no banco de dados
+                $paciente->img_paci = 'imagens_pacientes/' . $nomeImagem;
+            }
+    
+            // Atualiza o ângulo de rotação da imagem
+            $paciente->angulo_rotacao = $request->input('angulo_rotacao', 0);
+    
+            // Atualiza os demais campos do paciente
+            $paciente->nome_paci = $request->input('nome_paci');
+            $paciente->data_nasci_paci = $request->input('data_nasci_paci');
+            $paciente->telefone_paci = $request->input('telefone_paci');
+            $paciente->genero = $request->input('genero');
+            $paciente->cpf_paci = $request->input('cpf_paci');
+            $paciente->responsavel_paci = $request->input('responsavel_paci');
+            $paciente->cpf_responsavel_paci = $request->input('cpf_responsavel_paci');
+            $paciente->fk_convenio_paci = $request->input('fk_convenio_paci');
+            $paciente->cep_paci = $request->input('cep_paci');
+            $paciente->rua_paci = $request->input('rua_paci');
+            $paciente->numero_paci = $request->input('numero_paci');
+            $paciente->bairro_paci = $request->input('bairro_paci');
+            $paciente->cidade_paci = $request->input('cidade_paci');
+            $paciente->complemento_paci = $request->input('complemento_paci');
+            $paciente->uf_paci = $request->input('uf_paci');
+    
             $paciente->save();
-            
-            // Verificar qual botão foi pressionado
+    
+            // Verifica qual botão foi pressionado
             if ($request->input('action') == 'save_and_exit') {
-                return redirect('/pacientes');
+                return redirect('/pacientes')->with('success', 'Paciente atualizado com sucesso!');
             } else {
-                return redirect()->route('paciente.edit', ['id' => $paciente->pk_cod_paci]);
+                return redirect()->route('paciente.edit', ['id' => $paciente->pk_cod_paci])->with('success', 'Paciente atualizado com sucesso!');
             }
         }
+    
+        return redirect()->back()->withErrors('Paciente não encontrado.');
     }
+    
 
 
     public function buscarPacientes(Request $request)

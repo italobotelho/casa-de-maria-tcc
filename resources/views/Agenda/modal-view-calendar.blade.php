@@ -1,27 +1,101 @@
+<style>
+    .dot {
+        height: 10px;
+        /* Tamanho do ponto */
+        width: 10px;
+        /* Tamanho do ponto */
+        border-radius: 50%;
+        /* Faz o ponto ser redondo */
+        display: inline-block;
+        /* Para que o ponto fique ao lado do texto */
+        margin-right: 8px;
+        /* Espaçamento entre o ponto e o texto */
+        vertical-align: middle;
+        /* Alinha o ponto verticalmente ao centro do texto */
+    }
+  
+    /* Define a cor padrão para o link */
+    .custom-link {
+        color: inherit; /* Herda a cor do botão */
+        text-decoration: none; /* Remove o sublinhado */
+    }
+
+    /* Altera a cor do link no hover do botão */
+    .btn-outline-primary.custom-btn-hover:hover .custom-link {
+        color: white; /* Define a cor do link para branco */
+    }
+
+</style>
+
 <div class="modal fade modal-lg" id="modalViewCalendar" aria-hidden="true" aria-labelledby="modalViewCalendarLabel" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="modalViewCalendarLabel"></h1>
+                <div class="w-100 d-flex justify-content-center">
+                    <h1 class="modal-title fs-4 text-primary" id="modalViewCalendarLabel"></h1>
+                </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div>
-                    <p><strong>Nome:</strong> <span id="pacienteNome"></span></p>
-                    <p><strong>CPF:</strong> <span id="pacienteCPF"></span></p>
-                    <p><strong>Telefone:</strong> <span id="pacienteTelefone"></span></p>
-                    <p><strong>E-mail:</strong> <span id="pacienteEmail"></span></p>
-                    <p><strong>Convênio:</strong> <span id="pacienteConvenio"></span></p>
-                    <p><strong>Médico:</strong> <span id="medicoNome"></span></p>
-                    <p><strong>Procedimento:</strong> <span id="procedimento"></span></p>
-                    <p><strong>Hora Inicial:</strong> <span id="horaInicial"></span></p>
-                    <p><strong>Hora Final:</strong> <span id="horaFinal"></span></p>
+                <div class="d-flex gap-3">
+                    <div class="d-flex gap-2 p-3 border rounded" style="flex-direction: column; align-items: center;">
+                        <img id="pacienteFoto" class="rounded-circle" src="" alt="Foto do Paciente" style="width: 150px; height: 150px; object-fit: cover;">
+                            <button class="btn btn-outline-primary custom-btn-hover mt-2">
+                               <a class="custom-link link-offset-2 link-underline link-underline-opacity-0" href="#">Cadastro paciente</a>
+                            </button>
+                    </div>
+                    
+                    <div class="p-3 border rounded" style="flex: 1;">
+                        <div>
+                            <h1 class="text-primary fw-bold fs-4 mb-3" id="pacienteNome"></h1>
+                        </div>
+                        <table class="table table-stripped">
+                            <tbody>
+                                <tr>
+                                    <td class="text-body-tertiary fw-semibold text-end">Data nasc. :</td>
+                                    <td><span id="pacienteDataNasci"></span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-body-tertiary fw-semibold text-end">CPF:</td>
+                                    <td><span id="pacienteCPF"></span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-body-tertiary fw-semibold text-end">Contato:</td>
+                                    <td><span id="pacienteTelefone"></span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-body-tertiary fw-semibold text-end">E-mail:</td>
+                                    <td><span id="pacienteEmail"></span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-body-tertiary fw-semibold text-end">Convênio:</td>
+                                    <td><span id="pacienteConvenio"></span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-body-tertiary fw-semibold text-end">Médico:</td>
+                                    <td><span id="medicoNome"></span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-body-tertiary fw-semibold text-end">Procedimento:</td>
+                                    <td><span id="procedimento"></span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-body-tertiary fw-semibold text-end">Hora Inicial:</td>
+                                    <td><span id="horaInicial"></span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-body-tertiary fw-semibold text-end">Hora Final:</td>
+                                    <td><span id="horaFinal"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>                           
+                    </div>
                 </div>
             </div>
             <div class="modal-footer d-flex justify-content-between">
                 <div class="dropup-center dropup">
                     <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Status
+                        Alterar Status
                     </button>
                     <ul class="dropdown-menu">
                         <li>
@@ -61,24 +135,8 @@
                         </li>
                     </ul>
                 </div>
-                <button class="btn btn-primary" data-bs-target="#modalCalendar" data-bs-toggle="modal">Alterar Agendamento</button>
+                <button class="btn btn-primary" data-bs-target="#modalCalendar" data-bs-toggle="modal">Editar Agendamento</button>
             </div>
         </div>
     </div>
 </div>
-<style>
-    .dot {
-        height: 10px;
-        /* Tamanho do ponto */
-        width: 10px;
-        /* Tamanho do ponto */
-        border-radius: 50%;
-        /* Faz o ponto ser redondo */
-        display: inline-block;
-        /* Para que o ponto fique ao lado do texto */
-        margin-right: 8px;
-        /* Espaçamento entre o ponto e o texto */
-        vertical-align: middle;
-        /* Alinha o ponto verticalmente ao centro do texto */
-    }
-</style>

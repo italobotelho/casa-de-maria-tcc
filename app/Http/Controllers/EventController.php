@@ -23,7 +23,7 @@ class EventController extends Controller
 
     public function show($id)
     {
-        $event = Event::with(['procedimento', 'medico'])->find($id); // Carrega o evento, procedimento e médico associado
+        $event = Event::with(['procedimento', 'medico', 'paciente'])->find($id); // Carrega o evento, procedimento e médico associado
         if (!$event) {
             return response()->json(['message' => 'Evento não encontrado'], 404);
         }

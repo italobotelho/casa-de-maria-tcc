@@ -37,7 +37,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="w-100 d-flex justify-content-center"> <!-- Centraliza o título -->
-                        <h1 class="modal-title fs-5" id="titleModal"></h1>
+                        <h1 class="modal-title fs-5 text-primary" id="titleModal"></h1>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> <!-- Botão para fechar o modal -->
                 </div>
@@ -95,15 +95,6 @@
                                 </div>
                             </div>
 
-                            <!-- Campo para repetição -->
-                            {{-- <div class="col-12">
-                                <label class="form-check-label d-block" for="flexSwitchCheckRepeate">Repetição</label>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckRepeate"> <!-- Switch para repetição -->
-                                </div>
-                            </div> --}}
-
-                            <!-- Campo para convênio do paciente -->
                             <div class="col-12">
                                 <label for="convenio_id" class="form-label">Convênio</label>
                                 <input type="text" class="form-control" name="convenio_id" id="convenio_id" readonly disabled>
@@ -112,7 +103,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> <!-- Botão para fechar o modal -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button> <!-- Botão para fechar o modal -->
                     <button type="button" class="btn btn-danger deleteEvent">Excluir</button> <!-- Botão para excluir o evento -->
                     <button type="button" class="btn btn-primary saveEvent">Cadastrar Horário</button> <!-- Botão para salvar o evento -->
                 </div>
