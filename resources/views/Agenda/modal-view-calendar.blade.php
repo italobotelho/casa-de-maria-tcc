@@ -40,9 +40,9 @@
                 <div class="d-flex gap-3">
                     <div class="d-flex gap-2 p-3 border rounded" style="flex-direction: column; align-items: center;">
                         <img id="pacienteFoto" class="rounded-circle" src="" alt="Foto do Paciente" style="width: 150px; height: 150px; object-fit: cover;">
-                            <button class="btn btn-outline-primary custom-btn-hover mt-2">
-                               <a class="custom-link link-offset-2 link-underline link-underline-opacity-0" href="#">Cadastro paciente</a>
-                            </button>
+                        <button class="btn btn-outline-primary custom-btn-hover mt-2">
+                            <a class="custom-link link-offset-2 link-underline link-underline-opacity-0" id="cadastroPacienteLink" href="#">Cadastro paciente</a>
+                        </button>  
                     </div>
                     
                     <div class="p-3 border rounded" style="flex: 1;">

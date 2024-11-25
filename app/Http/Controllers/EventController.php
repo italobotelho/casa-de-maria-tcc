@@ -19,8 +19,6 @@ class EventController extends Controller
         $this->middleware('auth');
     }
 
-
-
     public function show($id)
     {
         $event = Event::with(['procedimento', 'medico', 'paciente'])->find($id); // Carrega o evento, procedimento e médico associado
@@ -39,6 +37,7 @@ class EventController extends Controller
             'paciente_id' => $event->paciente_id,
         ]);
     }
+
 
     public function loadEvents(Request $request)
     {
@@ -186,4 +185,5 @@ class EventController extends Controller
             return response()->json(['error' => 'Evento não encontrado.'], 404);
         }
     }
+    
 }

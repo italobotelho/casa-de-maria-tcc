@@ -218,6 +218,10 @@ var calendar;
 
             $("#modalCalendar input[name='medico_nome']").val(response.medico.nome_med);
 
+            // Atualiza o link de cadastro do paciente com o ID do paciente
+            let cadastroUrl = `/form_paciente/${pacienteId}`;
+            $('#cadastroPacienteLink').attr('href', cadastroUrl); // Atualiza o href do link
+
             $("#modalViewCalendar").modal('show');
         },
         error: function(xhr) {
