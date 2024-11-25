@@ -11,6 +11,11 @@ use App\Models\Event;
 
 class RecadoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index(Request $request)
     {
         // Verifica se o usuário quer visualizar recados excluídos
