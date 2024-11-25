@@ -32,7 +32,7 @@
 
 
     <!-- Modal para agendamento de eventos -->
-    <div class="modal fade" id="modalCalendar" tabindex="-1" aria-labelledby="titleModal" aria-hidden="true">
+    <div class="modal fade" id="modalCalendar" tabindex="-1" aria-labelledby="titleModal" >
         <div class="modal-dialog modal-dialog-scrollable modal-lg"> <!-- Diálogo do modal configurado para scroll e tamanho grande -->
             <div class="modal-content">
                 <div class="modal-header">

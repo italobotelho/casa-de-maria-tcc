@@ -1,4 +1,4 @@
-{{-- resources/views/agenda/home.blade.php --}}
+
 @extends('layouts.app')
 
 @section('css')

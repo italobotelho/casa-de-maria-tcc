@@ -23,58 +23,36 @@ var calendar;
 
     // Evento de criação do calendário principal
     calendar = new FullCalendar.Calendar(calendarEl, {
-
-      themeSystem: 'bootstrap5',
-
-      initialView: 'timeGridDay', // Definindo a visualização inicial como o "Day View"
-
-      dayMaxEventRows: true, // for all non-TimeGrid views
-      views: {
-        dayGrid: {
-          dayMaxEventRows: 3 // adjust to 6 only for timeGridWeek/timeGridDay
-        }
+      themeSystem: 'bootstrap5', // Define o sistema de tema como Bootstrap 5 para estilização.
+      initialView: 'timeGridDay', // Define a visualização inicial como "timeGridDay", que exibe os eventos em blocos de tempo durante o dia.
+      dayMaxEventRows: true, // Permite que o calendário exiba múltiplas linhas de eventos por dia.
+      views: { dayGrid: { dayMaxEventRows: 3 } }, // Limita a exibição de eventos a 3 linhas em visualizações do tipo "dayGrid".
+      eventMaxStack: 3, // Limita o número de eventos empilhados verticalmente no mesmo horário a 3.
+      headerToolbar: { // Configura a barra de ferramentas de cabeçalho do calendário.
+        left: 'prev,next today', // Exibe botões para navegar para o mês anterior, próximo e para o "hoje".
+        center: 'title', // Exibe o título do mês no centro da barra de ferramentas.
+        right: 'timeGridDay,timeGridWeek,dayGridMonth,listWeek' // Exibe os botões para navegar entre as visualizações de dia, semana, mês e lista.
       },
-      
-      eventMaxStack: 3,
-
-      headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'timeGridDay,timeGridWeek,dayGridMonth,listWeek'
+      businessHours: { // Define os horários comerciais para os dias da semana (segunda a sexta-feira).
+        daysOfWeek: [1, 2, 3, 4, 5], // Define que os horários comerciais vão de segunda a sexta-feira.
+        startTime: '10:00', // Define o horário de início do horário comercial como 9:00.
+        endTime: '18:00' // Define o horário de término do horário comercial como 18:00.
       },
-
-      businessHours: {
-        daysOfWeek: [1, 2, 3, 4, 5], // Segunda - Sexta
-        startTime: '10:00', // horário de início para dias úteis
-        endTime: '18:00',   // horário de término para dias úteis
+      allDaySlot: false, // Desativa o slot de "Dia Inteiro".
+      slotMinTime: '10:00', // Define o horário mínimo visível no calendário como 9:00.
+      slotMaxTime: '18:00', // Define o horário máximo visível no calendário como 18:00.
+      slotDuration: '00:30', // Define que cada slot de tempo no calendário terá duração de 30 minutos.
+      slotLabelInterval: '00:30', // Define o intervalo de rótulos de slot como 30 minutos.
+      slotLabelFormat: { // Define o formato de exibição dos rótulos de slot (hora:minuto).
+        hour: '2-digit', minute: '2-digit', omitZeroMinute: false, meridiem: false
       },
-  
-      allDaySlot: false, // Remove o slot de "dia inteiro"
-  
-      // Limita a exibição do calendário ao horário de businessHours
-      slotMinTime: '10:00', // Define o horário inicial para exibição
-      slotMaxTime: '18:00', // Define o horário final para exibição
-  
-      slotDuration: '00:30', // duração dos slots de 30 minutos
-
-      slotLabelInterval: '00:30',  // Exibe rótulos a cada 30 minutos
-
-      slotLabelFormat: {
-        hour: '2-digit',
-        minute: '2-digit',
-        omitZeroMinute: false,
-        meridiem: false
-      },
-
-      noEventsContent: 'Não há agendamentos para mostrar',
-
-      height: 'auto',
-      locale: 'pt-br',
-
-      navLinks: true,
-      selectable: true,
-      editable: true,
-      droppable: true,
+      noEventsContent: 'Não há agendamentos para mostrar', // Exibe uma mensagem quando não há eventos no calendário.
+      height: 'auto', // Ajusta automaticamente a altura do calendário com base no conteúdo.
+      locale: 'pt-br', // Define o idioma do calendário como português do Brasil.
+      navLinks: true, // Permite a navegação ao clicar nas datas do calendário.
+      selectable: true, // Permite a seleção de datas clicando no calendário.
+      editable: true, // Permite a edição de eventos.
+      droppable: true, // Permite arrastar eventos dentro do calendário.
 
       // Adicionando o evento para sincronizar o mês
       datesSet: function(dateInfo) {
@@ -183,17 +161,14 @@ var calendar;
         // Preenchendo o campo de procedimento
         $("#modalCalendar select[name='procedimento_id']").val(element.event.extendedProps.procedimento_id || '').change();
 
-        let startTime = moment(element.event.start).format("HH:mm");
-        $("#modalCalendar input[name='start']").val(startTime);
-
-        let endTime = moment(element.event.end).format("HH:mm");
-        $("#modalCalendar input[name='end']").val(endTime);
-
-        let eventDate = moment(element.event.start).format("YYYY-MM-DD");
-        $("#modalCalendar input[name='eventDate']").val(eventDate);
-
-        let color = element.event.backgroundColor || "#9D9D9B";
-        $("#modalCalendar input[name='color']").val(color);
+        // Preenchimento dos horários e data
+        let startTime = moment(element.event.start).format("HH:mm"); // Horário de início
+        $("#modalCalendar input[name='start']").val(startTime); // Preenche o campo de horário de início
+        let endTime = moment(element.event.end).format("HH:mm"); // Horário de término
+        $("#modalCalendar input[name='end']").val(endTime); // Preenche o campo de horário de término
+        let eventDate = moment(element.event.start).format("YYYY-MM-DD"); // Data do evento
+        $("#modalCalendar input[name='eventDate']").val(eventDate); // Preenche o campo de data do evento
+        
 
       // Configuração básica do modal
       $("#modalViewCalendar #modalViewCalendarLabel").html('Visualizar agendamento <strong>' + startDate + '</strong>');
@@ -235,6 +210,7 @@ var calendar;
       },
 
       eventResize: function(element) {
+        // Capturando os Dados do Evento Redimensionado
         let start = moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
         let end = moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
         let pacienteId = element.event.extendedProps.paciente_id;
@@ -256,6 +232,7 @@ var calendar;
         }
 
         let newEvent = {
+          //  Preparando os Dados para Envio
           _method: 'PUT',
           title: element.event.title,
           id: element.event.id,
@@ -268,13 +245,14 @@ var calendar;
           paciente_id: pacienteId
         };
 
-        if (!medico || !procedimentoId || !convenio) {
+        if (!medico || !procedimentoId || !convenio) { //os campós medico, procediemento e convenio, tem que estar preenchedios
           console.error('Um ou mais campos obrigatórios estão vazios.');
           return;
         }
 
         sendEvent(routeEvents('routeEventUpdate'), newEvent);
       },
+
 
       select: function(element) {
         clearMessages('#message');
@@ -295,7 +273,7 @@ var calendar;
         $("#modalCalendar input[name='eventDate']").val(moment(element.start).format("YYYY-MM-DD"));
         $("#modalCalendar input[name='color']").val("#9D9D9B");
 
-        $("#modalCalendar input[name='medico']").val('');
+        
 
         calendar.unselect();
       },
