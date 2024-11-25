@@ -40,7 +40,7 @@
         </div>
         
         
-        <div class="container border border-1 rounded shadow-sm">
+        <div class="container border border-1 rounded shadow-sm mb-5">
         
             <div class="my-4 mx-1"><button class="btn novoCadastro" onclick="window.location.href='/form_paciente'">CADASTRAR NOVO PACIENTE</button></div>
         
@@ -49,18 +49,30 @@
             
                 <!-- Formulário de busca -->
                 <form action="{{ url('/pacientes') }}" method="GET" class="form-inline mb-4 d-flex align-items-center">
-                    <div class="form-group me-3">
-                        <label for="nome_paci" class="me-2">Nome:</label>
-                        <input type="text" name="nome_paci" id="nome_paci" class="form-control" placeholder="Nome do paciente">
+                    <!-- Input group para o campo de busca por nome -->
+                    <div class="input-group me-3">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="bi bi-search"></i> <!-- Ícone de busca -->
+                        </span>
+                        <input type="text" name="nome_paci" id="nome_paci" class="form-control" placeholder="Nome do paciente" aria-label="Nome do paciente" aria-describedby="basic-addon1">
                     </div>
-                    <div class="form-group me-3">
-                        <label for="data_nasc_paci" class="me-2">Data de Nascimento:</label>
-                        <input type="date" name="data_nasc_paci" id="data_nasc_paci" class="form-control">
+
+                    <!-- Input group para o campo de busca por data de nascimento -->
+                    <div class="input-group me-3">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="bi bi-calendar"></i> <!-- Ícone de data -->
+                        </span>
+                        <input type="date" name="data_nasc_paci" id="data_nasc_paci" class="form-control" aria-label="Data de nascimento" aria-describedby="basic-addon2">
                     </div>
-                    <div class="">
+
+                    <!-- Botão de busca geral -->
+                    <div>
                         <button type="submit" class="btn btn-primary">Buscar</button>
                     </div>
                 </form>
+
+
+
             </div>            
         
             <div class="my-3 mx-1"><h3 class="text-uppercase fs-5 fw-medium">Resultados:</h3></div>

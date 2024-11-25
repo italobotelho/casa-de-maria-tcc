@@ -41,7 +41,7 @@ class PersonController extends Controller
     public function index()
     {
         // Paginação de pacientes com 10 itens por página
-        $pacientes = Paciente::with('convenio')->paginate(15); // Paginação de 10 pacientes por página
+        $pacientes = Paciente::with('convenio')->paginate(10); // Paginação de 10 pacientes por página
         $convenios = Convenio::all(); // Recupera todos os convênios
         return view('pacientes.index', ['pacientes' => $pacientes, 'convenios' => $convenios]); // Retorna a view com os dados
     }
@@ -255,7 +255,7 @@ class PersonController extends Controller
         }
     
         // Caso contrário, retorna todos os pacientes com paginação
-        $pacientes = $query->paginate(15); // Adiciona paginação
+        $pacientes = $query->paginate(10); // Adiciona paginação
         $convenios = Convenio::all(); // Recupera todos os convênios
     
         // Retorna a view com todos os pacientes ou com os pacientes filtrados

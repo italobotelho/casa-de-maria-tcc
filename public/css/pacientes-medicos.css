@@ -38,3 +38,31 @@ thead th {
     background-color: #f0f0f0; /* Cor de fundo ao passar o mouse */
     cursor: pointer; /* Muda o cursor para ponteiro */
 }
+
+/* Estilo para o botão de busca integrado */
+.form-group .btn-link {
+    font-size: 1.2rem; /* Tamanho do ícone */
+    color: #6c757d;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* Estilo para o botão de busca integrado */
+.form-group .btn-link {
+    font-size: 1.2rem; /* Tamanho do ícone */
+    color: #6c757d;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* Ajustar a largura do input group, se necessário */
+.input-group {
+    width: 100%;
+}
+
+/* Adicionar algum espaçamento entre os campos de input */
+.input-group.me-3 {
+    margin-right: 10px;
+}

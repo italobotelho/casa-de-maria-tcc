@@ -24,20 +24,33 @@
 
         <div class="my-4 mx-1"><button class="btn novoCadastro" onclick="window.location.href='/form_medico'">CADASTRAR NOVO MÉDICO</button></div>  
 
-        <div class="my-3 mx-1"><h2 class="text-uppercase fs-5 fw-medium">Filtros para Busca:</h2>
-             <!-- Formulário de busca -->
-             <form action="{{ route('medico.buscar1') }}" method="GET" class="form-inline mb-4 d-flex align-items-center">
+        <div class="my-3 mx-1">
+            
+            <h2 class="text-uppercase fs-5 fw-medium">Filtros para Busca:</h2>
+           <!-- Formulário de busca -->
+            <form action="{{ route('medico.buscar1') }}" method="GET" class="form-inline mb-4 d-flex align-items-center">
+                <!-- Campo de Nome -->
+                <div class="input-group me-3">
+                    <span class="input-group-text" id="basic-addon1">
+                        <i class="bi bi-search"></i> <!-- Ícone de busca -->
+                    </span>
+                    <input type="text" name="nome_med" id="nome_med" class="form-control" placeholder="Nome do profissional" aria-label="Nome do profissional" aria-describedby="basic-addon1">
+                </div>
 
-                    <div class="form-group me-3">
-                        <label for="nome_paci" class="me-2">Nome:</label>
-                        <input type="text" name="nome_med" id="nome_med" class="form-control" placeholder="Nome do médico">
-                    </div>
-                    <div class="form-group me-3">
-                        <label for="data_nasc_paci" class="me-2">CRM:</label>
-                        <input type="text" name="pk_crm_med" id="pk_crm_med" class="form-control" placeholder="CRM do medico">
-                    </div>
+                <!-- Campo de CRM -->
+                <div class="input-group me-3">
+                    <span class="input-group-text" id="basic-addon2">
+                        <i class="bi bi-search"></i> <!-- Ícone de busca -->
+                    </span>
+                    <input type="text" name="pk_crm_med" id="pk_crm_med" class="form-control" placeholder="CRM do profissional" aria-label="CRM do profissional" aria-describedby="basic-addon2">
+                </div>
+
+                <!-- Botão integrado ao input -->
+                <div>
                     <button type="submit" class="btn btn-primary">Buscar</button>
-                </form>  
+                </div>
+            </form>
+
         </div>
 
         <div class="my-3 mx-1"><h3 class="text-uppercase fs-5 fw-medium">Resultados:</h3></div>
