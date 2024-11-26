@@ -64,11 +64,18 @@
                         </span>
                         <input type="date" name="data_nasc_paci" id="data_nasc_paci" class="form-control" aria-label="Data de nascimento" aria-describedby="basic-addon2">
                     </div>
+                    <div class="d-flex gap-2">
+                        <!-- Botão de busca geral -->
+                        <div>
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                        </div>
 
-                    <!-- Botão de busca geral -->
-                    <div>
-                        <button type="submit" class="btn btn-primary">Buscar</button>
+                            <!-- Botão de limpar filtro -->
+                        <div>
+                            <button type="button" class="btn btn-secondary" id="limparFiltroBtn">Limpar</button>
+                        </div>
                     </div>
+                    
                 </form>
 
 
@@ -132,5 +139,14 @@
             window.history.replaceState(null, null, window.location.pathname);
         }
     }
+
+    document.getElementById('limparFiltroBtn').addEventListener('click', function() {
+        // Limpar os campos de filtro
+        document.getElementById('nome_paci').value = '';
+        document.getElementById('data_nasc_paci').value = '';
+
+        // Submeter o formulário sem parâmetros de filtro (mostrar todos os pacientes)
+        document.getElementById('filtroForm').submit();
+    });
 </script>
 @endsection

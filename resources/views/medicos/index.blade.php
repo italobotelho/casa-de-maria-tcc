@@ -45,10 +45,18 @@
                     <input type="text" name="pk_crm_med" id="pk_crm_med" class="form-control" placeholder="CRM do profissional" aria-label="CRM do profissional" aria-describedby="basic-addon2">
                 </div>
 
-                <!-- Botão integrado ao input -->
-                <div>
-                    <button type="submit" class="btn btn-primary">Buscar</button>
+                <div class="d-flex gap-2">
+                    <!-- Botão de busca geral -->
+                    <div>
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    </div>
+
+                        <!-- Botão de limpar filtro -->
+                    <div>
+                        <button type="button" class="btn btn-secondary" id="limparFiltroBtn">Limpar</button>
+                    </div>
                 </div>
+                
             </form>
 
         </div>
@@ -192,8 +200,17 @@
 
             // Exibir o modal
             $('#editarMedicoModal').modal('show');
-        }
+            }
+        });
     });
-});
+
+    document.getElementById('limparFiltroBtn').addEventListener('click', function() {
+        // Limpar os campos de filtro
+        document.getElementById('nome_med').value = '';
+        document.getElementById('pk_crm_med').value = '';
+
+        // Submeter o formulário sem parâmetros de filtro (mostrar todos os pacientes)
+        document.getElementById('filtroForm').submit();
+    });
 </script>
 @endsection
