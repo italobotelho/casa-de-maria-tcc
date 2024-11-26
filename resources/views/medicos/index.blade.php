@@ -124,34 +124,34 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title" id="editarMedicoModalLabel">Editar Médico</h3>
-
             </div>
             <form action="{{ route('medico.update') }}" id="formEditarMedico">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="modal-body">
                     <input type="hidden" id="editar-id" name="id">
-                    <div class="form-group">
-                        <label for="editar-nome">Nome</label>
+                    
+                    <div class="form-group mb-2"> <!-- Ajustado para margem menor -->
+                        <label for="editar-nome" class="fw-semibold">Nome</label>
                         <input type="text" class="form-control" id="editar-nome" name="nome" required>
                     </div>
-                    <div class="form-group">
-                        <label for="editar-telefone">Telefone</label>
+                    <div class="form-group mb-2"> <!-- Ajustado para margem menor -->
+                        <label for="editar-telefone" class="fw-semibold">Telefone</label>
                         <input type="text" maxlength="15" class="form-control" id="editar-telefone" name="telefone" required>
                     </div>
-                    <div class="form-group">
-                        <label for="editar-email">Email</label>
+                    <div class="form-group mb-2"> <!-- Ajustado para margem menor -->
+                        <label for="editar-email" class="fw-semibold">Email</label>
                         <input type="email" class="form-control" id="editar-email" name="email" required>
                     </div>
-                    <div class="form-group">
-                        <label for="editar-telefone">UF</label>
+                    <div class="form-group mb-2"> <!-- Ajustado para margem menor -->
+                        <label for="editar-uf" class="fw-semibold">UF</label>
                         <input type="text" maxlength="2" class="form-control" id="editar-uf" name="uf" required>
                     </div>
-                    <div class="form-group">
-                        <label for="editar-especialidade">Especialidade</label>
+                    <div class="form-group mb-2"> <!-- Ajustado para margem menor -->
+                        <label for="editar-especialidade" class="fw-semibold">Especialidade</label>
                         <input type="text" class="form-control" id="editar-especialidade" name="especialidade" required>
                     </div>
-                    <div class="form-group">
-                        <label for="editar-especialidade2">2ª Especialidade</label>
+                    <div class="form-group mb-2"> <!-- Ajustado para margem menor -->
+                        <label for="editar-especialidade2" class="fw-semibold">2ª Especialidade</label>
                         <input type="text" class="form-control" id="editar-especialidade2" name="especialidade2">
                     </div>
                 </div>
@@ -163,6 +163,7 @@
         </div>
     </div>
 </div>
+
 @endsection
 
 @section('scripts')

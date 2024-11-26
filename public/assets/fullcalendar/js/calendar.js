@@ -35,11 +35,11 @@ var calendar;
       },
       businessHours: { // Define os horários comerciais para os dias da semana (segunda a sexta-feira).
         daysOfWeek: [1, 2, 3, 4, 5], // Define que os horários comerciais vão de segunda a sexta-feira.
-        startTime: '10:00', // Define o horário de início do horário comercial como 9:00.
+        startTime: '8:00', // Define o horário de início do horário comercial como 9:00.
         endTime: '18:00' // Define o horário de término do horário comercial como 18:00.
       },
       allDaySlot: false, // Desativa o slot de "Dia Inteiro".
-      slotMinTime: '10:00', // Define o horário mínimo visível no calendário como 9:00.
+      slotMinTime: '8:00', // Define o horário mínimo visível no calendário como 9:00.
       slotMaxTime: '18:00', // Define o horário máximo visível no calendário como 18:00.
       slotDuration: '00:30', // Define que cada slot de tempo no calendário terá duração de 30 minutos.
       slotLabelInterval: '00:30', // Define o intervalo de rótulos de slot como 30 minutos.
