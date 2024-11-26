@@ -153,12 +153,7 @@ $(document).ready(function () {
             return; // Impede o agendamento
         }
 
-        // Verifique se a sugestão de médico está vazia ou se contém "Médico não cadastrado"
-        const medicoSuggestionsText = $('#medicoSuggestions').text();
-        if (!medicoSuggestionsText || medicoSuggestionsText.includes('Médico não cadastrado')) {
-            alert('Não é possível agendar. Médico não cadastrado.'); // Alerta ao usuário
-            return; // Impede o agendamento
-        }
+     
 
         let id = $("#modalCalendar input[name='id']").val();
 

@@ -252,7 +252,7 @@ var calendar;
 
         sendEvent(routeEvents('routeEventUpdate'), newEvent);
       },
-
+      
 
       select: function(element) {
         clearMessages('#message');
@@ -273,11 +273,13 @@ var calendar;
         $("#modalCalendar input[name='eventDate']").val(moment(element.start).format("YYYY-MM-DD"));
         $("#modalCalendar input[name='color']").val("#9D9D9B");
 
-        
+        $("#modalCalendar input[name='medico']").val('');
 
         calendar.unselect();
       },
 
+      // filtro do medico
+      
       events: function(fetchInfo, successCallback, failureCallback) {
         var medico= document.getElementById('medicoSelect').value;
 
